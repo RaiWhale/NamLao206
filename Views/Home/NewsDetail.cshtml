@@ -1,0 +1,66 @@
+﻿@model PhusannhiHospital.Models.News
+@using PhusannhiHospital.Models
+@{
+
+    var recentNews = ViewBag.RecentNews as List<News>;
+    var topics = ViewBag.topics as List<Topic>;
+}
+<div class="course-single-right-sidebar">
+    <section class="breadcrumb-bg" style="background-image: url('../../Content/Uploads/Banners/—Pngtree—medical security technology sense blue_1002464.jpg'); ">
+        <div class="container">
+            <div class="breadcrumb-holder">
+                <div>
+
+                    <div class="section-title justify-content-center mb-4 mb-md-8 wow fadeInUp">
+                        <span class="shape shape-left bg-info"></span>
+                        <h2 class="text-danger text-center">@Model.Title</h2>
+                        <span class="shape shape-right bg-info"></span>
+                    </div>                  
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /PAGE HEADER -->
+    <!--Recent News -->
+    <section class="py-7 py-md-10">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-lg-9">
+                    <div class="card shadow-none bg-transparent">
+                        @Html.Raw(Model.Details)
+                        <p style="text-align:right ; text-transform:uppercase ; font-size:medium"><b>Ngày đăng: @Model.DateUp.ToString("dd/MM/yyyy")</b></p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-3">
+                    @Html.Partial("_RightSide",Model)
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--Recent News -->
+    <!---->
+
+    <section class="pt-5 pb-8 pt-md-7 pb-md-10">
+        <div class="container">
+            <div class="section-title justify-content-center mb-4 mb-md-8">
+                <span class="shape shape-left bg-info"></span>
+                <h2 class="text-danger">Tin tức liên quan</h2>
+                <span class="shape shape-right bg-info"></span>
+            </div>
+
+            <div class="row">
+                @foreach (var item in recentNews)
+                {
+                    @Html.Partial("_recentNews", item)
+                }
+
+            </div>
+        </div>
+    </section>
+</div>
+
+
+
+
+
+

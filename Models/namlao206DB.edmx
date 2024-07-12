@@ -1,0 +1,1794 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="namlao206dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Accounts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccountType" Type="int" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="LoginName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ActivateCode" Type="varchar" MaxLength="6" />
+          <Property Name="Coso" Type="varchar" MaxLength="50" />
+          <Property Name="Token" Type="varchar" MaxLength="100" />
+          <Property Name="CheckDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Administrators">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="AdminName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LoginName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="250" />
+          <Property Name="AdminLevelId" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="Profile" Type="ntext" />
+          <Property Name="PhongBanId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AdminLevelPermissions">
+          <Key>
+            <PropertyRef Name="AdminLevelId" />
+            <PropertyRef Name="TableName" />
+          </Key>
+          <Property Name="AdminLevelId" Type="int" Nullable="false" />
+          <Property Name="TableName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Permission" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AdminLevels">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="AdminLevelName" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AlbumPictures">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PictureName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AlbumId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Albums">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AlbumName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ParentId" Type="int" />
+        </EntityType>
+        <EntityType Name="Banners">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BannerName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Url" Type="varchar(max)" />
+          <Property Name="isActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CalrouselPictures">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Url" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="150" />
+          <Property Name="Address" Type="nvarchar" MaxLength="200" />
+          <Property Name="CityId" Type="varchar" MaxLength="50" />
+          <Property Name="DistrictId" Type="varchar" MaxLength="50" />
+          <Property Name="WardId" Type="varchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="Avatar" Type="nvarchar" MaxLength="255" />
+          <Property Name="Gender" Type="tinyint" />
+          <Property Name="Birthday" Type="datetime" />
+        </EntityType>
+        <EntityType Name="DM_AdminListUpItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="NhomItemId" Type="int" />
+        </EntityType>
+        <EntityType Name="DM_Chucvus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Chucvu" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DM_Donvihanhchinhs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Ten" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Ma" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ParentId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CapId" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DM_hinhthuctochuc">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Hinhthuc" Type="nvarchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DM_Hocvis">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tenHocvi" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DM_Nghenghieps">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nghenghiep" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DM_NhomPhongBans">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nhomkhoa" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ParentId" Type="int" />
+        </EntityType>
+        <EntityType Name="DM_PhongBans">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenKhoa" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ChucNang" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="NhomKhoaId" Type="int" />
+          <Property Name="PictureId" Type="int" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="30" />
+          <Property Name="Email" Type="nvarchar" MaxLength="150" />
+          <Property Name="Address" Type="nvarchar" MaxLength="200" />
+          <Property Name="LevelId" Type="int" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="KhoaphongId" Type="int" />
+          <Property Name="KhoaChuyenId" Type="int" />
+          <Property Name="NghenghiepId" Type="int" />
+          <Property Name="ChucvuId" Type="int" />
+          <Property Name="HocviId" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CityId" Type="varchar" MaxLength="50" />
+          <Property Name="DistrictId" Type="varchar" MaxLength="50" />
+          <Property Name="WardId" Type="varchar" MaxLength="50" />
+          <Property Name="Avatar" Type="nvarchar" MaxLength="255" />
+          <Property Name="Gender" Type="int" Nullable="false" />
+          <Property Name="Birthday" Type="varchar" MaxLength="50" />
+          <Property Name="TrangThaiChuyen" Type="bit" Nullable="false" />
+          <Property Name="Canhan" Type="bit" />
+          <Property Name="Import" Type="bit" Nullable="false" />
+          <Property Name="GroupId" Type="int" />
+        </EntityType>
+        <EntityType Name="Feedbacks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Message" Type="nvarchar" MaxLength="500" />
+          <Property Name="DateUp" Type="datetime" Nullable="false" />
+          <Property Name="IsClosed" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LevelPermissions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LevelId" Type="int" Nullable="false" />
+          <Property Name="TableName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="PermissionCode" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Levels">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LevelName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LuuVet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdApi" Type="int" />
+          <Property Name="EmployeeCheckinId" Type="int" />
+          <Property Name="KhoaCheckinId" Type="int" />
+          <Property Name="thoiGianCheckin" Type="varchar" MaxLength="150" />
+          <Property Name="KhuPhanLuongId" Type="int" />
+          <Property Name="ticketNumber" Type="varchar" MaxLength="100" />
+          <Property Name="qrQgCode" Type="varchar" MaxLength="200" />
+          <Property Name="qrQgCode2" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="MaQuocGia">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ma" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="idQuocgia" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ten" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Nationalities">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="QuocTich" Type="nvarchar" MaxLength="100" />
+          <Property Name="Ma" Type="varchar" MaxLength="100" />
+          <Property Name="tenKhac" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Summary" Type="nvarchar(max)" />
+          <Property Name="Details" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TopicId" Type="int" Nullable="false" />
+          <Property Name="SubMenuId" Type="int" />
+          <Property Name="DateUp" Type="datetime" Nullable="false" />
+          <Property Name="AdminId" Type="int" />
+          <Property Name="Views" Type="int" Nullable="false" />
+          <Property Name="Picture" Type="varchar(max)" />
+          <Property Name="DateModified" Type="datetime" />
+          <Property Name="cosoId" Type="int" />
+          <Property Name="catid" Type="int" />
+          <Property Name="uutien" Type="bit" Nullable="false" />
+          <Property Name="Duyet" Type="bit" />
+          <Property Name="TitleChange" Type="nvarchar(max)" />
+          <Property Name="Author" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="NewsPictures">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Url" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Pictures">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Url" Type="varchar" MaxLength="150" />
+          <Property Name="KhoaphongId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SubMenus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="subMenuName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="ParentId" Type="int" />
+          <Property Name="TopicId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+        </EntityType>
+        <EntityType Name="Topics">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="TopicName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PictureId" Type="int" />
+          <Property Name="NhomNews" Type="tinyint" />
+          <Property Name="ParentId" Type="int" />
+        </EntityType>
+        <EntityType Name="Transports">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Coso" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="maCoSo" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Accounts_Levels">
+          <End Role="Levels" Type="Self.Levels" Multiplicity="1" />
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Levels">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Accounts">
+              <PropertyRef Name="AccountType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Administrators_ToAdminLevels">
+          <End Role="AdminLevels" Type="Self.AdminLevels" Multiplicity="1" />
+          <End Role="Administrators" Type="Self.Administrators" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdminLevels">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Administrators">
+              <PropertyRef Name="AdminLevelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AdminLevelPermissions_ToAdminLevels">
+          <End Role="AdminLevels" Type="Self.AdminLevels" Multiplicity="1" />
+          <End Role="AdminLevelPermissions" Type="Self.AdminLevelPermissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdminLevels">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AdminLevelPermissions">
+              <PropertyRef Name="AdminLevelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_ToDM_Donvihanhchinhs">
+          <End Role="DM_Donvihanhchinhs" Type="Self.DM_Donvihanhchinhs" Multiplicity="0..1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_Donvihanhchinhs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DM_Khoaphongs_ToDM_NhomKhoas">
+          <End Role="DM_NhomPhongBans" Type="Self.DM_NhomPhongBans" Multiplicity="0..1" />
+          <End Role="DM_PhongBans" Type="Self.DM_PhongBans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_NhomPhongBans">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DM_PhongBans">
+              <PropertyRef Name="NhomKhoaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DM_Khoaphongs_ToPicture">
+          <End Role="Pictures" Type="Self.Pictures" Multiplicity="0..1" />
+          <End Role="DM_PhongBans" Type="Self.DM_PhongBans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pictures">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DM_PhongBans">
+              <PropertyRef Name="PictureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DM_Nhanviens_Khoachuyen_DM_Khoaphongs">
+          <End Role="DM_PhongBans" Type="Self.DM_PhongBans" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_PhongBans">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="KhoaChuyenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DM_Nhanviens_Khoaphong_ToDM_Khoaphongs">
+          <End Role="DM_PhongBans" Type="Self.DM_PhongBans" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_PhongBans">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="KhoaphongId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DM_Nhanviens_ToChucvus">
+          <End Role="DM_Chucvus" Type="Self.DM_Chucvus" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_Chucvus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="ChucvuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DM_Nhanviens_ToDM_Donvihanhchinhs">
+          <End Role="DM_Donvihanhchinhs" Type="Self.DM_Donvihanhchinhs" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_Donvihanhchinhs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DM_Nhanviens_ToDM_Hocvis">
+          <End Role="DM_Hocvis" Type="Self.DM_Hocvis" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_Hocvis">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="HocviId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DM_Nhanviens_ToLevels">
+          <End Role="Levels" Type="Self.Levels" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Levels">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="LevelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DM_Nhanviens_ToNghenghieps">
+          <End Role="DM_Nghenghieps" Type="Self.DM_Nghenghieps" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_Nghenghieps">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="NghenghiepId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DM_PhongBans_Administrators">
+          <End Role="DM_PhongBans" Type="Self.DM_PhongBans" Multiplicity="1" />
+          <End Role="DM_PhongBans1" Type="Self.DM_PhongBans" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="DM_PhongBans">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DM_PhongBans1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HospitalAlbumPictures_ToHospitalAlbums">
+          <End Role="Albums" Type="Self.Albums" Multiplicity="1" />
+          <End Role="AlbumPictures" Type="Self.AlbumPictures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Albums">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AlbumPictures">
+              <PropertyRef Name="AlbumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LevelPermissions_ToLevels">
+          <End Role="Levels" Type="Self.Levels" Multiplicity="1" />
+          <End Role="LevelPermissions" Type="Self.LevelPermissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Levels">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LevelPermissions">
+              <PropertyRef Name="LevelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_News_ToSubMenus">
+          <End Role="SubMenus" Type="Self.SubMenus" Multiplicity="0..1" />
+          <End Role="News" Type="Self.News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubMenus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="SubMenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_News_ToTopics">
+          <End Role="Topics" Type="Self.Topics" Multiplicity="1" />
+          <End Role="News" Type="Self.News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Topics">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="TopicId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_News_ToTransports">
+          <End Role="Transports" Type="Self.Transports" Multiplicity="0..1" />
+          <End Role="News" Type="Self.News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transports">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="cosoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pictures_ToDM_Khoaphongs">
+          <End Role="DM_PhongBans" Type="Self.DM_PhongBans" Multiplicity="1" />
+          <End Role="Pictures" Type="Self.Pictures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_PhongBans">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pictures">
+              <PropertyRef Name="KhoaphongId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubMenu_ToTopics">
+          <End Role="Topics" Type="Self.Topics" Multiplicity="1" />
+          <End Role="SubMenus" Type="Self.SubMenus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Topics">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SubMenus">
+              <PropertyRef Name="TopicId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="namlao206dbModelStoreContainer">
+          <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Administrators" EntityType="Self.Administrators" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AdminLevelPermissions" EntityType="Self.AdminLevelPermissions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AdminLevels" EntityType="Self.AdminLevels" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AlbumPictures" EntityType="Self.AlbumPictures" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Albums" EntityType="Self.Albums" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Banners" EntityType="Self.Banners" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CalrouselPictures" EntityType="Self.CalrouselPictures" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DM_AdminListUpItem" EntityType="Self.DM_AdminListUpItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DM_Chucvus" EntityType="Self.DM_Chucvus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DM_Donvihanhchinhs" EntityType="Self.DM_Donvihanhchinhs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DM_hinhthuctochuc" EntityType="Self.DM_hinhthuctochuc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DM_Hocvis" EntityType="Self.DM_Hocvis" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DM_Nghenghieps" EntityType="Self.DM_Nghenghieps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DM_NhomPhongBans" EntityType="Self.DM_NhomPhongBans" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DM_PhongBans" EntityType="Self.DM_PhongBans" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Feedbacks" EntityType="Self.Feedbacks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LevelPermissions" EntityType="Self.LevelPermissions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Levels" EntityType="Self.Levels" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LuuVet" EntityType="Self.LuuVet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MaQuocGia" EntityType="Self.MaQuocGia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Nationalities" EntityType="Self.Nationalities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NewsPictures" EntityType="Self.NewsPictures" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pictures" EntityType="Self.Pictures" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubMenus" EntityType="Self.SubMenus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Topics" EntityType="Self.Topics" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transports" EntityType="Self.Transports" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Accounts_Levels" Association="Self.FK_Accounts_Levels">
+            <End Role="Levels" EntitySet="Levels" />
+            <End Role="Accounts" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Administrators_ToAdminLevels" Association="Self.FK_Administrators_ToAdminLevels">
+            <End Role="AdminLevels" EntitySet="AdminLevels" />
+            <End Role="Administrators" EntitySet="Administrators" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AdminLevelPermissions_ToAdminLevels" Association="Self.FK_AdminLevelPermissions_ToAdminLevels">
+            <End Role="AdminLevels" EntitySet="AdminLevels" />
+            <End Role="AdminLevelPermissions" EntitySet="AdminLevelPermissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_ToDM_Donvihanhchinhs" Association="Self.FK_Customers_ToDM_Donvihanhchinhs">
+            <End Role="DM_Donvihanhchinhs" EntitySet="DM_Donvihanhchinhs" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DM_Khoaphongs_ToDM_NhomKhoas" Association="Self.FK_DM_Khoaphongs_ToDM_NhomKhoas">
+            <End Role="DM_NhomPhongBans" EntitySet="DM_NhomPhongBans" />
+            <End Role="DM_PhongBans" EntitySet="DM_PhongBans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DM_Khoaphongs_ToPicture" Association="Self.FK_DM_Khoaphongs_ToPicture">
+            <End Role="Pictures" EntitySet="Pictures" />
+            <End Role="DM_PhongBans" EntitySet="DM_PhongBans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DM_Nhanviens_Khoachuyen_DM_Khoaphongs" Association="Self.FK_DM_Nhanviens_Khoachuyen_DM_Khoaphongs">
+            <End Role="DM_PhongBans" EntitySet="DM_PhongBans" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DM_Nhanviens_Khoaphong_ToDM_Khoaphongs" Association="Self.FK_DM_Nhanviens_Khoaphong_ToDM_Khoaphongs">
+            <End Role="DM_PhongBans" EntitySet="DM_PhongBans" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DM_Nhanviens_ToChucvus" Association="Self.FK_DM_Nhanviens_ToChucvus">
+            <End Role="DM_Chucvus" EntitySet="DM_Chucvus" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DM_Nhanviens_ToDM_Donvihanhchinhs" Association="Self.FK_DM_Nhanviens_ToDM_Donvihanhchinhs">
+            <End Role="DM_Donvihanhchinhs" EntitySet="DM_Donvihanhchinhs" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DM_Nhanviens_ToDM_Hocvis" Association="Self.FK_DM_Nhanviens_ToDM_Hocvis">
+            <End Role="DM_Hocvis" EntitySet="DM_Hocvis" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DM_Nhanviens_ToLevels" Association="Self.FK_DM_Nhanviens_ToLevels">
+            <End Role="Levels" EntitySet="Levels" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DM_Nhanviens_ToNghenghieps" Association="Self.FK_DM_Nhanviens_ToNghenghieps">
+            <End Role="DM_Nghenghieps" EntitySet="DM_Nghenghieps" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DM_PhongBans_Administrators" Association="Self.FK_DM_PhongBans_Administrators">
+            <End Role="DM_PhongBans" EntitySet="DM_PhongBans" />
+            <End Role="DM_PhongBans1" EntitySet="DM_PhongBans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HospitalAlbumPictures_ToHospitalAlbums" Association="Self.FK_HospitalAlbumPictures_ToHospitalAlbums">
+            <End Role="Albums" EntitySet="Albums" />
+            <End Role="AlbumPictures" EntitySet="AlbumPictures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LevelPermissions_ToLevels" Association="Self.FK_LevelPermissions_ToLevels">
+            <End Role="Levels" EntitySet="Levels" />
+            <End Role="LevelPermissions" EntitySet="LevelPermissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_News_ToSubMenus" Association="Self.FK_News_ToSubMenus">
+            <End Role="SubMenus" EntitySet="SubMenus" />
+            <End Role="News" EntitySet="News" />
+          </AssociationSet>
+          <AssociationSet Name="FK_News_ToTopics" Association="Self.FK_News_ToTopics">
+            <End Role="Topics" EntitySet="Topics" />
+            <End Role="News" EntitySet="News" />
+          </AssociationSet>
+          <AssociationSet Name="FK_News_ToTransports" Association="Self.FK_News_ToTransports">
+            <End Role="Transports" EntitySet="Transports" />
+            <End Role="News" EntitySet="News" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pictures_ToDM_Khoaphongs" Association="Self.FK_Pictures_ToDM_Khoaphongs">
+            <End Role="DM_PhongBans" EntitySet="DM_PhongBans" />
+            <End Role="Pictures" EntitySet="Pictures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubMenu_ToTopics" Association="Self.FK_SubMenu_ToTopics">
+            <End Role="Topics" EntitySet="Topics" />
+            <End Role="SubMenus" EntitySet="SubMenus" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="namlao206dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountType" Type="Int32" Nullable="false" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="LoginName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ActivateCode" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="Coso" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Token" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CheckDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Level" Relationship="Self.FK_Accounts_Levels" FromRole="Accounts" ToRole="Levels" />
+        </EntityType>
+        <EntityType Name="Administrator">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="AdminName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LoginName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="AdminLevelId" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="Profile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhongBanId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="AdminLevel" Relationship="Self.FK_Administrators_ToAdminLevels" FromRole="Administrators" ToRole="AdminLevels" />
+        </EntityType>
+        <EntityType Name="AdminLevelPermission">
+          <Key>
+            <PropertyRef Name="AdminLevelId" />
+            <PropertyRef Name="TableName" />
+          </Key>
+          <Property Name="AdminLevelId" Type="Int32" Nullable="false" />
+          <Property Name="TableName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Permission" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AdminLevel" Relationship="Self.FK_AdminLevelPermissions_ToAdminLevels" FromRole="AdminLevelPermissions" ToRole="AdminLevels" />
+        </EntityType>
+        <EntityType Name="AdminLevel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="AdminLevelName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Administrators" Relationship="Self.FK_Administrators_ToAdminLevels" FromRole="AdminLevels" ToRole="Administrators" />
+          <NavigationProperty Name="AdminLevelPermissions" Relationship="Self.FK_AdminLevelPermissions_ToAdminLevels" FromRole="AdminLevels" ToRole="AdminLevelPermissions" />
+        </EntityType>
+        <EntityType Name="AlbumPicture">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PictureName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AlbumId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Album" Relationship="Self.FK_HospitalAlbumPictures_ToHospitalAlbums" FromRole="AlbumPictures" ToRole="Albums" />
+        </EntityType>
+        <EntityType Name="Album">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AlbumName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ParentId" Type="Int32" />
+          <NavigationProperty Name="AlbumPictures" Relationship="Self.FK_HospitalAlbumPictures_ToHospitalAlbums" FromRole="Albums" ToRole="AlbumPictures" />
+        </EntityType>
+        <EntityType Name="Banner">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BannerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="isActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CalrouselPicture">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Url" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CityId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DistrictId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="WardId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Avatar" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="Byte" />
+          <Property Name="Birthday" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="DM_Donvihanhchinhs" Relationship="Self.FK_Customers_ToDM_Donvihanhchinhs" FromRole="Customers" ToRole="DM_Donvihanhchinhs" />
+        </EntityType>
+        <EntityType Name="DM_AdminListUpItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NhomItemId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="DM_Chucvus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Chucvu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_DM_Nhanviens_ToChucvus" FromRole="DM_Chucvus" ToRole="Employees" />
+        </EntityType>
+        <EntityType Name="DM_Donvihanhchinhs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Ten" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Ma" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ParentId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CapId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_Customers_ToDM_Donvihanhchinhs" FromRole="DM_Donvihanhchinhs" ToRole="Customers" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_DM_Nhanviens_ToDM_Donvihanhchinhs" FromRole="DM_Donvihanhchinhs" ToRole="Employees" />
+        </EntityType>
+        <EntityType Name="DM_hinhthuctochuc">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Hinhthuc" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DM_Hocvis">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tenHocvi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_DM_Nhanviens_ToDM_Hocvis" FromRole="DM_Hocvis" ToRole="Employees" />
+        </EntityType>
+        <EntityType Name="DM_Nghenghieps">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nghenghiep" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_DM_Nhanviens_ToNghenghieps" FromRole="DM_Nghenghieps" ToRole="Employees" />
+        </EntityType>
+        <EntityType Name="DM_NhomPhongBans">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nhomkhoa" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ParentId" Type="Int32" />
+          <NavigationProperty Name="DM_PhongBans" Relationship="Self.FK_DM_Khoaphongs_ToDM_NhomKhoas" FromRole="DM_NhomPhongBans" ToRole="DM_PhongBans" />
+        </EntityType>
+        <EntityType Name="DM_PhongBans">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenKhoa" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ChucNang" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NhomKhoaId" Type="Int32" />
+          <Property Name="PictureId" Type="Int32" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="DM_NhomPhongBans" Relationship="Self.FK_DM_Khoaphongs_ToDM_NhomKhoas" FromRole="DM_PhongBans" ToRole="DM_NhomPhongBans" />
+          <NavigationProperty Name="Picture" Relationship="Self.FK_DM_Khoaphongs_ToPicture" FromRole="DM_PhongBans" ToRole="Pictures" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_DM_Nhanviens_Khoachuyen_DM_Khoaphongs" FromRole="DM_PhongBans" ToRole="Employees" />
+          <NavigationProperty Name="Employees1" Relationship="Self.FK_DM_Nhanviens_Khoaphong_ToDM_Khoaphongs" FromRole="DM_PhongBans" ToRole="Employees" />
+          <NavigationProperty Name="DM_PhongBans1" Relationship="Self.FK_DM_PhongBans_Administrators" FromRole="DM_PhongBans" ToRole="DM_PhongBans1" />
+          <NavigationProperty Name="DM_PhongBans2" Relationship="Self.FK_DM_PhongBans_Administrators" FromRole="DM_PhongBans1" ToRole="DM_PhongBans" />
+          <NavigationProperty Name="Pictures" Relationship="Self.FK_Pictures_ToDM_Khoaphongs" FromRole="DM_PhongBans" ToRole="Pictures" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LevelId" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="KhoaphongId" Type="Int32" />
+          <Property Name="KhoaChuyenId" Type="Int32" />
+          <Property Name="NghenghiepId" Type="Int32" />
+          <Property Name="ChucvuId" Type="Int32" />
+          <Property Name="HocviId" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CityId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DistrictId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="WardId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Avatar" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="Int32" Nullable="false" />
+          <Property Name="Birthday" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TrangThaiChuyen" Type="Boolean" Nullable="false" />
+          <Property Name="Canhan" Type="Boolean" />
+          <Property Name="Import" Type="Boolean" Nullable="false" />
+          <Property Name="GroupId" Type="Int32" />
+          <NavigationProperty Name="DM_Chucvus" Relationship="Self.FK_DM_Nhanviens_ToChucvus" FromRole="Employees" ToRole="DM_Chucvus" />
+          <NavigationProperty Name="DM_Donvihanhchinhs" Relationship="Self.FK_DM_Nhanviens_ToDM_Donvihanhchinhs" FromRole="Employees" ToRole="DM_Donvihanhchinhs" />
+          <NavigationProperty Name="DM_Hocvis" Relationship="Self.FK_DM_Nhanviens_ToDM_Hocvis" FromRole="Employees" ToRole="DM_Hocvis" />
+          <NavigationProperty Name="DM_Nghenghieps" Relationship="Self.FK_DM_Nhanviens_ToNghenghieps" FromRole="Employees" ToRole="DM_Nghenghieps" />
+          <NavigationProperty Name="DM_PhongBans" Relationship="Self.FK_DM_Nhanviens_Khoachuyen_DM_Khoaphongs" FromRole="Employees" ToRole="DM_PhongBans" />
+          <NavigationProperty Name="DM_PhongBans1" Relationship="Self.FK_DM_Nhanviens_Khoaphong_ToDM_Khoaphongs" FromRole="Employees" ToRole="DM_PhongBans" />
+          <NavigationProperty Name="Level" Relationship="Self.FK_DM_Nhanviens_ToLevels" FromRole="Employees" ToRole="Levels" />
+        </EntityType>
+        <EntityType Name="Feedback">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Message" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="DateUp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsClosed" Type="Byte" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LevelPermission">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LevelId" Type="Int32" Nullable="false" />
+          <Property Name="TableName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DisplayName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PermissionCode" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Level" Relationship="Self.FK_LevelPermissions_ToLevels" FromRole="LevelPermissions" ToRole="Levels" />
+        </EntityType>
+        <EntityType Name="Level">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LevelName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK_Accounts_Levels" FromRole="Levels" ToRole="Accounts" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_DM_Nhanviens_ToLevels" FromRole="Levels" ToRole="Employees" />
+          <NavigationProperty Name="LevelPermissions" Relationship="Self.FK_LevelPermissions_ToLevels" FromRole="Levels" ToRole="LevelPermissions" />
+        </EntityType>
+        <EntityType Name="LuuVet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdApi" Type="Int32" />
+          <Property Name="EmployeeCheckinId" Type="Int32" />
+          <Property Name="KhoaCheckinId" Type="Int32" />
+          <Property Name="thoiGianCheckin" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="KhuPhanLuongId" Type="Int32" />
+          <Property Name="ticketNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="qrQgCode" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="qrQgCode2" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="MaQuocGia">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ma" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idQuocgia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ten" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Nationality">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="QuocTich" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Ma" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="tenKhac" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TopicId" Type="Int32" Nullable="false" />
+          <Property Name="SubMenuId" Type="Int32" />
+          <Property Name="DateUp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AdminId" Type="Int32" />
+          <Property Name="Views" Type="Int32" Nullable="false" />
+          <Property Name="Picture" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DateModified" Type="DateTime" Precision="3" />
+          <Property Name="cosoId" Type="Int32" />
+          <Property Name="catid" Type="Int32" />
+          <Property Name="uutien" Type="Boolean" Nullable="false" />
+          <Property Name="Duyet" Type="Boolean" />
+          <Property Name="TitleChange" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Author" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SubMenu" Relationship="Self.FK_News_ToSubMenus" FromRole="News" ToRole="SubMenus" />
+          <NavigationProperty Name="Topic" Relationship="Self.FK_News_ToTopics" FromRole="News" ToRole="Topics" />
+          <NavigationProperty Name="Transport" Relationship="Self.FK_News_ToTransports" FromRole="News" ToRole="Transports" />
+        </EntityType>
+        <EntityType Name="NewsPicture">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Url" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Picture">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Url" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="KhoaphongId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DM_PhongBans" Relationship="Self.FK_DM_Khoaphongs_ToPicture" FromRole="Pictures" ToRole="DM_PhongBans" />
+          <NavigationProperty Name="DM_PhongBans1" Relationship="Self.FK_Pictures_ToDM_Khoaphongs" FromRole="Pictures" ToRole="DM_PhongBans" />
+        </EntityType>
+        <EntityType Name="SubMenu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="subMenuName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="TopicId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" />
+          <NavigationProperty Name="News" Relationship="Self.FK_News_ToSubMenus" FromRole="SubMenus" ToRole="News" />
+          <NavigationProperty Name="Topic" Relationship="Self.FK_SubMenu_ToTopics" FromRole="SubMenus" ToRole="Topics" />
+        </EntityType>
+        <EntityType Name="Topic">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="TopicName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PictureId" Type="Int32" />
+          <Property Name="NhomNews" Type="Byte" />
+          <Property Name="ParentId" Type="Int32" />
+          <NavigationProperty Name="News" Relationship="Self.FK_News_ToTopics" FromRole="Topics" ToRole="News" />
+          <NavigationProperty Name="SubMenus" Relationship="Self.FK_SubMenu_ToTopics" FromRole="Topics" ToRole="SubMenus" />
+        </EntityType>
+        <EntityType Name="Transport">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Coso" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="maCoSo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="News" Relationship="Self.FK_News_ToTransports" FromRole="Transports" ToRole="News" />
+        </EntityType>
+        <Association Name="FK_Accounts_Levels">
+          <End Role="Levels" Type="Self.Level" Multiplicity="1" />
+          <End Role="Accounts" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Levels">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Accounts">
+              <PropertyRef Name="AccountType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Administrators_ToAdminLevels">
+          <End Role="AdminLevels" Type="Self.AdminLevel" Multiplicity="1" />
+          <End Role="Administrators" Type="Self.Administrator" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdminLevels">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Administrators">
+              <PropertyRef Name="AdminLevelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AdminLevelPermissions_ToAdminLevels">
+          <End Role="AdminLevels" Type="Self.AdminLevel" Multiplicity="1" />
+          <End Role="AdminLevelPermissions" Type="Self.AdminLevelPermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdminLevels">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AdminLevelPermissions">
+              <PropertyRef Name="AdminLevelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HospitalAlbumPictures_ToHospitalAlbums">
+          <End Role="Albums" Type="Self.Album" Multiplicity="1" />
+          <End Role="AlbumPictures" Type="Self.AlbumPicture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Albums">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AlbumPictures">
+              <PropertyRef Name="AlbumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_ToDM_Donvihanhchinhs">
+          <End Role="DM_Donvihanhchinhs" Type="Self.DM_Donvihanhchinhs" Multiplicity="0..1" />
+          <End Role="Customers" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_Donvihanhchinhs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DM_Nhanviens_ToChucvus">
+          <End Role="DM_Chucvus" Type="Self.DM_Chucvus" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_Chucvus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="ChucvuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DM_Nhanviens_ToDM_Donvihanhchinhs">
+          <End Role="DM_Donvihanhchinhs" Type="Self.DM_Donvihanhchinhs" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_Donvihanhchinhs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DM_Nhanviens_ToDM_Hocvis">
+          <End Role="DM_Hocvis" Type="Self.DM_Hocvis" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_Hocvis">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="HocviId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DM_Nhanviens_ToNghenghieps">
+          <End Role="DM_Nghenghieps" Type="Self.DM_Nghenghieps" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_Nghenghieps">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="NghenghiepId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DM_Khoaphongs_ToDM_NhomKhoas">
+          <End Role="DM_NhomPhongBans" Type="Self.DM_NhomPhongBans" Multiplicity="0..1" />
+          <End Role="DM_PhongBans" Type="Self.DM_PhongBans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_NhomPhongBans">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DM_PhongBans">
+              <PropertyRef Name="NhomKhoaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DM_Khoaphongs_ToPicture">
+          <End Role="Pictures" Type="Self.Picture" Multiplicity="0..1" />
+          <End Role="DM_PhongBans" Type="Self.DM_PhongBans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pictures">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DM_PhongBans">
+              <PropertyRef Name="PictureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DM_Nhanviens_Khoachuyen_DM_Khoaphongs">
+          <End Role="DM_PhongBans" Type="Self.DM_PhongBans" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_PhongBans">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="KhoaChuyenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DM_Nhanviens_Khoaphong_ToDM_Khoaphongs">
+          <End Role="DM_PhongBans" Type="Self.DM_PhongBans" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_PhongBans">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="KhoaphongId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DM_PhongBans_Administrators">
+          <End Role="DM_PhongBans" Type="Self.DM_PhongBans" Multiplicity="1" />
+          <End Role="DM_PhongBans1" Type="Self.DM_PhongBans" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="DM_PhongBans">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DM_PhongBans1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pictures_ToDM_Khoaphongs">
+          <End Role="DM_PhongBans" Type="Self.DM_PhongBans" Multiplicity="1" />
+          <End Role="Pictures" Type="Self.Picture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_PhongBans">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pictures">
+              <PropertyRef Name="KhoaphongId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DM_Nhanviens_ToLevels">
+          <End Role="Levels" Type="Self.Level" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Levels">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="LevelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LevelPermissions_ToLevels">
+          <End Role="Levels" Type="Self.Level" Multiplicity="1" />
+          <End Role="LevelPermissions" Type="Self.LevelPermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Levels">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LevelPermissions">
+              <PropertyRef Name="LevelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_News_ToSubMenus">
+          <End Role="SubMenus" Type="Self.SubMenu" Multiplicity="0..1" />
+          <End Role="News" Type="Self.News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubMenus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="SubMenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_News_ToTopics">
+          <End Role="Topics" Type="Self.Topic" Multiplicity="1" />
+          <End Role="News" Type="Self.News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Topics">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="TopicId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_News_ToTransports">
+          <End Role="Transports" Type="Self.Transport" Multiplicity="0..1" />
+          <End Role="News" Type="Self.News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transports">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="cosoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubMenu_ToTopics">
+          <End Role="Topics" Type="Self.Topic" Multiplicity="1" />
+          <End Role="SubMenus" Type="Self.SubMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Topics">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SubMenus">
+              <PropertyRef Name="TopicId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="namlao206dbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="Self.Account" />
+          <EntitySet Name="Administrators" EntityType="Self.Administrator" />
+          <EntitySet Name="AdminLevelPermissions" EntityType="Self.AdminLevelPermission" />
+          <EntitySet Name="AdminLevels" EntityType="Self.AdminLevel" />
+          <EntitySet Name="AlbumPictures" EntityType="Self.AlbumPicture" />
+          <EntitySet Name="Albums" EntityType="Self.Album" />
+          <EntitySet Name="Banners" EntityType="Self.Banner" />
+          <EntitySet Name="CalrouselPictures" EntityType="Self.CalrouselPicture" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="DM_AdminListUpItem" EntityType="Self.DM_AdminListUpItem" />
+          <EntitySet Name="DM_Chucvus" EntityType="Self.DM_Chucvus" />
+          <EntitySet Name="DM_Donvihanhchinhs" EntityType="Self.DM_Donvihanhchinhs" />
+          <EntitySet Name="DM_hinhthuctochuc" EntityType="Self.DM_hinhthuctochuc" />
+          <EntitySet Name="DM_Hocvis" EntityType="Self.DM_Hocvis" />
+          <EntitySet Name="DM_Nghenghieps" EntityType="Self.DM_Nghenghieps" />
+          <EntitySet Name="DM_NhomPhongBans" EntityType="Self.DM_NhomPhongBans" />
+          <EntitySet Name="DM_PhongBans" EntityType="Self.DM_PhongBans" />
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="Feedbacks" EntityType="Self.Feedback" />
+          <EntitySet Name="LevelPermissions" EntityType="Self.LevelPermission" />
+          <EntitySet Name="Levels" EntityType="Self.Level" />
+          <EntitySet Name="LuuVets" EntityType="Self.LuuVet" />
+          <EntitySet Name="MaQuocGias" EntityType="Self.MaQuocGia" />
+          <EntitySet Name="Nationalities" EntityType="Self.Nationality" />
+          <EntitySet Name="News" EntityType="Self.News" />
+          <EntitySet Name="NewsPictures" EntityType="Self.NewsPicture" />
+          <EntitySet Name="Pictures" EntityType="Self.Picture" />
+          <EntitySet Name="SubMenus" EntityType="Self.SubMenu" />
+          <EntitySet Name="Topics" EntityType="Self.Topic" />
+          <EntitySet Name="Transports" EntityType="Self.Transport" />
+          <AssociationSet Name="FK_Accounts_Levels" Association="Self.FK_Accounts_Levels">
+            <End Role="Levels" EntitySet="Levels" />
+            <End Role="Accounts" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Administrators_ToAdminLevels" Association="Self.FK_Administrators_ToAdminLevels">
+            <End Role="AdminLevels" EntitySet="AdminLevels" />
+            <End Role="Administrators" EntitySet="Administrators" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AdminLevelPermissions_ToAdminLevels" Association="Self.FK_AdminLevelPermissions_ToAdminLevels">
+            <End Role="AdminLevels" EntitySet="AdminLevels" />
+            <End Role="AdminLevelPermissions" EntitySet="AdminLevelPermissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HospitalAlbumPictures_ToHospitalAlbums" Association="Self.FK_HospitalAlbumPictures_ToHospitalAlbums">
+            <End Role="Albums" EntitySet="Albums" />
+            <End Role="AlbumPictures" EntitySet="AlbumPictures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_ToDM_Donvihanhchinhs" Association="Self.FK_Customers_ToDM_Donvihanhchinhs">
+            <End Role="DM_Donvihanhchinhs" EntitySet="DM_Donvihanhchinhs" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DM_Nhanviens_ToChucvus" Association="Self.FK_DM_Nhanviens_ToChucvus">
+            <End Role="DM_Chucvus" EntitySet="DM_Chucvus" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DM_Nhanviens_ToDM_Donvihanhchinhs" Association="Self.FK_DM_Nhanviens_ToDM_Donvihanhchinhs">
+            <End Role="DM_Donvihanhchinhs" EntitySet="DM_Donvihanhchinhs" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DM_Nhanviens_ToDM_Hocvis" Association="Self.FK_DM_Nhanviens_ToDM_Hocvis">
+            <End Role="DM_Hocvis" EntitySet="DM_Hocvis" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DM_Nhanviens_ToNghenghieps" Association="Self.FK_DM_Nhanviens_ToNghenghieps">
+            <End Role="DM_Nghenghieps" EntitySet="DM_Nghenghieps" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DM_Khoaphongs_ToDM_NhomKhoas" Association="Self.FK_DM_Khoaphongs_ToDM_NhomKhoas">
+            <End Role="DM_NhomPhongBans" EntitySet="DM_NhomPhongBans" />
+            <End Role="DM_PhongBans" EntitySet="DM_PhongBans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DM_Khoaphongs_ToPicture" Association="Self.FK_DM_Khoaphongs_ToPicture">
+            <End Role="Pictures" EntitySet="Pictures" />
+            <End Role="DM_PhongBans" EntitySet="DM_PhongBans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DM_Nhanviens_Khoachuyen_DM_Khoaphongs" Association="Self.FK_DM_Nhanviens_Khoachuyen_DM_Khoaphongs">
+            <End Role="DM_PhongBans" EntitySet="DM_PhongBans" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DM_Nhanviens_Khoaphong_ToDM_Khoaphongs" Association="Self.FK_DM_Nhanviens_Khoaphong_ToDM_Khoaphongs">
+            <End Role="DM_PhongBans" EntitySet="DM_PhongBans" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DM_PhongBans_Administrators" Association="Self.FK_DM_PhongBans_Administrators">
+            <End Role="DM_PhongBans" EntitySet="DM_PhongBans" />
+            <End Role="DM_PhongBans1" EntitySet="DM_PhongBans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pictures_ToDM_Khoaphongs" Association="Self.FK_Pictures_ToDM_Khoaphongs">
+            <End Role="DM_PhongBans" EntitySet="DM_PhongBans" />
+            <End Role="Pictures" EntitySet="Pictures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DM_Nhanviens_ToLevels" Association="Self.FK_DM_Nhanviens_ToLevels">
+            <End Role="Levels" EntitySet="Levels" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LevelPermissions_ToLevels" Association="Self.FK_LevelPermissions_ToLevels">
+            <End Role="Levels" EntitySet="Levels" />
+            <End Role="LevelPermissions" EntitySet="LevelPermissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_News_ToSubMenus" Association="Self.FK_News_ToSubMenus">
+            <End Role="SubMenus" EntitySet="SubMenus" />
+            <End Role="News" EntitySet="News" />
+          </AssociationSet>
+          <AssociationSet Name="FK_News_ToTopics" Association="Self.FK_News_ToTopics">
+            <End Role="Topics" EntitySet="Topics" />
+            <End Role="News" EntitySet="News" />
+          </AssociationSet>
+          <AssociationSet Name="FK_News_ToTransports" Association="Self.FK_News_ToTransports">
+            <End Role="Transports" EntitySet="Transports" />
+            <End Role="News" EntitySet="News" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubMenu_ToTopics" Association="Self.FK_SubMenu_ToTopics">
+            <End Role="Topics" EntitySet="Topics" />
+            <End Role="SubMenus" EntitySet="SubMenus" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="namlao206dbModelStoreContainer" CdmEntityContainer="namlao206dbEntities">
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="namlao206dbModel.Account">
+              <MappingFragment StoreEntitySet="Accounts">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AccountType" ColumnName="AccountType" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="LoginName" ColumnName="LoginName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="ActivateCode" ColumnName="ActivateCode" />
+                <ScalarProperty Name="Coso" ColumnName="Coso" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="CheckDate" ColumnName="CheckDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Administrators">
+            <EntityTypeMapping TypeName="namlao206dbModel.Administrator">
+              <MappingFragment StoreEntitySet="Administrators">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AdminName" ColumnName="AdminName" />
+                <ScalarProperty Name="LoginName" ColumnName="LoginName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="AdminLevelId" ColumnName="AdminLevelId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Profile" ColumnName="Profile" />
+                <ScalarProperty Name="PhongBanId" ColumnName="PhongBanId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AdminLevelPermissions">
+            <EntityTypeMapping TypeName="namlao206dbModel.AdminLevelPermission">
+              <MappingFragment StoreEntitySet="AdminLevelPermissions">
+                <ScalarProperty Name="AdminLevelId" ColumnName="AdminLevelId" />
+                <ScalarProperty Name="TableName" ColumnName="TableName" />
+                <ScalarProperty Name="Permission" ColumnName="Permission" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AdminLevels">
+            <EntityTypeMapping TypeName="namlao206dbModel.AdminLevel">
+              <MappingFragment StoreEntitySet="AdminLevels">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AdminLevelName" ColumnName="AdminLevelName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AlbumPictures">
+            <EntityTypeMapping TypeName="namlao206dbModel.AlbumPicture">
+              <MappingFragment StoreEntitySet="AlbumPictures">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PictureName" ColumnName="PictureName" />
+                <ScalarProperty Name="AlbumId" ColumnName="AlbumId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Albums">
+            <EntityTypeMapping TypeName="namlao206dbModel.Album">
+              <MappingFragment StoreEntitySet="Albums">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AlbumName" ColumnName="AlbumName" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Banners">
+            <EntityTypeMapping TypeName="namlao206dbModel.Banner">
+              <MappingFragment StoreEntitySet="Banners">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="BannerName" ColumnName="BannerName" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CalrouselPictures">
+            <EntityTypeMapping TypeName="namlao206dbModel.CalrouselPicture">
+              <MappingFragment StoreEntitySet="CalrouselPictures">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="namlao206dbModel.Customer">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
+                <ScalarProperty Name="WardId" ColumnName="WardId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Avatar" ColumnName="Avatar" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_AdminListUpItem">
+            <EntityTypeMapping TypeName="namlao206dbModel.DM_AdminListUpItem">
+              <MappingFragment StoreEntitySet="DM_AdminListUpItem">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="NhomItemId" ColumnName="NhomItemId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_Chucvus">
+            <EntityTypeMapping TypeName="namlao206dbModel.DM_Chucvus">
+              <MappingFragment StoreEntitySet="DM_Chucvus">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Chucvu" ColumnName="Chucvu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_Donvihanhchinhs">
+            <EntityTypeMapping TypeName="namlao206dbModel.DM_Donvihanhchinhs">
+              <MappingFragment StoreEntitySet="DM_Donvihanhchinhs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="Ma" ColumnName="Ma" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="CapId" ColumnName="CapId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_hinhthuctochuc">
+            <EntityTypeMapping TypeName="namlao206dbModel.DM_hinhthuctochuc">
+              <MappingFragment StoreEntitySet="DM_hinhthuctochuc">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Hinhthuc" ColumnName="Hinhthuc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_Hocvis">
+            <EntityTypeMapping TypeName="namlao206dbModel.DM_Hocvis">
+              <MappingFragment StoreEntitySet="DM_Hocvis">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="tenHocvi" ColumnName="tenHocvi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_Nghenghieps">
+            <EntityTypeMapping TypeName="namlao206dbModel.DM_Nghenghieps">
+              <MappingFragment StoreEntitySet="DM_Nghenghieps">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nghenghiep" ColumnName="Nghenghiep" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_NhomPhongBans">
+            <EntityTypeMapping TypeName="namlao206dbModel.DM_NhomPhongBans">
+              <MappingFragment StoreEntitySet="DM_NhomPhongBans">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nhomkhoa" ColumnName="Nhomkhoa" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_PhongBans">
+            <EntityTypeMapping TypeName="namlao206dbModel.DM_PhongBans">
+              <MappingFragment StoreEntitySet="DM_PhongBans">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TenKhoa" ColumnName="TenKhoa" />
+                <ScalarProperty Name="ChucNang" ColumnName="ChucNang" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="NhomKhoaId" ColumnName="NhomKhoaId" />
+                <ScalarProperty Name="PictureId" ColumnName="PictureId" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="namlao206dbModel.Employee">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="LevelId" ColumnName="LevelId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="KhoaphongId" ColumnName="KhoaphongId" />
+                <ScalarProperty Name="KhoaChuyenId" ColumnName="KhoaChuyenId" />
+                <ScalarProperty Name="NghenghiepId" ColumnName="NghenghiepId" />
+                <ScalarProperty Name="ChucvuId" ColumnName="ChucvuId" />
+                <ScalarProperty Name="HocviId" ColumnName="HocviId" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
+                <ScalarProperty Name="WardId" ColumnName="WardId" />
+                <ScalarProperty Name="Avatar" ColumnName="Avatar" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="TrangThaiChuyen" ColumnName="TrangThaiChuyen" />
+                <ScalarProperty Name="Canhan" ColumnName="Canhan" />
+                <ScalarProperty Name="Import" ColumnName="Import" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Feedbacks">
+            <EntityTypeMapping TypeName="namlao206dbModel.Feedback">
+              <MappingFragment StoreEntitySet="Feedbacks">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="DateUp" ColumnName="DateUp" />
+                <ScalarProperty Name="IsClosed" ColumnName="IsClosed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LevelPermissions">
+            <EntityTypeMapping TypeName="namlao206dbModel.LevelPermission">
+              <MappingFragment StoreEntitySet="LevelPermissions">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="LevelId" ColumnName="LevelId" />
+                <ScalarProperty Name="TableName" ColumnName="TableName" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="PermissionCode" ColumnName="PermissionCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Levels">
+            <EntityTypeMapping TypeName="namlao206dbModel.Level">
+              <MappingFragment StoreEntitySet="Levels">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="LevelName" ColumnName="LevelName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LuuVets">
+            <EntityTypeMapping TypeName="namlao206dbModel.LuuVet">
+              <MappingFragment StoreEntitySet="LuuVet">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdApi" ColumnName="IdApi" />
+                <ScalarProperty Name="EmployeeCheckinId" ColumnName="EmployeeCheckinId" />
+                <ScalarProperty Name="KhoaCheckinId" ColumnName="KhoaCheckinId" />
+                <ScalarProperty Name="thoiGianCheckin" ColumnName="thoiGianCheckin" />
+                <ScalarProperty Name="KhuPhanLuongId" ColumnName="KhuPhanLuongId" />
+                <ScalarProperty Name="ticketNumber" ColumnName="ticketNumber" />
+                <ScalarProperty Name="qrQgCode" ColumnName="qrQgCode" />
+                <ScalarProperty Name="qrQgCode2" ColumnName="qrQgCode2" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MaQuocGias">
+            <EntityTypeMapping TypeName="namlao206dbModel.MaQuocGia">
+              <MappingFragment StoreEntitySet="MaQuocGia">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ma" ColumnName="Ma" />
+                <ScalarProperty Name="idQuocgia" ColumnName="idQuocgia" />
+                <ScalarProperty Name="ten" ColumnName="ten" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Nationalities">
+            <EntityTypeMapping TypeName="namlao206dbModel.Nationality">
+              <MappingFragment StoreEntitySet="Nationalities">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="QuocTich" ColumnName="QuocTich" />
+                <ScalarProperty Name="Ma" ColumnName="Ma" />
+                <ScalarProperty Name="tenKhac" ColumnName="tenKhac" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="News">
+            <EntityTypeMapping TypeName="namlao206dbModel.News">
+              <MappingFragment StoreEntitySet="News">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Summary" ColumnName="Summary" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="TopicId" ColumnName="TopicId" />
+                <ScalarProperty Name="SubMenuId" ColumnName="SubMenuId" />
+                <ScalarProperty Name="DateUp" ColumnName="DateUp" />
+                <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+                <ScalarProperty Name="Views" ColumnName="Views" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+                <ScalarProperty Name="cosoId" ColumnName="cosoId" />
+                <ScalarProperty Name="catid" ColumnName="catid" />
+                <ScalarProperty Name="uutien" ColumnName="uutien" />
+                <ScalarProperty Name="Duyet" ColumnName="Duyet" />
+                <ScalarProperty Name="TitleChange" ColumnName="TitleChange" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NewsPictures">
+            <EntityTypeMapping TypeName="namlao206dbModel.NewsPicture">
+              <MappingFragment StoreEntitySet="NewsPictures">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pictures">
+            <EntityTypeMapping TypeName="namlao206dbModel.Picture">
+              <MappingFragment StoreEntitySet="Pictures">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="KhoaphongId" ColumnName="KhoaphongId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubMenus">
+            <EntityTypeMapping TypeName="namlao206dbModel.SubMenu">
+              <MappingFragment StoreEntitySet="SubMenus">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="subMenuName" ColumnName="subMenuName" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="TopicId" ColumnName="TopicId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Topics">
+            <EntityTypeMapping TypeName="namlao206dbModel.Topic">
+              <MappingFragment StoreEntitySet="Topics">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TopicName" ColumnName="TopicName" />
+                <ScalarProperty Name="PictureId" ColumnName="PictureId" />
+                <ScalarProperty Name="NhomNews" ColumnName="NhomNews" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transports">
+            <EntityTypeMapping TypeName="namlao206dbModel.Transport">
+              <MappingFragment StoreEntitySet="Transports">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Coso" ColumnName="Coso" />
+                <ScalarProperty Name="maCoSo" ColumnName="maCoSo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

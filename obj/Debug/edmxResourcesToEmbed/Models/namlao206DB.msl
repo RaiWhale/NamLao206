@@ -1,0 +1,349 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="namlao206dbModelStoreContainer" CdmEntityContainer="namlao206dbEntities">
+    <EntitySetMapping Name="Accounts">
+      <EntityTypeMapping TypeName="namlao206dbModel.Account">
+        <MappingFragment StoreEntitySet="Accounts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AccountType" ColumnName="AccountType" />
+          <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+          <ScalarProperty Name="LoginName" ColumnName="LoginName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="ActivateCode" ColumnName="ActivateCode" />
+          <ScalarProperty Name="Coso" ColumnName="Coso" />
+          <ScalarProperty Name="Token" ColumnName="Token" />
+          <ScalarProperty Name="CheckDate" ColumnName="CheckDate" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Administrators">
+      <EntityTypeMapping TypeName="namlao206dbModel.Administrator">
+        <MappingFragment StoreEntitySet="Administrators">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AdminName" ColumnName="AdminName" />
+          <ScalarProperty Name="LoginName" ColumnName="LoginName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="AdminLevelId" ColumnName="AdminLevelId" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Profile" ColumnName="Profile" />
+          <ScalarProperty Name="PhongBanId" ColumnName="PhongBanId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AdminLevelPermissions">
+      <EntityTypeMapping TypeName="namlao206dbModel.AdminLevelPermission">
+        <MappingFragment StoreEntitySet="AdminLevelPermissions">
+          <ScalarProperty Name="AdminLevelId" ColumnName="AdminLevelId" />
+          <ScalarProperty Name="TableName" ColumnName="TableName" />
+          <ScalarProperty Name="Permission" ColumnName="Permission" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AdminLevels">
+      <EntityTypeMapping TypeName="namlao206dbModel.AdminLevel">
+        <MappingFragment StoreEntitySet="AdminLevels">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AdminLevelName" ColumnName="AdminLevelName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AlbumPictures">
+      <EntityTypeMapping TypeName="namlao206dbModel.AlbumPicture">
+        <MappingFragment StoreEntitySet="AlbumPictures">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PictureName" ColumnName="PictureName" />
+          <ScalarProperty Name="AlbumId" ColumnName="AlbumId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Albums">
+      <EntityTypeMapping TypeName="namlao206dbModel.Album">
+        <MappingFragment StoreEntitySet="Albums">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AlbumName" ColumnName="AlbumName" />
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Banners">
+      <EntityTypeMapping TypeName="namlao206dbModel.Banner">
+        <MappingFragment StoreEntitySet="Banners">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="BannerName" ColumnName="BannerName" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CalrouselPictures">
+      <EntityTypeMapping TypeName="namlao206dbModel.CalrouselPicture">
+        <MappingFragment StoreEntitySet="CalrouselPictures">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="namlao206dbModel.Customer">
+        <MappingFragment StoreEntitySet="Customers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="CityId" ColumnName="CityId" />
+          <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
+          <ScalarProperty Name="WardId" ColumnName="WardId" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Avatar" ColumnName="Avatar" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DM_AdminListUpItem">
+      <EntityTypeMapping TypeName="namlao206dbModel.DM_AdminListUpItem">
+        <MappingFragment StoreEntitySet="DM_AdminListUpItem">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="NhomItemId" ColumnName="NhomItemId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DM_Chucvus">
+      <EntityTypeMapping TypeName="namlao206dbModel.DM_Chucvus">
+        <MappingFragment StoreEntitySet="DM_Chucvus">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Chucvu" ColumnName="Chucvu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DM_Donvihanhchinhs">
+      <EntityTypeMapping TypeName="namlao206dbModel.DM_Donvihanhchinhs">
+        <MappingFragment StoreEntitySet="DM_Donvihanhchinhs">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Ten" ColumnName="Ten" />
+          <ScalarProperty Name="Ma" ColumnName="Ma" />
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+          <ScalarProperty Name="CapId" ColumnName="CapId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DM_hinhthuctochuc">
+      <EntityTypeMapping TypeName="namlao206dbModel.DM_hinhthuctochuc">
+        <MappingFragment StoreEntitySet="DM_hinhthuctochuc">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Hinhthuc" ColumnName="Hinhthuc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DM_Hocvis">
+      <EntityTypeMapping TypeName="namlao206dbModel.DM_Hocvis">
+        <MappingFragment StoreEntitySet="DM_Hocvis">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="tenHocvi" ColumnName="tenHocvi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DM_Nghenghieps">
+      <EntityTypeMapping TypeName="namlao206dbModel.DM_Nghenghieps">
+        <MappingFragment StoreEntitySet="DM_Nghenghieps">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nghenghiep" ColumnName="Nghenghiep" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DM_NhomPhongBans">
+      <EntityTypeMapping TypeName="namlao206dbModel.DM_NhomPhongBans">
+        <MappingFragment StoreEntitySet="DM_NhomPhongBans">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nhomkhoa" ColumnName="Nhomkhoa" />
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DM_PhongBans">
+      <EntityTypeMapping TypeName="namlao206dbModel.DM_PhongBans">
+        <MappingFragment StoreEntitySet="DM_PhongBans">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TenKhoa" ColumnName="TenKhoa" />
+          <ScalarProperty Name="ChucNang" ColumnName="ChucNang" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="NhomKhoaId" ColumnName="NhomKhoaId" />
+          <ScalarProperty Name="PictureId" ColumnName="PictureId" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="namlao206dbModel.Employee">
+        <MappingFragment StoreEntitySet="Employees">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="LevelId" ColumnName="LevelId" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="KhoaphongId" ColumnName="KhoaphongId" />
+          <ScalarProperty Name="KhoaChuyenId" ColumnName="KhoaChuyenId" />
+          <ScalarProperty Name="NghenghiepId" ColumnName="NghenghiepId" />
+          <ScalarProperty Name="ChucvuId" ColumnName="ChucvuId" />
+          <ScalarProperty Name="HocviId" ColumnName="HocviId" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CityId" ColumnName="CityId" />
+          <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
+          <ScalarProperty Name="WardId" ColumnName="WardId" />
+          <ScalarProperty Name="Avatar" ColumnName="Avatar" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+          <ScalarProperty Name="TrangThaiChuyen" ColumnName="TrangThaiChuyen" />
+          <ScalarProperty Name="Canhan" ColumnName="Canhan" />
+          <ScalarProperty Name="Import" ColumnName="Import" />
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Feedbacks">
+      <EntityTypeMapping TypeName="namlao206dbModel.Feedback">
+        <MappingFragment StoreEntitySet="Feedbacks">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="DateUp" ColumnName="DateUp" />
+          <ScalarProperty Name="IsClosed" ColumnName="IsClosed" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LevelPermissions">
+      <EntityTypeMapping TypeName="namlao206dbModel.LevelPermission">
+        <MappingFragment StoreEntitySet="LevelPermissions">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="LevelId" ColumnName="LevelId" />
+          <ScalarProperty Name="TableName" ColumnName="TableName" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="PermissionCode" ColumnName="PermissionCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Levels">
+      <EntityTypeMapping TypeName="namlao206dbModel.Level">
+        <MappingFragment StoreEntitySet="Levels">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="LevelName" ColumnName="LevelName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LuuVets">
+      <EntityTypeMapping TypeName="namlao206dbModel.LuuVet">
+        <MappingFragment StoreEntitySet="LuuVet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdApi" ColumnName="IdApi" />
+          <ScalarProperty Name="EmployeeCheckinId" ColumnName="EmployeeCheckinId" />
+          <ScalarProperty Name="KhoaCheckinId" ColumnName="KhoaCheckinId" />
+          <ScalarProperty Name="thoiGianCheckin" ColumnName="thoiGianCheckin" />
+          <ScalarProperty Name="KhuPhanLuongId" ColumnName="KhuPhanLuongId" />
+          <ScalarProperty Name="ticketNumber" ColumnName="ticketNumber" />
+          <ScalarProperty Name="qrQgCode" ColumnName="qrQgCode" />
+          <ScalarProperty Name="qrQgCode2" ColumnName="qrQgCode2" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MaQuocGias">
+      <EntityTypeMapping TypeName="namlao206dbModel.MaQuocGia">
+        <MappingFragment StoreEntitySet="MaQuocGia">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Ma" ColumnName="Ma" />
+          <ScalarProperty Name="idQuocgia" ColumnName="idQuocgia" />
+          <ScalarProperty Name="ten" ColumnName="ten" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Nationalities">
+      <EntityTypeMapping TypeName="namlao206dbModel.Nationality">
+        <MappingFragment StoreEntitySet="Nationalities">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="QuocTich" ColumnName="QuocTich" />
+          <ScalarProperty Name="Ma" ColumnName="Ma" />
+          <ScalarProperty Name="tenKhac" ColumnName="tenKhac" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="News">
+      <EntityTypeMapping TypeName="namlao206dbModel.News">
+        <MappingFragment StoreEntitySet="News">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Summary" ColumnName="Summary" />
+          <ScalarProperty Name="Details" ColumnName="Details" />
+          <ScalarProperty Name="TopicId" ColumnName="TopicId" />
+          <ScalarProperty Name="SubMenuId" ColumnName="SubMenuId" />
+          <ScalarProperty Name="DateUp" ColumnName="DateUp" />
+          <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+          <ScalarProperty Name="Views" ColumnName="Views" />
+          <ScalarProperty Name="Picture" ColumnName="Picture" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="cosoId" ColumnName="cosoId" />
+          <ScalarProperty Name="catid" ColumnName="catid" />
+          <ScalarProperty Name="uutien" ColumnName="uutien" />
+          <ScalarProperty Name="Duyet" ColumnName="Duyet" />
+          <ScalarProperty Name="TitleChange" ColumnName="TitleChange" />
+          <ScalarProperty Name="Author" ColumnName="Author" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NewsPictures">
+      <EntityTypeMapping TypeName="namlao206dbModel.NewsPicture">
+        <MappingFragment StoreEntitySet="NewsPictures">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pictures">
+      <EntityTypeMapping TypeName="namlao206dbModel.Picture">
+        <MappingFragment StoreEntitySet="Pictures">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="KhoaphongId" ColumnName="KhoaphongId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SubMenus">
+      <EntityTypeMapping TypeName="namlao206dbModel.SubMenu">
+        <MappingFragment StoreEntitySet="SubMenus">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="subMenuName" ColumnName="subMenuName" />
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+          <ScalarProperty Name="TopicId" ColumnName="TopicId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Topics">
+      <EntityTypeMapping TypeName="namlao206dbModel.Topic">
+        <MappingFragment StoreEntitySet="Topics">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TopicName" ColumnName="TopicName" />
+          <ScalarProperty Name="PictureId" ColumnName="PictureId" />
+          <ScalarProperty Name="NhomNews" ColumnName="NhomNews" />
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Transports">
+      <EntityTypeMapping TypeName="namlao206dbModel.Transport">
+        <MappingFragment StoreEntitySet="Transports">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Coso" ColumnName="Coso" />
+          <ScalarProperty Name="maCoSo" ColumnName="maCoSo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

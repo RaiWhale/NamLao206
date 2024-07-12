@@ -1,0 +1,39 @@
+﻿@model NamLao206.Models.DM_PhongBans
+@using NamLao206.Models
+@{
+    namlao206dbEntities db = new namlao206dbEntities();
+    var pictures = ViewBag.Pictures as List<Picture>;
+    var pic = db.Pictures.Where(x => x.KhoaphongId == Model.Id).FirstOrDefault();
+}
+<div class="course-single-right-sidebar">
+    <section class="breadcrumb-bg" style="background-image: url('../../Content/Uploads/Banners/—Pngtree—medical security technology sense blue_1002464.jpg'); ">
+        <div class="container">
+            <div class="breadcrumb-holder">
+                <div>
+               
+                    <div class="section-title justify-content-center mb-4 mb-md-8 wow fadeInUp">
+                        <span class="shape shape-left bg-info"></span>
+                        <h2 class="text-danger text-center">@Model.TenKhoa</h2>
+                        <span class="shape shape-right bg-info"></span>
+                    </div>                   
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /PAGE HEADER -->
+    <!-- -->
+    <section class="py-7 py-md-10">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-lg-9">
+                    <div class="card shadow-none bg-transparent">
+                        @Html.Raw(Model.Description)
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-3">
+                    @*@Html.Partial("_RightSideKhoaphong")*@
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

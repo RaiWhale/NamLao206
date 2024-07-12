@@ -1,0 +1,71 @@
+﻿@model PhusannhiHospital.Models.ViewModels.LoginVM
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "login-validation" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="course-single-right-sidebar">
+        <section class="breadcrumb-bg" style="background-image: url('../../Content/Uploads/Banners/—Pngtree—medical security technology sense blue_1002464.jpg'); ">
+            <div class="container">
+                <div class="breadcrumb-holder">
+                    <div>
+                        <div class="section-title justify-content-center mb-4 mb-md-8 wow fadeInUp">
+                            <span class="shape shape-left bg-info"></span>
+                            <h2 class="text-danger text-center">@ViewBag.Title</h2>
+                            <span class="shape shape-right bg-info"></span>
+                        </div>
+                        <ul class="breadcrumb breadcrumb-transparent">
+                            <li class="breadcrumb-item">
+                                <a class="text-black" href="/Home/Trangchu">Trang chủ</a>
+                            </li>
+                            <li class="breadcrumb-item text-black active" aria-current="page">
+                                @ViewBag.Title
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /PAGE HEADER -->
+        <section class="pt-7 pb-7 pt-md-10">
+            <div class="container">
+                <div class="col-sm-8 col-lg-6 offset-3">
+                    <div class="bg-primary rounded-top p-2">
+                        <h3 class="text-white font-weight-bold mb-0 ms-2">Bệnh viện Phụ Sản - Nhi Đà Nẵng</h3>
+                    </div>
+                    <div class="border rounded-bottom-sm border-top-0">
+                        <div class="p-3">
+                            <form action="#" method="POST" role="form">
+                                <div class="form-group form-group-icon">
+                                    @Html.EditorFor(model => model.LoginName, new { htmlAttributes = new { @class = "form-control border", placeholder = "Email / Tài khoản đăng nhập", required = "required" } })
+                                </div>
+
+                                <div class="form-group form-group-icon">
+                                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control border", placeholder = "Mật khẩu", required = "required" } })
+
+                                </div>
+
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-danger text-uppercase w-100">Đăng nhập</button>
+                                </div>
+
+                                @*<div class="form-group text-center text-secondary mb-0">
+                                        <a class="text-danger" href="javascript:void(0)">Forgot password?</a>
+                                    </div>*@
+                                @if (ViewBag.Message != null)
+                                {
+                                    <!-- ALERT -->
+                                    <div class="form-group alert alert-mini alert-danger mb-30">
+                                        <strong>@ViewBag.Message</strong>
+                                    </div>
+                                    <!-- /ALERT -->
+                                }
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- / -->
+}
