@@ -29,7 +29,7 @@ namespace NamLao206.Controllers
 		}
 		public ActionResult PhongBan(int khoaid)
 		{
-			//IQueryable<DM_Khoaphongs> khoaphongs;
+			//IQueryable<DM_PhongBans> khoaphongs;
 
 			var id = db.DM_PhongBans.Where(x => x.Id == khoaid).FirstOrDefault();
 			if (id != null)

@@ -1,0 +1,77 @@
+﻿@model NamLao206.Models.Account
+@using NamLao206.Models
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="panel-body">
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.AccountType)
+            @Html.HiddenFor(model => model.EmployeeId)
+            @Html.HiddenFor(model => model.LoginName)
+            @Html.HiddenFor(model => model.Password)
+            <div class="form-group">
+                @Html.Label("Mã cơ sở", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Coso, new { htmlAttributes = new { @class = "form-control is-invalid-cus" } })
+                    @Html.ValidationMessageFor(model => model.Coso, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Mật khẩu mới", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input class="form-control is-invalid-cus" name="rePassword" id="rePassword" type="password" placeholder="Mật khẩu mới" onkeyup='check();' />
+                    @Html.ValidationMessage("rePassword", "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Nhập lại Mật khẩu mới", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">              
+                    <input class="form-control is-invalid-cus" name="rePassword2" id="rePassword2" type="password" placeholder="Mật khẩu mới" onkeyup='check();' />
+                    <span id='message'></span>
+                    @Html.ValidationMessage("rePassword2", "", new { @class = "text-danger" })
+                </div>
+            </div>        
+            <div class="form-group">
+                <div class="input-group  col-md-3">
+                    <div class="input-group-prepend text-center">
+                        <span class="input-group-text" id="basic-addon1">Kích hoạt</span>
+                    </div>
+                    <input class="form-control" type="checkbox" name="IsActive" id="IsActive" value="true" checked="@Model.IsActive" />
+                </div>
+            </div>
+        </div>
+        <div style="float:right">
+            <button type="submit" class="mt-2 btn btn-success">Lưu</button>
+            <button type="button" class="mt-2 btn btn-light" data-dismiss="modal">Đóng</button>
+        </div>
+
+    </div>
+
+
+}
+<script>
+    var check = function () {
+        if (document.getElementById('rePassword').value ==
+            document.getElementById('rePassword2').value) {
+            document.getElementById('message').style.color = 'green';
+            document.getElementById('message').innerHTML = 'Trùng khớp';
+            document.getElementById('submit').disabled = false;
+        } else {
+            document.getElementById('message').style.color = 'red';
+            document.getElementById('message').innerHTML = 'Không trùng khớp';
+            document.getElementById('submit').disabled = true;
+        }
+
+      
+    }
+
+    if (document.getElementById('rePassword').value == null) {
+        document.getElementById('rePassword2').required = false;
+    } else {
+        document.getElementById('rePassword2').required = true;
+    }
+  
+</script>

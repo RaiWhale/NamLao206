@@ -40,22 +40,26 @@
         <AssociationConnector Association="namlao206dbModel.FK_AdminLevelPermissions_ToAdminLevels" ManuallyRouted="false" />
         <AssociationConnector Association="namlao206dbModel.FK_HospitalAlbumPictures_ToHospitalAlbums" ManuallyRouted="false" />
         <AssociationConnector Association="namlao206dbModel.FK_Customers_ToDM_Donvihanhchinhs" ManuallyRouted="false" />
-        <AssociationConnector Association="namlao206dbModel.FK_DM_Nhanviens_ToChucvus" ManuallyRouted="false" />
-        <AssociationConnector Association="namlao206dbModel.FK_DM_Nhanviens_ToDM_Donvihanhchinhs" ManuallyRouted="false" />
-        <AssociationConnector Association="namlao206dbModel.FK_DM_Nhanviens_ToDM_Hocvis" ManuallyRouted="false" />
-        <AssociationConnector Association="namlao206dbModel.FK_DM_Nhanviens_ToNghenghieps" ManuallyRouted="false" />
-        <AssociationConnector Association="namlao206dbModel.FK_DM_Khoaphongs_ToDM_NhomKhoas" ManuallyRouted="false" />
-        <AssociationConnector Association="namlao206dbModel.FK_DM_Khoaphongs_ToPicture" ManuallyRouted="false" />
-        <AssociationConnector Association="namlao206dbModel.FK_DM_Nhanviens_Khoachuyen_DM_Khoaphongs" ManuallyRouted="false" />
-        <AssociationConnector Association="namlao206dbModel.FK_DM_Nhanviens_Khoaphong_ToDM_Khoaphongs" ManuallyRouted="false" />
+        <AssociationConnector Association="namlao206dbModel.FK_Employee_ToChucvus" ManuallyRouted="false" />
+        <AssociationConnector Association="namlao206dbModel.FK_Employee_ToDM_Donvihanhchinhs" ManuallyRouted="false" />
+        <AssociationConnector Association="namlao206dbModel.FK_Employee_ToDM_Hocvis" ManuallyRouted="false" />
+        <AssociationConnector Association="namlao206dbModel.FK_Employee_ToNghenghieps" ManuallyRouted="false" />
+        <AssociationConnector Association="namlao206dbModel.FK_DM_PhongBans_ToDM_NhomPhongBans" ManuallyRouted="false" />
+        <AssociationConnector Association="namlao206dbModel.FK_DM_PhongBans_ToPicture" ManuallyRouted="false" />
+        <AssociationConnector Association="namlao206dbModel.FK_Employee_Khoachuyen_DM_PhongBans" ManuallyRouted="false" />
+        <AssociationConnector Association="namlao206dbModel.FK_Employee_Khoaphong_ToDM_PhongBans" ManuallyRouted="false" />
         <AssociationConnector Association="namlao206dbModel.FK_DM_PhongBans_Administrators" ManuallyRouted="false" />
-        <AssociationConnector Association="namlao206dbModel.FK_Pictures_ToDM_Khoaphongs" ManuallyRouted="false" />
-        <AssociationConnector Association="namlao206dbModel.FK_DM_Nhanviens_ToLevels" ManuallyRouted="false" />
+        <AssociationConnector Association="namlao206dbModel.FK_Pictures_ToDM_PhongBans" ManuallyRouted="false" />
+        <AssociationConnector Association="namlao206dbModel.FK_Employee_ToLevels" ManuallyRouted="false" />
         <AssociationConnector Association="namlao206dbModel.FK_LevelPermissions_ToLevels" ManuallyRouted="false" />
         <AssociationConnector Association="namlao206dbModel.FK_News_ToSubMenus" ManuallyRouted="false" />
         <AssociationConnector Association="namlao206dbModel.FK_News_ToTopics" ManuallyRouted="false" />
         <AssociationConnector Association="namlao206dbModel.FK_News_ToTransports" ManuallyRouted="false" />
         <AssociationConnector Association="namlao206dbModel.FK_SubMenu_ToTopics" ManuallyRouted="false" />
+        <AssociationConnector Association="namlao206dbModel.FK_Accounts_Employees" />
+        <AssociationConnector Association="namlao206dbModel.FK_Administrators_DM_PhongBans" />
+        <AssociationConnector Association="namlao206dbModel.FK_News_ToAdministrators" />
+        <AssociationConnector Association="namlao206dbModel.FK_News_NewsPictures" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -1,0 +1,34 @@
+﻿@model IEnumerable<NamLao206.Models.News>
+
+<div class="table-responsive">
+    <table class="table custom-table basicExample">
+        <thead>
+            <tr>
+                <th>
+                    Tiêu đề
+                </th>
+                <th>
+                    Ngày đăng
+                </th>
+                <th>
+                    Thuộc Menu
+                </th>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateUp)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SubMenu.subMenuName)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

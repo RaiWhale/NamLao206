@@ -1,10 +1,10 @@
-﻿@using PhusannhiHospital.Models
+﻿@using NamLao206.Models
 @using PagedList.Mvc
 @using PagedList
-@model PagedList.IPagedList<PhusannhiHospital.Models.News>
+@model PagedList.IPagedList<NamLao206.Models.News>
 
 @{
-    phusannhidbEntities db = new phusannhidbEntities();
+    namlao206dbEntities db = new namlao206dbEntities();
     var news = db.News.OrderByDescending(x => x.Id).FirstOrDefault();
     var topics = ViewBag.topics as List<Topic>;
 }

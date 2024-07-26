@@ -20,6 +20,7 @@ namespace NamLao206.Models
             this.Employees = new HashSet<Employee>();
             this.Employees1 = new HashSet<Employee>();
             this.Pictures = new HashSet<Picture>();
+            this.Administrators = new HashSet<Administrator>();
         }
     
         public int Id { get; set; }
@@ -40,5 +41,7 @@ namespace NamLao206.Models
         public virtual DM_PhongBans DM_PhongBans2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Picture> Pictures { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Administrator> Administrators { get; set; }
     }
 }

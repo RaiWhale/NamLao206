@@ -1,0 +1,16 @@
+﻿@model IEnumerable<NamLao206.Models.DM_AdminListUpItem>
+
+
+
+@foreach (var listname in Model)
+{
+    if (listname.NhomItemId == 1)
+    { 
+        <li class=" ">
+            <a href="~/Admin/@listname.ItemName">
+                <i class="las la-hotel"></i><span>@listname.Name</span>
+            </a>
+        </li>
+    }
+
+}

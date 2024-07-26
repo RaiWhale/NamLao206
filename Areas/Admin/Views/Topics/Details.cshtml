@@ -1,0 +1,50 @@
+﻿@model NamLao206.Models.Topic
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Topic</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TopicName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TopicName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PictureId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PictureId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NhomNews)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NhomNews)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TopicId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TopicId)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

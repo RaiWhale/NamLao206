@@ -1,0 +1,85 @@
+﻿@model NamLao206.Models.News
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="panel-body">
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.Label("Tiêu đề", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control is-invalid-cus", @placeholder = "Tiêu đề", required = "required" } })
+                        @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    @Html.Label("Nhóm tin tức", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.TopicId, null, "--Chọn nhóm tin tức --", htmlAttributes: new { @class = "form-control is-invalid-cus single", @id = "TopicId" })
+                        @Html.ValidationMessageFor(model => model.TopicId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.Label("Nhóm tin con", htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(model => model.SubMenuId, new SelectList(" "), "--Chọn nhóm tin tức --", htmlAttributes: new { @class = "form-control is-invalid-cus single", @id = "SubMenuId" })
+                        @Html.ValidationMessageFor(model => model.SubMenuId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    @Html.Label("Cơ sở", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.cosoId, null, "--Chọn cơ sở --", htmlAttributes: new { @class = "form-control is-invalid-cus single", @id = "cosoId" })
+                        @Html.ValidationMessageFor(model => model.cosoId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Tóm tắt", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-12">
+                    @Html.TextAreaFor(model => model.Summary, htmlAttributes: new { @class = "form-control is-invalid-cus", @placeholder = "Không quá 100 chữ", required = "required" })
+                    @Html.ValidationMessageFor(model => model.Summary, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Chi tiết bài đăng", htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-12">
+                    @Html.TextAreaFor(model => model.Details, htmlAttributes: new { @class = "form-control is-invalid-cus textarea-cus", @id = "Details", required = "required" })
+                    @Html.ValidationMessageFor(model => model.Details, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label col-md-3" for="Logo">Hình ảnh:</label>
+                        <div class="col-md-9">
+                            <input type="file" class="btn btn-outline-primary rounded-pill mt-2 is-invalid-cus" name="pic" id="pic" placeholder="Hình ảnh" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    @Html.Label("Tác giả", htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.Author, new { htmlAttributes = new { @class = "form-control is-invalid-cus", @placeholder = "Tác giả", required = "required" } })
+                        @Html.ValidationMessageFor(model => model.Author, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    @Html.Label("Ngày đăng", htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        <input type="text" class="form-control datecus is-invalid-cus" placeholder="DD-MM-YYYY" id="DateUp" name="DateUp" required data-placeholder="_" value="@DateTime.Now.ToString("dd-MM-yyyy")" />
+                        @Html.ValidationMessageFor(model => model.DateUp, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" style="float:right">
+            <button type="submit" class="mt-2 btn btn-success">Lưu</button>
+            <a class="mt-2 btn btn-light" href="/Admin/News">Đóng</a>
+        </div>
+    </div>
+}

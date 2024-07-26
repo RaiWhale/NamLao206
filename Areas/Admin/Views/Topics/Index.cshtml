@@ -1,0 +1,152 @@
+﻿@model IEnumerable<NamLao206.Models.Topic>
+@{
+    var submenus = Model.SelectMany(x => x.SubMenus);
+    if (ViewBag.cat != null)
+    {
+        submenus = Model.First(x => x.Id == ViewBag.cat).SubMenus;
+    }
+}
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between">
+                <div class="header-title">
+                    <a href="@Url.Action("Create","Topics")" class="btn btn-primary add-list bcommand"><i class="las la-plus mr-3"></i>Tạo mới</a>
+                    @if (ViewBag.Message != null)
+                    {
+                        <!-- ALERT -->
+                        <strong style="color:red;">  &nbsp; &nbsp;@ViewBag.Message</strong>
+                        <!-- /ALERT -->
+                    }
+                </div>
+            </div>
+            <div class="card-body">
+
+                <div class="table-responsive">
+                    <table id="datatable" class="table data-table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Nhóm tin</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td @(ViewBag.cat == item.Id ? Html.Raw("class=\"font-bold\"") : Html.Raw(""))>
+                                        @Html.ActionLink(item.TopicName, "Index", new { id = item.Id })
+                                    </td>
+                                    <td class="text-center">
+                                        <a class="badge bg-success mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Thêm"
+                                           href="@Url.Action( "Create", "SubMenus", new { topicId = item.Id })"><i class="ri-add-line mr-0"></i></a>
+                                        <a class="badge bg-success mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sửa"
+                                           href="@Url.Action("Edit","Topics", new { id = item.Id })"><i class="ri-pencil-line mr-0"></i></a>
+                                        <a class="badge bg-warning mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xóa"
+                                           href="@Url.Action("Delete","Topics", new { id = item.Id })"><i class="ri-delete-bin-line mr-0"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td @(ViewBag.cat == null ? Html.Raw("class=\"font-bold\"") : Html.Raw(""))>
+                                    @Html.ActionLink("Tất cả(*)", "Index", new { id = "" })
+                                </td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between">
+                <div class="header-title">                  
+                    @if (ViewBag.Message != null)
+                    {
+                        <!-- ALERT -->
+                        <strong style="color:red;">  &nbsp; &nbsp;@ViewBag.Message</strong>
+                        <!-- /ALERT -->
+                    }
+                </div>
+            </div>
+            <div class="card-body">
+
+                <div class="table-responsive">
+                    <table id="" class="table data-table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Tên menu con</th>
+                                <th>Tên nhóm</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var item in submenus.Where(x => x.ParentId == 0 || x.ParentId == null))
+                            {
+
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Id)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.subMenuName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Topic.TopicName)
+                                    </td>
+                                    <td class="text-center">
+                                        <a class="badge bg-success mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Thêm"
+                                           href="@Url.Action("Create", "SubMenus", new { id = item.Id  , topicId = item.TopicId})"><i class="ri-add-line mr-0"></i></a>
+                                        <a class="badge bg-success mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sửa"
+                                           href="@Url.Action("Edit","SubMenus", new { id = item.Id })"><i class="ri-pencil-line mr-0"></i></a>
+                                        <a class="badge bg-warning mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xóa"
+                                           href="@Url.Action("Delete","SubMenus", new { id = item.Id })"><i class="ri-delete-bin-line mr-0"></i></a>                                     
+                                    </td>
+                                </tr>
+                                var subInSub = submenus.Where(x => x.ParentId == item.Id);
+                                foreach (var sub in subInSub)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => sub.Id)
+                                        </td>
+                                        <td>
+                                            &nbsp; &nbsp;+ @Html.DisplayFor(modelItem => sub.subMenuName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Topic.TopicName)  ->  @Html.DisplayFor(modelItem => item.subMenuName)
+                                        </td>
+                                        <td class="text-center">
+                                            <a class="badge bg-success mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sửa"
+                                               href="@Url.Action("Edit","SubMenus", new { id = item.Id })"><i class="ri-pencil-line mr-0"></i></a>
+                                            <a class="badge bg-warning mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xóa"
+                                               href="@Url.Action("Delete","SubMenus", new { id = item.Id })"><i class="ri-delete-bin-line mr-0"></i></a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td @(ViewBag.cat == null ? Html.Raw("class=\"font-bold\"") : Html.Raw(""))>
+                                    @Html.ActionLink("Tất cả(*)", "Index", new { id = "" })
+                                </td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

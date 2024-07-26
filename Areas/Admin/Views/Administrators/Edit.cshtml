@@ -1,0 +1,72 @@
+﻿@model NamLao206.Models.Administrator
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+@using (Html.BeginForm())
+{
+<div class="panel-body">
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.Password)
+        <div class="form-group">
+            @Html.LabelFor(model => model.AdminName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.AdminName, new { htmlAttributes = new { @class = "form-control is-invalid-cus" } })
+                @Html.ValidationMessageFor(model => model.AdminName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LoginName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LoginName, new { htmlAttributes = new { @class = "form-control is-invalid-cus" } })
+                @Html.ValidationMessageFor(model => model.LoginName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Mật khẩu mới", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input class="form-control is-invalid-cus" name="NewPassword" id="NewPassword" type="password" placeholder="Mật khẩu mới" onkeyup='check();' />
+                @Html.ValidationMessage("NewPassword", "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control is-invalid-cus" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AdminLevelId, "AdminLevelId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("AdminLevelId", null, htmlAttributes: new { @class = "form-control is-invalid-cus" })
+                @Html.ValidationMessageFor(model => model.AdminLevelId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IsActive, " Mở / Khóa", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-1">
+                @Html.EditorFor(model => model.IsActive, null, new { htmlAttributes = new { @class = "form-control is-invalid-cus" } })
+                @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+            </div>
+        </div> 
+    </div>
+    <div style="float:right">
+        <button type="submit" class="mt-2 btn btn-success">Lưu</button>
+        <button type="button" class="mt-2 btn btn-light" data-dismiss="modal">Đóng</button>
+    </div>
+</div>
+    }
+
+

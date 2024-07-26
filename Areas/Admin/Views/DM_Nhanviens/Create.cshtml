@@ -1,0 +1,209 @@
+﻿@model NamLao206.Models.Employee
+@using NamLao206.Models
+
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="panel-body">
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.Label("Tên đăng nhập", htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            @Html.Editor("LoginName", new { htmlAttributes = new { @class = "form-control is-invalid-cus", @placeholder = "Tên đăng nhập", required = "required" } })
+                            @Html.ValidationMessage("LoginName", "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.Label("Mật khẩu", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.Editor("Password", new { htmlAttributes = new { @class = "form-control is-invalid-cus", @placeholder = "Mật khẩu", Type = "password", required = "required" } })
+                            @Html.ValidationMessage("Password", "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.Label("Mã cơ sở", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.Editor("Coso", new { htmlAttributes = new { @class = "form-control is-invalid-cus", @placeholder = "48124 hoặc 48207", required = "required" } })
+                            @Html.ValidationMessage("Coso", "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.Label("Họ tên", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control is-invalid-cus", @placeholder = "Họ và tên", required = "required" } })
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.Label("Điện thoại", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control is-invalid-cus", @placeholder = "Số điện thoại", required = "required" } })
+                            @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.Label("Ngày sinh", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <input type="text" class="form-control datecus is-invalid-cus" placeholder="DD-MM-YYYY" id="Birthday" name="Birthday" required data-placeholder="_" />
+                            @Html.ValidationMessageFor(model => model.Birthday, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.Label("Thành phố", htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            @Html.DropDownListFor(model => model.CityId, null, "--Chọn Thành phố --", htmlAttributes: new { @class = "form-control is-invalid-cus single", @id = "CityId" })
+                            @Html.ValidationMessageFor(model => model.CityId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.Label("Quận huyện", htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            @Html.DropDownListFor(model => model.DistrictId, new SelectList(" "), "--Chọn Quận/Huyện--", htmlAttributes: new { @class = "form-control is-invalid-cus single", @id = "DistrictId" })
+                            @Html.ValidationMessageFor(model => model.DistrictId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.Label("Phường xã", htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            @Html.DropDownListFor(model => model.WardId, new SelectList(" "), "--Chọn Phường/Xã--", htmlAttributes: new { @class = "form-control is-invalid-cus single", @id = "WardId" })
+                            @Html.ValidationMessageFor(model => model.WardId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.Label("Địa chỉ", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control is-invalid-cus", @placeholder = "Địa chỉ" } })
+                            @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.Label("Email", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control is-invalid-cus", @placeholder = "Email", required = "required" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.Label("Phân quyền", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.LevelId, null, "--Chọn role--", htmlAttributes: new { @class = "form-control is-invalid-cus single", required = "required", @name = "AccountType", @id = "AccountType" })
+              
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.Label("Khoa/Phòng", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("KhoaphongId", null, "--Chọn khoa / phòng --", htmlAttributes: new { @class = "form-control is-invalid-cus single", @placeholder = "Khoa phòng" })
+                            @Html.ValidationMessageFor(model => model.KhoaphongId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.Label("Nghề nghiệp", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("NghenghiepId", null, "--Chọn nghề nghiệp --", htmlAttributes: new { @class = "form-control is-invalid-cus single" })
+                            @Html.ValidationMessageFor(model => model.NghenghiepId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.Label("Chức vụ", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("ChucvuId", null, "--Chọn chức vụ --", htmlAttributes: new { @class = "form-control is-invalid-cus single" })
+                            @Html.ValidationMessageFor(model => model.ChucvuId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.Label("Học vị", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("HocviId", null, "--Chọn học vị--", htmlAttributes: new { @class = "form-control is-invalid-cus single" })
+                            @Html.ValidationMessageFor(model => model.HocviId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.Label("Giới tính", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("Gender", EnumHelper.GetSelectList(typeof(Gender)), "--Chọn giới tính--", htmlAttributes: new { @class = "form-control is-invalid-cus single", required = "required" })
+                            @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.Label("Avatar", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <input type="file" class="btn btn-outline-primary rounded-pill mt-2 is-invalid-cus" name="pic" id="pic" placeholder="Hình ảnh" />
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    @Html.Label("Mở / Khóa", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input class="form-control" type="checkbox" name="IsActive" id="IsActive" value="true" />
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="form-group" style="float:right">
+            <button type="submit" class="mt-2 btn btn-success">Lưu</button>
+            <a class="mt-2 btn btn-light" href="/Admin/Employee">Đóng</a>
+        </div>
+    </div>
+}
+
+
+

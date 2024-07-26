@@ -26,5 +26,6 @@ namespace NamLao206.Models
         public bool IsActive { get; set; }
     
         public virtual Level Level { get; set; }
+        public virtual Employee Employee { get; set; }
     }
 }

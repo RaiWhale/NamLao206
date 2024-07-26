@@ -1,0 +1,23 @@
+﻿@model NamLao206.Models.CalrouselPicture
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="panel-body">
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+
+                @Html.Label("Hình ảnh", htmlAttributes: new { @class = "control-label col-md-3 is-invalid-cus" })
+                <div class="col-md-9">
+                    <input name="pic" id="pic" type="file" multiple class="form-control is-invalid-cus" required/>
+                </div>
+            </div>
+        </div>
+        <div style="float:right">
+            <button type="submit" class="mt-2 btn btn-success">Lưu</button>
+            <button type="button" class="mt-2 btn btn-light" data-dismiss="modal">Đóng</button>
+        </div>
+    </div>
+}

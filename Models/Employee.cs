@@ -14,6 +14,12 @@ namespace NamLao206.Models
     
     public partial class Employee
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Employee()
+        {
+            this.Accounts = new HashSet<Account>();
+        }
+    
         public int Id { get; set; }
         public string Name { get; set; }
         public string Phone { get; set; }
@@ -45,5 +51,7 @@ namespace NamLao206.Models
         public virtual DM_PhongBans DM_PhongBans { get; set; }
         public virtual DM_PhongBans DM_PhongBans1 { get; set; }
         public virtual Level Level { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Account> Accounts { get; set; }
     }
 }

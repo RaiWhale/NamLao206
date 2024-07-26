@@ -1,0 +1,108 @@
+﻿@model IEnumerable<NamLao206.Models.HospitalAlbum>
+
+@{
+    var albumpicture = Model.SelectMany(x => x.HospitalAlbumPictures);
+    if (ViewBag.cat != null)
+    {
+        albumpicture = Model.First(x => x.Id == ViewBag.cat).HospitalAlbumPictures;
+    }
+}
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between">
+                <div class="header-title">
+                    <a href="@Url.Action("Create","HospitalAlbums")" class="btn btn-primary add-list bcommand"><i class="las la-plus mr-3"></i>Tạo mới</a>                  
+                </div>
+            </div>
+            <div class="card-body">
+
+                <div class="table-responsive">
+                    <table id="datatable" class="table data-table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Album</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td @(ViewBag.cat == item.Id ? Html.Raw("class=\"font-bold\"") : Html.Raw(""))>
+                                        @Html.ActionLink(item.AlbumName, "Index", new { id = item.Id })
+                                    </td>
+                                    <td class="text-center">
+                                        <a class="badge bg-success mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sửa"
+                                           href="@Url.Action("Edit","HospitalAlbums", new { id = item.Id })"><i class="ri-pencil-line mr-0"></i></a>
+                                        <a class="badge bg-warning mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xóa"
+                                           href="@Url.Action("Delete","HospitalAlbums", new { id = item.Id })"><i class="ri-delete-bin-line mr-0"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td @(ViewBag.cat == null ? Html.Raw("class=\"font-bold\"") : Html.Raw(""))>
+                                    @Html.ActionLink("Tất cả(*)", "Index", new { id = "" })
+                                </td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between">
+                <div class="header-title">
+                    <a href="@Url.Action("Create","HospitalAlbumPictures")" class="btn btn-primary add-list bcommand"><i class="las la-plus mr-3"></i>Tạo mới</a>
+                </div>
+            </div>
+            <div class="card-body">                
+                <div class="table-responsive">
+                    <table id="tree-table-2" class="table data-table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Url</th>
+                                <th>Album</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>                         
+                            @foreach (var item in albumpicture)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Id)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PictureName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.HospitalAlbum.AlbumName)
+                                    </td>
+                                    <td class="text-center">
+                                        <a class="badge bg-success mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sửa"
+                                           href="@Url.Action("Edit", new { id = item.Id })"><i class="ri-pencil-line mr-0"></i></a>
+                                        <a class="badge bg-warning mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xóa"
+                                           href="@Url.Action("Delete", new { id = item.Id })"><i class="ri-delete-bin-line mr-0"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -46,7 +46,7 @@
     $('.textarea-cus').each(function () {
         var id = $(this).attr('id');
         CKEDITOR.replace(id, {
-            customConfig: "../../../Content/PluginCK/ckeditor/config.js"
+            customConfig: "../../../Content/ckeditor/config.js"
         });
     });  
 

@@ -1,0 +1,22 @@
+﻿@model NamLao206.Models.CalrouselPicture
+
+@{
+    <!--Sua-->
+    string src = "/Content/TrangChu/demo_files/images/mockups/600x399/3-min.jpg";
+    var pic = Model.Url;
+    if (pic == null)
+    {
+        src = "/Content/TrangChu/demo_files/images/mockups/600x399/3-min.jpg";
+    }
+    else
+    {
+        src = "/Content/Uploads/CalrouselPicture" + "\\" + pic;
+    }
+}
+<div class="item bg-light shadow-sm rounded p-3 mb-5 card">
+    <div class="position-relative">
+        <a href="#">
+            <img class="card-img-top lazyestload" data-src="@src" src="@src" alt="Card image" style="min-height:200px; max-height:200px"> <!--chỉnh max-height:190px -->
+        </a>
+    </div>
+</div>

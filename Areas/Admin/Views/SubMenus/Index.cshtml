@@ -1,0 +1,86 @@
+﻿@model IEnumerable<NamLao206.Models.SubMenu>
+@using NamLao206.Models;
+@{
+    var topics = ViewBag.topics as List<Topic>;
+
+    var tintuc = Model.SelectMany(x => x.News);
+
+    if (ViewBag.cat != null)
+    {
+        tintuc = Model.First(x => x.Id == ViewBag.cat).News;
+    }
+    if (ViewBag.topicid != null)
+    {
+        tintuc = topics.First(x => x.Id == ViewBag.topicid).News;
+    }
+}
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between">
+                <div class="header-title">
+                    <a href="@Url.Action("Create","Topics")" class="btn btn-primary add-list bcommand"><i class="las la-plus mr-3"></i>Tạo mới</a>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="col-md-4">
+                    <div class="table-responsive">
+                        <table id="datatable" class="table data-table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Submenu Name</th>
+                                    <th>Action</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="rcat" catid="0">
+                                    <td>All (*)</td>
+                                    <td></td>
+                                </tr>
+                                @foreach (var item in topics)
+                                {
+                                    <tr class="lcat" topicid="@item.Id">
+                                        <td @(ViewBag.topicid == item.Id ? Html.Raw("class=\"font-bold\"") : Html.Raw(""))>
+                                            @*@Html.ActionLink(item.TopicName, "Index", new { topicid = item.Id })*@
+                                            @item.TopicName
+                                        </td>
+                                        <td>
+                                            <a class="badge bg-success mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sửa"
+                                               href="@Url.Action( "Create", "SubMenus", new { id = item.Id })"><i class="ri-pencil-line mr-0"></i></a>
+                                            <a class="badge bg-success mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sửa"
+                                               href="@Url.Action("Edit","Topics", new { id = item.Id })"><i class="ri-pencil-line mr-0"></i></a>
+                                            <a class="badge bg-warning mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xóa"
+                                               href="@Url.Action("Delete","Topics", new { id = item.Id })"><i class="ri-delete-bin-line mr-0"></i></a>
+                                        </td>
+                                    </tr>
+                                    foreach (var cat in item.SubMenus)
+                                    {
+                                        <tr class="rcat" catid="@cat.Id">
+                                            <td>
+                                                &nbsp; &nbsp; &nbsp;+ @cat.subMenuName
+                                                @*@Html.ActionLink(cat.subMenuName, "Index", new { id = cat.Id })*@
+                                            </td>
+                                            <td>
+                                                <a class="badge bg-success mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sửa"
+                                                   href="@Url.Action("Edit", "SubMenus", new { id = item.Id })"><i class="ri-pencil-line mr-0"></i></a>
+                                                <a class="badge bg-warning mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xóa"
+                                                   href="@Url.Action("Delete", "SubMenus", new { id = item.Id })"><i class="ri-delete-bin-line mr-0"></i></a>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                            <tfoot>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-8" id="lstProducts">
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

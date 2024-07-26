@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="namlao206dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="namlao206dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Accounts">
           <Key>
             <PropertyRef Name="Id" />
@@ -24,7 +24,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AdminName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="LoginName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Password" Type="varchar" MaxLength="100" Nullable="false" />
@@ -32,7 +32,7 @@
           <Property Name="AdminLevelId" Type="int" Nullable="false" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="Profile" Type="ntext" />
-          <Property Name="PhongBanId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PhongBanId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
         </EntityType>
         <EntityType Name="AdminLevelPermissions">
           <Key>
@@ -259,7 +259,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Summary" Type="nvarchar(max)" />
           <Property Name="Details" Type="nvarchar(max)" Nullable="false" />
@@ -306,7 +306,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TopicName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="PictureId" Type="int" />
           <Property Name="NhomNews" Type="tinyint" />
@@ -320,6 +320,18 @@
           <Property Name="Coso" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="maCoSo" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Accounts_Employees">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Accounts">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Accounts_Levels">
           <End Role="Levels" Type="Self.Levels" Multiplicity="1" />
           <End Role="Accounts" Type="Self.Accounts" Multiplicity="*" />
@@ -329,6 +341,18 @@
             </Principal>
             <Dependent Role="Accounts">
               <PropertyRef Name="AccountType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Administrators_DM_PhongBans">
+          <End Role="DM_PhongBans" Type="Self.DM_PhongBans" Multiplicity="1" />
+          <End Role="Administrators" Type="Self.Administrators" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_PhongBans">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Administrators">
+              <PropertyRef Name="PhongBanId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -368,31 +392,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DM_Khoaphongs_ToDM_NhomKhoas">
-          <End Role="DM_NhomPhongBans" Type="Self.DM_NhomPhongBans" Multiplicity="0..1" />
-          <End Role="DM_PhongBans" Type="Self.DM_PhongBans" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DM_NhomPhongBans">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DM_PhongBans">
-              <PropertyRef Name="NhomKhoaId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DM_Khoaphongs_ToPicture">
-          <End Role="Pictures" Type="Self.Pictures" Multiplicity="0..1" />
-          <End Role="DM_PhongBans" Type="Self.DM_PhongBans" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Pictures">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DM_PhongBans">
-              <PropertyRef Name="PictureId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DM_Nhanviens_Khoachuyen_DM_Khoaphongs">
+        <Association Name="FK_DM_Nhanviens_Khoachuyen_DM_PhongBans">
           <End Role="DM_PhongBans" Type="Self.DM_PhongBans" Multiplicity="0..1" />
           <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
           <ReferentialConstraint>
@@ -404,7 +404,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DM_Nhanviens_Khoaphong_ToDM_Khoaphongs">
+        <Association Name="FK_DM_Nhanviens_PhongBan_ToDM_PhongBans">
           <End Role="DM_PhongBans" Type="Self.DM_PhongBans" Multiplicity="0..1" />
           <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
           <ReferentialConstraint>
@@ -476,15 +476,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DM_PhongBans_Administrators">
-          <End Role="DM_PhongBans" Type="Self.DM_PhongBans" Multiplicity="1" />
-          <End Role="DM_PhongBans1" Type="Self.DM_PhongBans" Multiplicity="0..1" />
+        <Association Name="FK_DM_PhongBans_ToDM_NhomPhongBans">
+          <End Role="DM_NhomPhongBans" Type="Self.DM_NhomPhongBans" Multiplicity="0..1" />
+          <End Role="DM_PhongBans" Type="Self.DM_PhongBans" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="DM_PhongBans">
+            <Principal Role="DM_NhomPhongBans">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="DM_PhongBans1">
+            <Dependent Role="DM_PhongBans">
+              <PropertyRef Name="NhomKhoaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DM_PhongBans_ToPicture">
+          <End Role="Pictures" Type="Self.Pictures" Multiplicity="0..1" />
+          <End Role="DM_PhongBans" Type="Self.DM_PhongBans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pictures">
               <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DM_PhongBans">
+              <PropertyRef Name="PictureId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -512,6 +524,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_News_NewsPictures">
+          <End Role="News" Type="Self.News" Multiplicity="1" />
+          <End Role="News1" Type="Self.News" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="News">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="News1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_News_ToAdministrators">
+          <End Role="Administrators" Type="Self.Administrators" Multiplicity="0..1" />
+          <End Role="News" Type="Self.News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Administrators">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="AdminId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_News_ToSubMenus">
           <End Role="SubMenus" Type="Self.SubMenus" Multiplicity="0..1" />
           <End Role="News" Type="Self.News" Multiplicity="*" />
@@ -536,19 +572,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_News_ToTransports">
-          <End Role="Transports" Type="Self.Transports" Multiplicity="0..1" />
-          <End Role="News" Type="Self.News" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Transports">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="News">
-              <PropertyRef Name="cosoId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Pictures_ToDM_Khoaphongs">
+        <Association Name="FK_Pictures_ToDM_PhongBans">
           <End Role="DM_PhongBans" Type="Self.DM_PhongBans" Multiplicity="1" />
           <End Role="Pictures" Type="Self.Pictures" Multiplicity="*" />
           <ReferentialConstraint>
@@ -603,9 +627,17 @@
           <EntitySet Name="SubMenus" EntityType="Self.SubMenus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Topics" EntityType="Self.Topics" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Transports" EntityType="Self.Transports" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Accounts_Employees" Association="Self.FK_Accounts_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Accounts" EntitySet="Accounts" />
+          </AssociationSet>
           <AssociationSet Name="FK_Accounts_Levels" Association="Self.FK_Accounts_Levels">
             <End Role="Levels" EntitySet="Levels" />
             <End Role="Accounts" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Administrators_DM_PhongBans" Association="Self.FK_Administrators_DM_PhongBans">
+            <End Role="DM_PhongBans" EntitySet="DM_PhongBans" />
+            <End Role="Administrators" EntitySet="Administrators" />
           </AssociationSet>
           <AssociationSet Name="FK_Administrators_ToAdminLevels" Association="Self.FK_Administrators_ToAdminLevels">
             <End Role="AdminLevels" EntitySet="AdminLevels" />
@@ -619,19 +651,11 @@
             <End Role="DM_Donvihanhchinhs" EntitySet="DM_Donvihanhchinhs" />
             <End Role="Customers" EntitySet="Customers" />
           </AssociationSet>
-          <AssociationSet Name="FK_DM_Khoaphongs_ToDM_NhomKhoas" Association="Self.FK_DM_Khoaphongs_ToDM_NhomKhoas">
-            <End Role="DM_NhomPhongBans" EntitySet="DM_NhomPhongBans" />
-            <End Role="DM_PhongBans" EntitySet="DM_PhongBans" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DM_Khoaphongs_ToPicture" Association="Self.FK_DM_Khoaphongs_ToPicture">
-            <End Role="Pictures" EntitySet="Pictures" />
-            <End Role="DM_PhongBans" EntitySet="DM_PhongBans" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DM_Nhanviens_Khoachuyen_DM_Khoaphongs" Association="Self.FK_DM_Nhanviens_Khoachuyen_DM_Khoaphongs">
+          <AssociationSet Name="FK_DM_Nhanviens_Khoachuyen_DM_PhongBans" Association="Self.FK_DM_Nhanviens_Khoachuyen_DM_PhongBans">
             <End Role="DM_PhongBans" EntitySet="DM_PhongBans" />
             <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
-          <AssociationSet Name="FK_DM_Nhanviens_Khoaphong_ToDM_Khoaphongs" Association="Self.FK_DM_Nhanviens_Khoaphong_ToDM_Khoaphongs">
+          <AssociationSet Name="FK_DM_Nhanviens_PhongBan_ToDM_PhongBans" Association="Self.FK_DM_Nhanviens_PhongBan_ToDM_PhongBans">
             <End Role="DM_PhongBans" EntitySet="DM_PhongBans" />
             <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
@@ -655,9 +679,13 @@
             <End Role="DM_Nghenghieps" EntitySet="DM_Nghenghieps" />
             <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
-          <AssociationSet Name="FK_DM_PhongBans_Administrators" Association="Self.FK_DM_PhongBans_Administrators">
+          <AssociationSet Name="FK_DM_PhongBans_ToDM_NhomPhongBans" Association="Self.FK_DM_PhongBans_ToDM_NhomPhongBans">
+            <End Role="DM_NhomPhongBans" EntitySet="DM_NhomPhongBans" />
             <End Role="DM_PhongBans" EntitySet="DM_PhongBans" />
-            <End Role="DM_PhongBans1" EntitySet="DM_PhongBans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DM_PhongBans_ToPicture" Association="Self.FK_DM_PhongBans_ToPicture">
+            <End Role="Pictures" EntitySet="Pictures" />
+            <End Role="DM_PhongBans" EntitySet="DM_PhongBans" />
           </AssociationSet>
           <AssociationSet Name="FK_HospitalAlbumPictures_ToHospitalAlbums" Association="Self.FK_HospitalAlbumPictures_ToHospitalAlbums">
             <End Role="Albums" EntitySet="Albums" />
@@ -667,6 +695,14 @@
             <End Role="Levels" EntitySet="Levels" />
             <End Role="LevelPermissions" EntitySet="LevelPermissions" />
           </AssociationSet>
+          <AssociationSet Name="FK_News_NewsPictures" Association="Self.FK_News_NewsPictures">
+            <End Role="News" EntitySet="News" />
+            <End Role="News1" EntitySet="News" />
+          </AssociationSet>
+          <AssociationSet Name="FK_News_ToAdministrators" Association="Self.FK_News_ToAdministrators">
+            <End Role="Administrators" EntitySet="Administrators" />
+            <End Role="News" EntitySet="News" />
+          </AssociationSet>
           <AssociationSet Name="FK_News_ToSubMenus" Association="Self.FK_News_ToSubMenus">
             <End Role="SubMenus" EntitySet="SubMenus" />
             <End Role="News" EntitySet="News" />
@@ -675,11 +711,7 @@
             <End Role="Topics" EntitySet="Topics" />
             <End Role="News" EntitySet="News" />
           </AssociationSet>
-          <AssociationSet Name="FK_News_ToTransports" Association="Self.FK_News_ToTransports">
-            <End Role="Transports" EntitySet="Transports" />
-            <End Role="News" EntitySet="News" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Pictures_ToDM_Khoaphongs" Association="Self.FK_Pictures_ToDM_Khoaphongs">
+          <AssociationSet Name="FK_Pictures_ToDM_PhongBans" Association="Self.FK_Pictures_ToDM_PhongBans">
             <End Role="DM_PhongBans" EntitySet="DM_PhongBans" />
             <End Role="Pictures" EntitySet="Pictures" />
           </AssociationSet>
@@ -688,8 +720,7 @@
             <End Role="SubMenus" EntitySet="SubMenus" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="namlao206dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -708,6 +739,7 @@
           <Property Name="CheckDate" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Level" Relationship="Self.FK_Accounts_Levels" FromRole="Accounts" ToRole="Levels" />
+          <NavigationProperty Name="Employee" Relationship="namlao206dbModel.FK_Accounts_Employees" FromRole="Account" ToRole="Employee" />
         </EntityType>
         <EntityType Name="Administrator">
           <Key>
@@ -723,6 +755,8 @@
           <Property Name="Profile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PhongBanId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="AdminLevel" Relationship="Self.FK_Administrators_ToAdminLevels" FromRole="Administrators" ToRole="AdminLevels" />
+          <NavigationProperty Name="DM_PhongBans" Relationship="namlao206dbModel.FK_Administrators_DM_PhongBans" FromRole="Administrator" ToRole="DM_PhongBans" />
+          <NavigationProperty Name="News" Relationship="namlao206dbModel.FK_News_ToAdministrators" FromRole="Administrator" ToRole="News" />
         </EntityType>
         <EntityType Name="AdminLevelPermission">
           <Key>
@@ -811,7 +845,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Chucvu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Employees" Relationship="Self.FK_DM_Nhanviens_ToChucvus" FromRole="DM_Chucvus" ToRole="Employees" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_Employee_ToChucvus" FromRole="DM_Chucvus" ToRole="Employees" />
         </EntityType>
         <EntityType Name="DM_Donvihanhchinhs">
           <Key>
@@ -823,7 +857,7 @@
           <Property Name="ParentId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CapId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Customers" Relationship="Self.FK_Customers_ToDM_Donvihanhchinhs" FromRole="DM_Donvihanhchinhs" ToRole="Customers" />
-          <NavigationProperty Name="Employees" Relationship="Self.FK_DM_Nhanviens_ToDM_Donvihanhchinhs" FromRole="DM_Donvihanhchinhs" ToRole="Employees" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_Employee_ToDM_Donvihanhchinhs" FromRole="DM_Donvihanhchinhs" ToRole="Employees" />
         </EntityType>
         <EntityType Name="DM_hinhthuctochuc">
           <Key>
@@ -838,7 +872,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="tenHocvi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Employees" Relationship="Self.FK_DM_Nhanviens_ToDM_Hocvis" FromRole="DM_Hocvis" ToRole="Employees" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_Employee_ToDM_Hocvis" FromRole="DM_Hocvis" ToRole="Employees" />
         </EntityType>
         <EntityType Name="DM_Nghenghieps">
           <Key>
@@ -846,7 +880,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nghenghiep" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Employees" Relationship="Self.FK_DM_Nhanviens_ToNghenghieps" FromRole="DM_Nghenghieps" ToRole="Employees" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_Employee_ToNghenghieps" FromRole="DM_Nghenghieps" ToRole="Employees" />
         </EntityType>
         <EntityType Name="DM_NhomPhongBans">
           <Key>
@@ -855,7 +889,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nhomkhoa" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ParentId" Type="Int32" />
-          <NavigationProperty Name="DM_PhongBans" Relationship="Self.FK_DM_Khoaphongs_ToDM_NhomKhoas" FromRole="DM_NhomPhongBans" ToRole="DM_PhongBans" />
+          <NavigationProperty Name="DM_PhongBans" Relationship="Self.FK_DM_PhongBans_ToDM_NhomPhongBans" FromRole="DM_NhomPhongBans" ToRole="DM_PhongBans" />
         </EntityType>
         <EntityType Name="DM_PhongBans">
           <Key>
@@ -868,13 +902,14 @@
           <Property Name="NhomKhoaId" Type="Int32" />
           <Property Name="PictureId" Type="Int32" />
           <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="DM_NhomPhongBans" Relationship="Self.FK_DM_Khoaphongs_ToDM_NhomKhoas" FromRole="DM_PhongBans" ToRole="DM_NhomPhongBans" />
-          <NavigationProperty Name="Picture" Relationship="Self.FK_DM_Khoaphongs_ToPicture" FromRole="DM_PhongBans" ToRole="Pictures" />
-          <NavigationProperty Name="Employees" Relationship="Self.FK_DM_Nhanviens_Khoachuyen_DM_Khoaphongs" FromRole="DM_PhongBans" ToRole="Employees" />
-          <NavigationProperty Name="Employees1" Relationship="Self.FK_DM_Nhanviens_Khoaphong_ToDM_Khoaphongs" FromRole="DM_PhongBans" ToRole="Employees" />
+          <NavigationProperty Name="DM_NhomPhongBans" Relationship="Self.FK_DM_PhongBans_ToDM_NhomPhongBans" FromRole="DM_PhongBans" ToRole="DM_NhomPhongBans" />
+          <NavigationProperty Name="Picture" Relationship="Self.FK_DM_PhongBans_ToPicture" FromRole="DM_PhongBans" ToRole="Pictures" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_Employee_Khoachuyen_DM_PhongBans" FromRole="DM_PhongBans" ToRole="Employees" />
+          <NavigationProperty Name="Employees1" Relationship="Self.FK_Employee_Khoaphong_ToDM_PhongBans" FromRole="DM_PhongBans" ToRole="Employees" />
           <NavigationProperty Name="DM_PhongBans1" Relationship="Self.FK_DM_PhongBans_Administrators" FromRole="DM_PhongBans" ToRole="DM_PhongBans1" />
           <NavigationProperty Name="DM_PhongBans2" Relationship="Self.FK_DM_PhongBans_Administrators" FromRole="DM_PhongBans1" ToRole="DM_PhongBans" />
-          <NavigationProperty Name="Pictures" Relationship="Self.FK_Pictures_ToDM_Khoaphongs" FromRole="DM_PhongBans" ToRole="Pictures" />
+          <NavigationProperty Name="Pictures" Relationship="Self.FK_Pictures_ToDM_PhongBans" FromRole="DM_PhongBans" ToRole="Pictures" />
+          <NavigationProperty Name="Administrators" Relationship="namlao206dbModel.FK_Administrators_DM_PhongBans" FromRole="DM_PhongBans" ToRole="Administrator" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -903,13 +938,14 @@
           <Property Name="Canhan" Type="Boolean" />
           <Property Name="Import" Type="Boolean" Nullable="false" />
           <Property Name="GroupId" Type="Int32" />
-          <NavigationProperty Name="DM_Chucvus" Relationship="Self.FK_DM_Nhanviens_ToChucvus" FromRole="Employees" ToRole="DM_Chucvus" />
-          <NavigationProperty Name="DM_Donvihanhchinhs" Relationship="Self.FK_DM_Nhanviens_ToDM_Donvihanhchinhs" FromRole="Employees" ToRole="DM_Donvihanhchinhs" />
-          <NavigationProperty Name="DM_Hocvis" Relationship="Self.FK_DM_Nhanviens_ToDM_Hocvis" FromRole="Employees" ToRole="DM_Hocvis" />
-          <NavigationProperty Name="DM_Nghenghieps" Relationship="Self.FK_DM_Nhanviens_ToNghenghieps" FromRole="Employees" ToRole="DM_Nghenghieps" />
-          <NavigationProperty Name="DM_PhongBans" Relationship="Self.FK_DM_Nhanviens_Khoachuyen_DM_Khoaphongs" FromRole="Employees" ToRole="DM_PhongBans" />
-          <NavigationProperty Name="DM_PhongBans1" Relationship="Self.FK_DM_Nhanviens_Khoaphong_ToDM_Khoaphongs" FromRole="Employees" ToRole="DM_PhongBans" />
-          <NavigationProperty Name="Level" Relationship="Self.FK_DM_Nhanviens_ToLevels" FromRole="Employees" ToRole="Levels" />
+          <NavigationProperty Name="DM_Chucvus" Relationship="Self.FK_Employee_ToChucvus" FromRole="Employees" ToRole="DM_Chucvus" />
+          <NavigationProperty Name="DM_Donvihanhchinhs" Relationship="Self.FK_Employee_ToDM_Donvihanhchinhs" FromRole="Employees" ToRole="DM_Donvihanhchinhs" />
+          <NavigationProperty Name="DM_Hocvis" Relationship="Self.FK_Employee_ToDM_Hocvis" FromRole="Employees" ToRole="DM_Hocvis" />
+          <NavigationProperty Name="DM_Nghenghieps" Relationship="Self.FK_Employee_ToNghenghieps" FromRole="Employees" ToRole="DM_Nghenghieps" />
+          <NavigationProperty Name="DM_PhongBans" Relationship="Self.FK_Employee_Khoachuyen_DM_PhongBans" FromRole="Employees" ToRole="DM_PhongBans" />
+          <NavigationProperty Name="DM_PhongBans1" Relationship="Self.FK_Employee_Khoaphong_ToDM_PhongBans" FromRole="Employees" ToRole="DM_PhongBans" />
+          <NavigationProperty Name="Level" Relationship="Self.FK_Employee_ToLevels" FromRole="Employees" ToRole="Levels" />
+          <NavigationProperty Name="Accounts" Relationship="namlao206dbModel.FK_Accounts_Employees" FromRole="Employee" ToRole="Account" />
         </EntityType>
         <EntityType Name="Feedback">
           <Key>
@@ -940,7 +976,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="LevelName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Accounts" Relationship="Self.FK_Accounts_Levels" FromRole="Levels" ToRole="Accounts" />
-          <NavigationProperty Name="Employees" Relationship="Self.FK_DM_Nhanviens_ToLevels" FromRole="Levels" ToRole="Employees" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_Employee_ToLevels" FromRole="Levels" ToRole="Employees" />
           <NavigationProperty Name="LevelPermissions" Relationship="Self.FK_LevelPermissions_ToLevels" FromRole="Levels" ToRole="LevelPermissions" />
         </EntityType>
         <EntityType Name="LuuVet">
@@ -999,6 +1035,9 @@
           <NavigationProperty Name="SubMenu" Relationship="Self.FK_News_ToSubMenus" FromRole="News" ToRole="SubMenus" />
           <NavigationProperty Name="Topic" Relationship="Self.FK_News_ToTopics" FromRole="News" ToRole="Topics" />
           <NavigationProperty Name="Transport" Relationship="Self.FK_News_ToTransports" FromRole="News" ToRole="Transports" />
+          <NavigationProperty Name="Administrator" Relationship="namlao206dbModel.FK_News_ToAdministrators" FromRole="News" ToRole="Administrator" />
+          <NavigationProperty Name="News1" Relationship="namlao206dbModel.FK_News_NewsPictures" FromRole="News" ToRole="News1" />
+          <NavigationProperty Name="News2" Relationship="namlao206dbModel.FK_News_NewsPictures" FromRole="News1" ToRole="News" />
         </EntityType>
         <EntityType Name="NewsPicture">
           <Key>
@@ -1014,8 +1053,8 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Url" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="KhoaphongId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="DM_PhongBans" Relationship="Self.FK_DM_Khoaphongs_ToPicture" FromRole="Pictures" ToRole="DM_PhongBans" />
-          <NavigationProperty Name="DM_PhongBans1" Relationship="Self.FK_Pictures_ToDM_Khoaphongs" FromRole="Pictures" ToRole="DM_PhongBans" />
+          <NavigationProperty Name="DM_PhongBans" Relationship="Self.FK_DM_PhongBans_ToPicture" FromRole="Pictures" ToRole="DM_PhongBans" />
+          <NavigationProperty Name="DM_PhongBans1" Relationship="Self.FK_Pictures_ToDM_PhongBans" FromRole="Pictures" ToRole="DM_PhongBans" />
         </EntityType>
         <EntityType Name="SubMenu">
           <Key>
@@ -1110,7 +1149,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DM_Nhanviens_ToChucvus">
+        <Association Name="FK_Employee_ToChucvus">
           <End Role="DM_Chucvus" Type="Self.DM_Chucvus" Multiplicity="0..1" />
           <End Role="Employees" Type="Self.Employee" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1122,7 +1161,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DM_Nhanviens_ToDM_Donvihanhchinhs">
+        <Association Name="FK_Employee_ToDM_Donvihanhchinhs">
           <End Role="DM_Donvihanhchinhs" Type="Self.DM_Donvihanhchinhs" Multiplicity="0..1" />
           <End Role="Employees" Type="Self.Employee" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1134,7 +1173,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DM_Nhanviens_ToDM_Hocvis">
+        <Association Name="FK_Employee_ToDM_Hocvis">
           <End Role="DM_Hocvis" Type="Self.DM_Hocvis" Multiplicity="0..1" />
           <End Role="Employees" Type="Self.Employee" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1146,7 +1185,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DM_Nhanviens_ToNghenghieps">
+        <Association Name="FK_Employee_ToNghenghieps">
           <End Role="DM_Nghenghieps" Type="Self.DM_Nghenghieps" Multiplicity="0..1" />
           <End Role="Employees" Type="Self.Employee" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1158,7 +1197,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DM_Khoaphongs_ToDM_NhomKhoas">
+        <Association Name="FK_DM_PhongBans_ToDM_NhomPhongBans">
           <End Role="DM_NhomPhongBans" Type="Self.DM_NhomPhongBans" Multiplicity="0..1" />
           <End Role="DM_PhongBans" Type="Self.DM_PhongBans" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1170,7 +1209,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DM_Khoaphongs_ToPicture">
+        <Association Name="FK_DM_PhongBans_ToPicture">
           <End Role="Pictures" Type="Self.Picture" Multiplicity="0..1" />
           <End Role="DM_PhongBans" Type="Self.DM_PhongBans" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1182,7 +1221,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DM_Nhanviens_Khoachuyen_DM_Khoaphongs">
+        <Association Name="FK_Employee_Khoachuyen_DM_PhongBans">
           <End Role="DM_PhongBans" Type="Self.DM_PhongBans" Multiplicity="0..1" />
           <End Role="Employees" Type="Self.Employee" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1194,7 +1233,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DM_Nhanviens_Khoaphong_ToDM_Khoaphongs">
+        <Association Name="FK_Employee_Khoaphong_ToDM_PhongBans">
           <End Role="DM_PhongBans" Type="Self.DM_PhongBans" Multiplicity="0..1" />
           <End Role="Employees" Type="Self.Employee" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1218,7 +1257,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Pictures_ToDM_Khoaphongs">
+        <Association Name="FK_Pictures_ToDM_PhongBans">
           <End Role="DM_PhongBans" Type="Self.DM_PhongBans" Multiplicity="1" />
           <End Role="Pictures" Type="Self.Picture" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1230,7 +1269,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DM_Nhanviens_ToLevels">
+        <Association Name="FK_Employee_ToLevels">
           <End Role="Levels" Type="Self.Level" Multiplicity="0..1" />
           <End Role="Employees" Type="Self.Employee" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1353,35 +1392,35 @@
             <End Role="DM_Donvihanhchinhs" EntitySet="DM_Donvihanhchinhs" />
             <End Role="Customers" EntitySet="Customers" />
           </AssociationSet>
-          <AssociationSet Name="FK_DM_Nhanviens_ToChucvus" Association="Self.FK_DM_Nhanviens_ToChucvus">
+          <AssociationSet Name="FK_Employee_ToChucvus" Association="Self.FK_Employee_ToChucvus">
             <End Role="DM_Chucvus" EntitySet="DM_Chucvus" />
             <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
-          <AssociationSet Name="FK_DM_Nhanviens_ToDM_Donvihanhchinhs" Association="Self.FK_DM_Nhanviens_ToDM_Donvihanhchinhs">
+          <AssociationSet Name="FK_Employee_ToDM_Donvihanhchinhs" Association="Self.FK_Employee_ToDM_Donvihanhchinhs">
             <End Role="DM_Donvihanhchinhs" EntitySet="DM_Donvihanhchinhs" />
             <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
-          <AssociationSet Name="FK_DM_Nhanviens_ToDM_Hocvis" Association="Self.FK_DM_Nhanviens_ToDM_Hocvis">
+          <AssociationSet Name="FK_Employee_ToDM_Hocvis" Association="Self.FK_Employee_ToDM_Hocvis">
             <End Role="DM_Hocvis" EntitySet="DM_Hocvis" />
             <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
-          <AssociationSet Name="FK_DM_Nhanviens_ToNghenghieps" Association="Self.FK_DM_Nhanviens_ToNghenghieps">
+          <AssociationSet Name="FK_Employee_ToNghenghieps" Association="Self.FK_Employee_ToNghenghieps">
             <End Role="DM_Nghenghieps" EntitySet="DM_Nghenghieps" />
             <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
-          <AssociationSet Name="FK_DM_Khoaphongs_ToDM_NhomKhoas" Association="Self.FK_DM_Khoaphongs_ToDM_NhomKhoas">
+          <AssociationSet Name="FK_DM_PhongBans_ToDM_NhomPhongBans" Association="Self.FK_DM_PhongBans_ToDM_NhomPhongBans">
             <End Role="DM_NhomPhongBans" EntitySet="DM_NhomPhongBans" />
             <End Role="DM_PhongBans" EntitySet="DM_PhongBans" />
           </AssociationSet>
-          <AssociationSet Name="FK_DM_Khoaphongs_ToPicture" Association="Self.FK_DM_Khoaphongs_ToPicture">
+          <AssociationSet Name="FK_DM_PhongBans_ToPicture" Association="Self.FK_DM_PhongBans_ToPicture">
             <End Role="Pictures" EntitySet="Pictures" />
             <End Role="DM_PhongBans" EntitySet="DM_PhongBans" />
           </AssociationSet>
-          <AssociationSet Name="FK_DM_Nhanviens_Khoachuyen_DM_Khoaphongs" Association="Self.FK_DM_Nhanviens_Khoachuyen_DM_Khoaphongs">
+          <AssociationSet Name="FK_Employee_Khoachuyen_DM_PhongBans" Association="Self.FK_Employee_Khoachuyen_DM_PhongBans">
             <End Role="DM_PhongBans" EntitySet="DM_PhongBans" />
             <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
-          <AssociationSet Name="FK_DM_Nhanviens_Khoaphong_ToDM_Khoaphongs" Association="Self.FK_DM_Nhanviens_Khoaphong_ToDM_Khoaphongs">
+          <AssociationSet Name="FK_Employee_Khoaphong_ToDM_PhongBans" Association="Self.FK_Employee_Khoaphong_ToDM_PhongBans">
             <End Role="DM_PhongBans" EntitySet="DM_PhongBans" />
             <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
@@ -1389,11 +1428,11 @@
             <End Role="DM_PhongBans" EntitySet="DM_PhongBans" />
             <End Role="DM_PhongBans1" EntitySet="DM_PhongBans" />
           </AssociationSet>
-          <AssociationSet Name="FK_Pictures_ToDM_Khoaphongs" Association="Self.FK_Pictures_ToDM_Khoaphongs">
+          <AssociationSet Name="FK_Pictures_ToDM_PhongBans" Association="Self.FK_Pictures_ToDM_PhongBans">
             <End Role="DM_PhongBans" EntitySet="DM_PhongBans" />
             <End Role="Pictures" EntitySet="Pictures" />
           </AssociationSet>
-          <AssociationSet Name="FK_DM_Nhanviens_ToLevels" Association="Self.FK_DM_Nhanviens_ToLevels">
+          <AssociationSet Name="FK_Employee_ToLevels" Association="Self.FK_Employee_ToLevels">
             <End Role="Levels" EntitySet="Levels" />
             <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
@@ -1417,7 +1456,71 @@
             <End Role="Topics" EntitySet="Topics" />
             <End Role="SubMenus" EntitySet="SubMenus" />
           </AssociationSet>
+          <AssociationSet Name="FK_Accounts_Employees" Association="namlao206dbModel.FK_Accounts_Employees">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Account" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Administrators_DM_PhongBans" Association="namlao206dbModel.FK_Administrators_DM_PhongBans">
+            <End Role="DM_PhongBans" EntitySet="DM_PhongBans" />
+            <End Role="Administrator" EntitySet="Administrators" />
+          </AssociationSet>
+          <AssociationSet Name="FK_News_ToAdministrators" Association="namlao206dbModel.FK_News_ToAdministrators">
+            <End Role="Administrator" EntitySet="Administrators" />
+            <End Role="News" EntitySet="News" />
+          </AssociationSet>
+          <AssociationSet Name="FK_News_NewsPictures" Association="namlao206dbModel.FK_News_NewsPictures">
+            <End Role="News" EntitySet="News" />
+            <End Role="News1" EntitySet="News" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_Accounts_Employees">
+          <End Type="namlao206dbModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="namlao206dbModel.Account" Role="Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Administrators_DM_PhongBans">
+          <End Type="namlao206dbModel.DM_PhongBans" Role="DM_PhongBans" Multiplicity="1" />
+          <End Type="namlao206dbModel.Administrator" Role="Administrator" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_PhongBans">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Administrator">
+              <PropertyRef Name="PhongBanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_News_ToAdministrators">
+          <End Type="namlao206dbModel.Administrator" Role="Administrator" Multiplicity="0..1" />
+          <End Type="namlao206dbModel.News" Role="News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Administrator">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="AdminId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_News_NewsPictures">
+          <End Type="namlao206dbModel.News" Role="News" Multiplicity="1" />
+          <End Type="namlao206dbModel.News" Role="News1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="News">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="News1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
