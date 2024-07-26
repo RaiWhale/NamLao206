@@ -1,6 +1,0 @@
-﻿@model IEnumerable<NamLao206.Models.Topic>
-
-@foreach (var topic in Model.Where(x => x.NhomNews == 2))
-{
-    <li><a href="~/Home/NhomNews/?topic=@topic.Id">@topic.TopicName</a></li>
-}
