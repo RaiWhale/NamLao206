@@ -1,15 +1,12 @@
 ﻿@model IEnumerable<NamLao206.Models.Topic>
 
 
-@foreach (var topic in Model)
+@foreach (var topic in Model.Where(x => x.NhomNews == 1))
 {
-    if (topic.NhomNews.Value == 1)
-    {
         <li>
             <a href="~/Home/DetailGioiThieu/?newsid=@topic.Id">@topic.TopicName</a>
         </li>
         <li class="divider"></li>
-    }
 }
 
 

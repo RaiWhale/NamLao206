@@ -145,16 +145,22 @@
                                     </a>
                                 </li>
                                 <li class="dropdown">
-                                    <a class="dropdown-toggle" href="#">PORTFOLIO <span>projects</span></a>
+                                    <a class="dropdown-toggle" href="#">Giới thiệu <span></span></a>
                                     <ul class="dropdown-menu">
-                                        @Html.Partial("_lstGioiThieu", new namlao206dbEntities().Topics)
+                                        @Html.Partial("_topicsGioiThieu", new namlao206dbEntities().Topics)
+
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" href="#">Tin tức <span></span></a>
+                                    <ul class="dropdown-menu">
+                                        @Html.Partial("_topicsNhom2", new namlao206dbEntities().Topics)
 
                                     </ul>
                                 </li>
                                 <li class="dropdown mega-menu">
                                     <a class="dropdown-toggle" href="#">PAGES <span>preview</span></a>
                                     <ul class="dropdown-menu">
-
                                         <li>
                                             <div class="row">
                                                 <div class="col-md-3">
@@ -213,6 +219,7 @@
                                                 </div>
                                             </div>
                                         </li>
+
                                     </ul>
                                 </li>
                                 <li class="dropdown">
@@ -367,17 +374,7 @@
                                     </ul>
                                 </li>
 
-                                <li class="dropdown">
-                                    <a class="dropdown-toggle" href="#">BLOG <span>recent news</span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="blog-sidebar-left.html">Blog Sidebar Left</a></li>
-                                        <li><a href="blog-sidebar-right.html">Blog Sidebar Right</a></li>
-                                        <li><a href="blog-without-sidebar.html">Blog Without Sidebar</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="blog-single-sidebar.html">Blog Single With Sidebar</a></li>
-                                        <li><a href="blog-single-without-sidebar.html">Blog Single Without Sidebar</a></li>
-                                    </ul>
-                                </li>
+
                                 <li class="dropdown mega-menu">
                                     <a class="dropdown-toggle" href="#">SHOP <span>our products</span></a>
                                     <ul class="dropdown-menu">

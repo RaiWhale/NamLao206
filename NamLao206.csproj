@@ -531,8 +531,9 @@
     <Content Include="Views\Home\NhomNews.cshtml" />
     <Content Include="Views\Shared\_banner.cshtml" />
     <Content Include="Views\Shared\_CalrouselPicture.cshtml" />
-    <Content Include="Views\Shared\_lstGioiThieu.cshtml" />
+    <Content Include="Views\Shared\_topicsGioiThieu.cshtml" />
     <Content Include="Views\Shared\_itemGioiThieu.cshtml" />
+    <Content Include="Views\Shared\_topicsNhom2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
