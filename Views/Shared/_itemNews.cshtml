@@ -1,0 +1,36 @@
+﻿@model NamLao206.Models.News
+@using NamLao206.Utils
+@{
+    string src = "";
+    var pic = Model.Picture;
+    if (string.IsNullOrEmpty(pic))
+    {
+        src = MySecurity.GetSrcPicture(Model.TopicId);
+    }
+    else
+    {
+        src = "/Content/Uploads/News/" + pic;
+    }
+}
+
+<div class="col-md-6 col-lg-4">
+    <div class="card card-border border-info card-hover bg-white">
+        <div class="position-relative">
+            <a href="~/Home/NewsDetail/?title=@Model.TitleChange&&newsid=@Model.Id">
+                <img class="card-img-top lazyestload" data-src="@src" src="@src" alt="Card image" style="min-height:190px; max-height:190px">
+            </a>
+        </div>
+        <div class="card-body bg-info px-5 py-6">
+            <h3 class="mb-1 elipsis2 nowrap hidden">
+                <a class="text-white font-size-20 d-block text-truncate" href="~/Home/NewsDetail/?title=@Model.TitleChange&&newsid=@Model.Id">@Model.Title</a>
+            </h3>
+            <big class="d-block mb-1">@Model.DateUp.ToString("dd/MM/yyyy")</big>
+            <a href="~/Home/NewsDetail/?title=@Model.TitleChange&&newsid=@Model.Id" class="btn btn-sm btn-white text-hover-primary text-uppercase d-inline-block">
+                <i class="fa fa-shopping-basket me-2" aria-hidden="true"></i>Xem thêm
+            </a>
+        </div>
+    </div>
+</div>
+
+
+

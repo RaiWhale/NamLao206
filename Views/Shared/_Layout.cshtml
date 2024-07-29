@@ -139,89 +139,35 @@
                                 </li>
                             -->
                             <ul id="topMain" class="nav nav-pills nav-main">
-                                <li class="mega-menu dropdown active">
+                                <li class="mega-menu dropdown">
                                     <a class="dropdown-toggle" href="/Home/Trangchu">
                                         <strong>TRANG CHỦ</strong><span>Xin chào</span>
                                     </a>
                                 </li>
                                 <li class="dropdown">
-                                    <a class="dropdown-toggle" href="#">Giới thiệu <span></span></a>
+                                    <a class="dropdown-toggle" href="#"><strong>GIỚI THIỆU</strong><span>Thông tin</span></a>
                                     <ul class="dropdown-menu">
                                         @Html.Partial("_topicsGioiThieu", new namlao206dbEntities().Topics)
 
                                     </ul>
                                 </li>
-                                <li class="dropdown">
-                                    <a class="dropdown-toggle" href="#">Tin tức <span></span></a>
-                                    <ul class="dropdown-menu">
-                                        @Html.Partial("_topicsNhom2", new namlao206dbEntities().Topics)
-
-                                    </ul>
-                                </li>
                                 <li class="dropdown mega-menu">
-                                    <a class="dropdown-toggle" href="#">PAGES <span>preview</span></a>
+                                    <a class="dropdown-toggle" href="#"><strong>ĐƠN VỊ</strong><span>Phòng ban</span></a>
                                     <ul class="dropdown-menu">
                                         <li>
                                             <div class="row">
-                                                <div class="col-md-3">
-                                                    <h3>Page Samples #1</h3>
-                                                    <ul>
-                                                        <li><a href="page-about-basic.html"><i class="fa fa-angle-right"></i> About Basic</a></li>
-                                                        <li><a href="page-about-us.html"><i class="fa fa-angle-right"></i> About Us</a></li>
-                                                        <li><a href="page-about-me.html"><i class="fa fa-angle-right"></i> About Me</a></li>
-                                                        <li><a href="page-about-team.html"><i class="fa fa-angle-right"></i> About Our Team</a></li>
-                                                        <li><a href="page-services.html"><i class="fa fa-angle-right"></i> Services</a></li>
-                                                        <li><a href="page-careers.html"><i class="fa fa-angle-right"></i> Careers</a></li>
-                                                        <li><a href="page-gallery.html"><i class="fa fa-angle-right"></i> Gallery</a></li>
-                                                        <li><a href="page-article.html"><i class="fa fa-angle-right"></i> Article Page</a></li>
-                                                        <li><a href="page-faq.html"><i class="fa fa-angle-right"></i> FAQ</a></li>
-                                                        <li><a href="page-clients.html"><span class="label label-default pull-right">new</span> <i class="fa fa-angle-right"></i> Clients</a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <h3>Page Samples #2</h3>
-                                                    <ul>
-                                                        <li><a href="page-timeline-centered.html"><i class="fa fa-angle-right"></i> Timeline Centered</a></li>
-                                                        <li><a href="page-timeline-left.html"><i class="fa fa-angle-right"></i> Timeline Left</a></li>
-                                                        <li><a href="page-timeline-right.html"><i class="fa fa-angle-right"></i> Timeline Right</a></li>
-                                                        <li><a href="page-custom-header.html"><i class="fa fa-angle-right"></i> Custom Header</a></li>
-                                                        <li><a href="page-invoice.html"><i class="fa fa-angle-right"></i> Invoice</a></li>
-                                                        <li><a href="page-login.html"><i class="fa fa-angle-right"></i> Login/Register</a></li>
-                                                        <li><a href="page-account-settings.html"><i class="fa fa-angle-right"></i> Account Settings</a></li>
-                                                        <li><a href="page-search.html"> <span class="label label-default pull-right">new</span><i class="fa fa-angle-right"></i> Search Result</a></li>
-                                                        <li><a href="page-user-profile.html"> <span class="label label-default pull-right">new</span><i class="fa fa-angle-right"></i> User Profile</a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <h3>Page Samples #3</h3>
-                                                    <ul>
-                                                        <li><a href="page-pricing-standard.html"><i class="fa fa-angle-right"></i> Pricing Standard</a></li>
-                                                        <li><a href="page-pricing-expanded.html"><i class="fa fa-angle-right"></i> Pricing Expanded</a></li>
-                                                        <li><a href="page-empty.html"><i class="fa fa-angle-right"></i> Empty Page</a></li>
-                                                        <li><a href="page-full.html"><i class="fa fa-angle-right"></i> Page Full Width</a></li>
-                                                        <li><a href="page-left-sidebar.html"><i class="fa fa-angle-right"></i> Page Left Sidebar</a></li>
-                                                        <li><a href="page-right-sidebar.html"><i class="fa fa-angle-right"></i> Page Right Sidebar</a></li>
-                                                        <li><a href="page-side-navigation.html"><i class="fa fa-angle-right"></i> Side Navigation</a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <h3>Page Samples #4</h3>
-                                                    <ul>
-
-                                                        <li><a href="page-maintenance.html"><i class="fa fa-angle-right"></i> Maintenance</a></li>
-                                                        <li><a href="page-coming-soon.html"><i class="fa fa-angle-right"></i> Coming Soon</a></li>
-                                                        <li><a href="page-privacy.html"><i class="fa fa-angle-right"></i> Privacy Policy</a></li>
-                                                        <li><a href="page-terms.html"><i class="fa fa-angle-right"></i> Terms Of Services</a></li>
-                                                        <li><a href="page-404.html"><i class="fa fa-angle-right"></i> 404 Error</a></li>
-                                                        <li><a href="page-sitemap.html"><i class="fa fa-angle-right"></i> Sitemap</a></li>
-                                                        <li><a href="email.html"><i class="fa fa-star-o"></i> Email Template</a></li>
-                                                    </ul>
-                                                </div>
+                                                @Html.Partial("_menuPhongBan", new namlao206dbEntities().DM_NhomPhongBans)
                                             </div>
                                         </li>
-
                                     </ul>
                                 </li>
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" href="#"><strong>TIN TỨC</strong><span>Sự kiện</span></a>
+                                    <ul class="dropdown-menu">
+                                        @Html.Partial("_topicsNhom2", new namlao206dbEntities().Topics)
+                                    </ul>
+                                </li>
+
                                 <li class="dropdown">
                                     <a class="dropdown-toggle" href="#">FEATURES <span>components</span></a>
                                     <ul class="dropdown-menu">
@@ -375,7 +321,7 @@
                                 </li>
 
 
-                                <li class="dropdown mega-menu">
+                                @*<li class="dropdown mega-menu">
                                     <a class="dropdown-toggle" href="#">SHOP <span>our products</span></a>
                                     <ul class="dropdown-menu">
                                         <li>
@@ -413,7 +359,7 @@
                                             </div>
                                         </li>
                                     </ul>
-                                </li>
+                                </li>*@
                                 <li class="dropdown">
                                     <a class="dropdown-toggle" href="#">CONTACT <span>write us</span></a>
                                     <ul class="dropdown-menu">

@@ -66,31 +66,31 @@ namespace NamLao206.Utils
             string srcPic = "";
             if (topicId == 2)
             {
-                srcPic = "/Content/TrangChu/assets/images/thongbao.jpeg";
+                srcPic = "/Content/EponaTheme/assets/images/thongbao.jpeg";
             }
             else if (topicId == 9)
             {
-                srcPic = "/Content/TrangChu/assets/images/dao-tao.jpg";
+                srcPic = "/Content/EponaTheme/assets/images/dao-tao.jpg";
             }
             else if (topicId == 10)
             {
-                srcPic = "/Content/TrangChu/assets/images/tuyen-dung.jpg";
+                srcPic = "/Content/EponaTheme/assets/images/tuyen-dung.jpg";
             }
             else if (topicId == 16)
             {
-                srcPic = "/Content/TrangChu/assets/images/tin-tuc.jpg";
+                srcPic = "/Content/EponaTheme/assets/images/tin-tuc.jpg";
             }
             else if (topicId == 22)
             {
-                srcPic = "/Content/TrangChu/assets/images/moi-thau.png";
+                srcPic = "/Content/EponaTheme/assets/images/moi-thau.png";
             }
             else if (topicId == 13)
             {
-                srcPic = "/Content/TrangChu/assets/images/chat-luong.jpg";
+                srcPic = "/Content/EponaTheme/assets/images/chat-luong.jpg";
             }
             else
             {
-                srcPic = "/Content/TrangChu/assets/images/thongbao.jpeg";
+                srcPic = "/Content/EponaTheme/assets/images/thongbao.jpeg";
             }
 
 

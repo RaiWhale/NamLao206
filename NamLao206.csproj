@@ -1536,6 +1536,8 @@
     <Content Include="Content\ckeditor\vendor\promise.js" />
     <Content Include="Content\EponaTheme\assets\cssjs\default\css\.css" />
     <Content Include="Content\EponaTheme\assets\cssjs\default\css\core.min.css" />
+    <Content Include="Content\EponaTheme\assets\images\chat-luong.jpg" />
+    <Content Include="Content\EponaTheme\assets\images\dao-tao.jpg" />
     <Content Include="Content\EponaTheme\assets\images\demo\brands\1.jpg" />
     <Content Include="Content\EponaTheme\assets\images\demo\brands\2.jpg" />
     <Content Include="Content\EponaTheme\assets\images\demo\brands\3.jpg" />
@@ -1549,6 +1551,11 @@
     <Content Include="Content\EponaTheme\assets\images\demo\layerslider\slide-b-4.png" />
     <Content Include="Content\EponaTheme\assets\images\demo\ps1.png" />
     <Content Include="Content\EponaTheme\assets\images\demo\ps2.png" />
+    <Content Include="Content\EponaTheme\assets\images\moi-thau.png" />
+    <Content Include="Content\EponaTheme\assets\images\thongbao.jpeg" />
+    <Content Include="Content\EponaTheme\assets\images\tin-tuc.jpg" />
+    <Content Include="Content\EponaTheme\assets\images\tuyen-dung.jpg" />
+    <Content Include="Content\EponaTheme\assets\images\tuyen-dung2.jpg" />
     <Content Include="Content\EponaTheme\cdn-cgi\scripts\5c5dd728\cloudflare-static\email-decode.min.js" />
     <Content Include="Content\EponaTheme\assets\css\.css" />
     <Content Include="Content\EponaTheme\assets\css\animate.css" />
@@ -1745,7 +1752,6 @@
     <Content Include="Content\bootstrap-grid.rtl.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
-    <Content Include="Content\net40\Web.config" />
     <Content Include="Areas\Admin\Views\Account\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Account\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
@@ -1921,12 +1927,15 @@
     <Content Include="Views\Home\ErrorCustome.cshtml" />
     <Content Include="Views\Home\PhongBan.cshtml" />
     <Content Include="Views\Home\NewsDetail.cshtml" />
-    <Content Include="Views\Home\NewsDetailNhom1.cshtml" />
+    <Content Include="Views\Home\DetailGioiThieu.cshtml" />
     <Content Include="Views\Home\NhomNews.cshtml" />
     <Content Include="Views\Shared\_banner.cshtml" />
     <Content Include="Views\Shared\_CalrouselPicture.cshtml" />
-    <Content Include="Views\Shared\_lstGioiThieu.cshtml" />
     <Content Include="Views\Shared\_itemGioiThieu.cshtml" />
+    <Content Include="Views\Shared\_topicsGioiThieu.cshtml" />
+    <Content Include="Views\Shared\_topicsNhom2.cshtml" />
+    <Content Include="Views\Shared\_menuPhongBan.cshtml" />
+    <Content Include="Views\Shared\_itemNews.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
