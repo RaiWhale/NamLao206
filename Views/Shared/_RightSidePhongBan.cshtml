@@ -1,0 +1,18 @@
+﻿@using NamLao206.Models
+@{
+    var phongBans = ViewBag.KhoaPhong as List<DM_PhongBans>;
+}
+<!-- tabs content -->
+<div class="tab-content">
+
+    <!-- POPULAR -->
+    <div id="tab_1" class="tab-pane active">
+        <ul>
+            @foreach (var item in phongBans)
+            {
+                <li><a href="~/Home/PhongBan/?khoaid=@item.Id"><i class="fa fa-sign-out"></i>@item.TenKhoa</a> <small></small></li>
+            }
+        </ul>
+    </div>
+    <!-- /POPULAR -->
+</div>

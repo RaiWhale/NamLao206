@@ -64,37 +64,23 @@ namespace NamLao206.Utils
         public static string GetSrcPicture(int topicId)
         {
             string srcPic = "";
-            if (topicId == 2)
-            {
-                srcPic = "/Content/EponaTheme/assets/images/thongbao.jpeg";
-            }
-            else if (topicId == 9)
-            {
-                srcPic = "/Content/EponaTheme/assets/images/dao-tao.jpg";
-            }
-            else if (topicId == 10)
-            {
-                srcPic = "/Content/EponaTheme/assets/images/tuyen-dung.jpg";
-            }
-            else if (topicId == 16)
-            {
-                srcPic = "/Content/EponaTheme/assets/images/tin-tuc.jpg";
-            }
-            else if (topicId == 22)
-            {
-                srcPic = "/Content/EponaTheme/assets/images/moi-thau.png";
-            }
-            else if (topicId == 13)
-            {
-                srcPic = "/Content/EponaTheme/assets/images/chat-luong.jpg";
-            }
-            else
-            {
-                srcPic = "/Content/EponaTheme/assets/images/thongbao.jpeg";
-            }
-
-
-
+			switch (topicId)
+			{
+                case 1: srcPic = "/Content/EponaTheme/assets/images/thongbao.jpeg";
+					break;
+				case 2:
+				case 3:
+				case 4:
+				case 5:
+				case 6:
+				case 7:
+					srcPic = "/Content/EponaTheme/assets/images/tin-tuc.jpg";
+					break;
+				default:
+					// Xử lý trường hợp không nằm trong các case trên
+					srcPic = "/Content/EponaTheme/assets/images/thongbao.jpeg";
+					break;
+			}	             
             return srcPic;
         }
 		public static string RemoveDiacritics(string input)

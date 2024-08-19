@@ -1,4 +1,4 @@
-/** ********************************************** **
+﻿/** ********************************************** **
 	@Author			Dorin Grigoras
 	@Website		www.stepofweb.com
 	@Last Update	1:33 PM Friday, September 26, 2014
@@ -26,7 +26,32 @@
 		--. DEMO ONLY
 
 *************************************************** **/
+/** 01. Hải Fix
+	 **************************************************************** **/
+.truncateSide {
+	width: 150px; /* Độ rộng cố định */
+	white-space: nowrap; /* Ngăn không cho văn bản xuống dòng */
+	overflow: hidden; /* Ẩn phần văn bản vượt quá khung */
+	text-overflow: ellipsis; /* Hiển thị dấu ba chấm */
+}
+	.truncateSide:hover {
+		overflow: visible;
+		white-space: normal;
+		width: auto;
+	} 
 
+.truncateHai {
+	width: 200px; /* Độ rộng cố định */
+	white-space: nowrap; /* Ngăn không cho văn bản xuống dòng */
+	overflow: hidden; /* Ẩn phần văn bản vượt quá khung */
+	text-overflow: ellipsis; /* Hiển thị dấu ba chấm */
+}
+
+	.truncateHai:hover {
+		overflow: visible;
+		white-space: normal;
+		width: auto;
+	}  
 
 /** 01. Globals
  **************************************************************** **/

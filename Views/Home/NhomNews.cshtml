@@ -8,72 +8,74 @@
     var news = db.News.OrderByDescending(x => x.Id).FirstOrDefault();
     var topics = ViewBag.topics as List<Topic>;
 }
-<div class="course-single-right-sidebar">
-    <section class="breadcrumb-bg" style="background-image: url('../../Content/Uploads/Banners/—Pngtree—medical security technology sense blue_1002464.jpg'); ">
-        <div class="container">
-            <div class="breadcrumb-holder">
-                <div>
 
-                    <div class="section-title justify-content-center mb-4 mb-md-8 wow fadeInUp">
-                        <span class="shape shape-left bg-info"></span>
-                        <h2 class="text-danger text-center">@ViewBag.TopicName</h2>
-                        <span class="shape shape-right bg-info"></span>
-                    </div>          
+
+<div class="container">
+    <!-- SEARCH -->
+    @using (Html.BeginForm("NhomNews", "Home", FormMethod.Get))
+    {
+        @Html.Hidden("topic")
+        @Html.Hidden("submenu")
+
+        <form class="clearfix well well-sm search-big">
+            <div class="input-group">
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-default input-lg dropdown-toggle" data-toggle="dropdown">
+                        Everything <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li class="active">
+                            <a href="#"><i class="fa fa-check"></i> Everything</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="j#">Articles</a>
+                        </li>
+                        <li>
+                            <a href="j#">Blog</a>
+                        </li>
+                        <li>
+                            <a href="j#">Products</a>
+                        </li>
+                        <li>
+                            <a href="#">Gallery</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <input name="search" class="form-control input-lg" type="text" placeholder="Tìm kiếm...">
+                <div class="input-group-btn">
+                    <button type="submit" class="btn btn-default input-lg"><i class="fa fa-fw fa-search fa-lg"></i></button>
                 </div>
             </div>
-        </div>
-    </section>
-    <!-- /PAGE HEADER -->
 
-        @using (Html.BeginForm("NhomNews", "Home", FormMethod.Get))
-        {
-            @Html.Hidden("topic")
-            @Html.Hidden("submenu")                        
-            <section class="pt-7 pb-7 pt-md-10">
-                <div class="container">
-                    <form class="shadow-sm rounded mb-8">
-                        <div class="input-group input-group-lg">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text bg-light border-0 px-4">
-                                    <i class="fa fa-search text-muted font-size-18" aria-hidden="true"></i>
-                                </span>
-                            </div>
-                            <input name="search" type="text" class="form-control bg-light border-0 form-control-lg" aria-label="Amount (to the nearest dollar)" placeholder="Search something..." required="">
-                            <div class="input-group-append">
-                                <button type="submit"  class="btn shadow-none btn-lg btn-info text-uppercase rounded-0 rounded-end">Tìm kiếm</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </section>
-        }
- 
-    <!-- -->
-    <section class="py-7 py-md-10">
-        <div class="container">
+            <h6 class="nomargin">
+                About 34 results <small class="text-success">(0.45 seconds) </small>
+            </h6>
+        </form>
+        <!-- /SEARCH -->
+
+    }
+    <div class="row">
+        <div class="col-lg-9 col-xs-12">
             <div class="row">
-                <div class="col-md-8 col-lg-9">
-                    <div class="row">
-                        @foreach (var item in Model)
-                        {
-                            if (item.Topic.NhomNews != 1)
-                            {
-                                @Html.Partial("_itemNews", item)
-                            }
-                            else
-                            {
-                                @Html.Partial("_itemGioiThieu", item)
-                            }
-                        }
-
-                    </div>
-                    @Html.PagedListPager(Model, page => Url.Action("NhomNews", "Home", new { page, search = ViewBag.search, topic = ViewBag.topic, submenu = ViewBag.submenu}))
-                </div>
-                <div class="col-md-4 col-lg-3">
-                    @Html.Partial("_RightSide", news)
-                </div>
+                @foreach (var item in Model)
+                {
+                    if (item.Topic.NhomNews != 1)
+                    {
+                        @Html.Partial("_itemNews", item)
+                    }
+                    else
+                    {
+                        @Html.Partial("_itemGioiThieu", item)
+                    }
+                }
             </div>
-          
+            @Html.PagedListPager(Model, page => Url.Action("NhomNews", "Home", new { page, search = ViewBag.search, topic = ViewBag.topic, submenu = ViewBag.submenu }))
         </div>
-    </section>
+        <div class="col-lg-3 col-xs-12">
+            @Html.Partial("_RightSide", news)
+        </div>
+    </div>
 </div>
+

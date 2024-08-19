@@ -1936,6 +1936,9 @@
     <Content Include="Views\Shared\_topicsNhom2.cshtml" />
     <Content Include="Views\Shared\_menuPhongBan.cshtml" />
     <Content Include="Views\Shared\_itemNews.cshtml" />
+    <Content Include="Views\Shared\_recentNews.cshtml" />
+    <Content Include="Views\Shared\_RightSidePhongBan.cshtml" />
+    <Content Include="Views\Shared\_RightSide.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -50,14 +50,13 @@ namespace NamLao206.Controllers
 		}
 		public ActionResult NhomNews(string topic, int? submenu, int? page, string search)
 		{
-			pageSize = 6;
+			pageSize = 9;
 			ViewBag.topic = db.Topics.ToList();
 			IQueryable<News> newsid = db.News.Where(s => s.Duyet == true);
 
 			if (!string.IsNullOrEmpty(search))
 			{
-				search = search.Trim().ToLower();
-				newsid = newsid.Where(s => s.Title.Contains(search)).OrderByDescending(x => x.DateUp);
+				newsid = newsid.Where(s => s.Title.Trim().ToLower().Contains(search.Trim().ToLower())).OrderByDescending(x => x.DateUp);
 			}
 			else if (!string.IsNullOrEmpty(topic))
 			{
@@ -108,7 +107,7 @@ namespace NamLao206.Controllers
 			ViewBag.urlPic = MySecurity.GetSrcPicture(nid.TopicId);		
 			ViewBag.latest_news = db.News.Where(x => x.SubMenuId == nid.SubMenuId).OrderByDescending(x => x.Id).Take(6).ToList();
 			ViewBag.topics = db.Topics.Where(x => x.NhomNews.Value == 2 || x.NhomNews.Value == 3).ToList();
-			ViewBag.RecentNews = db.News.Where(x => x.TopicId == nid.TopicId).OrderByDescending(x => x.Id).Take(4).ToList();
+			ViewBag.RecentNews = db.News.Where(x => x.TopicId == nid.TopicId).OrderByDescending(x => x.Id).Take(8).ToList();
 			return View(nid);
 		}
 	}

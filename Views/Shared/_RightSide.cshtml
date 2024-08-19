@@ -1,0 +1,79 @@
+﻿@using NamLao206.Models
+@model NamLao206.Models.News
+@using NamLao206.Utils
+@{
+    namlao206dbEntities db = new namlao206dbEntities();
+    var calrouselPicture = ViewBag.calrouselPicture as List<CalrouselPicture>;
+    var topics = ViewBag.topics as List<Topic>;
+    var recentNewsRightSide = db.News.OrderByDescending(x => x.Id).Take(3);
+    var latest_news = db.News.OrderByDescending(x => x.Id).Take(3);
+    string src = MySecurity.GetSrcPicture(Model.TopicId);
+    var pic = Model.Picture;
+    //if (string.IsNullOrEmpty(pic))
+    //{
+    //    src = MySecurity.GetSrcPicture(Model.TopicId);
+    //}
+    //else
+    //{
+    //    src = "/Content/Uploads/News/" + pic;
+    //}
+}
+<!-- Topics -->
+<div class="tabs nomargin-top">
+    <!-- tabs -->
+    <ul class="nav nav-tabs nav-justified">
+        <li class="active">
+            <a href="#tab_1" data-toggle="tab">
+                Tin tức
+            </a>
+        </li>
+        <li>
+            <a href="#tab_2" data-toggle="tab">
+                Tin mới
+            </a>
+        </li>
+    </ul>
+    <!-- tabs content -->
+    <div class="tab-content">
+
+        <!-- POPULAR -->
+        <div id="tab_1" class="tab-pane active">
+            <ul>
+                @foreach (var item in topics)
+                {
+                    <li><a href="~/Home/NhomNews/?topic=@item.Id"><i class="fa fa-sign-out"></i>@item.TopicName</a> <small></small></li>
+                }
+            </ul>         
+        </div>
+        <!-- /POPULAR -->
+        <!-- RECENT -->
+        <div id="tab_2" class="tab-pane">
+            @foreach (var item in recentNewsRightSide)
+            {
+                <div class="row tab-post">
+                    <!-- post -->
+                    <div class="col-lg-3 col-sm-3 col-xs-3">
+                        <a href="~/Home/NewsDetail/?title=@Model.TitleChange&&newsid=@Model.Id">
+                            <img src="@src" width="50" alt="" />
+                        </a>
+                    </div>
+                    <div class="col-lg-9 col-sm-9 col-xs-9">
+                        <h4 class="truncateSide">
+                            <a href="~/Home/NewsDetail/?title=@Model.TitleChange&&newsid=@Model.Id" class="tab-post-link">@Model.Title</a>
+                        </h4>
+                        <small>@Model.DateUp.ToString("dd/MM/yyyy")</small>
+                    </div>
+                </div><!-- /post -->
+            }
+        </div>
+        <!-- /RECENT -->
+    </div>
+</div>
+<!-- JUSTIFIED TAB -->
+<!-- HTML BLOCK -->
+<div class="mb-60">
+    <h4>Địa điểm google map</h4>
+
+    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3834.817601266054!2d108.24756275121247!3d16.02300778885502!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1svi!2s!4v1628559776873!5m2!1svi!2s" width="250" height="150" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+</div>
+<!-- /HTML BLOCK -->
