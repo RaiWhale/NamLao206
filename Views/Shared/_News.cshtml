@@ -1,0 +1,35 @@
+﻿@model NamLao206.Models.News
+@using NamLao206.Utils
+<!--Sua-->
+@{
+    string src = MySecurity.GetSrcPicture(Model.TopicId);
+    var pic = Model.Picture;
+    if (!string.IsNullOrEmpty(pic))
+    {
+        src = "/Content/Uploads/News/" + pic;
+    }
+}
+<div class="row">
+    <div class="col-md-6">      
+        <a href="~/Home/NewsDetail/?title=@Model.TitleChange&&newsid=@Model.Id"><p class="lead">
+            <strong>@Model.Title</strong></p>
+        </a>
+        <p>@Model.Summary.</p>
+    </div>
+
+    <div class="col-md-6 text-center">
+        <a href="~/Home/NewsDetail/?title=@Model.TitleChange&&newsid=@Model.Id">
+            <img class="img-responsive animate_fade_in" src="@src" alt="" style="width: 250px; height: 300px; object-fit: cover; display: block; margin: 0 auto; "/>
+        </a>      
+    </div>
+</div>
+
+@*<div class="testimonial">
+    <p>Praesent est laborum dolo rumes fugats untras. Etha rums ser quidem rerum facilis dolores nemis onis fugats vitaes nemo minima rerums unsers sadips amets.</p>
+    <cite><strong>John Doe</strong>, Customer</cite>
+</div>*@
+
+
+
+
+

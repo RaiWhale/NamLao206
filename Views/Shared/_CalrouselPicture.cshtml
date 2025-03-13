@@ -1,22 +1,17 @@
-﻿@model NamLao206.Models.CalrouselPicture
+﻿@model NamLao206.Models.AlbumPicture
+@using NamLao206.Utils
 
 @{
-    <!--Sua-->
-    string src = "/Content/TrangChu/demo_files/images/mockups/600x399/3-min.jpg";
-    var pic = Model.Url;
-    if (pic == null)
-    {
-        src = "/Content/TrangChu/demo_files/images/mockups/600x399/3-min.jpg";
-    }
-    else
-    {
-        src = "/Content/Uploads/CalrouselPicture" + "\\" + pic;
-    }
+    string src = "";
+    var pic = Model.PictureName;
+
+    src = "/Content/Uploads/Albums/" + Model.AlbumId + "/" + pic;
+
 }
-<div class="item bg-light shadow-sm rounded p-3 mb-5 card">
-    <div class="position-relative">
-        <a href="#">
-            <img class="card-img-top lazyestload" data-src="@src" src="@src" alt="Card image" style="min-height:200px; max-height:200px"> <!--chỉnh max-height:190px -->
-        </a>
-    </div>
-</div>
+
+<div>
+    <!-- item -->
+    <a href="shop-page-full-product.html" style="background-color:#fff9e9">
+        <img src="@src" style="min-height: 180px; max-height: 260px; margin-top:40px; margin-left: 20px; margin-bottom:40px; margin-right: 40px;" alt="" />
+    </a>
+</div><!-- /item -->

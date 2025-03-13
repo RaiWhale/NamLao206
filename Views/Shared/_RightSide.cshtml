@@ -9,14 +9,10 @@
     var latest_news = db.News.OrderByDescending(x => x.Id).Take(3);
     string src = MySecurity.GetSrcPicture(Model.TopicId);
     var pic = Model.Picture;
-    //if (string.IsNullOrEmpty(pic))
-    //{
-    //    src = MySecurity.GetSrcPicture(Model.TopicId);
-    //}
-    //else
-    //{
-    //    src = "/Content/Uploads/News/" + pic;
-    //}
+    if (!string.IsNullOrEmpty(pic))
+    {
+        src = "/Content/Uploads/News/" + pic;
+    }
 }
 <!-- Topics -->
 <div class="tabs nomargin-top">
@@ -58,8 +54,8 @@
                         </a>
                     </div>
                     <div class="col-lg-9 col-sm-9 col-xs-9">
-                        <h4 class="truncateSide">
-                            <a href="~/Home/NewsDetail/?title=@Model.TitleChange&&newsid=@Model.Id" class="tab-post-link">@Model.Title</a>
+                        <h4 class="">
+                            <a data-toggle="tooltip" data-placement="top" title="" data-original-title="@Model.Title" href="~/Home/NewsDetail/?title=@Model.TitleChange&&newsid=@Model.Id" class="tab-post-link">@Model.Title</a>
                         </h4>
                         <small>@Model.DateUp.ToString("dd/MM/yyyy")</small>
                     </div>
@@ -73,7 +69,7 @@
 <!-- HTML BLOCK -->
 <div class="mb-60">
     <h4>Địa điểm google map</h4>
-
-    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3834.817601266054!2d108.24756275121247!3d16.02300778885502!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1svi!2s!4v1628559776873!5m2!1svi!2s" width="250" height="150" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.3122218219974!2d108.2064721742713!3d16.049279884627317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314219b945b62a2d%3A0x99c0f9d51a57c2a7!2zMzhBIE5ndXnhu4VuIEjhu691IFRo4buNLCBIw7JhIFRodeG6rW4gTmFtLCBI4bqjaSBDaMOidSwgxJDDoCBO4bq1bmcgNTUwMDAwLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2sla!4v1730189215468!5m2!1svi!2sla"  width="250" height="150" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+   
 </div>
 <!-- /HTML BLOCK -->

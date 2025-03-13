@@ -10,32 +10,52 @@
             @Html.HiddenFor(model => model.Id)
             @Html.HiddenFor(model => model.AccountType)
             @Html.HiddenFor(model => model.EmployeeId)
-            @Html.HiddenFor(model => model.LoginName)
             @Html.HiddenFor(model => model.Password)
-            <div class="form-group">
-                @Html.Label("Mã cơ sở", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Coso, new { htmlAttributes = new { @class = "form-control is-invalid-cus" } })
-                    @Html.ValidationMessageFor(model => model.Coso, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.Label("Tên đăng nhập", htmlAttributes: new { @class = "control-label col-md-6" })
+                        <div class="col-md-9">
+                            @Html.EditorFor(model => model.LoginName, null, new { htmlAttributes = new { @class = "form-control is-invalid-cus", @placeholder = "Tên đăng nhập", required = "required" } })
+                            @Html.ValidationMessageFor(model => model.LoginName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.Label("Phân quyền", htmlAttributes: new { @class = "control-label col-md-6" })
+                        <div class="col-md-9">
+                            @Html.DropDownListFor(model => model.AccountType, null, htmlAttributes: new { @class = "form-control is-invalid-cus single" })
+                            @Html.ValidationMessageFor(model => model.LoginName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="form-group">
-                @Html.Label("Mật khẩu mới", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <input class="form-control is-invalid-cus" name="rePassword" id="rePassword" type="password" placeholder="Mật khẩu mới" onkeyup='check();' />
-                    @Html.ValidationMessage("rePassword", "", new { @class = "text-danger" })
+
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.Label("Mật khẩu mới", htmlAttributes: new { @class = "control-label col-md-6" })
+                        <div class="col-md-10">
+                            <input class="form-control is-invalid-cus" name="rePassword" id="rePassword" type="password" placeholder="Mật khẩu mới" onkeyup='check();' />
+                            @Html.ValidationMessage("rePassword", "", new { @class = "text-danger" })
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                @Html.Label("Nhập lại Mật khẩu mới", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">              
-                    <input class="form-control is-invalid-cus" name="rePassword2" id="rePassword2" type="password" placeholder="Mật khẩu mới" onkeyup='check();' />
-                    <span id='message'></span>
-                    @Html.ValidationMessage("rePassword2", "", new { @class = "text-danger" })
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.Label("Nhập lại Mật khẩu mới", htmlAttributes: new { @class = "control-label col-md-10" })
+                        <div class="col-md-10">
+                            <input class="form-control is-invalid-cus" name="rePassword2" id="rePassword2" type="password" placeholder="Mật khẩu mới" onkeyup='check();' />
+                            <span id='message'></span>
+                            @Html.ValidationMessage("rePassword2", "", new { @class = "text-danger" })
+                        </div>
+                    </div>
                 </div>
-            </div>        
+            </div>                  
             <div class="form-group">
-                <div class="input-group  col-md-3">
+                <div class="input-group col-md-3">
                     <div class="input-group-prepend text-center">
                         <span class="input-group-text" id="basic-addon1">Kích hoạt</span>
                     </div>

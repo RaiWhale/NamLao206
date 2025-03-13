@@ -46,14 +46,7 @@
                             @Html.DropDownListFor(model => model.SubMenuId, new SelectList(" "), "--Chọn nhóm tin tức --", htmlAttributes: new { @class = "form-control select2", @id = "SubMenuId" })
                             @Html.ValidationMessageFor(model => model.SubMenuId, "", new { @class = "text-danger" })
                         </div>
-                    </div>
-                    <div class="form-group col-md-6">
-                        @Html.Label("Cơ sở", htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-12">
-                            @Html.DropDownListFor(model => model.cosoId, null, "--Chọn cơ sở --", htmlAttributes: new { @class = "form-control select2", @id = "cosoId" })
-                            @Html.ValidationMessageFor(model => model.cosoId, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
+                    </div>          
                 </div>
                 <div class="form-group col-md-12">
                     <div class="form-group col-md-4">

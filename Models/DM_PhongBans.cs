@@ -17,10 +17,9 @@ namespace NamLao206.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public DM_PhongBans()
         {
-            this.Employees = new HashSet<Employee>();
-            this.Employees1 = new HashSet<Employee>();
-            this.Pictures = new HashSet<Picture>();
             this.Administrators = new HashSet<Administrator>();
+            this.Employees = new HashSet<Employee>();
+            this.Pictures = new HashSet<Picture>();
         }
     
         public int Id { get; set; }
@@ -30,18 +29,16 @@ namespace NamLao206.Models
         public Nullable<int> NhomKhoaId { get; set; }
         public Nullable<int> PictureId { get; set; }
         public System.DateTime CreateDate { get; set; }
+        public Nullable<int> donvi_Id { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Administrator> Administrators { get; set; }
+        public virtual DM_DonVis DM_DonVis { get; set; }
         public virtual DM_NhomPhongBans DM_NhomPhongBans { get; set; }
         public virtual Picture Picture { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Employee> Employees { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Employee> Employees1 { get; set; }
-        public virtual DM_PhongBans DM_PhongBans1 { get; set; }
-        public virtual DM_PhongBans DM_PhongBans2 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Picture> Pictures { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Administrator> Administrators { get; set; }
     }
 }

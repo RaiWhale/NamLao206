@@ -1,4 +1,23 @@
 ﻿@using NamLao206.Models
+
+@{
+    namlao206dbEntities db = new namlao206dbEntities();
+    if (User.Identity.IsAuthenticated)
+    {
+        var acc = db.Accounts.Where(x => x.Id.ToString().Equals(User.Identity.Name)).SingleOrDefault();
+        if (acc == null)
+        {
+            // Gọi hàm Logout()
+            Response.Redirect(Url.Action("Logout", "Login"));
+        }
+        ViewBag.acc = acc;
+        ViewBag.Hoten = acc.Employee.Name;
+        ViewBag.ThuChuaXem = db.Transports.Where(x => x.ReceiverUserId == acc.EmployeeId && x.DaXem == false).Take(5).ToList();
+    }
+    var user = ViewBag.acc as Account;
+    var banners = db.Banners.Where(x => x.isActive == true).OrderByDescending(x => x.Id).ToList();
+    var ThuChuaXem = ViewBag.ThuChuaXem as List<Transport>;
+}
 <!DOCTYPE html>
 <!--[if IE 8]>			<html class="ie ie8"> <![endif]-->
 <!--[if IE 9]>			<html class="ie ie9"> <![endif]-->
@@ -7,20 +26,20 @@
 <!--<![endif]-->
 <head>
     <meta charset="utf-8" />
-    <title>@ViewBag.Title Nam Lào 206</title>
+    <title>@ViewBag.Title Công ty TNHH MTV Hữu Nghị Nam Lào 206</title>
     <meta name="description" content="@ViewBag.Summary" />
-    <meta property="og:title" content="@ViewBag.Title - Bệnh viện Phụ Sản - Nhi Đà Nẵng">
+    <meta property="og:title" content="@ViewBag.Title - Nam Lào 206">
     <meta property="og:description" content="@ViewBag.Summary">
     <meta property="og:image" content="@ViewBag.urlPic">
 
-    <meta property="og:image" content="~/Content/TrangChu/assets/images/Logo/logo.png" />
+    <meta property="og:image" content="~/Content/EponaTheme/assets/images/logongangcongty.png" />
     <meta name="Author" content="Nam Lào 206" />
 
     <!-- mobile settings -->
     <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="~/Content/EponaTheme/assets/images/demo/favicon.ico" />
+    <link rel="shortcut icon" href="~/Content/EponaTheme/assets/images/logo/logo512x512.png" />
 
     <!-- WEB FONTS -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800&amp;subset=latin,latin-ext,cyrillic,cyrillic-ext" rel="stylesheet" type="text/css" />
@@ -49,13 +68,17 @@
     <link href="~/Content/EponaTheme/assets/css/header-4.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/EponaTheme/assets/css/footer-default.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/EponaTheme/assets/css/color_scheme/red.css" rel="stylesheet" type="text/css" id="color_scheme" />
-
+    @*<script src="~/Scripts/jquery-3.7.1.min.js"></script>*@
+    <script type="text/javascript" src="~/Content/EponaTheme/assets/plugins/jquery-2.2.3.min.js"></script>
     <!-- Morenizr -->
     <script type="text/javascript" src="~/Content/EponaTheme/assets/plugins/modernizr.min.js"></script>
-
+    <script src="~/Scripts/bcommand.js"></script>
+    <script src="~/Content/ckeditor/ckeditor.js"></script>
+    <script src="~/Content/ckeditor/ckfinder/ckfinder.js"></script>
+    <script src="~/Content/AdminBinhLT/assets/vendor/input-masks/cleave.min.js"></script>
     <!--[if lte IE 8]>
         <script src="~/Content/EponaTheme/assets/plugins/respond.js"></script>
-    <![endif]-->
+    <![endif]-->  
 </head>
 
 <!--
@@ -94,9 +117,49 @@
                     <div id="barMain">
                         <nav class="nav-second">
                             <ul class="nav nav-pills nav-second">
-                                <li><a href="#"><i class="fa fa-angle-right"></i> About</a></li>
-                                <li><a href="#"><i class="fa fa-angle-right"></i> Login</a></li>
-                                <li class="hidden-xs"><a href="#"><i class="fa fa-angle-right"></i> Contact Us</a></li>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <li class="quick-cart dropdown pull-right">
+                                        <a href="#" class="dropdown-toggle"><i class="fa fa-shopping-cart"></i>  Welcome, <strong>@ViewBag.Hoten</strong> <i class="fa fa-angle-down"></i></a>
+                                        <ul class="dropdown-menu pull-right">
+                                            <li>
+                                                <p style="color:red"><i class="fa fa-warning"></i><strong> Bạn có @ThuChuaXem.Count() công văn chưa xem</strong></p>
+                                                <!-- CART CONTENT -->
+                                                <div class="quick-cart-content">
+                                                    @foreach (var item in ThuChuaXem)
+                                                    {
+                                                        <a class="quick-cart-item" href="~/TransportFiles/TransportFiles/Details/@item.FileId?flag=HopThuDen">
+                                                            <!-- item 1 -->
+                                                            @*<img class="pull-left" src="assets/images/demo/shop/thumb/1.jpg" width="40" alt="quick cart">*@
+                                                            <div class="inline-block">
+                                                                <span class="title block white">@item.TransportFile.tenFile</span>
+                                                            </div>
+                                                        </a><!-- /item N -->
+                                                    }
+                                                    <div class="row cart-footer">
+                                                        <!-- cart footer -->
+                                                        <div class="col-md-6 nopadding-right">
+                                                            <a href="/Login/UpdateProfile" class="btn btn-primary fullwidth">My Settings</a>
+                                                        </div>
+                                                        <div class="col-md-6 nopadding-left">
+                                                            <a href="@Url.Action("Logout","Login")" class="btn btn-info fullwidth">Đăng xuất</a>
+                                                        </div>
+                                                    </div><!-- /cart footer -->
+
+                                                </div>
+                                                <!-- /CART CONTENT -->
+
+                                            </li>
+                                        </ul>
+                                    </li>
+
+                                }
+                                else
+                                {
+                                    <li><a href="/Login/Login" style="font-size:15px;">Đăng nhập thành viên</a></li>
+
+                                }
+
                             </ul>
                         </nav>
                     </div>
@@ -110,7 +173,7 @@
 
                     <!-- Logo -->
                     <a class="logo" href="index.html">
-                        <img src="~/Content/EponaTheme/assets/images/logo.png" height="50" alt="" />
+                        <img src="~/Content/EponaTheme/assets/images/logongangcongty.png" height="50" width="150" alt="" />
                     </a>
 
                     <!-- Mobile Menu Button -->
@@ -166,8 +229,23 @@
                                     <ul class="dropdown-menu">
                                         @Html.Partial("_topicsNhom2", new namlao206dbEntities().Topics)
                                     </ul>
-                                </li>                              
-       
+                                </li>
+                                @if (user != null)
+                                {
+                                    <li class="dropdown">
+                                        <a class="dropdown-toggle" href="#"><strong>CHỨC NĂNG</strong><span>nội bộ</span></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="~/TransportFiles/TransportFiles/" style="color:white">Văn Phòng Điện Tử</a></li>
+                                        </ul>
+                                        @if (user.Employee.LevelId == 4)
+                                        {
+                                            <ul class="dropdown-menu">
+                                                <li><a href="~/News/Index" style="color:white">Đăng bài viết</a></li>
+                                            </ul>
+                                        }
+                                    </li>
+
+                                }
                             </ul>
 
                         </nav>
@@ -183,256 +261,23 @@
 
 
         <!-- REVOLUTION SLIDER -->
-        <div class="container margin-top60">
+        <!-- Banner -->
+        <div class="container-fluid">
             <div class="slider fullwidthbanner-container roundedcorners">
-                <div class="fullwidthbanner">
+                <div class="fullwidthbanner" data-height="450">
                     <ul class="hide">
-
-                        <!-- SLIDE  -->
-                        <li data-transition="fade" data-slotamount="7" data-masterspeed="300" data-saveperformance="off">
-                            <img src="~/Content/EponaTheme/assets/images/1x1.png" data-lazyload="/Content/EponaTheme/assets/images/demo/flickr_16.jpg" alt="" data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat" />
-
-                            <div class="tp-caption lft start"
-                                 data-x="-86"
-                                 data-y="296"
-                                 data-speed="750"
-                                 data-start="750"
-                                 data-easing="easeOutExpo"
-                                 data-elementdelay="0.1"
-                                 data-endelementdelay="0.1"
-                                 data-endspeed="300">
-                                <img src="~/Content/EponaTheme/assets/images/1x1.png" alt="" data-lazyload="../Content/EponaTheme/assets/images/caption_bg.png">
-                            </div>
-
-                            <div class="tp-caption medium_light_white lfb start"
-                                 data-x="44"
-                                 data-y="320"
-                                 data-speed="300"
-                                 data-start="1500"
-                                 data-easing="easeOutExpo"
-                                 data-splitin="none"
-                                 data-splitout="none"
-                                 data-elementdelay="0.1"
-                                 data-endelementdelay="0.1"
-                                 data-endspeed="300">
-                                Epona: #1<br /> Template
-                            </div>
-
-                            <div class="tp-caption small_light_white lfb start"
-                                 data-x="44"
-                                 data-y="400"
-                                 data-speed="300"
-                                 data-start="1500"
-                                 data-easing="easeOutExpo"
-                                 data-splitin="none"
-                                 data-splitout="none"
-                                 data-elementdelay="0.1"
-                                 data-endelementdelay="0.1"
-                                 data-endspeed="300">
-                                <small>Awesome sliders give you the opportunity <br /> to showcase important content.</small>
-                            </div>
-
-                        </li>
-
-                        <!-- SLIDE  -->
-                        <li data-transition="fade" data-slotamount="7" data-masterspeed="300" data-saveperformance="off">
-                            <img src="~/Content/EponaTheme/assets/images/1x1.png" data-lazyload="../Content/EponaTheme/assets/images/demo/flickr_14.jpg" alt="" data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat" />
-
-                            <div class="tp-caption lft start"
-                                 data-x="0"
-                                 data-y="0"
-                                 data-speed="750"
-                                 data-start="750"
-                                 data-easing="easeOutExpo"
-                                 data-elementdelay="0.1"
-                                 data-endelementdelay="0.1"
-                                 data-endspeed="300">
-                                <img src="~/Content/EponaTheme/assets/images/1x1.png" alt="" data-lazyload="../Content/EponaTheme/assets/images/caption_bg.png">
-                            </div>
-
-                            <div class="tp-caption medium_light_white lfb start"
-                                 data-x="left" data-hoffset="70"
-                                 data-y="96"
-                                 data-speed="300"
-                                 data-start="1200"
-                                 data-easing="easeOutExpo"
-                                 data-splitin="none"
-                                 data-splitout="none"
-                                 data-elementdelay="0.1"
-                                 data-endelementdelay="0.1"
-                                 data-endspeed="300">
-                                Epona Great<br /> Revolution Captions
-                            </div>
-
-                            <div class="tp-caption block_black lfl start"
-                                 data-x="left" data-hoffset="70"
-                                 data-y="195"
-                                 data-speed="300"
-                                 data-start="1500"
-                                 data-easing="easeOutExpo"
-                                 data-splitin="none"
-                                 data-splitout="none"
-                                 data-elementdelay="0.1"
-                                 data-endelementdelay="0.1"
-                                 data-endspeed="300">
-                                New Features Always Added
-                            </div>
-
-                            <div class="tp-caption small_light_white lfl start"
-                                 data-x="left" data-hoffset="70"
-                                 data-y="250"
-                                 data-speed="1000"
-                                 data-start="1800"
-                                 data-easing="easeOutExpo"
-                                 data-splitin="none"
-                                 data-splitout="none"
-                                 data-elementdelay="0.1"
-                                 data-endelementdelay="0.1"
-                                 data-endspeed="300">
-                                <small>Awesome sliders give you the opportunity to<br /> showcase important content. Epona will constantly be<br /> updatedwith brand new features and additions</small>
-                            </div>
-                        </li>
-
-                        <!-- SLIDE  -->
-                        <li data-transition="fade" data-slotamount="7" data-masterspeed="300" data-saveperformance="off">
-                            <img src="~/Content/EponaTheme/assets/images/1x1.png" data-lazyload="../Content/EponaTheme/assets/images/demo/flickr_13.jpg" alt="" data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat" />
-
-                            <div class="tp-caption lft start"
-                                 data-x="right"
-                                 data-y="0"
-                                 data-speed="750"
-                                 data-start="750"
-                                 data-easing="easeOutExpo"
-                                 data-elementdelay="0.1"
-                                 data-endelementdelay="0.1"
-                                 data-endspeed="300">
-                                <img src="~/Content/EponaTheme/assets/images/1x1.png" alt="" data-lazyload="../Content/EponaTheme/assets/images/caption_bg.png">
-                            </div>
-
-                            <div class="tp-caption medium_light_white lfb start"
-                                 data-x="left" data-hoffset="810"
-                                 data-y="96"
-                                 data-speed="300"
-                                 data-start="1200"
-                                 data-easing="easeOutExpo"
-                                 data-splitin="none"
-                                 data-splitout="none"
-                                 data-elementdelay="0.1"
-                                 data-endelementdelay="0.1"
-                                 data-endspeed="300">
-                                Epona Great<br /> Revolution Captions
-                            </div>
-
-                            <div class="tp-caption block_black lfl start"
-                                 data-x="left" data-hoffset="810"
-                                 data-y="195"
-                                 data-speed="300"
-                                 data-start="1500"
-                                 data-easing="easeOutExpo"
-                                 data-splitin="none"
-                                 data-splitout="none"
-                                 data-elementdelay="0.1"
-                                 data-endelementdelay="0.1"
-                                 data-endspeed="300">
-                                New Features Always Added
-                            </div>
-
-                            <div class="tp-caption small_light_white lfl start"
-                                 data-x="left" data-hoffset="810"
-                                 data-y="250"
-                                 data-speed="1000"
-                                 data-start="1800"
-                                 data-easing="easeOutExpo"
-                                 data-splitin="none"
-                                 data-splitout="none"
-                                 data-elementdelay="0.1"
-                                 data-endelementdelay="0.1"
-                                 data-endspeed="300">
-                                <small>Awesome sliders give you the opportunity to<br /> showcase important content. Epona will constantly be<br /> updatedwith brand new features and additions</small>
-                            </div>
-                        </li>
-
-                        <!-- SLIDE  -->
-                        <li data-transition="fade" data-slotamount="7" data-masterspeed="300" data-saveperformance="off" data-thumb="~/Content/EponaTheme/assets/images/demo/thumb_blue.jpg">
-                            <img src="~/Content/EponaTheme/assets/images/1x1.png" data-lazyload="~/Content/EponaTheme/assets/images/demo/blue.jpg" alt="" data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat" />
-
-                            <div class="tp-caption lft start"
-                                 data-x="0"
-                                 data-y="0"
-                                 data-speed="750"
-                                 data-start="750"
-                                 data-easing="easeOutExpo"
-                                 data-elementdelay="0.1"
-                                 data-endelementdelay="0.1"
-                                 data-endspeed="300">
-                                <img src="~/Content/EponaTheme/assets/images/1x1.png" alt="" data-lazyload="~/Content/EponaTheme/assets/images/caption_bg.png">
-                            </div>
-
-                            <div class="tp-caption medium_light_white lfb start"
-                                 data-x="left" data-hoffset="70"
-                                 data-y="96"
-                                 data-speed="300"
-                                 data-start="1200"
-                                 data-easing="easeOutExpo"
-                                 data-splitin="none"
-                                 data-splitout="none"
-                                 data-elementdelay="0.1"
-                                 data-endelementdelay="0.1"
-                                 data-endspeed="300">
-                                Epona Great<br /> Revolution Captions
-                            </div>
-
-                            <div class="tp-caption block_black lfl start"
-                                 data-x="left" data-hoffset="70"
-                                 data-y="195"
-                                 data-speed="300"
-                                 data-start="1500"
-                                 data-easing="easeOutExpo"
-                                 data-splitin="none"
-                                 data-splitout="none"
-                                 data-elementdelay="0.1"
-                                 data-endelementdelay="0.1"
-                                 data-endspeed="300">
-                                New Features Always Added
-                            </div>
-
-                            <div class="tp-caption small_light_white lfl start"
-                                 data-x="left" data-hoffset="70"
-                                 data-y="250"
-                                 data-speed="1000"
-                                 data-start="1800"
-                                 data-easing="easeOutExpo"
-                                 data-splitin="none"
-                                 data-splitout="none"
-                                 data-elementdelay="0.1"
-                                 data-endelementdelay="0.1"
-                                 data-endspeed="300">
-                                <small>Awesome sliders give you the opportunity to<br /> showcase important content. Epona will constantly be<br /> updatedwith brand new features and additions</small>
-                            </div>
-
-                            <div class="tp-caption lfb"
-                                 data-x="right" data-hoffset="-70"
-                                 data-y="40"
-                                 data-speed="2000"
-                                 data-start="500"
-                                 data-easing="easeOutExpo"
-                                 data-elementdelay="0.1"
-                                 data-endelementdelay="0.1"
-                                 data-endspeed="300"
-                                 style="z-index: 2;">
-                                <img src="~/Content/EponaTheme/assets/images/1x1.png" alt="" data-lazyload="~/Content/EponaTheme/assets/images/demo/desktop.png">
-                            </div>
-
-                        </li>
-
+                        @foreach (var item in banners)
+                        {
+                            @Html.Partial("_banner", item)
+                        }
                     </ul>
-                    <div class="tp-bannertimer"></div>
+
                 </div>
             </div>
-
         </div>
+
+        <!-- /Banner -->
         <!-- /REVOLUTION SLIDER -->
-      
         <!-- POPULAR -->
         <section>
             @RenderBody()
@@ -441,32 +286,38 @@
         <!-- SECTION -->
         <section class="alternate">
             <div class="container">
-
                 <div class="row">
                     <div class="col-md-6 col-sm-6">
-                        <h3><strong>Amazing</strong> tools to build <strong>awesome</strong> websites</h3>
+                        <h3><strong>LĨNH VỰC KINH DOANH CHÍNH</strong></h3>
                         <ul class="list-icon spaced check-circle">
-                            <li>Fully responsive so your content will always look good on any device</li>
-                            <li>Cool sliders give you the opportunity to showcase your content</li>
-                            <li>Advanced template options to easily customize your website</li>
-                            <li>Multiple layout options for home pages, portfolio, shop and blog</li>
-                            <li>Incredible shortcodes for easy customization</li>
-                            <li>Free lifetime update because we care about your website as much as you</li>
+                            @Html.Partial("_hinhThucKinhDoanh", new namlao206dbEntities().DM_hinhthuckinhdoanh)
                         </ul>
-
-                        <div class="margin-top20">
-                            <!-- buttons -->
-                            <a href="#purchase" target="_blank" rel="nofollow" class="btn btn-primary">PURCHASE EPONA</a>
-                            <a href="#" class="btn btn-default">PRICING</a>
-                        </div><!-- /buttons -->
-
                     </div>
                     <div class="col-md-6 col-sm-6">
-                        <!-- right image -->
-                        <img class="img-responsive appear-animation" data-animation="fadeIn" src="~/Content/EponaTheme/assets/images/demo/laptop.png" alt="" />
+                        <!-- sửa hình chân trang image -->
+                        <img class="img-responsive appear-animation" data-animation="fadeIn" src="~/Content/EponaTheme/assets/images/anhkinhdoanh.png" alt="" />
                     </div><!-- /right image -->
                 </div>
 
+            </div>
+
+            <div id="myModal" class="modal bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" data-backdrop="static">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title float-left" id="myModalLabel"></h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        <!-- Modal Body -->
+                        <div class="modal-body">
+                            <!-- Nếu bị ẩn sau modal thì chỉnh  z-index: 1060 !important; ở select2-container css -->
+                        </div>
+                        <!-- Modal Footer -->
+                        <div class="modal-footer">
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
         <!-- /SECTION -->
@@ -479,16 +330,7 @@
                     <!-- col #1 -->
                     <div class="logo_footer dark col-md-3">
 
-                        <img alt="" src="~/Content/EponaTheme/assets/images/logo_footer.png" height="50" class="logo" />
-
-                        <p class="block">
-                            4th Street, Suite 88<br />
-                            New York NY 10887<br />
-                            Email: <a href="~/Content/EponaTheme/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4e37213b3c2b232f27220e37213b3c2a21232f2720602d2123">[email&#160;protected]</a><br />
-                            Phone: +40 (0) 111 1234 567<br />
-                            Fax: +40 (0) 111 1234 568<br />
-                        </p>
-
+                        <img alt="" src="~/Content/EponaTheme/assets/images/logo_footer.png" height="150" width="150" class="logo" />
                         <p class="block">
                             <!-- social -->
                             <a href="#" class="social fa fa-facebook"></a>
@@ -500,57 +342,28 @@
                     <!-- /col #1 -->
                     <!-- col #2 -->
                     <div class="spaced col-md-3 col-sm-4 hidden-xs">
-                        <h4>Recent <strong>Posts</strong></h4>
-                        <ul class="list-unstyled">
-                            <li>
-                                <a class="block" href="#">New CSS3 Transitions this Year</a>
-                                <small>June 29, 2014</small>
-                            </li>
-                            <li>
-                                <a class="block" href="#">Inteligent Transitions In UX Design</a>
-                                <small>June 29, 2014</small>
-                            </li>
-                            <li>
-                                <a class="block" href="#">Lorem Ipsum Dolor</a>
-                                <small>June 29, 2014</small>
-                            </li>
-                        </ul>
+                        <h4 style="color: green; font-size: 20px; font-weight: bold;">Địa chỉ</h4>
+                        <p>
+                            38A Nguyễn Hữu Thọ, phường Hòa Thuận Tây, Quận Hải Châu, Thành phố Đà Nẵng
+                        </p>
                     </div>
                     <!-- /col #2 -->
                     <!-- col #3 -->
                     <div class="spaced col-md-3 col-sm-4 hidden-xs">
-                        <h4>Recent <strong>Tweets</strong></h4>
-                        <ul class="list-unstyled fsize13">
-                            <li>
-                                <i class="fa fa-twitter"></i> <a href="#"> Doe</a> Pilsum dolor lorem sit consectetur adipiscing orem sequat <small class="ago">8 mins ago</small>
-                            </li>
-                            <li>
-                                <i class="fa fa-twitter"></i> <a href="#"> Doe</a> Remonde sequat ipsum dolor lorem sit consectetur adipiscing  <small class="ago">8 mins ago</small>
-                            </li>
-                            <li>
-                                <i class="fa fa-twitter"></i> <a href="#"> Doe</a> Imperdiet condimentum diam dolor lorem sit consectetur adipiscing <small class="ago">8 mins ago</small>
-                            </li>
-                        </ul>
+                        <h4 style="color: green; font-size: 20px; font-weight: bold;">Email</h4>
+                        <p>
+                            Congtyhuunghinamlaoqk5@gmail.com
+                        </p>
                     </div>
                     <!-- /col #3 -->
                     <!-- col #4 -->
                     <div class="spaced col-md-3 col-sm-4">
-                        <h4>About <strong>Us</strong></h4>
+                        <h4 style="color: green; font-size: 20px; font-weight: bold;">Liên hệ chúng tôi </h4>
                         <p>
-                            Incredibly beautiful responsive Bootstrap Template for Corporate and Creative Professionals.
+                            Quản lý Văn phòng trụ sở Đà Nẵng SĐT: +84 982169643 Nội dung Website: 0339939579
                         </p>
-
-                        <h4><small><strong>Subscribe to our Newsletter</strong></small></h4>
-                        <form id="newsletterSubscribe" method="post" action="php/newsletter.php" class="input-group">
-                            <input required type="email" class="form-control" name="newsletter_email" id="newsletter_email" value="" placeholder="E-mail Address">
-                            <span class="input-group-btn">
-                                <button class="btn btn-primary">SUBMIT</button>
-                            </span>
-                        </form>
-
                     </div>
                     <!-- /col #4 -->
-
                 </div>
 
             </div>
@@ -559,12 +372,22 @@
 
             <div class="copyright">
                 <div class="container text-center fsize12">
-                    Epona theme by <a href="http://www.stepofweb.com" target="_blank" title="bootstrap themes &amp; templates" class="copyright">stepofweb</a> &bull; All Right Reserved &copy; Your Company LLC. &nbsp;
-                    <a href="page-privacy.html" class="fsize11">Privacy Policy</a> &bull;
-                    <a href="page-terms.html" class="fsize11">Terms of Service</a>
+                    Design by <a href="http://namlao206.vn" target="_blank" title="bootstrap themes &amp; templates" class="copyright">Phòng Tham Mưu - Kế Hoạch</a> &bull; All Right Reserved &copy; Công ty TNHH MTV Hữu Nghị Nam Lào &nbsp;
+                    <a href="page-privacy.html" class="fsize11">2024</a> &bull;
+                    <a href="page-terms.html" class="fsize11">0339939579</a>
                 </div>
             </div>
         </footer>
+        @*<style>
+                #footer {
+                    background-image: url('Content/EponaTheme/assets/images/backroungfooter.png');
+                    background-size: cover;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    padding: 50px 0;
+                    color: #fff;
+                }
+            </style>*@
         <!-- /FOOTER -->
 
         <a href="#" id="toTop"></a>
@@ -572,7 +395,7 @@
     </div><!-- /#wrapper -->
     <!-- JAVASCRIPT FILES -->
     <script data-cfasync="false" src="~/Content/EponaTheme/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-    <script type="text/javascript" src="~/Content/EponaTheme/assets/plugins/jquery-2.2.3.min.js"></script>
+
     <script type="text/javascript" src="~/Content/EponaTheme/assets/plugins/jquery.isotope.js"></script>
     <script type="text/javascript" src="~/Content/EponaTheme/assets/plugins/masonry.js"></script>
 
@@ -588,5 +411,24 @@
     <script type="text/javascript" src="~/Content/EponaTheme/assets/js/revolution_slider.js"></script>
 
     <script type="text/javascript" src="~/Content/EponaTheme/assets/js/scripts.js"></script>
+    <!-- Begin EMC Tracking Code -->
+    <script type="text/javascript">
+        var _govaq = window._govaq || [];
+        _govaq.push(['trackPageView']);
+        _govaq.push(['enableLinkTracking']);
+        (function () {
+            _govaq.push(['setTrackerUrl', 'https://f-emc.ngsp.gov.vn/tracking']);
+            _govaq.push(['setSiteId', '4112']);
+            var d = document,
+                g = d.createElement('script'),
+                s = d.getElementsByTagName('script')[0];
+            g.type = 'text/javascript';
+            g.async = true;
+            g.defer = true;
+            g.src = 'https://f-emc.ngsp.gov.vn/embed/gov-tracking.min.js';
+            s.parentNode.insertBefore(g, s);
+        })();
+    </script>
+    <!-- End EMC Tracking Code -->
 </body>
 </html>

@@ -129,7 +129,8 @@ dl, ol, ul {
     }
 
 dt {
-    font-weight: 700
+    font-weight: bold;
+    color: #098b45;
 }
 
 dd {
@@ -165,7 +166,7 @@ sup {
 }
 
 a {
-    color: #4788ff;
+    color: #098b45;
     text-decoration: none;
     background-color: transparent
 }
@@ -1701,7 +1702,7 @@ pre {
     width: 100%;
     margin-bottom: 1rem;
     color: #535f6b;
-    background: #c7cbd3;
+    background: #d0e1ec;
     border-radius: 10px
 }
 
@@ -9483,7 +9484,7 @@ a.text-dark:focus, a.text-dark:hover {
 }
 
     .sidebar-default .iq-sidebar-menu .iq-menu li a[aria-expanded=true] i.iq-arrow-left {
-        color: #4788ff
+        color: #145a39
     }
 
 .sidebar-default .iq-sidebar-menu .iq-menu li .iq-submenu li a:hover {
@@ -9524,7 +9525,8 @@ a.text-dark:focus, a.text-dark:hover {
 }
 
 .sidebar-default .iq-sidebar-menu .iq-menu > li.active > a {
-    color: #4788ff;
+    color: #145a39;
+    font-weight:bold;
     text-decoration: none
 }
 
@@ -9646,7 +9648,7 @@ a.text-dark:focus, a.text-dark:hover {
 .wrapper-menu {
     font-size: 30px;
     text-align: center;
-    color: #4788ff;
+    color: #098b45;
     position: relative;
     transition: all .6s ease-in-out
 }
@@ -11142,9 +11144,10 @@ a.btn.disabled, fieldset:disabled a.btn {
 }
 
 .btn-primary {
-    color: #fff;
-    background-color: #4788ff;
-    border-color: #4788ff;
+    color: #323030;
+    font-weight: bold;
+    background-color: #d0e1ec;
+    border-color: #0cc1b8;
     box-shadow: unset
 }
 
@@ -11209,8 +11212,8 @@ a.btn.disabled, fieldset:disabled a.btn {
 
 .btn-success {
     color: #fff;
-    background-color: #37e6b0;
-    border-color: #37e6b0;
+    background-color: #78db7f;
+    border-color: #78db7f;
     box-shadow: unset
 }
 
@@ -13732,7 +13735,7 @@ a.bg-gray-dark:focus, a.bg-gray-dark:hover, button.bg-gray-dark:focus, button.bg
 
 .bg-primary {
     color: #fff !important;
-    background-color: #4788ff !important
+    background-color: #098b45 !important
 }
 
 a.bg-primary:focus, a.bg-primary:hover, button.bg-primary:focus, button.bg-primary:hover {
@@ -13772,7 +13775,7 @@ a.badge-secondary:focus, a.badge-secondary:hover, button.badge-secondary:focus, 
 
 .bg-success {
     color: #fff !important;
-    background-color: #37e6b0 !important
+    background-color: #1477b7 !important
 }
 
 a.bg-success:focus, a.bg-success:hover, button.bg-success:focus, button.bg-success:hover {
@@ -17489,9 +17492,9 @@ table.dataTable thead td, table.dataTable thead th {
 
     .dataTables_wrapper .dataTables_paginate span .paginate_button.current {
         padding: 3px 10px;
-        color: #4788ff !important;
-        border: 1px solid #4788ff !important;
-        background: #c9dcff !important;
+        color: #303030 !important;
+        border: 1px solid #78db7f !important;
+        background: #ffffff !important;
         border-radius: 5px
     }
 
@@ -19437,7 +19440,7 @@ button.close-popup {
 }
 
 #loading-center {
-    background: url(../images/loader.gif) no-repeat scroll 50%;
+    background: url(../images/loader.png) no-repeat scroll 50%;
     background-size: 20%;
     width: 100%;
     height: 100%;

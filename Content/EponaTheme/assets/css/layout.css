@@ -28,6 +28,10 @@
 *************************************************** **/
 /** 01. Hải Fix
 	 **************************************************************** **/
+.disabled-link {
+	pointer-events: none;
+	opacity: 0.5;
+}
 .truncateSide {
 	width: 150px; /* Độ rộng cố định */
 	white-space: nowrap; /* Ngăn không cho văn bản xuống dòng */
@@ -38,11 +42,11 @@
 		overflow: visible;
 		white-space: normal;
 		width: auto;
-	} 
+	}
 
 .truncateHai {
-	width: 200px; /* Độ rộng cố định */
-	white-space: nowrap; /* Ngăn không cho văn bản xuống dòng */
+	/* width: 200px; /* Độ rộng cố định */
+	/* white-space: nowrap; /* Ngăn không cho văn bản xuống dòng */
 	overflow: hidden; /* Ẩn phần văn bản vượt quá khung */
 	text-overflow: ellipsis; /* Hiển thị dấu ba chấm */
 }
@@ -65,12 +69,13 @@ html, body {
 }
 
 body {
-	color:#666;
-	background-color:#fff;
-	font-family:'Open Sans', Arial, sans-serif;
-
-	font-size:14px; line-height:23px;
-	margin:0; padding:0 !important;
+	/*color: #108c46;*/ /*test sau*/
+	/*background-color: #108c46;*/
+	font-family: 'Open Sans', Arial, sans-serif;
+	font-size: 14px;
+	line-height: 23px;
+	margin: 0;
+	padding: 0 !important;
 }
 body.grey .divider .fa,
 body.grey { /* grey background - YT style */
@@ -78,8 +83,8 @@ body.grey { /* grey background - YT style */
 }
 
 section {
-	padding-top:60px;
-	padding-bottom:60px;
+	padding-top:20px;
+	padding-bottom:20px;
 }
 	section.alternate .divider .fa,
 	section.alternate {
@@ -298,7 +303,7 @@ textarea, select {
 /** 04. Slider
  **************************************************************** **/
 div.slider {
-	background-color:#171717;
+	/** background-color:#171717;tắt nền banner**/
 	position:relative;
 	z-index:1;
 

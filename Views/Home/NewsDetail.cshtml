@@ -25,15 +25,18 @@
             <!-- divider -->
             <i class="fa fa-star"></i>
         </div>
-        <div class="owl-carousel" data-plugin-options='{"singleItem": false, "autoPlay": true}'>
-            <!-- transitionStyle: fade, backSlide, goDown, fadeUp,  -->
+        <div class="owl-carousel" data-plugin-options='{"itemsDesktop":[1199,4], "itemsDesktopSmall":[980,3], "itemsTablet":[684,2], "itemsMobile":[490,1], "singleItem": false, "stopOnHover":true, "autoPlay":true, "autoHeight": false, "navigation": false, "pagination": true}'>
             @foreach (var item in recentNews)
             {
                 @Html.Partial("_recentNews", item)
-            }   
+            }
         </div>
+        <!--<div class="owl-carousel" data-plugin-options='{"singleItem": false, "autoPlay": true}'>-->
+            <!-- transitionStyle: fade, backSlide, goDown, fadeUp,  -->
+            <!--
+        </div>-->
         <div class="row">
-   
+
         </div>
     </section>
 </div>

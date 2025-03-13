@@ -17,7 +17,10 @@ namespace NamLao206.Models
         public int Id { get; set; }
         public string PictureName { get; set; }
         public int AlbumId { get; set; }
+        public string ten { get; set; }
+        public string mota { get; set; }
+        public Nullable<int> chucvuId { get; set; }
     
-        public virtual Album Album { get; set; }
+        public virtual DM_Chucvus DM_Chucvus { get; set; }
     }
 }

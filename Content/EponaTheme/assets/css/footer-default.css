@@ -1,12 +1,15 @@
-/** Footer
+﻿/** Footer
  **************************************************************** **/
 #footer {
-	color:#777;
-	display:block;
-	vertical-align:bottom;
-	background-color:#2B2B2B;
-	border-top:#252525 5px solid;
-	z-index:101;
+	color: black;
+	display: block;
+	vertical-align: bottom;
+	/*background-color: green;*/
+	background-image: url("../images/backroungfooter.png"); /*Sửa background Image*/
+	border-top: #2e8a06 5px solid;
+	z-index: 101;
+	background-size: cover;
+	background-position: center;
 }
 #footer.bottom {
 	position:absolute;
@@ -29,32 +32,23 @@
 }
 #footer .dark {
 	height:400px;
-	background-color:#252525;
 }
 
-#footer h2,
-#footer h3,
-#footer h4 {
-	color:#fff;
-}
-
-#footer .copyright {
-	background-color:#252525;
-	padding:20px 0;
-}
-
+	#footer h2,
+	#footer h3,
+	#footer h4 {
+		color: #060606;
+	}
 
 #footer hr {
 	border:0; margin:0; padding:0;
-	border-top:#1a1a1a 1px solid;
-	border-bottom:#3d3d3d 1px solid;
 }
 
-#footer li {
-	position:relative;
-	padding:6px 0;
-	border-bottom: 1px solid rgba(255,255,255,0.1);
-}
+	#footer li {
+		position: relative;
+		padding: 6px 0;
+		border-bottom: 1px solid rgb(9 175 23 / 10%);
+	}
 
 #footer li:after {
 	width: 100%;
@@ -65,7 +59,7 @@
 	left: 0;
 }
 #footer li a {
-	color:#777;
+	color:black;
 	text-decoration:none;
 	font-size:14px;
 
@@ -75,13 +69,14 @@
 			transition: all .2s ease 0s;
 }
 #footer li a:hover {
-	color:#fff;
+	color:green;
 }
 #footer li small {
 	font-size:11px;
+	color:black;
 }
 #footer li small.ago {
-	color:#666;
+	color:black;
 }
 #footer .input-group-btn .btn, 
 #footer .input-group .btn,

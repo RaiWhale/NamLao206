@@ -14,17 +14,8 @@ namespace NamLao206.Models
     
     public partial class Album
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Album()
-        {
-            this.AlbumPictures = new HashSet<AlbumPicture>();
-        }
-    
         public int Id { get; set; }
         public string AlbumName { get; set; }
         public Nullable<int> ParentId { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AlbumPicture> AlbumPictures { get; set; }
     }
 }

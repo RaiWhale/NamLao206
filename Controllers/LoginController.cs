@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 
-namespace PhusannhiHospital.Controllers
+namespace NamLao206.Controllers
 {
     public class LoginController : Controller
     {
@@ -105,6 +105,10 @@ namespace PhusannhiHospital.Controllers
                 if (acc.IsActive)
                 {
                     FormsAuthentication.SetAuthCookie(acc.Id.ToString(), false);
+                    if(acc.AccountType == 3)
+                    {
+                        return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+                    }
                     return RedirectToAction("Trangchu", "Home");
                 }
                 else

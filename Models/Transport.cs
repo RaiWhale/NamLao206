@@ -14,17 +14,16 @@ namespace NamLao206.Models
     
     public partial class Transport
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Transport()
-        {
-            this.News = new HashSet<News>();
-        }
-    
         public int Id { get; set; }
-        public string Coso { get; set; }
-        public string maCoSo { get; set; }
+        public int FileId { get; set; }
+        public System.DateTime TransportDate { get; set; }
+        public Nullable<int> ReceiverUserId { get; set; }
+        public string ReceiveGroups { get; set; }
+        public byte[] ReceiveUnit { get; set; }
+        public Nullable<System.DateTime> ModifiedDate { get; set; }
+        public Nullable<bool> DaXem { get; set; }
+        public bool IsActive { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<News> News { get; set; }
+        public virtual TransportFile TransportFile { get; set; }
     }
 }

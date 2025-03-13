@@ -14,7 +14,7 @@ using System.Web.Mvc;
 namespace NamLao206.Areas.Admin.Controllers
 {
     [Authorize]
-    public class EmployeeController : Controller
+    public class EmployeesController : Controller
     {
         private namlao206dbEntities db = new namlao206dbEntities();
         int pageSize = 10;
@@ -25,7 +25,7 @@ namespace NamLao206.Areas.Admin.Controllers
 			IQueryable<Employee> employee; //model chinh
 
 
-			employee = db.Employees.Include(d => d.DM_Chucvus).Include(d => d.DM_Hocvis).Include(d => d.DM_PhongBans1).Include(d => d.DM_Nghenghieps).Include(d => d.Level).Include(d => d.DM_Donvihanhchinhs).OrderBy(d => d.Id);
+			employee = db.Employees.Include(d => d.DM_Chucvus).Include(d => d.DM_Hocvis).Include(d => d.DM_Nghenghieps).Include(d => d.Level).Include(d => d.DM_Donvihanhchinhs).OrderBy(d => d.Id);
             if (search != null && search.Trim() != "")
             {
 				employee = employee.Where(s => s.Name.ToLower().Contains(search.Trim().ToLower()));
@@ -33,8 +33,6 @@ namespace NamLao206.Areas.Admin.Controllers
             ViewBag.search = search;
             //Paging
             int pageNumber = page ?? 1;
-
-
             return View(employee.ToPagedList(pageNumber, pageSize));
         }
 
@@ -62,6 +60,7 @@ namespace NamLao206.Areas.Admin.Controllers
             ViewBag.KhoaphongId = new SelectList(db.DM_PhongBans, "Id", "TenKhoa");
             ViewBag.NghenghiepId = new SelectList(db.DM_Nghenghieps, "Id", "Nghenghiep");
             ViewBag.LevelId = new SelectList(db.Levels, "Id", "LevelName");
+            ViewBag.GenderId = new SelectList(db.Genders, "Id", "GioiTinh");
             return View();
         }
 
@@ -70,7 +69,7 @@ namespace NamLao206.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Phone,Email,Address,LevelId,IsActive,KhoaphongId,NghenghiepId,ChucvuId,HocviId,CreatedDate,CityId,DistrictId,WardId,Avatar,Gender,Birthday")] Employee employee, RegisterVM data, string LoginName, string Password, string Coso, HttpPostedFileBase pic)
+        public ActionResult Create([Bind(Include = "Id,Name,Phone,Email,Address,LevelId,IsActive,KhoaphongId,NghenghiepId,ChucvuId,HocviId,CreatedDate,CityId,DistrictId,WardId,Avatar,GenderId,Birthday")] Employee employee, RegisterVM data, string LoginName, string Password, HttpPostedFileBase pic)
         {
             if (ModelState.IsValid)
             {
@@ -89,23 +88,15 @@ namespace NamLao206.Areas.Admin.Controllers
 
 				employee.CreatedDate = DateTime.Now;              
                 db.Employees.Add(employee);
-
-
                 db.SaveChanges();
 
-                Password = MySecurity.Encrypt(data.Password);
-		
-		
+				data.Password = MySecurity.Encrypt(Password);				
 				var acc = AutoMapper.Mapper.Map<Account>(data);
 				acc.EmployeeId = employee.Id;
 				acc.AccountType = employee.LevelId.Value;
-				acc.IsActive = true;       
-                acc.Coso = Coso;
+				acc.IsActive = true;                  
                 db.Accounts.Add(acc);
                 db.SaveChanges();
-
-
-
                 return RedirectToAction("Index");
             }
 
@@ -118,8 +109,8 @@ namespace NamLao206.Areas.Admin.Controllers
             ViewBag.KhoaphongId = new SelectList(db.DM_PhongBans, "Id", "TenKhoa", employee.KhoaphongId);
             ViewBag.NghenghiepId = new SelectList(db.DM_Nghenghieps, "Id", "Nghenghiep", employee.NghenghiepId);
             ViewBag.LevelId = new SelectList(db.Levels, "Id", "LevelName", employee.LevelId);
-
-            return View(employee);
+            ViewBag.GenderId = new SelectList(db.Genders, "Id", "GioiTinh", employee.GenderId);
+			return View(employee);
         }
 
         // GET: Admin/Employee/Edit/5
@@ -143,7 +134,8 @@ namespace NamLao206.Areas.Admin.Controllers
             ViewBag.KhoaphongId = new SelectList(db.DM_PhongBans, "Id", "TenKhoa", employee.KhoaphongId);
             ViewBag.NghenghiepId = new SelectList(db.DM_Nghenghieps, "Id", "Nghenghiep", employee.NghenghiepId);
             ViewBag.LevelId = new SelectList(db.Levels, "Id", "LevelName", employee.LevelId);
-            return View(employee);
+			ViewBag.GenderId = new SelectList(db.Genders, "Id", "GioiTinh", employee.GenderId);
+			return View(employee);
         }
 
         // POST: Admin/Employee/Edit/5
@@ -151,7 +143,7 @@ namespace NamLao206.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Phone,Email,Address,LevelId,IsActive,KhoaphongId,NghenghiepId,ChucvuId,HocviId,CreatedDate,CityId,DistrictId,WardId,Avatar,Gender,Birthday")] Employee employee, HttpPostedFileBase pic)
+        public ActionResult Edit([Bind(Include = "Id,Name,Phone,Email,Address,LevelId,IsActive,KhoaphongId,NghenghiepId,ChucvuId,HocviId,CreatedDate,CityId,DistrictId,WardId,Avatar,GenderId,Birthday")] Employee employee, HttpPostedFileBase pic)
         {
             if (ModelState.IsValid)
             {
@@ -164,7 +156,6 @@ namespace NamLao206.Areas.Admin.Controllers
                     {
                         System.IO.File.Delete(path + "\\" + employee.Avatar);
                     }
-
                     if (!Directory.Exists(path)) Directory.CreateDirectory(path);
                     pic.SaveAs(path + "\\" + filename);
 					employee.Avatar = filename;
@@ -182,7 +173,8 @@ namespace NamLao206.Areas.Admin.Controllers
             ViewBag.KhoaphongId = new SelectList(db.DM_PhongBans, "Id", "TenKhoa", employee.KhoaphongId);
             ViewBag.NghenghiepId = new SelectList(db.DM_Nghenghieps, "Id", "Nghenghiep", employee.NghenghiepId);
             ViewBag.LevelId = new SelectList(db.Levels, "Id", "LevelName", employee.LevelId);
-            return View(employee);
+			ViewBag.GenderId = new SelectList(db.Genders, "Id", "GioiTinh", employee.GenderId);
+			return View(employee);
         }
 
         // GET: Admin/Employee/Delete/5

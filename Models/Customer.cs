@@ -25,9 +25,10 @@ namespace NamLao206.Models
         public bool IsActive { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public string Avatar { get; set; }
-        public Nullable<byte> Gender { get; set; }
+        public int GenderId { get; set; }
         public Nullable<System.DateTime> Birthday { get; set; }
     
+        public virtual Gender Gender { get; set; }
         public virtual DM_Donvihanhchinhs DM_Donvihanhchinhs { get; set; }
     }
 }

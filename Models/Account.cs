@@ -14,6 +14,15 @@ namespace NamLao206.Models
     
     public partial class Account
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Account()
+        {
+            this.News = new HashSet<News>();
+            this.TransportFiles = new HashSet<TransportFile>();
+            this.TransportFiles1 = new HashSet<TransportFile>();
+            this.TransportFiles2 = new HashSet<TransportFile>();
+        }
+    
         public int Id { get; set; }
         public int AccountType { get; set; }
         public int EmployeeId { get; set; }
@@ -25,7 +34,15 @@ namespace NamLao206.Models
         public Nullable<System.DateTime> CheckDate { get; set; }
         public bool IsActive { get; set; }
     
-        public virtual Level Level { get; set; }
         public virtual Employee Employee { get; set; }
+        public virtual Level Level { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<News> News { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TransportFile> TransportFiles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TransportFile> TransportFiles1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TransportFile> TransportFiles2 { get; set; }
     }
 }

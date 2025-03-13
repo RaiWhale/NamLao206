@@ -37,23 +37,27 @@ namespace NamLao206.Models
         public virtual DbSet<DM_AdminListUpItem> DM_AdminListUpItem { get; set; }
         public virtual DbSet<DM_Chucvus> DM_Chucvus { get; set; }
         public virtual DbSet<DM_Donvihanhchinhs> DM_Donvihanhchinhs { get; set; }
-        public virtual DbSet<DM_hinhthuctochuc> DM_hinhthuctochuc { get; set; }
+        public virtual DbSet<DM_DonVis> DM_DonVis { get; set; }
+        public virtual DbSet<DM_hinhthuckinhdoanh> DM_hinhthuckinhdoanh { get; set; }
         public virtual DbSet<DM_Hocvis> DM_Hocvis { get; set; }
         public virtual DbSet<DM_Nghenghieps> DM_Nghenghieps { get; set; }
         public virtual DbSet<DM_NhomPhongBans> DM_NhomPhongBans { get; set; }
         public virtual DbSet<DM_PhongBans> DM_PhongBans { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<Feedback> Feedbacks { get; set; }
+        public virtual DbSet<Gender> Genders { get; set; }
         public virtual DbSet<LevelPermission> LevelPermissions { get; set; }
         public virtual DbSet<Level> Levels { get; set; }
         public virtual DbSet<LuuVet> LuuVets { get; set; }
         public virtual DbSet<MaQuocGia> MaQuocGias { get; set; }
         public virtual DbSet<Nationality> Nationalities { get; set; }
-        public virtual DbSet<News> News { get; set; }
         public virtual DbSet<NewsPicture> NewsPictures { get; set; }
         public virtual DbSet<Picture> Pictures { get; set; }
         public virtual DbSet<SubMenu> SubMenus { get; set; }
         public virtual DbSet<Topic> Topics { get; set; }
+        public virtual DbSet<TransportFileUrl> TransportFileUrls { get; set; }
         public virtual DbSet<Transport> Transports { get; set; }
+        public virtual DbSet<News> News { get; set; }
+        public virtual DbSet<TransportFile> TransportFiles { get; set; }
     }
 }

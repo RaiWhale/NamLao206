@@ -1,5 +1,6 @@
 ﻿using NamLao206.Models;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.IO;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Windows.Documents;
 
 namespace NamLao206.Areas.Admin.Controllers
 {
@@ -61,37 +63,31 @@ namespace NamLao206.Areas.Admin.Controllers
         public ActionResult Create([Bind(Include = "Id,PictureName,AlbumId")] AlbumPicture albumPicture)
         {
            
-                if (Request.Files.Count > 0)
+            if (Request.Files.Count > 0)
+            {
+                int file_count = 0;
+                string dir = Server.MapPath("~/Content/Uploads/Albums") + "\\" + albumPicture.AlbumId + "\\";
+                if (!System.IO.Directory.Exists(dir)) System.IO.Directory.CreateDirectory(dir);
+
+                for (int i = 0; i < Request.Files.Count; i++)
                 {
-                    int file_count = 0;
-                    string dir = Server.MapPath("~/Content/Uploads/AlbumPictures") + "\\" + albumPicture.Id + "\\";
-                    if (!System.IO.Directory.Exists(dir)) System.IO.Directory.CreateDirectory(dir);
-
-                    for (int i = 0; i < Request.Files.Count; i++)
+                    try
                     {
-                        try
+                        HttpPostedFileBase file = Request.Files[i];
+                        if (!string.IsNullOrEmpty(file.FileName))
                         {
-                            HttpPostedFileBase file = Request.Files[i];
-                            if (!string.IsNullOrEmpty(file.FileName))
-                            {
-                                string filename = DateTime.Now.Ticks + "_" + file.FileName.Split('/').Last();
-                                file.SaveAs(dir + filename);
-							    albumPicture.PictureName = filename;
-								db.AlbumPictures.Add(albumPicture);
-								file_count++;
-                            }
+                            string filename = DateTime.Now.Ticks + "_" + file.FileName.Split('/').Last();
+                            file.SaveAs(dir + filename);
+                            albumPicture.PictureName = filename;
+                            db.AlbumPictures.Add(albumPicture);
+                            db.SaveChanges();
+                            file_count++;
                         }
-                        catch { }
                     }
-                    if (file_count > 0)
-                    {
-						
-						db.SaveChanges();
-                    }
-                    return RedirectToAction("Index", "AlbumPictures");
-                }
-            
-
+                    catch { }
+                }    
+                return RedirectToAction("Index", "AlbumPictures");
+            }
             ViewBag.AlbumId = new SelectList(db.Albums, "Id", "AlbumName", albumPicture.AlbumId);
             return PartialView(albumPicture);
         }
@@ -151,10 +147,10 @@ namespace NamLao206.Areas.Admin.Controllers
         {
             AlbumPicture albumPicture = db.AlbumPictures.Find(id);
             db.AlbumPictures.Remove(albumPicture);
-            string path = Server.MapPath("~/Content/Uploads/AlbumPictures") + "\\" + albumPicture.AlbumId + "\\";
-            if (System.IO.File.Exists(path + "\\" + albumPicture.PictureName))
+            string path = Server.MapPath("~/Content/Uploads/Album") + "\\" + albumPicture.AlbumId + "\\";
+            if (System.IO.File.Exists(path  + albumPicture.PictureName))
             {
-                System.IO.File.Delete(path + "\\" + albumPicture.PictureName);
+                System.IO.File.Delete(path  + albumPicture.PictureName);
             }
             db.SaveChanges();
             return RedirectToAction("Index");

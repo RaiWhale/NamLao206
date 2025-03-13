@@ -28,7 +28,6 @@ namespace NamLao206.Models
         public Nullable<int> LevelId { get; set; }
         public bool IsActive { get; set; }
         public Nullable<int> KhoaphongId { get; set; }
-        public Nullable<int> KhoaChuyenId { get; set; }
         public Nullable<int> NghenghiepId { get; set; }
         public Nullable<int> ChucvuId { get; set; }
         public Nullable<int> HocviId { get; set; }
@@ -37,21 +36,21 @@ namespace NamLao206.Models
         public string DistrictId { get; set; }
         public string WardId { get; set; }
         public string Avatar { get; set; }
-        public int Gender { get; set; }
+        public int GenderId { get; set; }
         public string Birthday { get; set; }
         public bool TrangThaiChuyen { get; set; }
         public Nullable<bool> Canhan { get; set; }
         public bool Import { get; set; }
         public Nullable<int> GroupId { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Account> Accounts { get; set; }
         public virtual DM_Chucvus DM_Chucvus { get; set; }
         public virtual DM_Donvihanhchinhs DM_Donvihanhchinhs { get; set; }
         public virtual DM_Hocvis DM_Hocvis { get; set; }
         public virtual DM_Nghenghieps DM_Nghenghieps { get; set; }
         public virtual DM_PhongBans DM_PhongBans { get; set; }
-        public virtual DM_PhongBans DM_PhongBans1 { get; set; }
         public virtual Level Level { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Account> Accounts { get; set; }
+        public virtual Gender Gender { get; set; }
     }
 }

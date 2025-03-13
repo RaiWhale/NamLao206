@@ -14,11 +14,11 @@ CKEDITOR.editorConfig = function( config ) {
     config.languages = 'vi';
   
 
-    config.baseHref = '/Content/PluginCK/ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=Images'
-    config.filebrowserBrowseUrl = '/Content/PluginCK/ckfinder/ckfinder.html';
-    config.filebrowserImageBrowseUrl = '/Content/PluginCK/ckfinder/ckfinder.html?Types=Images';
-    config.filebrowserUploadUrl = '/Content/PluginCK/ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=File';
-    config.filebrowserImageUploadUrl = '/Content/PluginCK/ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=Images';
+    config.baseHref = '/Content/ckeditor/ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=Images'
+    config.filebrowserBrowseUrl = '/Content/ckeditor/ckfinder/ckfinder.html';
+    config.filebrowserImageBrowseUrl = '/Content/ckeditor/ckfinder/ckfinder.html?Types=Images';
+    config.filebrowserUploadUrl = '/Content/ckeditor/ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=File';
+    config.filebrowserImageUploadUrl = '/Content/ckeditor/ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=Images';
 
     CKFinder.setupCKEditor(null, '/Content/ckeditor/ckfinder/');
 

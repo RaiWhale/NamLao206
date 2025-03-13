@@ -14,12 +14,6 @@ namespace NamLao206.Models
     
     public partial class Administrator
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Administrator()
-        {
-            this.News = new HashSet<News>();
-        }
-    
         public int Id { get; set; }
         public string AdminName { get; set; }
         public string LoginName { get; set; }
@@ -30,9 +24,7 @@ namespace NamLao206.Models
         public string Profile { get; set; }
         public int PhongBanId { get; set; }
     
-        public virtual AdminLevel AdminLevel { get; set; }
         public virtual DM_PhongBans DM_PhongBans { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<News> News { get; set; }
+        public virtual AdminLevel AdminLevel { get; set; }
     }
 }

@@ -29,14 +29,7 @@
                         @Html.DropDownListFor(model => model.SubMenuId, new SelectList(" "), "--Chọn nhóm tin tức --", htmlAttributes: new { @class = "form-control is-invalid-cus single", @id = "SubMenuId" })
                         @Html.ValidationMessageFor(model => model.SubMenuId, "", new { @class = "text-danger" })
                     </div>
-                </div>
-                <div class="col-md-6">
-                    @Html.Label("Cơ sở", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.DropDownListFor(model => model.cosoId, null, "--Chọn cơ sở --", htmlAttributes: new { @class = "form-control is-invalid-cus single", @id = "cosoId" })
-                        @Html.ValidationMessageFor(model => model.cosoId, "", new { @class = "text-danger" })
-                    </div>
-                </div>
+                </div>     
             </div>
             <div class="form-group">
                 @Html.Label("Tóm tắt", htmlAttributes: new { @class = "control-label col-md-2" })

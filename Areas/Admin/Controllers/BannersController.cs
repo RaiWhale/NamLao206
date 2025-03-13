@@ -47,7 +47,7 @@ namespace NamLao206.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,BannerName,Url,isActive")] Banner banner, HttpPostedFileBase pic)
+        public ActionResult Create([Bind(Include = "Id,BannerName,Url,isActive,tenCTY,mota")] Banner banner, HttpPostedFileBase pic)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +88,7 @@ namespace NamLao206.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,BannerName,Url,isActive")] Banner banner, HttpPostedFileBase pic)
+        public ActionResult Edit([Bind(Include = "Id,BannerName,Url,isActive,tenCTY,mota")] Banner banner, HttpPostedFileBase pic)
         {
             if (ModelState.IsValid)
             {
@@ -106,7 +106,7 @@ namespace NamLao206.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return PartialView(banner);
+            return View(banner);
         }
 
         // GET: Admin/Banners/Delete/5

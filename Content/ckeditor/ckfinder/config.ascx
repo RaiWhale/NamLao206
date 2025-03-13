@@ -26,12 +26,12 @@
     {
         // Paste your license name and key here. If left blank, CKFinder will
         // be fully functional, in Demo Mode.
-        LicenseName = "https://localhost:44354/";
-        LicenseKey = "5Q88L79DHCJ6WL4KGKY9CDH2Y8QX3PVF";
+        LicenseName = "https://namlao206.vn/";
+        LicenseKey = "LX5CUUQCX9NSG49EH2JCMRMLYGBXP6ED";
 
         // The base URL used to reach files in CKFinder through the browser.
         //BaseUrl = "/Images/";
-        BaseUrl = "/Content/Uploads/AlbumPictures/";
+        BaseUrl = "/Content/Uploads/News/";
 
         // The phisical directory in the server where the file will end up. If
         // blank, CKFinder attempts to resolve BaseUrl.

@@ -33,6 +33,7 @@ namespace NamLao206.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.AccountType = new SelectList(db.Levels, "Id", "LevelName", account.AccountType);
             return PartialView(account);
         }
         // POST: Admin/Account/Edit/5
@@ -41,7 +42,7 @@ namespace NamLao206.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,AccountType,EmployeeId,LoginName,Password,ActivateCode,Coso,Token,IsActive")] Account account, string rePassword, string rePassword2)
+        public ActionResult Edit([Bind(Include = "Id,AccountType,EmployeeId,LoginName,Password,ActivateCode,Token,IsActive")] Account account, string rePassword, string rePassword2)
         {
             if (ModelState.IsValid)
             {
@@ -55,7 +56,8 @@ namespace NamLao206.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return PartialView(account);
+			ViewBag.AccountType = new SelectList(db.Levels, "Id", "LevelName", account.AccountType);
+			return PartialView(account);
         }
         // GET: Admin/Account
         [AllowAnonymous]
@@ -70,7 +72,7 @@ namespace NamLao206.Areas.Admin.Controllers
         public ActionResult Login(LoginVM data)
         {
             data.Password = MySecurity.Encrypt(data.Password);
-            var acc = db.Administrators.SingleOrDefault(x => x.LoginName.Equals(data.LoginName) && x.Password.Equals(data.Password));
+            var acc = db.Accounts.SingleOrDefault(x => x.LoginName.Equals(data.LoginName) && x.Password.Equals(data.Password));
             if (acc != null)
             {
                 if (acc.IsActive)

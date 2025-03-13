@@ -3,14 +3,10 @@
 @{
     string src = MySecurity.GetSrcPicture(Model.TopicId);
     var pic = Model.Picture;
-    //if (string.IsNullOrEmpty(pic))
-    //{
-    //    src = MySecurity.GetSrcPicture(Model.TopicId);
-    //}
-    //else
-    //{
-    //    src = "/Content/Uploads/News/" + pic;
-    //}
+    if (!string.IsNullOrEmpty(pic))
+    {
+        src = "/Content/Uploads/News/" + pic;
+    }
 }
 <div class="col-md-4">
     <!-- item 1 -->
@@ -20,14 +16,15 @@
                 <span class="overlay color2"></span>
                 <span class="inner">
                     <span class="block fa fa-plus fsize20"></span>
-                    <strong>PROJECT</strong> DETAIL
+                    <strong>XEM</strong> THÊM
                 </span>
             </a>
-            <img class="img-responsive" src="@src"  alt="">
+            <img class="img-responsive" src="@src" style="min-height:190px; max-height:190px" alt="">
         </figure>
         <div class="item-box-desc">
-            <h4 class="truncateHai">
-                <a class="text-white font-size-20 d-block text-truncate" href="~/Home/NewsDetail/?title=@Model.TitleChange&&newsid=@Model.Id">@Model.Title</a>
+            <h4 class="">
+
+                <a data-toggle="tooltip" data-placement="top" title="" data-original-title="@Model.Title" class="featured-title" style="text-align: left; max-width: 100%; font-size: 14px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; text-overflow: ellipsis; " href="~/Home/NewsDetail/?title=@Model.TitleChange&&newsid=@Model.Id"><b>@Model.Title</b></a>
             </h4>
             <small class="styleColor">@Model.DateUp.ToString("dd/MM/yyyy")</small>
         </div>

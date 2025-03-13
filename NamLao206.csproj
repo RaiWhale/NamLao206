@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="packages\EntityFramework.6.5.1\build\EntityFramework.props" Condition="Exists('packages\EntityFramework.6.5.1\build\EntityFramework.props')" />
+  <Import Project="packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -45,19 +45,50 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=5.2.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>packages\Autofac.5.2.0\lib\net461\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="AutoMapper, Version=7.0.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>packages\AutoMapper.7.0.1\lib\net45\AutoMapper.dll</HintPath>
     </Reference>
+    <Reference Include="CKFinder, Version=2.4.0.2631, Culture=neutral, PublicKeyToken=579e7adc719a1423, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Content\ckeditor\ckfinder\bin\Debug\CKFinder.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>packages\EntityFramework.6.5.1\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>packages\EntityFramework.6.5.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServerCompact, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.SqlServerCompact.6.1.3\lib\net45\EntityFramework.SqlServerCompact.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus, Version=7.5.2.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>packages\EPPlus.7.5.2\lib\net462\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus.Interfaces, Version=7.5.0.0, Culture=neutral, PublicKeyToken=a694d7f3b0907a61, processorArchitecture=MSIL">
+      <HintPath>packages\EPPlus.Interfaces.7.5.0\lib\net462\EPPlus.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus.System.Drawing, Version=7.5.0.0, Culture=neutral, PublicKeyToken=2308d35469c9bac0, processorArchitecture=MSIL">
+      <HintPath>packages\EPPlus.System.Drawing.7.5.0\lib\net462\EPPlus.System.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageProcessor, Version=2.8.0.152, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\ImageProcessor.2.8.0\lib\net452\ImageProcessor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\lib\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.IO.RecyclableMemoryStream, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.IO.RecyclableMemoryStream.3.0.1\lib\netstandard2.0\Microsoft.IO.RecyclableMemoryStream.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -79,8 +110,19 @@
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.ComponentModel.Annotations.5.0.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.SqlServer.Compact.4.0.8876.1\lib\net40\System.Data.SqlServerCe.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Drawing.Common.8.0.4\lib\net462\System.Drawing.Common.dll</HintPath>
+    </Reference>
     <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
     </Reference>
@@ -171,8 +213,11 @@
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\DM_AdminListUpItemController.cs" />
     <Compile Include="Areas\Admin\Controllers\DM_ChucvusController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DM_DonVisController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DM_hinhthuckinhdoanhController.cs" />
     <Compile Include="Areas\Admin\Controllers\DM_HocvisController.cs" />
-    <Compile Include="Areas\Admin\Controllers\DM_KhoaphongsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DM_NhomPhongBansController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DM_PhongBansController.cs" />
     <Compile Include="Areas\Admin\Controllers\EmployeesController.cs" />
     <Compile Include="Areas\Admin\Controllers\AlbumPicturesController.cs" />
     <Compile Include="Areas\Admin\Controllers\AlbumsController.cs" />
@@ -208,10 +253,14 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Areas\TransportFiles\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\TransportFiles\Controllers\TransportFilesController.cs" />
+    <Compile Include="Areas\TransportFiles\TransportFilesAreaRegistration.cs" />
     <Compile Include="Controllers\CascadingDropdownController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\LoginRedirectController.cs" />
+    <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -252,7 +301,10 @@
     <Compile Include="Models\DM_Donvihanhchinhs.cs">
       <DependentUpon>namlao206DB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DM_hinhthuctochuc.cs">
+    <Compile Include="Models\DM_DonVis.cs">
+      <DependentUpon>namlao206DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DM_hinhthuckinhdoanh.cs">
       <DependentUpon>namlao206DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DM_Hocvis.cs">
@@ -271,6 +323,9 @@
       <DependentUpon>namlao206DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Feedback.cs">
+      <DependentUpon>namlao206DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Gender.cs">
       <DependentUpon>namlao206DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Level.cs">
@@ -321,6 +376,12 @@
     <Compile Include="Models\Transport.cs">
       <DependentUpon>namlao206DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TransportFile.cs">
+      <DependentUpon>namlao206DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TransportFileUrl.cs">
+      <DependentUpon>namlao206DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ViewModels\Donvihanhchinh.cs" />
     <Compile Include="Models\ViewModels\LoginVM.cs" />
     <Compile Include="Models\ViewModels\NhomKhoasVM.cs" />
@@ -343,10 +404,15 @@
     <Content Include="Content\AdminBinhLT\assets\images\layouts\layout-9\curve-dark.svg" />
     <Content Include="Content\AdminBinhLT\assets\images\layouts\layout-9\curve.svg" />
     <Content Include="Content\AdminBinhLT\assets\images\loader.gif" />
-    <Content Include="Content\AdminBinhLT\assets\images\login\01.png" />
-    <Content Include="Content\AdminBinhLT\assets\images\login\02.png" />
-    <Content Include="Content\AdminBinhLT\assets\images\login\03.png" />
+    <Content Include="Content\AdminBinhLT\assets\images\loader.png" />
+    <Content Include="Content\AdminBinhLT\assets\images\login\bannerAdmin.png" />
+    <Content Include="Content\AdminBinhLT\assets\images\login\bannernoibo.png" />
+    <Content Include="Content\AdminBinhLT\assets\images\login\banner_darkboad1.png" />
+    <Content Include="Content\AdminBinhLT\assets\images\login\banner_darkboad2.png" />
+    <Content Include="Content\AdminBinhLT\assets\images\login\LOGOCONGTY.png" />
+    <Content Include="Content\AdminBinhLT\assets\images\login\logongangcongty.png" />
     <Content Include="Content\AdminBinhLT\assets\images\logo.png" />
+    <Content Include="Content\AdminBinhLT\assets\images\logocon.png" />
     <Content Include="Content\AdminBinhLT\assets\images\music-dashboard\realease-song\realease-back.jpg" />
     <Content Include="Content\AdminBinhLT\assets\images\page-img\50.png" />
     <Content Include="Content\AdminBinhLT\assets\images\page-img\51.png" />
@@ -384,6 +450,18 @@
     <Content Include="Content\AdminBinhLT\assets\js\tree.js" />
     <Content Include="Content\AdminBinhLT\assets\js\vector-map-custom.js" />
     <Content Include="Content\AdminBinhLT\assets\vendor\fortawesome\fontawesome-free\css\all.min.css" />
+    <Content Include="Content\AdminBinhLT\assets\vendor\fortawesome\fontawesome-free\webfonts\fa-brands-400.svg#fontawesome" />
+    <Content Include="Content\AdminBinhLT\assets\vendor\fortawesome\fontawesome-free\webfonts\fa-brands-400.ttf" />
+    <Content Include="Content\AdminBinhLT\assets\vendor\fortawesome\fontawesome-free\webfonts\fa-brands-400.woff" />
+    <Content Include="Content\AdminBinhLT\assets\vendor\fortawesome\fontawesome-free\webfonts\fa-brands-400.woff2" />
+    <Content Include="Content\AdminBinhLT\assets\vendor\fortawesome\fontawesome-free\webfonts\fa-regular-400.svg#fontawesome" />
+    <Content Include="Content\AdminBinhLT\assets\vendor\fortawesome\fontawesome-free\webfonts\fa-regular-400.ttf" />
+    <Content Include="Content\AdminBinhLT\assets\vendor\fortawesome\fontawesome-free\webfonts\fa-regular-400.woff" />
+    <Content Include="Content\AdminBinhLT\assets\vendor\fortawesome\fontawesome-free\webfonts\fa-regular-400.woff2" />
+    <Content Include="Content\AdminBinhLT\assets\vendor\fortawesome\fontawesome-free\webfonts\fa-solid-900.svg#fontawesome" />
+    <Content Include="Content\AdminBinhLT\assets\vendor\fortawesome\fontawesome-free\webfonts\fa-solid-900.ttf" />
+    <Content Include="Content\AdminBinhLT\assets\vendor\fortawesome\fontawesome-free\webfonts\fa-solid-900.woff" />
+    <Content Include="Content\AdminBinhLT\assets\vendor\fortawesome\fontawesome-free\webfonts\fa-solid-900.woff2" />
     <Content Include="Content\AdminBinhLT\assets\vendor\fullcalendar\core\main.css" />
     <Content Include="Content\AdminBinhLT\assets\vendor\fullcalendar\core\main.js" />
     <Content Include="Content\AdminBinhLT\assets\vendor\fullcalendar\daygrid\main.css" />
@@ -393,28 +471,63 @@
     <Content Include="Content\AdminBinhLT\assets\vendor\fullcalendar\timegrid\main.css" />
     <Content Include="Content\AdminBinhLT\assets\vendor\fullcalendar\timegrid\main.js" />
     <Content Include="Content\AdminBinhLT\assets\vendor\icon\dripicons\dripicons.css" />
+    <Content Include="Content\AdminBinhLT\assets\vendor\icon\dripicons\dripicons.eot" />
+    <Content Include="Content\AdminBinhLT\assets\vendor\icon\dripicons\dripicons.svg#dripicons" />
+    <Content Include="Content\AdminBinhLT\assets\vendor\icon\dripicons\dripicons.ttf" />
+    <Content Include="Content\AdminBinhLT\assets\vendor\icon\dripicons\dripicons.woff" />
     <Content Include="Content\AdminBinhLT\assets\vendor\input-masks\cleave-custom.js" />
     <Content Include="Content\AdminBinhLT\assets\vendor\input-masks\cleave-phone.js" />
     <Content Include="Content\AdminBinhLT\assets\vendor\input-masks\cleave.min.js" />
     <Content Include="Content\AdminBinhLT\assets\vendor\line-awesome\dist\line-awesome\css\line-awesome.min.css" />
+    <Content Include="Content\AdminBinhLT\assets\vendor\line-awesome\dist\line-awesome\fonts\la-brands-400.svg#lineawesome" />
+    <Content Include="Content\AdminBinhLT\assets\vendor\line-awesome\dist\line-awesome\fonts\la-brands-400.ttf" />
+    <Content Include="Content\AdminBinhLT\assets\vendor\line-awesome\dist\line-awesome\fonts\la-brands-400.woff" />
+    <Content Include="Content\AdminBinhLT\assets\vendor\line-awesome\dist\line-awesome\fonts\la-brands-400.woff2" />
+    <Content Include="Content\AdminBinhLT\assets\vendor\line-awesome\dist\line-awesome\fonts\la-regular-400.svg#lineawesome" />
+    <Content Include="Content\AdminBinhLT\assets\vendor\line-awesome\dist\line-awesome\fonts\la-regular-400.ttf" />
+    <Content Include="Content\AdminBinhLT\assets\vendor\line-awesome\dist\line-awesome\fonts\la-regular-400.woff" />
+    <Content Include="Content\AdminBinhLT\assets\vendor\line-awesome\dist\line-awesome\fonts\la-regular-400.woff2" />
+    <Content Include="Content\AdminBinhLT\assets\vendor\line-awesome\dist\line-awesome\fonts\la-solid-900.svg#lineawesome" />
+    <Content Include="Content\AdminBinhLT\assets\vendor\line-awesome\dist\line-awesome\fonts\la-solid-900.ttf" />
+    <Content Include="Content\AdminBinhLT\assets\vendor\line-awesome\dist\line-awesome\fonts\la-solid-900.woff" />
+    <Content Include="Content\AdminBinhLT\assets\vendor\line-awesome\dist\line-awesome\fonts\la-solid-900.woff2" />
     <Content Include="Content\AdminBinhLT\assets\vendor\mapbox\mapbox-gl.css" />
     <Content Include="Content\AdminBinhLT\assets\vendor\remixicon\fonts\remixicon.css" />
+    <Content Include="Content\AdminBinhLT\assets\vendor\remixicon\fonts\remixicon.ttf" />
+    <Content Include="Content\AdminBinhLT\assets\vendor\remixicon\fonts\remixicon.woff" />
+    <Content Include="Content\AdminBinhLT\assets\vendor\remixicon\fonts\remixicon.woff2" />
     <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
+    <Content Include="Content\bootstrap-grid.rtl.css.map" />
     <Content Include="Content\bootstrap-grid.rtl.min.css" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css.map" />
     <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
     <Content Include="Content\bootstrap-reboot.rtl.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.css.map" />
     <Content Include="Content\bootstrap-reboot.rtl.min.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css.map" />
     <Content Include="Content\bootstrap-utilities.css" />
+    <Content Include="Content\bootstrap-utilities.css.map" />
     <Content Include="Content\bootstrap-utilities.min.css" />
+    <Content Include="Content\bootstrap-utilities.min.css.map" />
     <Content Include="Content\bootstrap-utilities.rtl.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.css.map" />
     <Content Include="Content\bootstrap-utilities.rtl.min.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css.map" />
     <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.rtl.css" />
+    <Content Include="Content\bootstrap.rtl.css.map" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\bootstrap.rtl.min.css.map" />
     <Content Include="Content\ckeditor\adapters\jquery.js" />
     <Content Include="Content\ckeditor\build-config.js" />
     <Content Include="Content\ckeditor\ckeditor.js" />
@@ -1536,27 +1649,6 @@
     <Content Include="Content\ckeditor\vendor\promise.js" />
     <Content Include="Content\EponaTheme\assets\cssjs\default\css\.css" />
     <Content Include="Content\EponaTheme\assets\cssjs\default\css\core.min.css" />
-    <Content Include="Content\EponaTheme\assets\images\chat-luong.jpg" />
-    <Content Include="Content\EponaTheme\assets\images\dao-tao.jpg" />
-    <Content Include="Content\EponaTheme\assets\images\demo\brands\1.jpg" />
-    <Content Include="Content\EponaTheme\assets\images\demo\brands\2.jpg" />
-    <Content Include="Content\EponaTheme\assets\images\demo\brands\3.jpg" />
-    <Content Include="Content\EponaTheme\assets\images\demo\brands\4.jpg" />
-    <Content Include="Content\EponaTheme\assets\images\demo\brands\5.jpg" />
-    <Content Include="Content\EponaTheme\assets\images\demo\brands\6.jpg" />
-    <Content Include="Content\EponaTheme\assets\images\demo\brands\7.jpg" />
-    <Content Include="Content\EponaTheme\assets\images\demo\brands\8.jpg" />
-    <Content Include="Content\EponaTheme\assets\images\demo\desktop_slider.png" />
-    <Content Include="Content\EponaTheme\assets\images\demo\layerslider\bi-colored-butterfly-source_ijc.gif" />
-    <Content Include="Content\EponaTheme\assets\images\demo\layerslider\slide-b-4.png" />
-    <Content Include="Content\EponaTheme\assets\images\demo\ps1.png" />
-    <Content Include="Content\EponaTheme\assets\images\demo\ps2.png" />
-    <Content Include="Content\EponaTheme\assets\images\moi-thau.png" />
-    <Content Include="Content\EponaTheme\assets\images\thongbao.jpeg" />
-    <Content Include="Content\EponaTheme\assets\images\tin-tuc.jpg" />
-    <Content Include="Content\EponaTheme\assets\images\tuyen-dung.jpg" />
-    <Content Include="Content\EponaTheme\assets\images\tuyen-dung2.jpg" />
-    <Content Include="Content\EponaTheme\cdn-cgi\scripts\5c5dd728\cloudflare-static\email-decode.min.js" />
     <Content Include="Content\EponaTheme\assets\css\.css" />
     <Content Include="Content\EponaTheme\assets\css\animate.css" />
     <Content Include="Content\EponaTheme\assets\css\color_scheme\red.css" />
@@ -1572,11 +1664,45 @@
     <Content Include="Content\EponaTheme\assets\css\revolution-slider.css" />
     <Content Include="Content\EponaTheme\assets\css\sky-forms.css" />
     <Content Include="Content\EponaTheme\assets\css\weather-icons.min.css" />
+    <Content Include="Content\EponaTheme\assets\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\EponaTheme\assets\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\EponaTheme\assets\fonts\Material-Design-Iconic-Font.ttf" />
+    <Content Include="Content\EponaTheme\assets\fonts\Material-Design-Iconic-Font.woff" />
+    <Content Include="Content\EponaTheme\assets\fonts\Material-Design-Iconic-Font.woff2" />
+    <Content Include="Content\EponaTheme\assets\fonts\Simple-Line-Icons.eot" />
+    <Content Include="Content\EponaTheme\assets\fonts\Simple-Line-Icons.svg#Simple-Line-Icons" />
+    <Content Include="Content\EponaTheme\assets\fonts\Simple-Line-Icons.ttf" />
+    <Content Include="Content\EponaTheme\assets\fonts\Simple-Line-Icons.woff" />
+    <Content Include="Content\EponaTheme\assets\fonts\weathericons-regular-webfont.svg#weathericons-regular-webfontRg" />
+    <Content Include="Content\EponaTheme\assets\fonts\weathericons-regular-webfont.ttf" />
+    <Content Include="Content\EponaTheme\assets\fonts\weathericons-regular-webfont.woff" />
     <Content Include="Content\EponaTheme\assets\images\1x1.png" />
+    <Content Include="Content\EponaTheme\assets\images\anhkinhdoanh.png" />
+    <Content Include="Content\EponaTheme\assets\images\backroungfooter.png" />
+    <Content Include="Content\EponaTheme\assets\images\backroungfooter1.png" />
+    <Content Include="Content\EponaTheme\assets\images\Banner\banner-Middle.jpg" />
     <Content Include="Content\EponaTheme\assets\images\big_banner.png" />
     <Content Include="Content\EponaTheme\assets\images\big_banner_grey.png" />
+    <Content Include="Content\EponaTheme\assets\images\bn1.png" />
     <Content Include="Content\EponaTheme\assets\images\caption_bg.png" />
+    <Content Include="Content\EponaTheme\assets\images\chat-luong.jpg" />
+    <Content Include="Content\EponaTheme\assets\images\chuyendoiso.jpeg" />
+    <Content Include="Content\EponaTheme\assets\images\congty1.jpg" />
+    <Content Include="Content\EponaTheme\assets\images\congty2.jpg" />
+    <Content Include="Content\EponaTheme\assets\images\congty3.jpg" />
+    <Content Include="Content\EponaTheme\assets\images\congty4.jpg" />
+    <Content Include="Content\EponaTheme\assets\images\congty5.jpeg" />
+    <Content Include="Content\EponaTheme\assets\images\dao-tao.jpg" />
+    <Content Include="Content\EponaTheme\assets\images\demo\brands\1.jpg" />
+    <Content Include="Content\EponaTheme\assets\images\demo\brands\2.jpg" />
+    <Content Include="Content\EponaTheme\assets\images\demo\brands\3.jpg" />
+    <Content Include="Content\EponaTheme\assets\images\demo\brands\4.jpg" />
+    <Content Include="Content\EponaTheme\assets\images\demo\brands\5.jpg" />
+    <Content Include="Content\EponaTheme\assets\images\demo\brands\6.jpg" />
+    <Content Include="Content\EponaTheme\assets\images\demo\brands\7.jpg" />
+    <Content Include="Content\EponaTheme\assets\images\demo\brands\8.jpg" />
     <Content Include="Content\EponaTheme\assets\images\demo\desktop.png" />
+    <Content Include="Content\EponaTheme\assets\images\demo\desktop_slider.png" />
     <Content Include="Content\EponaTheme\assets\images\demo\fashion\thumb\1.jpg" />
     <Content Include="Content\EponaTheme\assets\images\demo\fashion\thumb\2.jpg" />
     <Content Include="Content\EponaTheme\assets\images\demo\fashion\thumb\3.jpg" />
@@ -1586,6 +1712,8 @@
     <Content Include="Content\EponaTheme\assets\images\demo\fashion\thumb\7.jpg" />
     <Content Include="Content\EponaTheme\assets\images\demo\fashion\thumb\8.jpg" />
     <Content Include="Content\EponaTheme\assets\images\demo\laptop.png" />
+    <Content Include="Content\EponaTheme\assets\images\demo\layerslider\bi-colored-butterfly-source_ijc.gif" />
+    <Content Include="Content\EponaTheme\assets\images\demo\layerslider\slide-b-4.png" />
     <Content Include="Content\EponaTheme\assets\images\demo\other\thumb_o1.jpg" />
     <Content Include="Content\EponaTheme\assets\images\demo\other\thumb_o2.jpg" />
     <Content Include="Content\EponaTheme\assets\images\demo\other\thumb_o3.jpg" />
@@ -1594,10 +1722,30 @@
     <Content Include="Content\EponaTheme\assets\images\demo\portfolio\thumb\a2.jpg" />
     <Content Include="Content\EponaTheme\assets\images\demo\portfolio\thumb\a3.jpg" />
     <Content Include="Content\EponaTheme\assets\images\demo\portfolio\thumb\a4.jpg" />
+    <Content Include="Content\EponaTheme\assets\images\demo\ps1.png" />
+    <Content Include="Content\EponaTheme\assets\images\demo\ps2.png" />
+    <Content Include="Content\EponaTheme\assets\images\doiso1.jpg" />
+    <Content Include="Content\EponaTheme\assets\images\doiso2.jpg" />
+    <Content Include="Content\EponaTheme\assets\images\doiso3.jpg" />
+    <Content Include="Content\EponaTheme\assets\images\doiso4.jpg" />
+    <Content Include="Content\EponaTheme\assets\images\doiso5.jpg" />
     <Content Include="Content\EponaTheme\assets\images\female.png" />
     <Content Include="Content\EponaTheme\assets\images\logo.png" />
+    <Content Include="Content\EponaTheme\assets\images\logo1.png" />
+    <Content Include="Content\EponaTheme\assets\images\logongang.png" />
+    <Content Include="Content\EponaTheme\assets\images\logongangcongty.png" />
+    <Content Include="Content\EponaTheme\assets\images\logo\baoqk.jpg" />
+    <Content Include="Content\EponaTheme\assets\images\logo\baoquandoi.jpg" />
+    <Content Include="Content\EponaTheme\assets\images\logo\dvcqg.png" />
+    <Content Include="Content\EponaTheme\assets\images\logo\facebook.png" />
+    <Content Include="Content\EponaTheme\assets\images\logo\logo512x512.png" />
+    <Content Include="Content\EponaTheme\assets\images\logo\MBbank.png" />
+    <Content Include="Content\EponaTheme\assets\images\logo\thuvienPL.jpg" />
+    <Content Include="Content\EponaTheme\assets\images\logo\viettel.jpg" />
+    <Content Include="Content\EponaTheme\assets\images\logo\zalo.png" />
     <Content Include="Content\EponaTheme\assets\images\logo_footer.png" />
     <Content Include="Content\EponaTheme\assets\images\male.png" />
+    <Content Include="Content\EponaTheme\assets\images\moi-thau.png" />
     <Content Include="Content\EponaTheme\assets\images\patterns\parallax_overlay.png" />
     <Content Include="Content\EponaTheme\assets\images\patterns\pattern1.png" />
     <Content Include="Content\EponaTheme\assets\images\patterns\pattern10.png" />
@@ -1640,8 +1788,13 @@
     <Content Include="Content\EponaTheme\assets\images\revolution_slider\assets\small_right_boxed.png" />
     <Content Include="Content\EponaTheme\assets\images\revolution_slider\assets\timer.png" />
     <Content Include="Content\EponaTheme\assets\images\revolution_slider\assets\transparent.png" />
+    <Content Include="Content\EponaTheme\assets\images\revolution_slider\font\revicons.woff" />
     <Content Include="Content\EponaTheme\assets\images\revolution_slider\images\gradient\g30.png" />
     <Content Include="Content\EponaTheme\assets\images\revolution_slider\images\gradient\g40.png" />
+    <Content Include="Content\EponaTheme\assets\images\thongbao.jpeg" />
+    <Content Include="Content\EponaTheme\assets\images\tin-tuc.jpg" />
+    <Content Include="Content\EponaTheme\assets\images\tuyen-dung.jpg" />
+    <Content Include="Content\EponaTheme\assets\images\tuyen-dung2.jpg" />
     <Content Include="Content\EponaTheme\assets\js\revolution_slider.js" />
     <Content Include="Content\EponaTheme\assets\js\scripts.js" />
     <Content Include="Content\EponaTheme\assets\plugins\bootstrap\css\.css" />
@@ -1649,6 +1802,10 @@
     <Content Include="Content\EponaTheme\assets\plugins\bootstrap\css\github.com\necolas\.css" />
     <Content Include="Content\EponaTheme\assets\plugins\bootstrap\css\github.com\necolas\normalize.css" />
     <Content Include="Content\EponaTheme\assets\plugins\bootstrap\css\sourceMappingURL=bootstrap.min.css" />
+    <Content Include="Content\EponaTheme\assets\plugins\bootstrap\fonts\glyphicons-halflings-regular.svg#glyphicons_halflingsregular" />
+    <Content Include="Content\EponaTheme\assets\plugins\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\EponaTheme\assets\plugins\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\EponaTheme\assets\plugins\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Content\EponaTheme\assets\plugins\bootstrap\js\bootstrap.min.js" />
     <Content Include="Content\EponaTheme\assets\plugins\flexslider\jquery.flexslider-min.js" />
     <Content Include="Content\EponaTheme\assets\plugins\jquery-2.2.3.min.js" />
@@ -1666,13 +1823,537 @@
     <Content Include="Content\EponaTheme\assets\plugins\revolution-slider\js\jquery.themepunch.revolution.min.js" />
     <Content Include="Content\EponaTheme\assets\plugins\revolution-slider\js\jquery.themepunch.tools.min.js" />
     <Content Include="Content\EponaTheme\assets\plugins\styleswitcher\styleswitcher.js" />
+    <Content Include="Content\EponaTheme\cdn-cgi\scripts\5c5dd728\cloudflare-static\email-decode.min.js" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\Uploads\Albums\1\638629683029497833_namlao-lanhdao-1637898876.jpg" />
+    <Content Include="Content\Uploads\Albums\1\638629683031463876_namlao-lanhdao-1637898895.jpg" />
+    <Content Include="Content\Uploads\Albums\1\638629683031518797_namlao-lanhdao-1637898912.jpg" />
+    <Content Include="Content\Uploads\Albums\1\638629683031544499_namlao-lanhdao-1637898918.png" />
+    <Content Include="Content\Uploads\Albums\1\638629808952706237_unnamed %283%29.png" />
+    <Content Include="Content\Uploads\Albums\1\638629809025640409_namlao-lanhdao-1637898918.png" />
+    <Content Include="Content\Uploads\Albums\1\638629809229405525_unnamed.png" />
+    <Content Include="Content\Uploads\Albums\1\638629809324519887_unnamed %282%29.png" />
+    <Content Include="Content\Uploads\Albums\1\638629809374338336_unnamed %281%29.png" />
+    <Content Include="Content\Uploads\Albums\1\638629810526210019_unnamed %283%29.png" />
+    <Content Include="Content\Uploads\Albums\1\638629810824132561_unnamed.png" />
+    <Content Include="Content\Uploads\Albums\1\638629811511814622_unnamed %281%29.png" />
+    <Content Include="Content\Uploads\Albums\1\638629811596277193_unnamed %282%29.png" />
+    <Content Include="Content\Uploads\Albums\1\638629811652357249_unnamed.png" />
+    <Content Include="Content\Uploads\Albums\1\638629811718456147_unnamed %283%29.png" />
+    <Content Include="Content\Uploads\Albums\1\638630198432534983_IMGP1273.JPG" />
+    <Content Include="Content\Uploads\Albums\1\638630198432634711_IMGP1273.png" />
+    <Content Include="Content\Uploads\Albums\1\638630198433813567_IMGP1274.JPG" />
+    <Content Include="Content\Uploads\Albums\1\638630198433933266_IMGP1275.JPG" />
+    <Content Include="Content\Uploads\Albums\1\638630198455154813_IMGP1273.JPG" />
+    <Content Include="Content\Uploads\Albums\1\638630198455244563_IMGP1273.png" />
+    <Content Include="Content\Uploads\Albums\1\638630198455424198_IMGP1274.JPG" />
+    <Content Include="Content\Uploads\Albums\1\638630198455513841_IMGP1275.JPG" />
+    <Content Include="Content\Uploads\Albums\1\638630198455603605_IMGP1275.png" />
+    <Content Include="Content\Uploads\Albums\1\638630198455935312_IMGP1280.JPG" />
+    <Content Include="Content\Uploads\Albums\1\638630198456145081_IMGP1280.png" />
+    <Content Include="Content\Uploads\Albums\1\638630199891777692_5bdcf7e910aed3f08abf.jpg" />
+    <Content Include="Content\Uploads\Albums\1\638630199891807309_8a959f1e7859bb07e248.jpg" />
+    <Content Include="Content\Uploads\Albums\1\638630199892013677_4836c0bf27f8e4a6bde9.jpg" />
+    <Content Include="Content\Uploads\Albums\1\638630199892033652_d2b3be0459439a1dc352.jpg" />
+    <Content Include="Content\Uploads\Albums\1\638630199892043622_dacb1245f502365c6f13.jpg" />
+    <Content Include="Content\Uploads\Albums\1\638630199892063571_Gặt lúa.jpg" />
+    <Content Include="Content\Uploads\Albums\1\638630199892233945_HỌI CHỢ.jpg" />
+    <Content Include="Content\Uploads\Albums\1\638630199892253905_image%282%29.png" />
+    <Content Include="Content\Uploads\Albums\1\638630199892273840_IMGP7245.jpg" />
+    <Content Include="Content\Uploads\Albums\1\638630199892303760_IMGP7334.JPG" />
+    <Content Include="Content\Uploads\Albums\1\638630199892373575_IMGP7337.JPG" />
+    <Content Include="Content\Uploads\Albums\1\638630199892453359_lao2.png" />
+    <Content Include="Content\Uploads\Albums\1\638630199892473307_lao3.png" />
+    <Content Include="Content\Uploads\Albums\1\638630199892493253_lao4.png" />
+    <Content Include="Content\Uploads\Albums\1\638630199892503227_lao5.png" />
+    <Content Include="Content\Uploads\Albums\1\638630199892573047_lao6.png" />
+    <Content Include="Content\Uploads\Albums\1\638630199892602962_lao8.png" />
+    <Content Include="Content\Uploads\Albums\1\638630199892632914_liên tịch công ty.jpg" />
+    <Content Include="Content\Uploads\Albums\1\638630199892652885_LT Cty - f5.jpg" />
+    <Content Include="Content\Uploads\Albums\1\638630199892732944_namlao-1659941236.jpg" />
+    <Content Include="Content\Uploads\Albums\1\638630199892762809_namlao-1672020837.jpg" />
+    <Content Include="Content\Uploads\Albums\1\638630199892782763_namlao-slide-1607301930.jpg" />
+    <Content Include="Content\Uploads\Albums\1\638630199892822646_namlao-slide-1608080458.jpeg" />
+    <Content Include="Content\Uploads\Albums\1\638630199892922395_QK5 LT - f5.jpg" />
+    <Content Include="Content\Uploads\Albums\1\638630199892982403_Quý - cà phê f5.jpg" />
+    <Content Include="Content\Uploads\Albums\1\638630199893142058_Sanamxay.jpg" />
+    <Content Include="Content\Uploads\Albums\1\638630199893581736_Tặng KT f5.jpg" />
+    <Content Include="Content\Uploads\Albums\1\638630199893671495_TĐ LMCĐ.jpg" />
+    <Content Include="Content\Uploads\Albums\1\638630199893741320_Thăm Ngày QĐVN.jpg" />
+    <Content Include="Content\Uploads\Albums\1\638630199893901082_TMTQK -f5.jpg" />
+    <Content Include="Content\Uploads\Albums\1\638630199894040841_XNTT.jpg" />
+    <Content Include="Content\Uploads\Albums\1\638630199894090774_z3495339068151_ea3cec22c56e584eded2904c48ab0cba.jpg" />
+    <Content Include="Content\Uploads\Albums\2\638630197666495037_kd1.jpg" />
+    <Content Include="Content\Uploads\Albums\2\638630197666654476_kd2.jpg" />
+    <Content Include="Content\Uploads\Albums\2\638630197666704349_kd3.jpg" />
+    <Content Include="Content\Uploads\Albums\2\638630197666947277_kd4.jpg" />
+    <Content Include="Content\Uploads\Albums\2\638630197666977195_kd5.jpg" />
+    <Content Include="Content\Uploads\Albums\2\638630197666987162_kd6.jpg" />
+    <Content Include="Content\Uploads\Albums\2\638630197667007109_kd7.jpg" />
+    <Content Include="Content\Uploads\Albums\2\638630197667027082_kd8.jpg" />
+    <Content Include="Content\Uploads\Albums\2\638630197667047012_kd9.jpg" />
+    <Content Include="Content\Uploads\Albums\2\638630197667056979_kd10.jpg" />
+    <Content Include="Content\Uploads\Albums\2\638630197667076924_kd11.jpg" />
+    <Content Include="Content\Uploads\Albums\2\638630197667086897_kd12.jpg" />
+    <Content Include="Content\Uploads\Albums\2\638630197667106846_kd13.jpg" />
+    <Content Include="Content\Uploads\Albums\2\638630197667116824_kd14.jpg" />
+    <Content Include="Content\Uploads\Albums\2\638630197667236952_kd15.jpg" />
+    <Content Include="Content\Uploads\Albums\2\638630197667256900_kd16.jpg" />
+    <Content Include="Content\Uploads\Albums\2\638630197667266882_kd17.jpg" />
+    <Content Include="Content\Uploads\Albums\2\638630197667286821_kd18.jpg" />
+    <Content Include="Content\Uploads\Albums\2\638630197667306771_kd19.jpg" />
+    <Content Include="Content\Uploads\Albums\2\638630197667316739_kd20.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630198156620809_280894616_995471631153308_6504980110499691465_n.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630198156800327_281212002_995471644486640_3112957364592774888_n.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630198156820276_nl1.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630198156830255_nl2.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630198156880191_nl3.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630198156900073_nl4.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630198156920008_nl5.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630198156929986_tl1.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630198156949945_tl2.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630198156959908_tl4.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630198317425958_140015602_716215819078892_7899199315056871737_n.jpeg" />
+    <Content Include="Content\Uploads\Albums\3\638630198317445906_140058830_716215779078896_7929551434924202648_n.jpeg" />
+    <Content Include="Content\Uploads\Albums\3\638630198317465852_140308400_716215789078895_7194844312767739546_n.jpeg" />
+    <Content Include="Content\Uploads\Albums\3\638630198317546337_175614164_767057667328040_1867347768068249238_n.jpeg" />
+    <Content Include="Content\Uploads\Albums\3\638630198317566292_175853316_767057537328053_797444508902232577_n.jpeg" />
+    <Content Include="Content\Uploads\Albums\3\638630198317586237_176055189_767057593994714_1982015034835359759_n.jpeg" />
+    <Content Include="Content\Uploads\Albums\3\638630198317596203_190102657_791147464919060_8022004916330951825_n.jpeg" />
+    <Content Include="Content\Uploads\Albums\3\638630198317616156_191746783_819927735374366_1540680385676325094_n.jpeg" />
+    <Content Include="Content\Uploads\Albums\3\638630198317626130_193124249_791147491585724_551692408605640385_n.jpeg" />
+    <Content Include="Content\Uploads\Albums\3\638630198317646077_194267861_791147438252396_5364466198484137946_n.jpeg" />
+    <Content Include="Content\Uploads\Albums\3\638630198317656045_214572273_809407216426418_4363196803770867300_n.jpeg" />
+    <Content Include="Content\Uploads\Albums\3\638630198317685971_216078943_809407246426415_7827114490053163609_n.jpeg" />
+    <Content Include="Content\Uploads\Albums\3\638630198317695944_220298517_819927875374352_7595297102093973735_n.jpeg" />
+    <Content Include="Content\Uploads\Albums\3\638630198317715892_Bộ-Tư-lệnh-Quân-khu-tổ-chức-bàn-giao-trang-thiết-bị-vật-tư-y-tế-phòng-chống-dịch-Covid-19.jpeg" />
+    <Content Include="Content\Uploads\Albums\3\638630198317735872_Các-LL-phối-hợp-kiểm-soát-người-qua-lại-biên-giới-trên-địa-bàn-huyện-Tây-Giang-Quảng-Nam..jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630198317755846_cb1-2048x1286.jpeg" />
+    <Content Include="Content\Uploads\Albums\3\638630198317765817_cb2-2048x1278.jpeg" />
+    <Content Include="Content\Uploads\Albums\3\638630198317785767_Những-chuyến-hàng-thắm-tình-hữu-nghị..jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630198317795743_QK1-2-2048x1365.jpeg" />
+    <Content Include="Content\Uploads\Albums\3\638630198317815687_QK2-2-2048x1365.jpeg" />
+    <Content Include="Content\Uploads\Albums\3\638630198317835636_tg1-Small.jpeg" />
+    <Content Include="Content\Uploads\Albums\3\638630198317855582_tg2-Small.jpeg" />
+    <Content Include="Content\Uploads\Albums\3\638630198317865559_Trung-tướng-Thái-Đại-Ngọc-TL-Quân-khu-kiểm-tra-chốt-phòng-chống-đich-huyện-Ngọc-Hồi-Kon-Tum.jpeg" />
+    <Content Include="Content\Uploads\Albums\3\638630199228765349_IMGP1273.JPG" />
+    <Content Include="Content\Uploads\Albums\3\638630199229075494_IMGP1273.png" />
+    <Content Include="Content\Uploads\Albums\3\638630199229274960_IMGP1274.JPG" />
+    <Content Include="Content\Uploads\Albums\3\638630199229364716_IMGP1275.JPG" />
+    <Content Include="Content\Uploads\Albums\3\638630199229494574_IMGP1275.png" />
+    <Content Include="Content\Uploads\Albums\3\638630199229694333_IMGP1280.JPG" />
+    <Content Include="Content\Uploads\Albums\3\638630199229774147_IMGP1280.png" />
+    <Content Include="Content\Uploads\Albums\3\638630199406989715_ảnh 1 CTTTDG.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630199407019637_ảnh 2 CTTTGD.JPG" />
+    <Content Include="Content\Uploads\Albums\3\638630199407229601_ảnh 3 hoạt động xung kích.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630199407259543_ảnh 4 hoạt động xung kích.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630199407289445_ảnh 5 công tác xây dựng đoàn.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630199407299412_ảnh 6 công tác xây dựng đoàn.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630199407329337_ảnh 7 công tác phối hợp kết nghĩa.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630199407339310_ảnh 8 công tác phối hợp kết nghĩa.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630201232061218_5bdcf7e910aed3f08abf.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630201232160992_8a959f1e7859bb07e248.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630201232390382_123.PNG" />
+    <Content Include="Content\Uploads\Albums\3\638630201232450237_4836c0bf27f8e4a6bde9.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630201232480141_d2b3be0459439a1dc352.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630201232500093_dacb1245f502365c6f13.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630201232510063_ĐK khởi công.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630201232599859_f4.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630201232749788_Gặt lúa.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630201232829487_HỌI CHỢ.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630201232849421_image%282%29.png" />
+    <Content Include="Content\Uploads\Albums\3\638630201232869390_IMGP7245.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630201232929226_IMGP7327.JPG" />
+    <Content Include="Content\Uploads\Albums\3\638630201232999040_IMGP7334.JPG" />
+    <Content Include="Content\Uploads\Albums\3\638630201233179091_IMGP7337.JPG" />
+    <Content Include="Content\Uploads\Albums\3\638630201233258882_lao2.png" />
+    <Content Include="Content\Uploads\Albums\3\638630201233490189_lao3.png" />
+    <Content Include="Content\Uploads\Albums\3\638630201233530186_lao4.png" />
+    <Content Include="Content\Uploads\Albums\3\638630201234156620_lao5.png" />
+    <Content Include="Content\Uploads\Albums\3\638630201234296298_lao6.png" />
+    <Content Include="Content\Uploads\Albums\3\638630201234326220_lao8.png" />
+    <Content Include="Content\Uploads\Albums\3\638630201234366255_liên tịch công ty.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630201238614372_LT Cty - f5.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630201238664234_namlao-1659941236.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630201238674212_namlao-1672020837.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630201238694159_namlao-slide-1607301930.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630201238724085_namlao-slide-1608080458.jpeg" />
+    <Content Include="Content\Uploads\Albums\3\638630201238793896_QK5 LT - f5.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630201238853745_Quý - cà phê f5.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630201239115094_Sanamxay.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630201239184916_Tặng KT f5.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630201239254729_TĐ LMCĐ.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630201239324536_Thăm Ngày QĐVN.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630201239384372_TMTQK -f5.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630201239464233_Xayxompun.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630201239494084_XNTT.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630201239524004_z3495339068151_ea3cec22c56e584eded2904c48ab0cba.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630201735661858_20201126_102815.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630201735832876_20220727_073840.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630201735842859_20220812_090522.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630201735862806_20220815_151130.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630201735872768_20220819_083823 %282%29.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630201735902695_20221021_151153.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630201735922654_Cán bộ kỹ thuật Hướng dẫn  khai thác mủ cao su cho công nhân %282%29.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630201735952564_Chúc Tết tỉnh đội Chăm Pa Sắc.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630201736022375_Diễn tập với Quảng Nam và Attapu.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630201736142056_ONCNGT~1.JPG" />
+    <Content Include="Content\Uploads\Albums\3\638630201736181947_INGYBC~1.JPG" />
+    <Content Include="Content\Uploads\Albums\3\638630201736221840_DSC00249.JPG" />
+    <Content Include="Content\Uploads\Albums\3\638630201736251767_Huấn luyện cứu hộ.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630201736503792_IMG_0153.JPG" />
+    <Content Include="Content\Uploads\Albums\3\638630201736553656_IMGP0217 %282%29.JPG" />
+    <Content Include="Content\Uploads\Albums\3\638630201736573601_IMGP0233 %282%29.JPG" />
+    <Content Include="Content\Uploads\Albums\3\638630201736613495_IMGP0601 %282%29.JPG" />
+    <Content Include="Content\Uploads\Albums\3\638630201736643414_IMGP0986.JPG" />
+    <Content Include="Content\Uploads\Albums\3\638630201736713218_IMGP1001.JPG" />
+    <Content Include="Content\Uploads\Albums\3\638630201736783032_IMGP1107.JPG" />
+    <Content Include="Content\Uploads\Albums\3\638630201736862826_IMGP1115.JPG" />
+    <Content Include="Content\Uploads\Albums\3\638630201737122937_IMGP1350.JPG" />
+    <Content Include="Content\Uploads\Albums\3\638630201737162720_IMGP1404 - Copy.JPG" />
+    <Content Include="Content\Uploads\Albums\3\638630201737192637_IMGP1443.JPG" />
+    <Content Include="Content\Uploads\Albums\3\638630201737232528_IMGP1621.png" />
+    <Content Include="Content\Uploads\Albums\3\638630201737522249_IMGP7219.JPG" />
+    <Content Include="Content\Uploads\Albums\3\638630201737642049_IMGP7234.JPG" />
+    <Content Include="Content\Uploads\Albums\3\638630201737671970_IMGP7366 %282%29.JPG" />
+    <Content Include="Content\Uploads\Albums\3\638630201737701888_IMGP7705 %282%29.JPG" />
+    <Content Include="Content\Uploads\Albums\3\638630201737731806_IMGP7717 %282%29.JPG" />
+    <Content Include="Content\Uploads\Albums\3\638630201737771705_IMGP7785 %282%29.JPG" />
+    <Content Include="Content\Uploads\Albums\3\638630201737821571_IMGP8124 %282%29.JPG" />
+    <Content Include="Content\Uploads\Albums\3\638630201737851495_IMGP8160 %283%29.JPG" />
+    <Content Include="Content\Uploads\Albums\3\638630201737871432_Tham gia diễn tập.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630201739170827_Tiến hành khám, cấp phát thuốc cho cán bộ, chiến sĩ và gia đình quân nhân BCHQS tỉnh Attapư %283%29.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630201739290520_Untitled-1.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630201739611083_z3180684432700_6af6f6951f2be9d04e5bcdafa68a2eaa.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630201739621050_z3180684480376_273fc1822bd5037d8bea08f215b6ca51 %282%29.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630201739641002_z3251790529267_596e62d087cfec98ab00f2c67dcd2fca %282%29.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630201739660950_z3381464128856_6a5b4186e4aa792ac1cd508fd95ae3ed %282%29.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630201740419863_z3598484724252_f034fa8bd7fd01d2ad8a2804b9ca7101 %281%29.jpg" />
+    <Content Include="Content\Uploads\Albums\3\638630201740439793_z3824449041958_61f488ac7e630a428e939e33ecd72925.jpg" />
+    <Content Include="Content\Uploads\Albums\4\638630197874975189_4.jpg" />
+    <Content Include="Content\Uploads\Albums\4\638630197875144446_16.jpg" />
+    <Content Include="Content\Uploads\Albums\4\638630197875184339_Capture.JPG" />
+    <Content Include="Content\Uploads\Albums\4\638630197875204267_n %281%29.jpg" />
+    <Content Include="Content\Uploads\Albums\4\638630197875214245_n2.jpg" />
+    <Content Include="Content\Uploads\Albums\4\638630197875244162_n3.jpg" />
+    <Content Include="Content\Uploads\Albums\4\638630197875264103_ǹ5.jpg" />
+    <Content Include="Content\Uploads\Albums\4\638630197875264103_ǹ5.jpg" />
+    <Content Include="Content\Uploads\Albums\4\638630197875284050_n6.jpg" />
+    <Content Include="Content\Uploads\Albums\4\638630197875303998_n7.jpg" />
+    <Content Include="Content\Uploads\Albums\4\638630197875323944_ñ7.jpg" />
+    <Content Include="Content\Uploads\Albums\4\638630197875323944_ñ7.jpg" />
+    <Content Include="Content\Uploads\Albums\4\638630197875373917_̣n9.JPG" />
+    <Content Include="Content\Uploads\Albums\4\638630197875403837_n10.JPG" />
+    <Content Include="Content\Uploads\Albums\4\638630197875413806_n11.jpg" />
+    <Content Include="Content\Uploads\Albums\4\638630197875433760_n12.JPG" />
+    <Content Include="Content\Uploads\Albums\4\638630197875453700_n13.JPG" />
+    <Content Include="Content\Uploads\Albums\4\638630197875463675_N14.JPG" />
+    <Content Include="Content\Uploads\Albums\4\638630197875483620_n15.jpg" />
+    <Content Include="Content\Uploads\Albums\4\638630197875503577_n16.jpg" />
+    <Content Include="Content\Uploads\Albums\4\638630197875523525_n17.jpg" />
+    <Content Include="Content\Uploads\Albums\4\638630197875543466_n18.jpg" />
+    <Content Include="Content\Uploads\Albums\4\638630197875563430_n19.jpg" />
+    <Content Include="Content\Uploads\Albums\4\638630197875583361_N20.JPG" />
+    <Content Include="Content\Uploads\Albums\4\638630197875603310_n21.JPG" />
+    <Content Include="Content\Uploads\Albums\4\638630197875613279_n22.JPG" />
+    <Content Include="Content\Uploads\Albums\4\638630197875623255_n23.JPG" />
+    <Content Include="Content\Uploads\Albums\4\638630197875643196_N24.JPG" />
+    <Content Include="Content\Uploads\Albums\4\638630197875663140_n25.JPG" />
+    <Content Include="Content\Uploads\Albums\4\638630197875673119_n26.JPG" />
+    <Content Include="Content\Uploads\Albums\4\638630197875693070_n27.JPG" />
+    <Content Include="Content\Uploads\Albums\4\638630197875703031_n29.jpg" />
+    <Content Include="Content\Uploads\Albums\4\638630197875722990_n30.jpg" />
+    <Content Include="Content\Uploads\Albums\4\638630197875742930_n49.jpg" />
+    <Content Include="Content\Uploads\Albums\4\638630197875762875_nâ28.JPG" />
+    <Content Include="Content\Uploads\Albums\4\638630197875782824_Ngày 08 tháng 9.jpg" />
+    <Content Include="Content\Uploads\Albums\4\638630197875842670_z5786782448984_d549cb98e0e26969659117ee306dc03f.jpg" />
+    <Content Include="Content\Uploads\Albums\4\638632899189709082_bn1.png" />
+    <Content Include="Content\Uploads\Albums\4\638632899189965610_bn2.png" />
+    <Content Include="Content\Uploads\Albums\4\638632899190015492_bn3.png" />
+    <Content Include="Content\Uploads\Albums\4\638632899190035423_bn4.png" />
+    <Content Include="Content\Uploads\Albums\4\638651779717115527_bn1.png" />
+    <Content Include="Content\Uploads\Albums\4\638651779717932964_bn2.png" />
+    <Content Include="Content\Uploads\Albums\4\638651779717982630_bn3.png" />
+    <Content Include="Content\Uploads\Albums\4\638651779718019323_bn4.png" />
+    <Content Include="Content\Uploads\Albums\6\638632873705809354_cttdbqp.png" />
+    <Content Include="Content\Uploads\Albums\6\638632874075957054_260.png" />
+    <Content Include="Content\Uploads\Albums\6\638632874076208370_261.png" />
+    <Content Include="Content\Uploads\Albums\6\638632874076301235_bm.png" />
+    <Content Include="Content\Uploads\Albums\6\638632874076324356_bnwer.png" />
+    <Content Include="Content\Uploads\Albums\6\638632874076334352_bx206.png" />
+    <Content Include="Content\Uploads\Albums\6\638632874076359090_ct206.png" />
+    <Content Include="Content\Uploads\Albums\6\638632874076369082_ksđhs.png" />
+    <Content Include="Content\Uploads\Albums\6\638632874076389036_nk.png" />
+    <Content Include="Content\Uploads\Banners\10\638633039397264193_260.png" />
+    <Content Include="Content\Uploads\Banners\11\638633039513542721_cs.png" />
+    <Content Include="Content\Uploads\Banners\13\638633039693887256_nk.png" />
+    <Content Include="Content\Uploads\Banners\14\638633039829526662_261.png" />
+    <Content Include="Content\Uploads\Banners\15\638633040040786280_bx206.png" />
+    <Content Include="Content\Uploads\Banners\16\638633040143971690_bnwer.png" />
+    <Content Include="Content\Uploads\Banners\17\638633040241555577_ct206.png" />
+    <Content Include="Content\Uploads\Banners\7\638633039017138709_cttdbqp.png" />
+    <Content Include="Content\Uploads\Banners\8\638633039100618598_ct206.png" />
+    <Content Include="Content\Uploads\Banners\9\638633039258799103_bm.png" />
+    <Content Include="Content\Uploads\HopThu\10\638666724712254413_CV đóng dấu gia hạn giấy ra vào.pdf" />
+    <Content Include="Content\Uploads\HopThu\11\638668248797621357_Lich Cong Tac Tuan-11102024072937.pdf" />
+    <Content Include="Content\Uploads\HopThu\12\638669048190031104_TUAN 46.pdf" />
+    <Content Include="Content\Uploads\HopThu\13\638669072631985143_VB kiem tra-11112024062454.pdf" />
+    <Content Include="Content\Uploads\HopThu\14\638669428945659613_HD 5169 mang mac Le phuc K24.pdf" />
+    <Content Include="Content\Uploads\HopThu\15\638670017797081127_HD 5169 mang mac Le phuc K24.pdf" />
+    <Content Include="Content\Uploads\HopThu\16\638670874755770945_11.112024 _ien ung pho bao YINXING.pdf" />
+    <Content Include="Content\Uploads\HopThu\17\638671945781259898_HD cấp thẻ BHYT năm 2025.pdf" />
+    <Content Include="Content\Uploads\HopThu\18\638672612927597923_CV hướng dẫn thực hiện TT92.pdf" />
+    <Content Include="Content\Uploads\HopThu\18\638672612927887934_vb295007.pdf" />
+    <Content Include="Content\Uploads\HopThu\19\638672614323451836_CV hướng dẫn thực hiện TT92.pdf" />
+    <Content Include="Content\Uploads\HopThu\19\638672614323531841_HD cấp thẻ BHYT năm 2025.pdf" />
+    <Content Include="Content\Uploads\HopThu\19\638672614323571776_vb295007.pdf" />
+    <Content Include="Content\Uploads\HopThu\1\638659827088451460_Adobe Scan 31 Oct 2024.pdf" />
+    <Content Include="Content\Uploads\HopThu\20\638673535177541733_15.11 Lich tuan tu ngay 16.11.pdf" />
+    <Content Include="Content\Uploads\HopThu\21\638673543241151475_Cv ve quan triet Thong tu 92 - Le phuc 16.11.pdf" />
+    <Content Include="Content\Uploads\HopThu\22\638673570845739892_vb29500716.11.pdf" />
+    <Content Include="Content\Uploads\HopThu\23\638675236771290049_000. Cong van thong bao tuyen sinh dao tao S_H tai HVHC nam 2025.pdf" />
+    <Content Include="Content\Uploads\HopThu\24\638675977192187722_2.PLuc khai thang hanh dong vi B_Gva phong chong BLGD 2024Cty%2919.11.pdf" />
+    <Content Include="Content\Uploads\HopThu\25\638675983829169369_1.KH Thang hanh dong VBDG.. voi bao luc tren co so gioi trong CTY.2024.pdf" />
+    <Content Include="Content\Uploads\HopThu\26\638676310868178434_HUONG DAN XET KHEN THUONG SK2025.pdf" />
+    <Content Include="Content\Uploads\HopThu\27\638676315043390635_19.11 Cv huong dan khen thuong sang kien.pdf" />
+    <Content Include="Content\Uploads\HopThu\28\638677164954690709_Adobe Scan 20 Nov 2024.pdf" />
+    <Content Include="Content\Uploads\HopThu\29\638677748176546048_Cong van don doc hoat dong chinh sach dip 22.12.2024.pdf" />
+    <Content Include="Content\Uploads\HopThu\2\638659827889489041_25.10.24 .Lich tuan tu ngay 28.10-31.pdf" />
+    <Content Include="Content\Uploads\HopThu\30\638677756004028320_HD THI T̀M HI_U.pdf" />
+    <Content Include="Content\Uploads\HopThu\31\638679561768101059_23.11 in ky Lich tuan tu ngay 25.11-01.12.pdf" />
+    <Content Include="Content\Uploads\HopThu\32\638681510637076999_LT dieu chinh -Dai. 23.11 Lich tuan tu ngay 25.11-01.12.pdf" />
+    <Content Include="Content\Uploads\HopThu\33\638681606855586173_tmkh218.pdf" />
+    <Content Include="Content\Uploads\HopThu\34\638682068276926665_Kh chuc mung quoc khanh lao.pdf" />
+    <Content Include="Content\Uploads\HopThu\35\638682342435426373_CV - thong bao lich phat song phim truyen hinh nhieu tap tren VTV1.pdf" />
+    <Content Include="Content\Uploads\HopThu\36\638684920405544201_Cong van phong chong dich ta lon Chau Phi 11.2024.pdf" />
+    <Content Include="Content\Uploads\HopThu\37\638687210246686429_11.29.24 .Lich tuan tu ngay 2.12.24.pdf" />
+    <Content Include="Content\Uploads\HopThu\38\638688106082473391_CV dao tao VHNT bao chi va thong tin.pdf" />
+    <Content Include="Content\Uploads\HopThu\39\638690038248842270_Quy Dinh 0512-12052024124023.pdf" />
+    <Content Include="Content\Uploads\HopThu\3\638660445188268622_Thong bao thuc hien che do mua lanh k24.pdf" />
+    <Content Include="Content\Uploads\HopThu\40\638690975163189260_Cong van dang ki co so dong phuc BHLD nam 2025.pdf" />
+    <Content Include="Content\Uploads\HopThu\41\638690978114973013_CV HD PC cum A 06.12.24.pdf" />
+    <Content Include="Content\Uploads\HopThu\42\638693488687040995_12.7.24 .Lich tuan tu ngay 9.12-15.12.pdf" />
+    <Content Include="Content\Uploads\HopThu\43\638693513434299606_Quan triet chan chinh an toan giao thong 2024.pdf" />
+    <Content Include="Content\Uploads\HopThu\44\638693531626513010_KH to chuc thang hanh dong phong chong HIV.AIDS.pdf" />
+    <Content Include="Content\Uploads\HopThu\45\638694131948722441_230KHTM.pdf" />
+    <Content Include="Content\Uploads\HopThu\46\638694135168660542_227BCCT.pdf" />
+    <Content Include="Content\Uploads\HopThu\47\638695874121148536_Cv vv đề nghị đề bạt quân hàm, nâng lương năm 2025.pdf" />
+    <Content Include="Content\Uploads\HopThu\48\638695940235636294_CV XEM L_ 22.12.pdf" />
+    <Content Include="Content\Uploads\HopThu\4\638660681188019866_Thong bao thuc hien che do mua lanh k24.pdf" />
+    <Content Include="Content\Uploads\HopThu\5\638660693500628380_25.10.24 .Lich tuan tu ngay 28.10-31.pdf" />
+    <Content Include="Content\Uploads\HopThu\68\638696088917625690_z5581447394961_a86693e2a4f1cdd1fc98518315e6a546.jpg" />
+    <Content Include="Content\Uploads\HopThu\6\638660769574725510_Các trường hợp ko có kết quả khám SKĐK 2024.pdf" />
+    <Content Include="Content\Uploads\HopThu\70\638696095762125586_z5581447394961_a86693e2a4f1cdd1fc98518315e6a546.jpg" />
+    <Content Include="Content\Uploads\HopThu\7\638660786989325092_Lich tuan tu ngay 4.11-10.11 đ.pdf" />
+    <Content Include="Content\Uploads\HopThu\8\638663016175772873_TUAN 45 %282%29.pdf" />
+    <Content Include="Content\Uploads\HopThu\9\638664832031491957_Ket Luan 06-11062024083009.pdf" />
+    <Content Include="Content\Uploads\images\1%281%29.jpeg" />
+    <Content Include="Content\Uploads\images\1.jpeg" />
+    <Content Include="Content\Uploads\images\12.jpeg" />
+    <Content Include="Content\Uploads\images\13.jpeg" />
+    <Content Include="Content\Uploads\images\14.jpeg" />
+    <Content Include="Content\Uploads\images\175614164_767057667328040_1867347768068249238_n%281%29.jpeg" />
+    <Content Include="Content\Uploads\images\175614164_767057667328040_1867347768068249238_n.jpeg" />
+    <Content Include="Content\Uploads\images\175853316_767057537328053_797444508902232577_n.jpeg" />
+    <Content Include="Content\Uploads\images\179332845_773602576673549_8388778945642928041_n.jpeg" />
+    <Content Include="Content\Uploads\images\180417163_773602616673545_6984471167835829225_n.jpeg" />
+    <Content Include="Content\Uploads\images\181106454_773602610006879_689758007483382743_n.jpeg" />
+    <Content Include="Content\Uploads\images\191746783_819927735374366_1540680385676325094_n%281%29.jpeg" />
+    <Content Include="Content\Uploads\images\191746783_819927735374366_1540680385676325094_n.jpeg" />
+    <Content Include="Content\Uploads\images\193124249_791147491585724_551692408605640385_n.jpeg" />
+    <Content Include="Content\Uploads\images\194267861_791147438252396_5364466198484137946_n.jpeg" />
+    <Content Include="Content\Uploads\images\2%281%29.jpeg" />
+    <Content Include="Content\Uploads\images\2%282%29.jpeg" />
+    <Content Include="Content\Uploads\images\2.jpeg" />
+    <Content Include="Content\Uploads\images\21.jpeg" />
+    <Content Include="Content\Uploads\images\214572273_809407216426418_4363196803770867300_n.jpeg" />
+    <Content Include="Content\Uploads\images\216078943_809407246426415_7827114490053163609_n.jpeg" />
+    <Content Include="Content\Uploads\images\22.jpeg" />
+    <Content Include="Content\Uploads\images\220298517_819927875374352_7595297102093973735_n.jpeg" />
+    <Content Include="Content\Uploads\images\3%281%29.jpeg" />
+    <Content Include="Content\Uploads\images\3.jpeg" />
+    <Content Include="Content\Uploads\images\31.jpeg" />
+    <Content Include="Content\Uploads\images\32.jpeg" />
+    <Content Include="Content\Uploads\images\33.jpeg" />
+    <Content Include="Content\Uploads\images\4.jpeg" />
+    <Content Include="Content\Uploads\images\41.jpeg" />
+    <Content Include="Content\Uploads\images\42.jpeg" />
+    <Content Include="Content\Uploads\images\43.jpeg" />
+    <Content Include="Content\Uploads\images\44.jpeg" />
+    <Content Include="Content\Uploads\images\5.jpeg" />
+    <Content Include="Content\Uploads\images\51.jpeg" />
+    <Content Include="Content\Uploads\images\52.jpeg" />
+    <Content Include="Content\Uploads\images\53.jpeg" />
+    <Content Include="Content\Uploads\images\6.jpeg" />
+    <Content Include="Content\Uploads\images\61.jpeg" />
+    <Content Include="Content\Uploads\images\62%281%29.jpeg" />
+    <Content Include="Content\Uploads\images\62.jpeg" />
+    <Content Include="Content\Uploads\images\63.jpeg" />
+    <Content Include="Content\Uploads\images\64.jpeg" />
+    <Content Include="Content\Uploads\images\71.jpeg" />
+    <Content Include="Content\Uploads\images\72.jpeg" />
+    <Content Include="Content\Uploads\images\73.jpeg" />
+    <Content Include="Content\Uploads\images\74.jpeg" />
+    <Content Include="Content\Uploads\images\Bộ-Tư-lệnh-Quân-khu-tổ-chức-bàn-giao-trang-thiết-bị-vật-tư-y-tế-phòng-chống-dịch-Covid-19%281%29.jpeg" />
+    <Content Include="Content\Uploads\images\Bộ-Tư-lệnh-Quân-khu-tổ-chức-bàn-giao-trang-thiết-bị-vật-tư-y-tế-phòng-chống-dịch-Covid-19.jpeg" />
+    <Content Include="Content\Uploads\images\Các-LL-phối-hợp-kiểm-soát-người-qua-lại-biên-giới-trên-địa-bàn-huyện-Tây-Giang-Quảng-Nam_.jpg" />
+    <Content Include="Content\Uploads\images\cb1-2048x1286.jpeg" />
+    <Content Include="Content\Uploads\images\cb2-2048x1278.jpeg" />
+    <Content Include="Content\Uploads\images\DN1%281%29.jpeg" />
+    <Content Include="Content\Uploads\images\DN1.jpeg" />
+    <Content Include="Content\Uploads\images\DN2.jpeg" />
+    <Content Include="Content\Uploads\images\H1.jpeg" />
+    <Content Include="Content\Uploads\images\H2.jpeg" />
+    <Content Include="Content\Uploads\images\H3.jpeg" />
+    <Content Include="Content\Uploads\images\Hô-trợ-vật-tư-y-tê-cho-Lao.jpeg" />
+    <Content Include="Content\Uploads\images\IMGP6819-2048x1365.jpeg" />
+    <Content Include="Content\Uploads\images\IMGP6903-2048x1365.jpeg" />
+    <Content Include="Content\Uploads\images\Những-chuyến-hàng-thắm-tình-hữu-nghị_.jpg" />
+    <Content Include="Content\Uploads\images\QK1-2-2048x1365.jpeg" />
+    <Content Include="Content\Uploads\images\QK2-2-2048x1365.jpeg" />
+    <Content Include="Content\Uploads\images\tg1-Small.jpeg" />
+    <Content Include="Content\Uploads\images\tg2-Small.jpeg" />
+    <Content Include="Content\Uploads\images\Trung-tướng-Thái-Đại-Ngọc-TL-Quân-khu-kiểm-tra-chốt-phòng-chống-đich-huyện-Ngọc-Hồi-Kon-Tum.jpeg" />
+    <Content Include="Content\Uploads\images\TT-Nguyen-Xuan-Phuc-jfif-5960-1607065850%281%29.jpg" />
+    <Content Include="Content\Uploads\images\TT-Nguyen-Xuan-Phuc-jfif-5960-1607065850%282%29.jpg" />
+    <Content Include="Content\Uploads\images\TT-Nguyen-Xuan-Phuc-jfif-5960-1607065850.jpg" />
+    <Content Include="Content\Uploads\images\z2671450280110_28541f0b00e9ea2e0cfdd41aa10be695%281%29.jpeg" />
+    <Content Include="Content\Uploads\images\z2671450280110_28541f0b00e9ea2e0cfdd41aa10be695.jpeg" />
+    <Content Include="Content\Uploads\News\638627122653665016_doiso2.jpg" />
+    <Content Include="Content\Uploads\News\638627122887965379_doiso1.jpg" />
+    <Content Include="Content\Uploads\News\638627123369776227_doiso3.jpg" />
+    <Content Include="Content\Uploads\News\638627134335006626_Bộ-Tư-lệnh-Quân-khu-tổ-chức-bàn-giao-trang-thiết-bị-vật-tư-y-tế-phòng-chống-dịch-Covid-19.jpeg" />
+    <Content Include="Content\Uploads\News\638627134734989102_Những-chuyến-hàng-thắm-tình-hữu-nghị..jpg" />
+    <Content Include="Content\Uploads\News\638627135339361301_Chúc Tết tỉnh đội Chăm Pa Sắc.jpg" />
+    <Content Include="Content\Uploads\News\638627135864962134_Tiến hành khám, cấp phát thuốc cho cán bộ, chiến sĩ và gia đình quân nhân BCHQS tỉnh Attapư %283%29.jpg" />
+    <Content Include="Content\Uploads\News\638627137089397319_z3180684432700_6af6f6951f2be9d04e5bcdafa68a2eaa.jpg" />
+    <Content Include="Content\Uploads\News\638627137408879904_20220815_151130.jpg" />
+    <Content Include="Content\Uploads\News\638627138157470993_z3180684480376_273fc1822bd5037d8bea08f215b6ca51 %282%29.jpg" />
+    <Content Include="Content\Uploads\News\638627138375555145_z3251790529267_596e62d087cfec98ab00f2c67dcd2fca %282%29.jpg" />
+    <Content Include="Content\Uploads\News\638627138663248832_498024104pm.jpg" />
+    <Content Include="Content\Uploads\News\638627138918994127_316673622_571053651691540_1146877059417374164_n.jpg" />
+    <Content Include="Content\Uploads\News\638627139321631715_Đảng ủy-BGĐ Công ty trao tặng 2 Nhà tình nghĩa cho Cán bộ hưu trí thuộc Sư đoàn BB5 - QĐND Lào.jpg" />
+    <Content Include="Content\Uploads\News\638627139473709224_IMGP3637.JPG" />
+    <Content Include="Content\Uploads\News\638627139624658619_Tiến hành Công tác Dân vận tại Đắc Chưng - Sê Kong - Lào.JPG" />
+    <Content Include="Content\Uploads\News\638627139761248470_z2960495983974_1692754b903bf86791e490dc7195ac7c.jpg" />
+    <Content Include="Content\Uploads\News\638627140045458343_Hội nghị liên tịch giữa Công ty  Hữu Nghị Nam Lào và Sư đoàn BB5-QĐND Lào.jpg" />
+    <Content Include="Content\Uploads\News\638627140289101506_hoi nghi.jpg" />
+    <Content Include="Content\Uploads\News\638627140570221209_20230425_133717.jpg" />
+    <Content Include="Content\Uploads\News\638627140914279728_nl3.jpg" />
+    <Content Include="Content\Uploads\News\638627141021155126_176055189_767057593994714_1982015034835359759_n.jpeg" />
+    <Content Include="Content\Uploads\News\638627141308158242_20210319_111704.jpg" />
+    <Content Include="Content\Uploads\News\638627141725308265_IMGP0128.JPG" />
+    <Content Include="Content\Uploads\News\638627141878358770_IMGP2063.JPG" />
+    <Content Include="Content\Uploads\News\638627142192456376_20230830_183444.jpg" />
+    <Content Include="Content\Uploads\News\638627142358881128_20230830_200025.jpg" />
+    <Content Include="Content\Uploads\News\638627142504171395_Bệnh xá Công ty Hữu nghị 206 Khám, chữa bệnh cấp phát thuốc miễn phí cho nhân dân 4 tỉnh Nam Lào.JPG" />
+    <Content Include="Content\Uploads\News\638627142653632242_Mùa hè tình nguyện.JPG" />
+    <Content Include="Content\Uploads\News\638627143124044706_316673622_571053651691540_1146877059417374164_n.jpg" />
+    <Content Include="Content\Uploads\News\638627143419259381_tuyendung.jpg" />
+    <Content Include="Content\Uploads\News\638627143663597112_Các-LL-phối-hợp-kiểm-soát-người-qua-lại-biên-giới-trên-địa-bàn-huyện-Tây-Giang-Quảng-Nam..jpg" />
+    <Content Include="Content\Uploads\News\638627143765462789_Bộ-Tư-lệnh-Quân-khu-tổ-chức-bàn-giao-trang-thiết-bị-vật-tư-y-tế-phòng-chống-dịch-Covid-19.jpeg" />
+    <Content Include="Content\Uploads\News\638627143893681941_Những-chuyến-hàng-thắm-tình-hữu-nghị..jpg" />
+    <Content Include="Content\Uploads\News\638627144435242375_20231020_164410.jpg" />
+    <Content Include="Content\Uploads\News\638627144539181646_20231127_150540.jpg" />
+    <Content Include="Content\Uploads\News\638627144653355117_Capture.PNG" />
+    <Content Include="Content\Uploads\News\638627144820043860_Phú giải giao trên nông trường cao su.JPG" />
+    <Content Include="Content\Uploads\News\638627144993967218_20230830_183444.jpg" />
+    <Content Include="Content\Uploads\News\638627145087560733_Hoạt động TDTT của CB, NV, NLĐ Công ty.JPG" />
+    <Content Include="Content\Uploads\News\638627145174071644_Cán bộ nhân viên Công ty giao lưu TDTT với Sư đoàn BB5 - QĐND Lào nhân kỷ niệm năm Hữu nghị Việt Nam Lào 2022.jpg" />
+    <Content Include="Content\Uploads\News\638627145315354845_IMGP0740.JPG" />
+    <Content Include="Content\Uploads\News\638627145416256644_Hỗ trợ các gia đình bị lốc xoáy tại Cụm bản Đăc Muôn - Sê Kong - Lào.JPG" />
+    <Content Include="Content\Uploads\News\638627145609509023_IMGP8489.JPG" />
+    <Content Include="Content\Uploads\News\638627145731204894_IMGP0217 %282%29.JPG" />
+    <Content Include="Content\Uploads\News\638627145828416891_20210319_111704.jpg" />
+    <Content Include="Content\Uploads\News\638627145940654962_Tặng học bổng cho sinh viên tại Đăc Chưng chuẩn .JPG" />
+    <Content Include="Content\Uploads\News\638627146057058307_BGĐ Công ty tặng thiết bị y tế - thuốc điều trị Covid-19 cho trường HSQ số 2 Viêng Xay - QĐND Lào.JPG" />
+    <Content Include="Content\Uploads\News\638627146355306768_mơi2.jpg" />
+    <Content Include="Content\Uploads\News\638627146463558331_498024104pm.jpg" />
+    <Content Include="Content\Uploads\News\638627146661637347_Công ty Hữu Nghị Nam Lào phối hợp với Bộ Quốc phòng Lào bàn giao công trình sửa chữa 2 cụm bản tại Lào.jpg" />
+    <Content Include="Content\Uploads\News\638627146765721157_20231220_091541.jpg" />
+    <Content Include="Content\Uploads\News\638627146929011891_20210319_111704.jpg" />
+    <Content Include="Content\Uploads\News\638627147110077064_Phong trào nuôi heo đất của Hội PNCS Công ty.jpg" />
+    <Content Include="Content\Uploads\News\638627147211217457_z3838474610753_53d9217e3b198061fe67fd53c404adfb.jpg" />
+    <Content Include="Content\Uploads\News\638627147303480904_20220517_101522.jpg" />
+    <Content Include="Content\Uploads\News\638627147437958233_Đc Trung tướng Thái Đại Ngọc - PBTĐU-Tư lệnh QK thăm và kiểm tra Công ty.jpg" />
+    <Content Include="Content\Uploads\News\638627147629099117_IMGP3091.JPG" />
+    <Content Include="Content\Uploads\News\638627148241654203_IMGP0300.JPG" />
+    <Content Include="Content\Uploads\News\638627148375399884_mơi2.jpg" />
+    <Content Include="Content\Uploads\News\638627148509408739_moi3.jpg" />
+    <Content Include="Content\Uploads\News\638627601760130393_namlao-1718326554 %281%29.jpg" />
+    <Content Include="Content\Uploads\News\638627602411911335_namlao-1717484447.jpg" />
+    <Content Include="Content\Uploads\News\638627602694228597_namlao-1717484351.jpg" />
+    <Content Include="Content\Uploads\News\638627602923356161_namlao-1717484918.png" />
+    <Content Include="Content\Uploads\News\638627603472511596_namlao-1717485310.jpg" />
+    <Content Include="Content\Uploads\News\638627603574740347_namlao-1717485435.jpg" />
+    <Content Include="Content\Uploads\News\638627603962389844_namlao-1717485556.jpg" />
+    <Content Include="Content\Uploads\News\638627604355425210_namlao-1717485674.jpg" />
+    <Content Include="Content\Uploads\News\638627604979323718_namlao-1717485753.jpg" />
+    <Content Include="Content\Uploads\News\638627605083892494_mơi2.jpg" />
+    <Content Include="Content\Uploads\News\638627605332414682_12ddd.jpg" />
+    <Content Include="Content\Uploads\News\638627605569672621_namlao-1715415239.jpg" />
+    <Content Include="Content\Uploads\News\638627606570953930_ONCNGT~1.JPG" />
+    <Content Include="Content\Uploads\News\638627608409133221_IMGP3091.JPG" />
+    <Content Include="Content\Uploads\News\638627608996406484_Đc Trung tướng Thái Đại Ngọc - PBTĐU-Tư lệnh QK thăm và kiểm tra Công ty.jpg" />
+    <Content Include="Content\Uploads\News\638627609246937138_IMGP2351.JPG" />
+    <Content Include="Content\Uploads\News\638627609630818396_IMGP7245.jpg" />
+    <Content Include="Content\Uploads\News\638627611304951898_175614164_767057667328040_1867347768068249238_n.jpeg" />
+    <Content Include="Content\Uploads\News\638627612288097130_z3180684480376_273fc1822bd5037d8bea08f215b6ca51 %282%29.jpg" />
+    <Content Include="Content\Uploads\News\638627613101161197_316673622_571053651691540_1146877059417374164_n.jpg" />
+    <Content Include="Content\Uploads\News\638628031617861053_viendaotao5.png" />
+    <Content Include="Content\Uploads\News\638628031735452445_viendaotao5.png" />
+    <Content Include="Content\Uploads\News\638628033052501205_viendaotao5.png" />
+    <Content Include="Content\Uploads\News\638628033554019987_viendaotao5.png" />
+    <Content Include="Content\Uploads\News\638628033817208765_viendaotao5.png" />
+    <Content Include="Content\Uploads\News\638628034012814532_viendaotao5.png" />
+    <Content Include="Content\Uploads\News\638631512866929582_z3381464128856_6a5b4186e4aa792ac1cd508fd95ae3ed %282%29.jpg" />
+    <Content Include="Content\Uploads\News\638631513493208713_12ddd.jpg" />
+    <Content Include="Content\Uploads\News\638631514308854552_18.JPG" />
+    <Content Include="Content\Uploads\News\638631514496867647_20231220_095934 %281%29.jpg" />
+    <Content Include="Content\Uploads\News\638631514699082992_20221121_161939.jpg" />
+    <Content Include="Content\Uploads\News\638631515982454671_IMGP3091.JPG" />
+    <Content Include="Content\Uploads\News\638631516098646372_20201014_073338.jpg" />
+    <Content Include="Content\Uploads\News\638631516573988563_IMGP3091.JPG" />
+    <Content Include="Content\Uploads\News\638631516693905284_20210714_073408.jpg" />
+    <Content Include="Content\Uploads\News\638631517154047431_INGYBC~1.JPG" />
+    <Content Include="Content\Uploads\News\638631517323431747_IMGP7234.JPG" />
+    <Content Include="Content\Uploads\News\638631517656418168_mơi1.jpg" />
+    <Content Include="Content\Uploads\News\638631517832918601_175614164_767057667328040_1867347768068249238_n.jpeg" />
+    <Content Include="Content\Uploads\News\638631517956378510_140058830_716215779078896_7929551434924202648_n.jpeg" />
+    <Content Include="Content\Uploads\News\638631519099023834_z4044688690450_5297b03d5395be41953ecf980b116e2f.jpg" />
+    <Content Include="Content\Uploads\News\638631519251251044_140015602_716215819078892_7899199315056871737_n.jpeg" />
+    <Content Include="Content\Uploads\News\638631519342304974_193124249_791147491585724_551692408605640385_n.jpeg" />
+    <Content Include="Content\Uploads\News\638631519686585384_20230830_183444.jpg" />
+    <Content Include="Content\Uploads\News\638631519891070022_20210319_111704.jpg" />
+    <Content Include="Content\Uploads\News\638631520641575599_IMGP0128.JPG" />
+    <Content Include="Content\Uploads\News\638631520976845369_IMGP3637.JPG" />
+    <Content Include="Content\Uploads\News\638631521227102203_tg1-Small.jpeg" />
+    <Content Include="Content\Uploads\News\638631521342234270_214572273_809407216426418_4363196803770867300_n.jpeg" />
+    <Content Include="Content\Uploads\News\638631521735849947_175853316_767057537328053_797444508902232577_n.jpeg" />
+    <Content Include="Content\Uploads\News\638631521892832831_Những-chuyến-hàng-thắm-tình-hữu-nghị..jpg" />
+    <Content Include="Content\Uploads\News\638631522019744842_140308400_716215789078895_7194844312767739546_n.jpeg" />
+    <Content Include="Content\Uploads\News\638631522123821430_220298517_819927875374352_7595297102093973735_n.jpeg" />
+    <Content Include="Content\Uploads\News\638631522387860980_Những-chuyến-hàng-thắm-tình-hữu-nghị..jpg" />
+    <Content Include="Content\Uploads\News\638631522609211806_688787gggg.jpg" />
+    <Content Include="Content\Uploads\News\638631522715249910_194267861_791147438252396_5364466198484137946_n.jpeg" />
+    <Content Include="Content\Uploads\News\638631522965002059_Phong trào nuôi heo đất của Hội PNCS Công ty.jpg" />
+    <Content Include="Content\Uploads\News\638631523197442893_Phong trào nuôi heo đất của Hội PNCS Công ty.jpg" />
+    <Content Include="Content\Uploads\News\638631523338310116_445ffff.jpg" />
+    <Content Include="Content\Uploads\News\638631523588466010_IMGP0300.JPG" />
+    <Content Include="Content\Uploads\News\638631523966870046_IMGP1713.JPG" />
+    <Content Include="Content\Uploads\News\638631524200067615_IMGP1741.JPG" />
+    <Content Include="Content\Uploads\News\638631524413119049_Tổ chức Tết thiếu nhi cho các cháu tại Lào.JPG" />
+    <Content Include="Content\Uploads\News\638631524737565870_5gđf.JPG" />
+    <Content Include="Content\Uploads\News\638631525110405249_20231220_095934 %281%29.jpg" />
+    <Content Include="Content\Uploads\News\638631526051968743_20231220_091541.jpg" />
+    <Content Include="Content\Uploads\News\638638960282681956_bannerAdmin.png" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Models\namlao206DB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>namlao206DB.Context.cs</LastGenOutput>
       <DependentUpon>namlao206DB.edmx</DependentUpon>
+      <LastGenOutput>namlao206DB.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\namlao206DB.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -1680,30 +2361,6 @@
       <LastGenOutput>namlao206DB.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bcommand.js" />
-    <EntityDeploy Include="Models\namlao206DB.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>namlao206DB.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\namlao206DB.edmx.diagram">
-      <DependentUpon>namlao206DB.edmx</DependentUpon>
-    </Content>
-    <Content Include="Content\EponaTheme\assets\fonts\Simple-Line-Icons.eot" />
-    <Content Include="Content\EponaTheme\assets\fonts\Simple-Line-Icons.svg#Simple-Line-Icons" />
-    <Content Include="Content\EponaTheme\assets\fonts\Simple-Line-Icons.ttf" />
-    <Content Include="Content\EponaTheme\assets\fonts\Simple-Line-Icons.woff" />
-    <Content Include="Content\EponaTheme\assets\fonts\weathericons-regular-webfont.svg#weathericons-regular-webfontRg" />
-    <Content Include="Content\EponaTheme\assets\fonts\weathericons-regular-webfont.ttf" />
-    <Content Include="Content\EponaTheme\assets\fonts\weathericons-regular-webfont.woff" />
-    <Content Include="Content\EponaTheme\assets\plugins\bootstrap\fonts\glyphicons-halflings-regular.svg#glyphicons_halflingsregular" />
-    <Content Include="Content\EponaTheme\assets\plugins\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="Content\EponaTheme\assets\plugins\bootstrap\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Content\EponaTheme\assets\plugins\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="Content\EponaTheme\assets\fonts\fontawesome-webfont.woff" />
-    <Content Include="Content\EponaTheme\assets\fonts\fontawesome-webfont.woff2" />
-    <Content Include="Content\EponaTheme\assets\fonts\Material-Design-Iconic-Font.ttf" />
-    <Content Include="Content\EponaTheme\assets\fonts\Material-Design-Iconic-Font.woff" />
-    <Content Include="Content\EponaTheme\assets\fonts\Material-Design-Iconic-Font.woff2" />
-    <Content Include="Content\EponaTheme\assets\images\revolution_slider\font\revicons.woff" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -1736,22 +2393,6 @@
     <Content Include="Scripts\bootstrap.esm.js.map" />
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
     <Content Include="Scripts\bootstrap.bundle.js.map" />
-    <Content Include="Content\bootstrap.rtl.min.css.map" />
-    <Content Include="Content\bootstrap.rtl.css.map" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-utilities.rtl.min.css.map" />
-    <Content Include="Content\bootstrap-utilities.rtl.css.map" />
-    <Content Include="Content\bootstrap-utilities.min.css.map" />
-    <Content Include="Content\bootstrap-utilities.css.map" />
-    <Content Include="Content\bootstrap-reboot.rtl.min.css.map" />
-    <Content Include="Content\bootstrap-reboot.rtl.css.map" />
-    <Content Include="Content\bootstrap-reboot.min.css.map" />
-    <Content Include="Content\bootstrap-reboot.css.map" />
-    <Content Include="Content\bootstrap-grid.rtl.min.css.map" />
-    <Content Include="Content\bootstrap-grid.rtl.css.map" />
-    <Content Include="Content\bootstrap-grid.min.css.map" />
-    <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Areas\Admin\Views\Account\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Account\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
@@ -1786,26 +2427,26 @@
     <Content Include="Areas\Admin\Views\DM_Hocvis\Details.cshtml" />
     <Content Include="Areas\Admin\Views\DM_Hocvis\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\DM_Hocvis\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\DM_Khoaphongs\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\DM_Khoaphongs\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\DM_Khoaphongs\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\DM_Khoaphongs\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\DM_Khoaphongs\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\DM_Nhanviens\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\DM_Nhanviens\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\DM_Nhanviens\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\DM_Nhanviens\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\DM_Nhanviens\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\HospitalAlbumPictures\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\HospitalAlbumPictures\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\HospitalAlbumPictures\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\HospitalAlbumPictures\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\HospitalAlbumPictures\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\HospitalAlbums\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\HospitalAlbums\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\HospitalAlbums\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\HospitalAlbums\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\HospitalAlbums\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\DM_PhongBans\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\DM_PhongBans\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\DM_PhongBans\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\DM_PhongBans\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\DM_PhongBans\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Employees\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Employees\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Employees\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Employees\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Employees\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\AlbumPictures\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\AlbumPictures\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\AlbumPictures\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\AlbumPictures\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\AlbumPictures\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Albums\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Albums\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Albums\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Albums\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Albums\Index.cshtml" />
     <Content Include="Areas\Admin\Views\News\Create.cshtml" />
     <Content Include="Areas\Admin\Views\News\Create2.cshtml" />
     <Content Include="Areas\Admin\Views\News\Delete.cshtml" />
@@ -1833,40 +2474,47 @@
     <Content Include="Areas\Admin\Views\Topics\Index.cshtml" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
-    <Content Include="Content\AdminBinhLT\assets\vendor\fortawesome\fontawesome-free\webfonts\fa-brands-400.svg#fontawesome" />
-    <Content Include="Content\AdminBinhLT\assets\vendor\fortawesome\fontawesome-free\webfonts\fa-brands-400.ttf" />
-    <Content Include="Content\AdminBinhLT\assets\vendor\fortawesome\fontawesome-free\webfonts\fa-brands-400.woff" />
-    <Content Include="Content\AdminBinhLT\assets\vendor\fortawesome\fontawesome-free\webfonts\fa-brands-400.woff2" />
-    <Content Include="Content\AdminBinhLT\assets\vendor\fortawesome\fontawesome-free\webfonts\fa-regular-400.svg#fontawesome" />
-    <Content Include="Content\AdminBinhLT\assets\vendor\fortawesome\fontawesome-free\webfonts\fa-regular-400.ttf" />
-    <Content Include="Content\AdminBinhLT\assets\vendor\fortawesome\fontawesome-free\webfonts\fa-regular-400.woff" />
-    <Content Include="Content\AdminBinhLT\assets\vendor\fortawesome\fontawesome-free\webfonts\fa-regular-400.woff2" />
-    <Content Include="Content\AdminBinhLT\assets\vendor\fortawesome\fontawesome-free\webfonts\fa-solid-900.svg#fontawesome" />
-    <Content Include="Content\AdminBinhLT\assets\vendor\fortawesome\fontawesome-free\webfonts\fa-solid-900.ttf" />
-    <Content Include="Content\AdminBinhLT\assets\vendor\fortawesome\fontawesome-free\webfonts\fa-solid-900.woff" />
-    <Content Include="Content\AdminBinhLT\assets\vendor\fortawesome\fontawesome-free\webfonts\fa-solid-900.woff2" />
-    <Content Include="Content\AdminBinhLT\assets\vendor\icon\dripicons\dripicons.eot" />
-    <Content Include="Content\AdminBinhLT\assets\vendor\icon\dripicons\dripicons.svg#dripicons" />
-    <Content Include="Content\AdminBinhLT\assets\vendor\icon\dripicons\dripicons.ttf" />
-    <Content Include="Content\AdminBinhLT\assets\vendor\icon\dripicons\dripicons.woff" />
-    <Content Include="Content\AdminBinhLT\assets\vendor\line-awesome\dist\line-awesome\fonts\la-brands-400.svg#lineawesome" />
-    <Content Include="Content\AdminBinhLT\assets\vendor\line-awesome\dist\line-awesome\fonts\la-brands-400.ttf" />
-    <Content Include="Content\AdminBinhLT\assets\vendor\line-awesome\dist\line-awesome\fonts\la-brands-400.woff" />
-    <Content Include="Content\AdminBinhLT\assets\vendor\line-awesome\dist\line-awesome\fonts\la-brands-400.woff2" />
-    <Content Include="Content\AdminBinhLT\assets\vendor\line-awesome\dist\line-awesome\fonts\la-regular-400.svg#lineawesome" />
-    <Content Include="Content\AdminBinhLT\assets\vendor\line-awesome\dist\line-awesome\fonts\la-regular-400.ttf" />
-    <Content Include="Content\AdminBinhLT\assets\vendor\line-awesome\dist\line-awesome\fonts\la-regular-400.woff" />
-    <Content Include="Content\AdminBinhLT\assets\vendor\line-awesome\dist\line-awesome\fonts\la-regular-400.woff2" />
-    <Content Include="Content\AdminBinhLT\assets\vendor\line-awesome\dist\line-awesome\fonts\la-solid-900.svg#lineawesome" />
-    <Content Include="Content\AdminBinhLT\assets\vendor\line-awesome\dist\line-awesome\fonts\la-solid-900.ttf" />
-    <Content Include="Content\AdminBinhLT\assets\vendor\line-awesome\dist\line-awesome\fonts\la-solid-900.woff" />
-    <Content Include="Content\AdminBinhLT\assets\vendor\line-awesome\dist\line-awesome\fonts\la-solid-900.woff2" />
-    <Content Include="Content\AdminBinhLT\assets\vendor\remixicon\fonts\remixicon.ttf" />
-    <Content Include="Content\AdminBinhLT\assets\vendor\remixicon\fonts\remixicon.woff" />
-    <Content Include="Content\AdminBinhLT\assets\vendor\remixicon\fonts\remixicon.woff2" />
+    <Content Include="Areas\Admin\Views\DM_hinhthuckinhdoanh\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\DM_hinhthuckinhdoanh\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\DM_hinhthuckinhdoanh\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\DM_hinhthuckinhdoanh\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\DM_hinhthuckinhdoanh\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\DM_DonVis\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\DM_DonVis\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\DM_DonVis\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\DM_DonVis\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\DM_DonVis\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\DM_NhomPhongBans\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\DM_NhomPhongBans\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\DM_NhomPhongBans\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\DM_NhomPhongBans\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\DM_NhomPhongBans\Index.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\web.config" />
+    <Content Include="Areas\TransportFiles\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\TransportFiles\Create.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\TransportFiles\Delete.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\TransportFiles\Details.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\TransportFiles\Edit.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\TransportFiles\HopThuDen.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\TransportFiles\HopThuDi.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\TransportFiles\CongVanKhan.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\TransportFiles\ChuyenTiep.cshtml" />
+    <EntityDeploy Include="Models\namlao206DB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>namlao206DB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\namlao206DB.edmx.diagram">
+      <DependentUpon>namlao206DB.edmx</DependentUpon>
+    </Content>
+    <Content Include="Content\Uploads\Excel\Danhsach.xlsx" />
+    <Content Include="Content\Uploads\HopThu\1027\638660726408342464_Thong bao thuc hien che do mua lanh k24.pdf" />
+    <Content Include="Content\Uploads\HopThu\1028\638688105849809072_back" />
+    <Content Include="Content\Uploads\HopThu\1029\638695986136033225_DanhSach.xlsx" />
+    <Content Include="Content\Uploads\HopThu\1030\638695995462687760_DanhSach.xlsx" />
+    <Content Include="Content\Uploads\HopThu\1031\638696005777077394_DanhSach.xlsx" />
     <Content Include="Content\ckeditor\CHANGES.md" />
-    <Content Include="Content\ckeditor\ckfinder\plugins\fileeditor\codemirror\LICENSE" />
-    <Content Include="Content\ckeditor\ckfinder\userfiles\.htaccess" />
     <Content Include="Content\ckeditor\LICENSE.md" />
     <Content Include="Content\ckeditor\plugins\exportpdf\CHANGELOG.md" />
     <Content Include="Content\ckeditor\plugins\exportpdf\LICENSE.md" />
@@ -1901,6 +2549,8 @@
     <Content Include="Content\ckeditor\samples\toolbarconfigurator\font\fontello.woff" />
     <Content Include="Content\ckeditor\samples\toolbarconfigurator\lib\codemirror\LICENSE" />
     <Content Include="Content\ckeditor\skins\moono-lisa\readme.md" />
+    <Content Include="Content\ckeditor\ckfinder\plugins\fileeditor\codemirror\LICENSE" />
+    <Content Include="Content\ckeditor\ckfinder\userfiles\.htaccess" />
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.1.js" />
     <Content Include="Scripts\jquery-3.7.1.min.js" />
@@ -1915,7 +2565,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
-    <Content Include="Content\Site.css" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Trangchu.cshtml" />
@@ -1939,14 +2588,27 @@
     <Content Include="Views\Shared\_recentNews.cshtml" />
     <Content Include="Views\Shared\_RightSidePhongBan.cshtml" />
     <Content Include="Views\Shared\_RightSide.cshtml" />
+    <Content Include="Views\Shared\_testimonialNews.cshtml" />
+    <Content Include="Views\Shared\_News.cshtml" />
+    <Content Include="Views\Shared\_hinhThucKinhDoanh.cshtml" />
+    <Content Include="Views\Shared\_carouselNews.cshtml" />
+    <Content Include="Views\Shared\_RightSideMainPage.cshtml" />
+    <Content Include="Views\Shared\_bannerMiddle.cshtml" />
+    <Content Include="Views\News\Create.cshtml" />
+    <Content Include="Views\News\Create2.cshtml" />
+    <Content Include="Views\News\Delete.cshtml" />
+    <Content Include="Views\News\Details.cshtml" />
+    <Content Include="Views\News\Edit.cshtml" />
+    <Content Include="Views\News\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\TransportFiles\Data\" />
     <Folder Include="Content\AdminBinhLT\assets\css\fonts\" />
     <Folder Include="Content\AdminBinhLT\assets\fonts\" />
     <Folder Include="Content\AdminBinhLT\assets\images\e-commerce\" />
-    <Folder Include="Content\ckeditor\ckfinder\core\Content\Uploads\AlbumPictures\files\" />
+    <Folder Include="Content\Uploads\KhoaPhongs\76\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -1988,12 +2650,12 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('packages\EntityFramework.6.5.1\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.5.1\build\EntityFramework.props'))" />
-    <Error Condition="!Exists('packages\EntityFramework.6.5.1\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.5.1\build\EntityFramework.targets'))" />
     <Error Condition="!Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
+    <Error Condition="!Exists('packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
   </Target>
-  <Import Project="packages\EntityFramework.6.5.1\build\EntityFramework.targets" Condition="Exists('packages\EntityFramework.6.5.1\build\EntityFramework.targets')" />
   <Import Project="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
+  <Import Project="packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

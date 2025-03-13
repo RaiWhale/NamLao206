@@ -16,14 +16,32 @@ namespace NamLao206.Controllers
 		int pageSize = 0;
 		public ActionResult Trangchu()
 		{
-			ViewBag.Title = "Trang chủ -";
+            int pageNumber = 2; // Adjust this based on your current page (starts from 1)
+            int pageSize = 10; // Number of items per page
+            ViewBag.Title = "Trang chủ -";
 
 
-			ViewBag.news_hot = db.News.Where(x => x.Topic.NhomNews != 1 && x.Duyet == true).OrderByDescending(x => x.uutien).ThenByDescending(x => x.DateUp).Take(10).ToList();
-			ViewBag.banner = db.Banners.Where(x => x.isActive == true).OrderByDescending(x => x.Id).Take(5).ToList();
-			ViewBag.calrouselPicture = db.CalrouselPictures.OrderByDescending(x => x.Id).Take(20).ToList();
-			
-			return View();
+			ViewBag.hot_News = db.News.Where(x => x.Topic.NhomNews != 1 && x.Duyet == true && x.uutien == true).OrderByDescending(x => x.DateUp).Take(10).ToList();
+			ViewBag.hot_News_KhongUuTien =db.News.Where(x => x.Topic.NhomNews != 1 && x.TopicId != 13 && x.Duyet == true && x.uutien == false)
+				.OrderByDescending(x => x.DateUp)
+				.Take(pageSize).ToList();
+            ViewBag.hot_News_KhongUuTienSkip = db.News.Where(x => x.Topic.NhomNews != 1 && x.TopicId != 13 && x.Duyet == true && x.uutien == false)
+                .OrderByDescending(x => x.DateUp)
+				.Skip((pageNumber - 1) * pageSize) // Skip based on page number
+				.Take(5).ToList();
+
+
+            ViewBag.banner = db.AlbumPictures.Where(x => x.AlbumId == 4).OrderByDescending(x => x.Id).ToList();		
+			ViewBag.chuyenDoiSo_News = db.News.Where(x=>x.TopicId == 9 && x.Duyet == true).OrderByDescending(x => x.DateUp).Take(10).ToList();
+
+			ViewBag.doingoaiNews = db.News.Where(x => x.TopicId == 14 && x.Duyet == true).OrderByDescending(x => x.DateUp).Take(10).ToList();
+            ViewBag.anninh_News = db.News.Where(x => x.TopicId == 2 && x.Duyet == true).OrderByDescending(x => x.DateUp).Take(3).ToList();
+			ViewBag.thau_News = db.News.Where(x => x.TopicId == 13 && x.Duyet == true).OrderByDescending(x => x.DateUp).Take(10).ToList();
+            ViewBag.doanthe_News = db.News.Where(x => x.TopicId == 5 && x.Duyet == true).OrderByDescending(x => x.DateUp).Take(10).ToList();
+
+            ViewBag.carousel_Chief = db.AlbumPictures.Where(x => x.AlbumId == 1).OrderByDescending(x => x.Id).Take(20).ToList(); /*AlbumId=1 => Ban lãnh đạo*/
+            ViewBag.linhvuckinhdoanh = db.AlbumPictures.Where(x => x.AlbumId == 2).OrderByDescending(x => x.Id).Take(20).ToList(); /*AlbumId=2 => linhvuckinhdoanh*/
+            return View();
 		}
 		public ActionResult Lienhe()
 		{

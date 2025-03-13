@@ -47,10 +47,11 @@ namespace NamLao206.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,TopicName,PictureId,NhomNews,ParentId")] Topic topic)
+        public ActionResult Create([Bind(Include = "Id,TopicName,PictureId,NhomNews,ParentId,HienThiNhom")] Topic topic)
         {
             if (ModelState.IsValid)
             {
+                topic.ParentId = 0;
                 db.Topics.Add(topic);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -79,7 +80,7 @@ namespace NamLao206.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,TopicName,PictureId,NhomNews,ParentId")] Topic topic)
+        public ActionResult Edit([Bind(Include = "Id,TopicName,PictureId,NhomNews,ParentId,HienThiNhom")] Topic topic)
         {
             if (ModelState.IsValid)
             {

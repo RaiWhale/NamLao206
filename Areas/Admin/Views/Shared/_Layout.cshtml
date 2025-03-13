@@ -1,10 +1,27 @@
 ﻿@using NamLao206.Models
+@{ 
+    namlao206dbEntities db = new namlao206dbEntities();
+    if (User.Identity.IsAuthenticated)
+    {
+        var acc = db.Accounts.Where(x => x.Id.ToString().Equals(User.Identity.Name)).SingleOrDefault();
+        if (acc != null && acc.AccountType == 3)
+        {
+            ViewBag.Hoten = acc.Employee.Name;
+        }
+        else
+        {
+            // Gọi hàm Logout()
+            Response.Redirect(Url.Action("Logout", "Account"));
+        }
+
+    }
+}
 <!doctype html>
 <html lang="en-US">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-    <title>@ViewBag.Title Bệnh viện Phụ Sản - Nhi Đà Nẵng</title>
+    <title>@ViewBag.Title CÔNG TY TNHH MTV HỮU NGHỊ NAM LÀO</title>
     <meta name="description" content="" />
 
     <!-- mobile settings -->
@@ -47,18 +64,17 @@
     <!-- loader END -->
     <!-- Wrapper Start -->
     <div class="wrapper">
-
-        <div class="iq-sidebar  sidebar-default ">
+        <div class="iq-sidebar  sidebar-default " style="background-image: url(/Content/AdminBinhLT/assets/images/login/banner_darkboad2.png);">
             <div class="iq-sidebar-logo d-flex align-items-center justify-content-between">
                 <a href="#" class="header-logo">
-                    <img src="~/Content/TrangChu/assets/images/Logo/logodaixanh.jpg" class="img-fluid rounded-normal" alt="logo">
+                    <img src="~/Content/AdminBinhLT/assets/images/login/logongangcongty.png" class="img-fluid rounded-normal" alt="logo">
                 </a>
 
                 <div class="iq-menu-bt-sidebar">
                     <i class="las la-bars wrapper-menu"></i>
                 </div>
             </div>
-            <div class="data-scrollbar" data-scroll="1">
+            <div class="data-scrollbar" data-scroll="1" >
                 <nav class="iq-sidebar-menu">
                     <ul id="iq-sidebar-toggle" class="iq-menu">
                         <li class="active">
@@ -103,7 +119,7 @@
                 <div class="p-3"></div>
             </div>
         </div>
-        <div class="iq-top-navbar">
+        <div class="iq-top-navbar" style="background-image: url(/Content/AdminBinhLT/assets/images/login/banner_darkboad1.png);">
             <div class="iq-navbar-custom">
                 <nav class="navbar navbar-expand-lg navbar-light p-0">
                     <div class="iq-navbar-logo d-flex align-items-center justify-content-between">

@@ -1,71 +1,132 @@
 ﻿@model NamLao206.Models.ViewModels.LoginVM
+@{
+    Layout = null;
+}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <title>@ViewBag.Title CÔNG TY TNHH MTV HỮU NGHỊ NAM LÀO</title>
+    <meta name="description" content="" />
 
-@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "login-validation" }))
-{
-    @Html.AntiForgeryToken()
-    <div class="course-single-right-sidebar">
-        <section class="breadcrumb-bg" style="background-image: url('../../Content/Uploads/Banners/—Pngtree—medical security technology sense blue_1002464.jpg'); ">
-            <div class="container">
-                <div class="breadcrumb-holder">
-                    <div>
-                        <div class="section-title justify-content-center mb-4 mb-md-8 wow fadeInUp">
-                            <span class="shape shape-left bg-info"></span>
-                            <h2 class="text-danger text-center">@ViewBag.Title</h2>
-                            <span class="shape shape-right bg-info"></span>
-                        </div>
-                        <ul class="breadcrumb breadcrumb-transparent">
-                            <li class="breadcrumb-item">
-                                <a class="text-black" href="/Home/Trangchu">Trang chủ</a>
-                            </li>
-                            <li class="breadcrumb-item text-black active" aria-current="page">
-                                @ViewBag.Title
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- /PAGE HEADER -->
-        <section class="pt-7 pb-7 pt-md-10">
-            <div class="container">
-                <div class="col-sm-8 col-lg-6 offset-3">
-                    <div class="bg-primary rounded-top p-2">
-                        <h3 class="text-white font-weight-bold mb-0 ms-2">Bệnh viện Phụ Sản - Nhi Đà Nẵng</h3>
-                    </div>
-                    <div class="border rounded-bottom-sm border-top-0">
-                        <div class="p-3">
-                            <form action="#" method="POST" role="form">
-                                <div class="form-group form-group-icon">
-                                    @Html.EditorFor(model => model.LoginName, new { htmlAttributes = new { @class = "form-control border", placeholder = "Email / Tài khoản đăng nhập", required = "required" } })
-                                </div>
+    <!-- mobile settings -->
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="~/Content/AdminBinhLT/assets/images/logocon.png" />
 
-                                <div class="form-group form-group-icon">
-                                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control border", placeholder = "Mật khẩu", required = "required" } })
 
-                                </div>
 
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-danger text-uppercase w-100">Đăng nhập</button>
-                                </div>
 
-                                @*<div class="form-group text-center text-secondary mb-0">
-                                        <a class="text-danger" href="javascript:void(0)">Forgot password?</a>
-                                    </div>*@
-                                @if (ViewBag.Message != null)
+    <link rel="stylesheet" href="/Content/AdminBinhLT/assets/css/backend.min.css">
+    <link rel="stylesheet" href="/Content/AdminBinhLT/assets/vendor/fortawesome/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="/Content/AdminBinhLT/assets/vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css">
+    <link rel="stylesheet" href="/Content/AdminBinhLT/assets/vendor/remixicon/fonts/remixicon.css">
+    <link rel="stylesheet" href="/Content/AdminBinhLT/assets/vendor/icon/dripicons/dripicons.css">
+
+    <link rel='stylesheet' href='/Content/AdminBinhLT/assets/vendor/fullcalendar/core/main.css' />
+    <link rel='stylesheet' href='/Content/AdminBinhLT/assets/vendor/fullcalendar/daygrid/main.css' />
+    <link rel='stylesheet' href='/Content/AdminBinhLT/assets/vendor/fullcalendar/timegrid/main.css' />
+    <link rel='stylesheet' href='/Content/AdminBinhLT/assets/vendor/fullcalendar/list/main.css' />
+    <link rel="stylesheet" href="/Content/AdminBinhLT/assets/vendor/mapbox/mapbox-gl.css">
+
+    <!-- JAVASCRIPT FILES IMPORTANT -->
+    <script src="~/Content/Admin/Admin_BS3/assets/plugins/jquery/jquery-2.2.3.min.js"></script>
+</head>
+<body class=" ">
+    <!-- loader Start -->
+    <div id="loading">
+        <div id="loading-center">
+        </div>
+    </div>
+    <!-- loader END -->
+
+    <div class="wrapper" style="background-image: url(/Content/AdminBinhLT/assets/images/login/bannernoibo.png)">
+        <section class="login-content">
+
+            <div class="container h-100">
+                <div class="row align-items-center justify-content-center h-100">
+                    <div class="col-12">
+                        <div class="row align-items-center">
+                            <div class="col-lg-6 mb-lg-0 mb-4 mt-lg-0 mt-4 ">
+                                <img src="~/Content/AdminBinhLT/assets/images/login/LOGOCONGTY.png" style="width: 150px; height: 150px; ">
+                                <h1 style="font-weight:bold; font-size: 30px; color:red">HỆ THỐNG <span style="font-size: 50px; font-weight: bold; color: #155a3a;">QUẢN LÝ VĂN BẢN</span></h1>
+                                <h2 class="mb-2" style="font-weight:bold; font-size: 30px; color:red">& ĐIỀU HÀNH</h2>
+                                <p style="text-decoration: underline;">Quản lý và điều hành nội bộ</p>
+                                <p style="text-decoration: underline;">Hỗ trợ: 0339939579 - Phòng Tham Mưu - Kế Hoạch</p>
+                                <p style="text-decoration: underline;">Copyright by Phòng Tham Mưu - Kế Hoạch năm 2024</p>
+                            </div>
+                            <div class="col-lg-6" style="border-block-color: green;">
+
+                                <h2 class="mb-2" style="font-weight: bold; font-size: 30px; color: #155a3a">CÔNG TY TNHH MTV HỮU NGHỊ NAM LÀO</h2>
+
+                                @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "login-validation" }))
                                 {
-                                    <!-- ALERT -->
-                                    <div class="form-group alert alert-mini alert-danger mb-30">
-                                        <strong>@ViewBag.Message</strong>
-                                    </div>
-                                    <!-- /ALERT -->
-                                }
-                            </form>
-                        </div>
+                                    @Html.AntiForgeryToken()
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="floating-label form-group">
+                                                @Html.EditorFor(model => model.LoginName, new { htmlAttributes = new { @class = "form-control is-invalid-cus", @placeholder = "Tên đăng nhập" } })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="floating-label form-group">
+                                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control is-invalid-cus", @placeholder = "Mật khẩu" } })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="custom-control custom-checkbox mb-3">
+                                                <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                                <label class="custom-control-label" for="customCheck1">Ghi nhớ thông tin đăng nhập</label>
+                                            </div>
+                                        </div>
 
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Đăng nhập</button>
+
+                                }
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
     </div>
-    <!-- / -->
-}
+
+    <!--NEW-->
+    <!-- Backend Bundle JavaScript -->
+    <script src="/Content/AdminBinhLT/assets/js/backend-bundle.min.js"></script>
+    <!-- Flextree Javascript-->
+    <script src="/Content/AdminBinhLT/assets/js/flex-tree.min.js"></script>
+    <script src="/Content/AdminBinhLT/assets/js/tree.js"></script>
+    <!-- Table Treeview JavaScript -->
+    <script src="/Content/AdminBinhLT/assets/js/table-treeview.js"></script>
+    <!-- Masonary Gallery Javascript -->
+    <script src="/Content/AdminBinhLT/assets/js/masonry.pkgd.min.js"></script>
+    <script src="/Content/AdminBinhLT/assets/js/imagesloaded.pkgd.min.js"></script>
+    <!-- Mapbox Javascript -->
+    <script src="/Content/AdminBinhLT/assets/js/mapbox-gl.js"></script>
+    <script src="/Content/AdminBinhLT/assets/js/mapbox.js"></script>
+    <!-- Fullcalender Javascript -->
+    <script src='/Content/AdminBinhLT/assets/vendor/fullcalendar/core/main.js'></script>
+    <script src='/Content/AdminBinhLT/assets/vendor/fullcalendar/daygrid/main.js'></script>
+    <script src='/Content/AdminBinhLT/assets/vendor/fullcalendar/timegrid/main.js'></script>
+    <script src='/Content/AdminBinhLT/assets/vendor/fullcalendar/list/main.js'></script>
+    <!-- SweetAlert JavaScript -->
+    <script src="/Content/AdminBinhLT/assets/js/sweetalert.js"></script>
+    <!-- Vectoe Map JavaScript -->
+    <script src="/Content/AdminBinhLT/assets/js/vector-map-custom.js"></script>
+    <!-- Chart Custom JavaScript -->
+    <script src="/Content/AdminBinhLT/assets/js/customizer.js"></script>
+    <!-- Chart Custom JavaScript -->
+    <script src="/Content/AdminBinhLT/assets/js/chart-custom.js"></script>
+    <!-- slider JavaScript -->
+    <script src="/Content/AdminBinhLT/assets/js/slider.js"></script>
+    <!-- app JavaScript -->
+    <script src="/Content/AdminBinhLT/assets/js/app.js"></script>
+</body>
+</html>
+
+
+
+

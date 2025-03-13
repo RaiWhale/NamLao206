@@ -76,6 +76,9 @@ namespace NamLao206.Utils
 				case 7:
 					srcPic = "/Content/EponaTheme/assets/images/tin-tuc.jpg";
 					break;
+				case 9:
+					srcPic = "/Content/EponaTheme/assets/images/chuyendoiso.jpeg";
+					break;
 				default:
 					// Xử lý trường hợp không nằm trong các case trên
 					srcPic = "/Content/EponaTheme/assets/images/thongbao.jpeg";

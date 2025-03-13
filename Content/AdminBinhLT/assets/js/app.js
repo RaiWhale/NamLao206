@@ -640,11 +640,13 @@ Index Of Script
                 placeholder: "Select a Option",
                 allowClear: true
             });
-            $("#multiple").select2({
+            //Sửa từ id  thành class (# => .)
+            $(".multiple").select2({
                 placeholder: "Select a Multiple Option",
                 allowClear: true
             });
-            $("#multiple2").select2({
+            //Sửa từ id  thành class (# => .)
+            $(".multiple2").select2({
                 placeholder: "Select a Multiple Option",
                 allowClear: true
             });

@@ -1,0 +1,59 @@
+﻿@model NamLao206.Models.AlbumPicture
+
+<!--Sua-->
+@{
+    string src = "";
+    var pic = Model.PictureName;
+    src = "/Content/Uploads/Albums/" + Model.AlbumId + "/" + pic;
+}
+
+
+
+<li data-transition="fade" data-slotamount="7" data-masterspeed="300" data-saveperformance="off">
+    <img src="@src" data-lazyload="@src" alt="" data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat" />
+    @*@if (!string.IsNullOrEmpty(Model.tenCTY))
+        {
+            <div class="tp-caption lft start "
+                 data-x="-86"
+                 data-y="296"
+                 data-speed="750"
+                 data-start="750"
+                 data-easing="easeOutExpo"
+                 data-elementdelay="0.1"
+                 data-endelementdelay="0.1"
+                 data-endspeed="300">
+                <img src="~/Content/EponaTheme/assets/images/1x1.png" alt="" data-lazyload="../Content/EponaTheme/assets/images/caption_bg.png">
+            </div>
+
+            <div class="tp-caption medium_light_white lfb start"
+                 data-x="44"
+                 data-y="320"
+                 data-speed="300"
+                 data-start="1500"
+                 data-easing="easeOutExpo"
+                 data-splitin="none"
+                 data-splitout="none"
+                 data-elementdelay="0.1"
+                 data-endelementdelay="0.1"
+                 data-endspeed="300">
+                <b class="text-wrap" style="text-transform: uppercase; font-weight: bold; padding: 10px; color: white;">@Model.tenCTY</b>
+            </div>
+
+            <div class="tp-caption small_light_white lfb start"
+                 data-x="44"
+                 data-y="400"
+                 data-speed="300"
+                 data-start="1500"
+                 data-easing="easeOutExpo"
+                 data-splitin="none"
+                 data-splitout="none"
+                 data-elementdelay="0.1"
+                 data-endelementdelay="0.1"
+                 data-endspeed="300">
+                <small>@Model.mota</small>
+            </div>*@
+    }
+
+</li>
+
+

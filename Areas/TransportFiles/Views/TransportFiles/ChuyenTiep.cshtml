@@ -1,0 +1,43 @@
+﻿@model NamLao206.Models.TransportFile
+@{
+    ViewBag.Title = "ChuyenTiep";
+}
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="panel-body">
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Id)
+            <div class="row">
+                <div class="card col-md-12 col-xs-12">
+                    <div class="card-header justify-content-between">
+                        <div class="header-title">
+                            <h4 class="card-title">Nơi nhận qua mạng</h4>
+                        </div>
+                    </div>
+                    <!--Sửa JS app.js -> js -> assets -> AdminBinhLt (multiple)-->
+                    <div class="card-body align-content-center">
+                        <div class="col-md-12" id="status1">
+                            <div class="form-group">
+                                @Html.Label("Chọn người gửi", htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-9">
+                                    @Html.DropDownList("lstReceiverUserId", (SelectList)ViewBag.Employees, htmlAttributes: new { @class = "js-states form-control multiple", @multiple = "multiple", @id = "lstReceiverUserId" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="float:right">
+                <button type="submit" class="mt-2 btn btn-success">GỬI VĂN BẢN</button>
+                <button type="button" class="mt-2 btn btn-light" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+
+
+    </div>
+}
+
+<script src="/Content/AdminBinhLT/assets/js/app.js"></script>

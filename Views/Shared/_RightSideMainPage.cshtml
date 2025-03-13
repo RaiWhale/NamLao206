@@ -1,0 +1,23 @@
+﻿@model NamLao206.Models.News
+@using NamLao206.Utils
+@{
+    string src = MySecurity.GetSrcPicture(Model.TopicId);
+    var pic = Model.Picture;
+    if (!string.IsNullOrEmpty(pic))
+    {
+        src = "/Content/Uploads/News/" + pic;
+    }
+}
+
+<div class="row tab-post">
+    <!-- post -->
+    <div class="col-md-3 col-sm-3 col-xs-3">
+        <a href="~/Home/NewsDetail/?title=@Model.TitleChange&&newsid=@Model.Id">
+            <img src="@src" style=" min-width:60px; max-width:60px" alt="" />
+        </a>
+    </div>
+    <div class="col-md-9 col-sm-9 col-xs-9">
+        <a href="~/Home/NewsDetail/?title=@Model.TitleChange&&newsid=@Model.Id" class="tab-post-link" style="font-size: 14px; color:black; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis;">@Model.Title</a>
+        <small>@Model.DateUp.ToString("dd/MM/yyyy")</small>
+    </div>
+</div><!-- /post -->

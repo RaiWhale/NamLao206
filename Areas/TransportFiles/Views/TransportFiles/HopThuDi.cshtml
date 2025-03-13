@@ -1,0 +1,94 @@
+﻿@model IEnumerable<NamLao206.Models.TransportFile>
+
+@{
+    ViewBag.Title = "Hộp thư - ";
+    var color = "";
+    int stt = 1; // Khởi tạo biến đếm
+
+}
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between">
+                <div class="header-title">
+                    <a href="@Url.Action("Create")" class="btn btn-primary add-list "><i class="las la-plus mr-3"></i>GỬI VĂN BẢN ĐI</a>
+                </div>
+                @if (ViewBag.Message != null)
+                {
+                    <!-- ALERT -->
+                    <div class="alert alert-mini alert-danger mb-30">
+                        <strong>@ViewBag.Message</strong>
+                    </div>
+                    <!-- /ALERT -->
+                }
+            </div>
+            <div class="card-body">
+
+                <div class="table-responsive">
+                    <table id="datatable" class="table data-table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Số Văn Bản</th>
+                                <th>Trích Yếu</th>
+                                <th>Ngày tạo</th>                 
+                                <th>Người tạo</th>
+                                <th>Xem Văn Bản</th>
+                                <th></th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @stt
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.tenFile)
+                                    </td>
+                                    <td style="width:500px">
+                                        @Html.DisplayFor(modelItem => item.Mota)
+
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CreateDate)
+
+                                    </td>
+                            
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Account1.Employee.Name)
+                                    </td>
+                                    <td class="text-center">
+                                        @if (item.KhanCap == true)
+                                        {
+                                            color = "btn-danger";
+                                        }
+                                        else
+                                        {
+                                            color = "btn-secondary";
+                                        }
+                                        <button type="button" class="btn @color  mt-2"><i class="ri-star-fill pr-0"></i></button>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center list-action">
+                                            <a class="btn btn-primary mt-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xem"
+                                               href="@Url.Action("Details", new { id = item.Id,flag = "HopThuDi"  })"><i class="ri-eye-line mr-0"></i></a> ||
+
+                                            <a class="badge bg-warning mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xóa"
+                                               href="@Url.Action("Delete", new { id = item.Id })"><i class="ri-delete-bin-line mr-0"></i></a>
+                                        </div>                                    
+                                    </td>                                
+                                </tr>
+                                stt++;
+                            }
+                        </tbody>
+                        <tfoot>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

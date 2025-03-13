@@ -18,5 +18,7 @@ namespace NamLao206.Models
         public string BannerName { get; set; }
         public string Url { get; set; }
         public bool isActive { get; set; }
+        public string tenCTY { get; set; }
+        public string mota { get; set; }
     }
 }

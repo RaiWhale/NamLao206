@@ -55,9 +55,7 @@ namespace NamLao206.Areas.Admin.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.Title = "Đăng tin";
-            ViewBag.cosoId = new SelectList(db.Transports, "Id", "Coso");
-            ViewBag.AdminId = new SelectList(db.Administrators, "Id", "AdminName");
+            ViewBag.Title = "Đăng tin";         
             ViewBag.TopicId = new SelectList(db.Topics.Where(x => x.NhomNews != 1), "Id", "TopicName");
             ViewBag.SubMenuId = new SelectList(db.SubMenus, "Id", "subMenuName");
             return View();
@@ -65,9 +63,7 @@ namespace NamLao206.Areas.Admin.Controllers
 
         public ActionResult Create2()
         {
-            ViewBag.Title = "Đăng tin";
-            ViewBag.cosoId = new SelectList(db.Transports, "Id", "Coso");
-            ViewBag.AdminId = new SelectList(db.Administrators, "Id", "AdminName");
+            ViewBag.Title = "Đăng tin";        
             ViewBag.TopicId = new SelectList(db.Topics.Where(x => x.NhomNews != 1), "Id", "TopicName");
             ViewBag.SubMenuId = new SelectList(db.SubMenus, "Id", "subMenuName");
             return View();
@@ -78,7 +74,7 @@ namespace NamLao206.Areas.Admin.Controllers
 
         [HttpPost, ValidateInput(false)]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,Summary,Details,TopicId,AdminId,Views,Picture,SubMenuId,cosoId,TitleChange,Author")] News news, HttpPostedFileBase pic, string DateUp)
+        public ActionResult Create([Bind(Include = "Id,Title,Summary,Details,TopicId,AdminId,Views,Picture,SubMenuId,TitleChange,Author")] News news, HttpPostedFileBase pic, string DateUp)
         {
             
             if (ModelState.IsValid)
@@ -102,8 +98,6 @@ namespace NamLao206.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.cosoId = new SelectList(db.Transports, "Id", "Coso", news.cosoId);
-            ViewBag.AdminId = new SelectList(db.Administrators, "Id", "AdminName", news.AdminId);
             ViewBag.TopicId = new SelectList(db.Topics.Where(x => x.NhomNews != 1), "Id", "TopicName", news.TopicId);
             ViewBag.SubMenuId = new SelectList(db.SubMenus, "Id", "subMenuName", news.SubMenuId);
             return View(news);
@@ -121,9 +115,7 @@ namespace NamLao206.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.page = page;
-			ViewBag.cosoId = new SelectList(db.Transports, "Id", "Coso", news.cosoId);
-            ViewBag.AdminId = new SelectList(db.Administrators, "Id", "AdminName", news.AdminId);
+            ViewBag.page = page;	
             ViewBag.TopicId = new SelectList(db.Topics, "Id", "TopicName", news.TopicId);
             ViewBag.SubMenuId = new SelectList(db.SubMenus.Where(x => x.TopicId == news.TopicId), "Id", "subMenuName", news.SubMenuId);
             return View(news);
@@ -135,7 +127,7 @@ namespace NamLao206.Areas.Admin.Controllers
 
         [HttpPost, ValidateInput(false)]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Summary,Details,TopicId,AdminId,Views,Picture,SubMenuId,cosoId,uutien,Duyet,Author")] News news, HttpPostedFileBase pic, string DateUp, int? page)
+        public ActionResult Edit([Bind(Include = "Id,Title,Summary,Details,TopicId,AdminId,Views,Picture,SubMenuId,uutien,Duyet,Author")] News news, HttpPostedFileBase pic, string DateUp, int? page)
         {
             if (ModelState.IsValid)
             {
@@ -161,8 +153,6 @@ namespace NamLao206.Areas.Admin.Controllers
                 db.SaveChanges();			
 				return RedirectToAction("Index", new { page = page });
             }
-            ViewBag.cosoId = new SelectList(db.Transports, "Id", "Coso", news.cosoId);
-            ViewBag.AdminId = new SelectList(db.Administrators, "Id", "AdminName", news.AdminId);
             ViewBag.TopicId = new SelectList(db.Topics.Where(x => x.NhomNews != 1), "Id", "TopicName", news.TopicId);
             ViewBag.SubMenuId = new SelectList(db.SubMenus.Where(x => x.TopicId == news.TopicId), "Id", "subMenuName", news.SubMenuId);
             return View(news);

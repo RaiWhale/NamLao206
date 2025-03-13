@@ -3,12 +3,12 @@
 @foreach (var nhomkhoa in Model.Where(x => x.ParentId == 1))
 {
     <div class="col-md-3">
-        <h3>@nhomkhoa.Nhomkhoa</h3>
+        <h3 style="color:white">@nhomkhoa.Nhomkhoa</h3>
         <ul>
             @foreach (var khoa in nhomkhoa.DM_PhongBans)
             {
                 <li>
-                    <a class="" href="~/Home/PhongBan/?khoaid=@khoa.Id">
+                    <a class="" href="~/Home/PhongBan/?khoaid=@khoa.Id" style="color:white">
                         <i class="fa fa-angle-right"></i>@khoa.TenKhoa
                     </a>
                 </li>

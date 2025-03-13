@@ -57,38 +57,8 @@ namespace NamLao206.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 db.Albums.Add(album);
-                db.SaveChanges();
-                if (Request.Files.Count > 0)
-                {
-                    int file_count = 0;
-                    string dir = Server.MapPath("~/Content/Uploads/AlbumPictures") + "\\" + album.Id + "\\";
-                    if (!System.IO.Directory.Exists(dir)) System.IO.Directory.CreateDirectory(dir);
-
-                    for (int i = 0; i < Request.Files.Count; i++)
-                    {
-                        try
-                        {
-                            HttpPostedFileBase file = Request.Files[i];
-                            if (!string.IsNullOrEmpty(file.FileName))
-                            {
-                                string filename = DateTime.Now.Ticks + "_" + file.FileName.Split('/').Last();
-                                file.SaveAs(dir + filename);
-                                db.AlbumPictures.Add(new AlbumPicture
-                                {
-
-                                    PictureName = filename,
-                                    AlbumId = album.Id
-                                });
-                                file_count++;
-                            }
-                        }
-                        catch { }
-                    }
-                    if (file_count > 0)
-                    {
-                        db.SaveChanges();
-                    }
-                }
+                db.SaveChanges();              
+                
                 return RedirectToAction("Index", "AlbumPictures");
             }
             return PartialView(album);
@@ -146,12 +116,7 @@ namespace NamLao206.Areas.Admin.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Album album = db.Albums.Find(id);
-            db.Albums.Remove(album);
-            string path = Server.MapPath("~/Content/Uploads/AlbumPictures") + "\\" + album.Id;
-            if (Directory.Exists(path))
-            {
-                Directory.Delete(path, true);
-            }
+            db.Albums.Remove(album);        
             db.SaveChanges();
             return RedirectToAction("Index", "AlbumPictures");
         }

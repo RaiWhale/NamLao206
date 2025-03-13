@@ -32,11 +32,10 @@ namespace NamLao206.Models
         public string TitleChange { get; set; }
         public string Author { get; set; }
     
-        public virtual SubMenu SubMenu { get; set; }
-        public virtual Topic Topic { get; set; }
-        public virtual Transport Transport { get; set; }
-        public virtual Administrator Administrator { get; set; }
+        public virtual Account Account { get; set; }
         public virtual News News1 { get; set; }
         public virtual News News2 { get; set; }
+        public virtual SubMenu SubMenu { get; set; }
+        public virtual Topic Topic { get; set; }
     }
 }

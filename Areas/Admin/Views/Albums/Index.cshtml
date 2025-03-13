@@ -1,0 +1,49 @@
+﻿@model IEnumerable<NamLao206.Models.Album>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div id="panel-1" class="panel panel-default">
+    <div class="panel-heading">
+        <span class="title elipsis">
+            <strong>@ViewBag.Title</strong> <!-- panel title -->
+        </span>
+
+        <!-- right options -->
+        <ul class="options pull-right list-inline">
+            <li><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="Colapse" data-placement="bottom"></a></li>
+            <li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="Fullscreen" data-placement="bottom"><i class="fa fa-expand"></i></a></li>
+        </ul>
+        <!-- /right options -->
+
+    </div>
+    <div class="panel-body">
+        <div>@Html.ActionLink(" Tạo tài khoản ", "Create", null, new { @class = "bcommand btn btn-primary btn-rounded", dialogwidth = "500" })</div>
+        <div class="table-responsive">
+            <table class="table custom-table table-bordered" id="scrollVertical3">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AlbumName)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AlbumName)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+</div>

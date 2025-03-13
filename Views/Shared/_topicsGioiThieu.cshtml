@@ -4,7 +4,7 @@
 @foreach (var topic in Model.Where(x => x.NhomNews == 1))
 {
         <li>
-            <a href="~/Home/DetailGioiThieu/?newsid=@topic.Id">@topic.TopicName</a>
+            <a href="~/Home/DetailGioiThieu/?newsid=@topic.Id" style="color:white">@topic.TopicName</a>
         </li>
         <li class="divider"></li>
 

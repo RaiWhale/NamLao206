@@ -4,62 +4,71 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c469de1b469a483883e97a051aa0e238" Name="Diagram1">
-        <EntityTypeShape EntityType="namlao206dbModel.Account" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="namlao206dbModel.Administrator" Width="1.5" PointX="8" PointY="15.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="namlao206dbModel.AdminLevelPermission" Width="1.5" PointX="8" PointY="18.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="namlao206dbModel.AdminLevel" Width="1.5" PointX="5.75" PointY="17" IsExpanded="true" />
-        <EntityTypeShape EntityType="namlao206dbModel.AlbumPicture" Width="1.5" PointX="11" PointY="2" IsExpanded="true" />
-        <EntityTypeShape EntityType="namlao206dbModel.Album" Width="1.5" PointX="8.75" PointY="2" IsExpanded="true" />
-        <EntityTypeShape EntityType="namlao206dbModel.Banner" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="namlao206dbModel.CalrouselPicture" Width="1.5" PointX="0.75" PointY="11.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="namlao206dbModel.Customer" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="namlao206dbModel.DM_AdminListUpItem" Width="1.5" PointX="13.75" PointY="1.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="namlao206dbModel.DM_Chucvus" Width="1.5" PointX="3.75" PointY="2.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="namlao206dbModel.DM_Donvihanhchinhs" Width="1.5" PointX="3.75" PointY="10.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="namlao206dbModel.DM_hinhthuctochuc" Width="1.5" PointX="0.75" PointY="14.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="namlao206dbModel.DM_Hocvis" Width="1.5" PointX="3.75" PointY="13.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="namlao206dbModel.DM_Nghenghieps" Width="1.5" PointX="3.75" PointY="20.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="namlao206dbModel.DM_NhomPhongBans" Width="1.5" PointX="1.5" PointY="23.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="namlao206dbModel.DM_PhongBans" Width="1.5" PointX="3.75" PointY="23.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="namlao206dbModel.Employee" Width="1.5" PointX="6" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="namlao206dbModel.Feedback" Width="1.5" PointX="10.75" PointY="14.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="namlao206dbModel.LevelPermission" Width="1.5" PointX="3" PointY="17.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="namlao206dbModel.Level" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="namlao206dbModel.LuuVet" Width="1.5" PointX="13.75" PointY="12.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="namlao206dbModel.MaQuocGia" Width="1.5" PointX="15.75" PointY="1.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="namlao206dbModel.Nationality" Width="1.5" PointX="15.75" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="namlao206dbModel.News" Width="1.5" PointX="13.25" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="namlao206dbModel.NewsPicture" Width="1.5" PointX="15.75" PointY="7.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="namlao206dbModel.Picture" Width="1.5" PointX="1.5" PointY="25.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="namlao206dbModel.SubMenu" Width="1.5" PointX="11" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="namlao206dbModel.Topic" Width="1.5" PointX="8.75" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="namlao206dbModel.Transport" Width="1.5" PointX="11" PointY="7.25" IsExpanded="true" />
-        <AssociationConnector Association="namlao206dbModel.FK_Accounts_Levels" ManuallyRouted="false" />
-        <AssociationConnector Association="namlao206dbModel.FK_Administrators_ToAdminLevels" ManuallyRouted="false" />
-        <AssociationConnector Association="namlao206dbModel.FK_AdminLevelPermissions_ToAdminLevels" ManuallyRouted="false" />
-        <AssociationConnector Association="namlao206dbModel.FK_HospitalAlbumPictures_ToHospitalAlbums" ManuallyRouted="false" />
-        <AssociationConnector Association="namlao206dbModel.FK_Customers_ToDM_Donvihanhchinhs" ManuallyRouted="false" />
-        <AssociationConnector Association="namlao206dbModel.FK_Employee_ToChucvus" ManuallyRouted="false" />
-        <AssociationConnector Association="namlao206dbModel.FK_Employee_ToDM_Donvihanhchinhs" ManuallyRouted="false" />
-        <AssociationConnector Association="namlao206dbModel.FK_Employee_ToDM_Hocvis" ManuallyRouted="false" />
-        <AssociationConnector Association="namlao206dbModel.FK_Employee_ToNghenghieps" ManuallyRouted="false" />
-        <AssociationConnector Association="namlao206dbModel.FK_DM_PhongBans_ToDM_NhomPhongBans" ManuallyRouted="false" />
-        <AssociationConnector Association="namlao206dbModel.FK_DM_PhongBans_ToPicture" ManuallyRouted="false" />
-        <AssociationConnector Association="namlao206dbModel.FK_Employee_Khoachuyen_DM_PhongBans" ManuallyRouted="false" />
-        <AssociationConnector Association="namlao206dbModel.FK_Employee_Khoaphong_ToDM_PhongBans" ManuallyRouted="false" />
-        <AssociationConnector Association="namlao206dbModel.FK_DM_PhongBans_Administrators" ManuallyRouted="false" />
-        <AssociationConnector Association="namlao206dbModel.FK_Pictures_ToDM_PhongBans" ManuallyRouted="false" />
-        <AssociationConnector Association="namlao206dbModel.FK_Employee_ToLevels" ManuallyRouted="false" />
-        <AssociationConnector Association="namlao206dbModel.FK_LevelPermissions_ToLevels" ManuallyRouted="false" />
-        <AssociationConnector Association="namlao206dbModel.FK_News_ToSubMenus" ManuallyRouted="false" />
-        <AssociationConnector Association="namlao206dbModel.FK_News_ToTopics" ManuallyRouted="false" />
-        <AssociationConnector Association="namlao206dbModel.FK_News_ToTransports" ManuallyRouted="false" />
-        <AssociationConnector Association="namlao206dbModel.FK_SubMenu_ToTopics" ManuallyRouted="false" />
-        <AssociationConnector Association="namlao206dbModel.FK_Accounts_Employees" />
-        <AssociationConnector Association="namlao206dbModel.FK_Administrators_DM_PhongBans" />
-        <AssociationConnector Association="namlao206dbModel.FK_News_ToAdministrators" />
-        <AssociationConnector Association="namlao206dbModel.FK_News_NewsPictures" />
+      <Diagram DiagramId="29c1a31a3446417490865ebb14ab054e" Name="Diagram1" ShowGrid="true">
+        <EntityTypeShape EntityType="namlao206_websiteModel.Account" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="namlao206_websiteModel.Administrator" Width="1.5" PointX="11" PointY="19" IsExpanded="true" />
+        <EntityTypeShape EntityType="namlao206_websiteModel.AdminLevelPermission" Width="1.5" PointX="11" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="namlao206_websiteModel.AdminLevel" Width="1.5" PointX="8.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="namlao206_websiteModel.AlbumPicture" Width="1.5" PointX="6" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="namlao206_websiteModel.Album" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="namlao206_websiteModel.Banner" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="namlao206_websiteModel.CalrouselPicture" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="namlao206_websiteModel.Customer" Width="1.5" PointX="6" PointY="31.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="namlao206_websiteModel.DM_AdminListUpItem" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="namlao206_websiteModel.DM_Chucvus" Width="1.5" PointX="3.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="namlao206_websiteModel.DM_Donvihanhchinhs" Width="1.5" PointX="3.75" PointY="25.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="namlao206_websiteModel.DM_DonVis" Width="1.5" PointX="1.5" PointY="31.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="namlao206_websiteModel.DM_hinhthuckinhdoanh" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="namlao206_websiteModel.DM_Hocvis" Width="1.5" PointX="3.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="namlao206_websiteModel.DM_Nghenghieps" Width="1.5" PointX="3.75" PointY="29.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="namlao206_websiteModel.DM_NhomPhongBans" Width="1.5" PointX="1.5" PointY="34.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="namlao206_websiteModel.DM_PhongBans" Width="1.5" PointX="3.75" PointY="33.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="namlao206_websiteModel.Employee" Width="1.5" PointX="6" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="namlao206_websiteModel.Feedback" Width="1.5" PointX="10.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="namlao206_websiteModel.Gender" Width="1.5" PointX="3.75" PointY="38.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="namlao206_websiteModel.LevelPermission" Width="1.5" PointX="3" PointY="22.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="namlao206_websiteModel.Level" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="namlao206_websiteModel.LuuVet" Width="1.5" PointX="9.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="namlao206_websiteModel.MaQuocGia" Width="1.5" PointX="11.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="namlao206_websiteModel.Nationality" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="namlao206_websiteModel.NewsPicture" Width="1.5" PointX="0.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="namlao206_websiteModel.Picture" Width="1.5" PointX="1.5" PointY="37.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="namlao206_websiteModel.SubMenu" Width="1.5" PointX="11" PointY="23.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="namlao206_websiteModel.Topic" Width="1.5" PointX="8.75" PointY="23.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="namlao206_websiteModel.TransportFileUrl" Width="1.5" PointX="7.5" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="namlao206_websiteModel.Transport" Width="1.5" PointX="7.5" PointY="16.375" IsExpanded="true" />
+        <AssociationConnector Association="namlao206_websiteModel.FK_Accounts_Employees" ManuallyRouted="false" />
+        <AssociationConnector Association="namlao206_websiteModel.FK_Accounts_Levels" ManuallyRouted="false" />
+        <AssociationConnector Association="namlao206_websiteModel.FK_Administrators_DM_PhongBans" ManuallyRouted="false" />
+        <AssociationConnector Association="namlao206_websiteModel.FK_Administrators_ToAdminLevels" ManuallyRouted="false" />
+        <AssociationConnector Association="namlao206_websiteModel.FK_AdminLevelPermissions_ToAdminLevels" ManuallyRouted="false" />
+        <AssociationConnector Association="namlao206_websiteModel.FK_AlbumPictures_Chucvus" ManuallyRouted="false" />
+        <AssociationConnector Association="namlao206_websiteModel.FK_Customers_Genders" ManuallyRouted="false" />
+        <AssociationConnector Association="namlao206_websiteModel.FK_Customers_ToDM_Donvihanhchinhs" ManuallyRouted="false" />
+        <AssociationConnector Association="namlao206_websiteModel.FK_DM_Nhanviens_ToChucvus" ManuallyRouted="false" />
+        <AssociationConnector Association="namlao206_websiteModel.FK_DM_Nhanviens_ToDM_Donvihanhchinhs" ManuallyRouted="false" />
+        <AssociationConnector Association="namlao206_websiteModel.FK_DM_PhongBans_DM_Donvis" ManuallyRouted="false" />
+        <AssociationConnector Association="namlao206_websiteModel.FK_DM_Nhanviens_ToDM_Hocvis" ManuallyRouted="false" />
+        <AssociationConnector Association="namlao206_websiteModel.FK_DM_Nhanviens_ToNghenghieps" ManuallyRouted="false" />
+        <AssociationConnector Association="namlao206_websiteModel.FK_DM_PhongBans_ToDM_NhomPhongBans" ManuallyRouted="false" />
+        <AssociationConnector Association="namlao206_websiteModel.FK_DM_PhongBans_ToPicture" ManuallyRouted="false" />
+        <AssociationConnector Association="namlao206_websiteModel.FK_Employees_PhongBans" ManuallyRouted="false" />
+        <AssociationConnector Association="namlao206_websiteModel.FK_Pictures_ToDM_PhongBans" ManuallyRouted="false" />
+        <AssociationConnector Association="namlao206_websiteModel.FK_DM_Nhanviens_ToLevels" ManuallyRouted="false" />
+        <AssociationConnector Association="namlao206_websiteModel.FK_Employees_Genders" ManuallyRouted="false" />
+        <AssociationConnector Association="namlao206_websiteModel.FK_LevelPermissions_ToLevels" ManuallyRouted="false" />
+        <AssociationConnector Association="namlao206_websiteModel.FK_SubMenu_ToTopics" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="namlao206_websiteModel.News" Width="1.5" PointX="13.25" PointY="15.25" />
+        <AssociationConnector Association="namlao206_websiteModel.FK_News_ToAccounts" />
+        <AssociationConnector Association="namlao206_websiteModel.FK_News_NewsPictures" />
+        <AssociationConnector Association="namlao206_websiteModel.FK_News_ToSubMenus" />
+        <AssociationConnector Association="namlao206_websiteModel.FK_News_ToTopics" />
+        <EntityTypeShape EntityType="namlao206_websiteModel.TransportFile" Width="1.5" PointX="5.25" PointY="42.5" />
+        <AssociationConnector Association="namlao206_websiteModel.FK_TransportFiles_AccountModified" />
+        <AssociationConnector Association="namlao206_websiteModel.FK_TransportFiles_AccountsCreate" />
+        <AssociationConnector Association="namlao206_websiteModel.FK_TransportFiles_AccountsPheDuyet" />
+        <AssociationConnector Association="namlao206_websiteModel.FK_TransportFileUrls_TransportFiles" />
+        <AssociationConnector Association="namlao206_websiteModel.FK_Transports_TransportFiles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

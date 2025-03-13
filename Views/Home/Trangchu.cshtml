@@ -1,449 +1,349 @@
-﻿<div class="container">
+﻿@using NamLao206.Models
+@using NamLao206.Utils
+@{
+    var hot_News = ViewBag.hot_News as List<News>;
+    var chuyenDoiSo_News = ViewBag.chuyenDoiSo_News as List<News>;
+    var anninh_News = ViewBag.anninh_News as List<News>;
+    var thau_News = ViewBag.thau_News as List<News>;
+    var doanthe_News = ViewBag.doanthe_News as List<News>;
+    var doingoaiNews = ViewBag.doingoaiNews as List<News>;
+    var hot_News_KhongUuTien = ViewBag.hot_News_KhongUuTien as List<News>;
+    var hot_News_KhongUuTienSkip = ViewBag.hot_News_KhongUuTienSkip as List<News>;
 
-    <!-- FEATURED PRODUCTS -->
-    <h2 class="owl-featured"><strong>Hot</strong> News</h2>
-    <div class="owl-carousel featured" data-plugin-options='{"itemsDesktop":[1199,4], "itemsDesktopSmall":[980,3], "itemsTablet":[684,2], "itemsMobile":[490,1], "singleItem": false, "stopOnHover":false, "autoPlay":false, "autoHeight": false, "navigation": true, "pagination": false}'>
-        <div>
-            <div class="owl-featured-item">
-                <a class="figure" href="page-article.html">
-                    <span><i class="fa fa-plus"></i></span>
-                    <img alt="" src="~/Content/EponaTheme/assets/images/demo/fashion/thumb/1.jpg" width="230" />
-                </a>
-                <div class="owl-featured-detail">
-                    <a class="featured-title" href="page-article.html">Cras justo odio, dapibus ac facilisis in, egestas eget quam. </a>
-                </div>
-            </div>
-        </div>
-        <div>
-            <div class="owl-featured-item">
-                <a class="figure" href="page-article.html">
-                    <span><i class="fa fa-plus"></i></span>
-                    <img alt="" src="~/Content/EponaTheme/assets/images/demo/fashion/thumb/2.jpg" width="230" />
-                </a>
-                <div class="owl-featured-detail">
-                    <a class="featured-title" href="page-article.html">Cras justo odio, dapibus ac facilisis in, egestas eget quam. </a>
-                </div>
-            </div>
-        </div>
-        <div>
-            <div class="owl-featured-item">
-                <a class="figure" href="page-article.html">
-                    <span><i class="fa fa-plus"></i></span>
-                    <img alt="" src="~/Content/EponaTheme/assets/images/demo/fashion/thumb/3.jpg" width="230" />
-                </a>
-                <div class="owl-featured-detail">
-                    <a class="featured-title" href="page-article.html">Cras justo odio, dapibus ac facilisis in, egestas eget quam. </a>
-                </div>
-            </div>
-        </div>
-        <div>
-            <div class="owl-featured-item">
-                <a class="figure" href="page-article.html">
-                    <span><i class="fa fa-plus"></i></span>
-                    <img alt="" src="~/Content/EponaTheme/assets/images/demo/fashion/thumb/4.jpg" width="230" />
-                </a>
-                <div class="owl-featured-detail">
-                    <a class="featured-title" href="page-article.html">Cras justo odio, dapibus ac facilisis in, egestas eget quam. </a>
-                </div>
-            </div>
-        </div>
-        <div>
-            <div class="owl-featured-item">
-                <a class="figure" href="page-article.html">
-                    <span><i class="fa fa-plus"></i></span>
-                    <img alt="" src="~/Content/EponaTheme/assets/images/demo/fashion/thumb/5.jpg" width="230" />
-                </a>
-                <div class="owl-featured-detail">
-                    <a class="featured-title" href="page-article.html">Cras justo odio, dapibus ac facilisis in, egestas eget quam. </a>
-                </div>
-            </div>
-        </div>
-        <div>
-            <div class="owl-featured-item">
-                <a class="figure" href="page-article.html">
-                    <span><i class="fa fa-plus"></i></span>
-                    <img alt="" src="~/Content/EponaTheme/assets/images/demo/fashion/thumb/6.jpg" width="230" />
-                </a>
-                <div class="owl-featured-detail">
-                    <a class="featured-title" href="page-article.html">Cras justo odio, dapibus ac facilisis in, egestas eget quam.</a>
-                </div>
-            </div>
-        </div>
-        <div>
-            <div class="owl-featured-item">
-                <a class="figure" href="page-article.html">
-                    <span><i class="fa fa-plus"></i></span>
-                    <img alt="" src="~/Content/EponaTheme/assets/images/demo/fashion/thumb/7.jpg" width="230" />
-                </a>
-                <div class="owl-featured-detail">
-                    <a class="featured-title" href="page-article.html">Cras justo odio, dapibus ac facilisis in, egestas eget quam.</a>
-                </div>
-            </div>
-        </div>
-        <div>
-            <div class="owl-featured-item">
-                <a class="figure" href="page-article.html">
-                    <span><i class="fa fa-plus"></i></span>
-                    <img alt="" src="~/Content/EponaTheme/assets/images/demo/fashion/thumb/8.jpg" width="230" />
-                </a>
-                <div class="owl-featured-detail">
-                    <a class="featured-title" href="page-article.html">Cras justo odio, dapibus ac facilisis in, egestas eget quam.</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- /FEATURED PRODUCTS -->
+    var carousel_Chief = ViewBag.carousel_Chief as List<AlbumPicture>;
+    var linhvuckinhdoanh = ViewBag.linhvuckinhdoanh as List<AlbumPicture>;
+    var lstBanner = ViewBag.banner as List<AlbumPicture>;
 
-    <hr class="half-margins invisible" />
-
-    <!-- FEATURED PRODUCTS -->
-    <h2 class="owl-featured"><strong>Today</strong> Most Readed</h2>
-    <div class="owl-carousel featured" data-plugin-options='{"itemsDesktop":[1199,4], "itemsDesktopSmall":[980,3], "itemsTablet":[684,2], "itemsMobile":[490,1], "singleItem": false, "stopOnHover":false, "autoPlay":false, "autoHeight": false, "navigation": true, "pagination": false}'>
-        <div>
-            <div class="owl-featured-item">
-                <a class="figure" href="page-article.html">
-                    <span><i class="fa fa-plus"></i></span>
-                    <img alt="" src="~/Content/EponaTheme/assets/images/demo/fashion/thumb/3.jpg" width="230" />
-                </a>
-                <div class="owl-featured-detail">
-                    <a class="featured-title" href="page-article.html">Cras justo odio, dapibus ac facilisis in, egestas eget quam. </a>
-                </div>
-            </div>
-        </div>
-        <div>
-            <div class="owl-featured-item">
-                <a class="figure" href="page-article.html">
-                    <span><i class="fa fa-plus"></i></span>
-                    <img alt="" src="~/Content/EponaTheme/assets/images/demo/fashion/thumb/6.jpg" width="230" />
-                </a>
-                <div class="owl-featured-detail">
-                    <a class="featured-title" href="page-article.html">Cras justo odio, dapibus ac facilisis in, egestas eget quam.</a>
-                </div>
-            </div>
-        </div>
-        <div>
-            <div class="owl-featured-item">
-                <a class="figure" href="page-article.html">
-                    <span><i class="fa fa-plus"></i></span>
-                    <img alt="" src="~/Content/EponaTheme/assets/images/demo/fashion/thumb/7.jpg" width="230" />
-                </a>
-                <div class="owl-featured-detail">
-                    <a class="featured-title" href="page-article.html">Cras justo odio, dapibus ac facilisis in, egestas eget quam.</a>
-                </div>
-            </div>
-        </div>
-        <div>
-            <div class="owl-featured-item">
-                <a class="figure" href="page-article.html">
-                    <span><i class="fa fa-plus"></i></span>
-                    <img alt="" src="~/Content/EponaTheme/assets/images/demo/fashion/thumb/8.jpg" width="230" />
-                </a>
-                <div class="owl-featured-detail">
-                    <a class="featured-title" href="page-article.html">Cras justo odio, dapibus ac facilisis in, egestas eget quam.</a>
-                </div>
-            </div>
-        </div>
-        <div>
-            <div class="owl-featured-item">
-                <a class="figure" href="page-article.html">
-                    <span><i class="fa fa-plus"></i></span>
-                    <img alt="" src="~/Content/EponaTheme/assets/images/demo/fashion/thumb/1.jpg" width="230" />
-                </a>
-                <div class="owl-featured-detail">
-                    <a class="featured-title" href="page-article.html">Cras justo odio, dapibus ac facilisis in, egestas eget quam. </a>
-                </div>
-            </div>
-        </div>
-        <div>
-            <div class="owl-featured-item">
-                <a class="figure" href="page-article.html">
-                    <span><i class="fa fa-plus"></i></span>
-                    <img alt="" src="~/Content/EponaTheme/assets/images/demo/fashion/thumb/2.jpg" width="230" />
-                </a>
-                <div class="owl-featured-detail">
-                    <a class="featured-title" href="page-article.html">Cras justo odio, dapibus ac facilisis in, egestas eget quam. </a>
-                </div>
-            </div>
-        </div>
-        <div>
-            <div class="owl-featured-item">
-                <a class="figure" href="page-article.html">
-                    <span><i class="fa fa-plus"></i></span>
-                    <img alt="" src="~/Content/EponaTheme/assets/images/demo/fashion/thumb/4.jpg" width="230" />
-                </a>
-                <div class="owl-featured-detail">
-                    <a class="featured-title" href="page-article.html">Cras justo odio, dapibus ac facilisis in, egestas eget quam. </a>
-                </div>
-            </div>
-        </div>
-        <div>
-            <div class="owl-featured-item">
-                <a class="figure" href="page-article.html">
-                    <span><i class="fa fa-plus"></i></span>
-                    <img alt="" src="~/Content/EponaTheme/assets/images/demo/fashion/thumb/5.jpg" width="230" />
-                </a>
-                <div class="owl-featured-detail">
-                    <a class="featured-title" href="page-article.html">Cras justo odio, dapibus ac facilisis in, egestas eget quam. </a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- /FEATURED PRODUCTS -->
-
-    <hr class="half-margins invisible" />
-
-    <!-- Banner -->
-    <a class="block clearfix" href="#purchase" target="_blank" rel="nofollow">
-        <img class="img-responsive" src="~/Content/EponaTheme/assets/images/big_banner.png" alt="">
-    </a><!-- /Banner -->
-
-    <hr class="half-margins invisible" />
-
+    string src = "";
+    var pic = "";
+}
+<div class="container-fluid">
     <div class="row">
+        <div class="col-md-2 col-sm-8 col-xs-12">
+            <!--<div class="col-md-12">-->
+            <!-- RIGHTSIDE MAINPAGE -->
+            <!--<div class="tabs nomargin">
+                <div class="tab-content">-->
+            <!-- tin xem nhiều -->
+            <!--<div id="tab_1" class="tab-pane active">
+                foreach (var item in hot_News_KhongUuTienSkip)
+                {
+                    Html.Partial("_RightSideMainPage", item)
+                }
 
-        <div class="col-md-9">
-
-            <!-- More News -->
-            <h4><strong>Politics</strong> News</h4>
-            <div class="row">
-
-                <div class="col-sm-4 col-md-4">
-                    <div class="thumbnail">
-                        <img class="img-responsive" src="~/Content/EponaTheme/assets/images/demo/other/thumb_o3.jpg" alt="" />
-                        <div class="caption">
-                            <h4>Lorem Ipsum Dolor Sit...</h4>
-                            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-                            <p><a href="page-article.html" class="btn btn-default btn-sm" role="button">Read More</a></p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-4 col-md-4">
-                    <div class="thumbnail">
-                        <img class="img-responsive" src="~/Content/EponaTheme/assets/images/demo/other/thumb_o4.jpg" alt="" />
-                        <div class="caption">
-                            <h4>Lorem Ipsum Dolor Sit...</h4>
-                            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-                            <p><a href="page-article.html" class="btn btn-default btn-sm" role="button">Read More</a></p>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-sm-4 col-md-4">
-                    <div class="thumbnail">
-                        <img class="img-responsive" src="~/Content/EponaTheme/assets/images/demo/other/thumb_o1.jpg" alt="" />
-                        <div class="caption">
-                            <h4>Lorem Ipsum Dolor Sit...</h4>
-                            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-                            <p><a href="page-article.html" class="btn btn-default btn-sm" role="button">Read More</a></p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <!-- /More News -->
-
-            <hr class="half-margins invisible" />
-
-            <!-- More News -->
-            <h4><strong>Science</strong> News</h4>
-            <div class="row">
-
-                <div class="col-sm-4 col-md-4">
-                    <div class="thumbnail">
-                        <img class="img-responsive" src="~/Content/EponaTheme/assets/images/demo/other/thumb_o4.jpg" alt="" />
-                        <div class="caption">
-                            <h4>Lorem Ipsum Dolor Sit...</h4>
-                            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-                            <p><a href="page-article.html" class="btn btn-default btn-sm" role="button">Read More</a></p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-4 col-md-4">
-                    <div class="thumbnail">
-                        <img class="img-responsive" src="~/Content/EponaTheme/assets/images/demo/other/thumb_o2.jpg" alt="" />
-                        <div class="caption">
-                            <h4>Lorem Ipsum Dolor Sit...</h4>
-                            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-                            <p><a href="page-article.html" class="btn btn-default btn-sm" role="button">Read More</a></p>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-sm-4 col-md-4">
-                    <div class="thumbnail">
-                        <img class="img-responsive" src="~/Content/EponaTheme/assets/images/demo/other/thumb_o1.jpg" alt="" />
-                        <div class="caption">
-                            <h4>Lorem Ipsum Dolor Sit...</h4>
-                            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-                            <p><a href="page-article.html" class="btn btn-default btn-sm" role="button">Read More</a></p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <!-- /More News -->
-
+            </div>-->
+            <!-- tin xem nhiều -->
+            <!--</div>
+            </div>-->
+            <!-- RIGHTSIDE MAINPAGE -->
+            <!--</div>-->
         </div>
-
-        <div class="col-md-3">
-
-            <h4><strong>More</strong> News?</h4>
-            <form method="get" action="#" class="input-group nopadding">
-                <input type="text" class="form-control" name="s" value="" placeholder="Search...">
-                <span class="input-group-btn">
-                    <button class="btn btn-primary"><i class="fa fa-search"></i></button>
-                </span>
-            </form>
-
-
+        <!-- MIDDLE -->
+        <div class="col-md-8 col-sm-10 col-xs-12 ">
             <hr class="half-margins invisible" />
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- HOT NEWS -->
+                    <div class="col-md-12">
+                        <div class="owl-carousel text-center" data-plugin-options='{"items": 1, "singleItem": true, "navigation": false, "pagination": true, "autoPlay": true, "transitionStyle":"fadeUp"}'>
+                            <!-- transitionStyle: fade, backSlide, goDown, fadeUp,  -->
+                            @foreach (var item in hot_News)
+                            {
+                                @Html.Partial("_testimonialNews", item)
+                            }
+                        </div>
+                        <div class="owl-carousel featured" data-plugin-options='{"itemsDesktop":[1199,4], "itemsDesktopSmall":[980,3], "itemsTablet":[684,2], "itemsMobile":[490,1], "singleItem": false, "stopOnHover":false, "autoPlay":true, "autoHeight": false, "navigation": false, "pagination": false}'>
+                            @foreach (var item in hot_News_KhongUuTien)
+                            {
+                                @Html.Partial("_carouselNews", item)
+                            }
+                        </div>
+                    </div>
 
-
-            <!-- JUSTIFIED TAB -->
-            <div class="tabs nomargin">
-
-                <!-- tabs -->
-                <ul class="nav nav-tabs nav-justified">
-                    <li class="active">
-                        <a href="#tab_1" data-toggle="tab">
-                            Popular
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#tab_2" data-toggle="tab">
-                            Recent
-                        </a>
-                    </li>
+                </div>
+                <!-- HOT NEWS -->
+            </div>
+            <!--Ban lãnh đạo-->
+            <h2 class="owl-featured"> <strong style="color:darkgreen; text-transform:uppercase; text-decoration:underline; text-underline-offset: 5px; text-decoration-thickness:5px;">BAN LÃNH ĐẠO</></strong></h2>
+            <div class="owl-carousel controlls-over buttons-bottom" style="background-color: #fff9e9;" data-plugin-options='{ "itemsDesktop":[1199,4], "itemsDesktopSmall":[980,2], "itemsTablet":[768,2], "singleItem": false, "items":4, "margin": 100, "autoHeight": false, "navigation": true, "pagination": false, "progressBar":"false"}'>
+                @foreach (var item in carousel_Chief)
+                {
+                    @Html.Partial("_CalrouselPicture", item)
+                }
+            </div>
+            <!--Ban lãnh đạo-->
+            <!-- THAU NEWS -->
+            <h2 class="owl-featured"> <strong style="color:darkgreen; text-transform:uppercase; text-decoration:underline; text-underline-offset: 5px; text-decoration-thickness:5px;">TIN Đấu Thầu</></strong></h2>
+            <div class="owl-carousel featured" data-plugin-options='{"itemsDesktop":[1199,4], "itemsDesktopSmall":[980,3], "itemsTablet":[684,2], "itemsMobile":[490,1], "singleItem": false, "stopOnHover":false, "autoPlay":true, "autoHeight": false, "navigation": true, "pagination": false}'>
+                @foreach (var item in thau_News)
+                {
+                    @Html.Partial("_carouselNews", item)
+                }
+            </div>
+            <!-- /THAU NEWS -->
+            <!-- CHUYEN DOI SO NEW -->
+            <h2 class="owl-featured"> <strong style="color:darkgreen; text-transform:uppercase; text-decoration:underline; text-underline-offset: 5px; text-decoration-thickness:5px;">TIN CHUYỂN ĐỔI SỐ</></strong> </h2>
+            <div class="owl-carousel featured" data-plugin-options='{"itemsDesktop":[1199,4], "itemsDesktopSmall":[980,3], "itemsTablet":[684,2], "itemsMobile":[490,1], "singleItem": false, "stopOnHover":false, "autoPlay":true, "autoHeight": false, "navigation": true, "pagination": false}'>
+                @foreach (var item in chuyenDoiSo_News)
+                {
+                    @Html.Partial("_carouselNews", item)
+                }
+            </div>
+            <!-- CHUYEN DOI SO NEW -->
+            <!-- TIN HIEN THI NHOM -->
+            <div id="portfolio">
+                <ul class="nav nav-pills isotope-filter isotope-filter" data-sort-id="isotope-list" data-option-key="filter">
+                    <li data-option-value="*" class="active"><a style="color:green;" href="#">TIÊU ĐIỂM</a></li>
+                    @foreach (var item in new namlao206dbEntities().Topics.Where(x => x.HienThiNhom == true))
+                    {
+                        <li data-option-value=".@item.Id"><a style="color:green;" href="#">@item.TopicName</a></li>
+                    } <!-- lấy từ bảng Topics ra các tiêu đề có Id như trên-->
                 </ul>
+                <div class="row">
+                    <ul class="sort-destination isotope" data-sort-id="isotope-list">
+                        <!-- lấy từ bảng News ra các tin tức có TopicId như trên và chọn ra 3 tin tức với mỗi TopicId-->
+                        @foreach (var item in new namlao206dbEntities().News.Where(x => x.Topic.HienThiNhom == true)
+                            .OrderByDescending(x => x.DateUp)
+                            .GroupBy(x => x.TopicId)
+                            .SelectMany(group => group.Take(3)))
+                        {
+                            src = MySecurity.GetSrcPicture(item.TopicId);
+                            pic = item.Picture;
+                            if (!string.IsNullOrEmpty(pic))
+                            {
+                                src = "/Content/Uploads/News/" + pic;
+                            }
+                            <li class="sotope-item col-sm-6 col-md-4 @item.TopicId">
+                                <!-- item -->
+                                <div class="item-box">
+                                    <figure>
+                                        <a class="item-hover" href="~/Home/NewsDetail/?title=@item.TitleChange&&newsid=@item.Id"  data-toggle="tooltip" data-placement="top" title="" data-original-title="@item.Title">
+                                            <span class="overlay color2"></span>
+                                            <span class="inner">
+                                                <span class="block fa fa-plus fsize20"></span>
+                                                <strong>Xem</strong> thêm
+                                            </span>
+                                        </a>
+                                        <img class="img-responsive" src="@src" style="width:400px; height: 250px;" alt="">
+                                    </figure>
+                                    <div class="item-box-desc">
+                                        <h4>  <a data-toggle="tooltip" data-placement="top" title="" data-original-title="@item.Title" class="featured-title" style="text-align: left; max-width: 100%; font-size: 14px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; text-overflow: ellipsis; " href="~/Home/NewsDetail/?title=@item.TitleChange&&newsid=@item.Id"><b>@item.Title</b></a></h4>
+                                        <small class="styleColor">@item.DateUp.ToString("dd/MM/yyyy")</small>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                    </ul>
 
-                <!-- tabs content -->
-                <div class="tab-content">
+                </div><!-- /.masonry-container -->
+            </div>
+            <!-- TIN HIEN THI NHOM -->
+            <!-- Banner -->
 
-                    <!-- POPULAR -->
-                    <div id="tab_1" class="tab-pane active">
+            <section>
+                <div class="">
 
-                        <div class="row tab-post">
-                            <!-- post -->
-                            <div class="col-md-3 col-sm-3 col-xs-3">
-                                <a href="page-article.html">
-                                    <img src="~/Content/EponaTheme/assets/images/demo/portfolio/thumb/a1.jpg" width="50" alt="" />
+                    <header class="text-center">
+                        <h1 class="font-dosis" style="color: green;">
+                            <strong>ĐƠN VỊ</strong> LIÊN KẾT
+                        </h1>
+                        <div class="divider">
+                            <!-- divider -->
+                            <i class="fa fa-star"></i>
+                        </div>
+                    </header>
+                    <div class="row"  style="text-align:center">
+                        <!-- Media -->
+                        <div class="col-md-3 col-sm-9 col-xs-12">
+                            <div class="media mb-6">
+                                <div class="me-xl-4">
+                                    <img src="~/Content/EponaTheme/assets/images/logo/baoquandoi.jpg" alt="" style="width:100px; height:100px;">
+                                </div>
+                                <a target="_blank" href="https://www.qdnd.vn/">
+                                    <div class="media-body" style="font-size: 10px; font-weight: bold; padding: 5px;">
+                                        <h3 class="text-primary">Báo Quân Đội Nhân Dân Việt Nam</h3>
+                                        <p></p>
+                                    </div>
                                 </a>
                             </div>
-                            <div class="col-md-9 col-sm-9 col-xs-9">
-                                <a href="page-article.html" class="tab-post-link">Maecenas metus nulla</a>
-                                <small>June 29 2014</small>
-                            </div>
-                        </div><!-- /post -->
+                        </div>
 
-                        <div class="row tab-post">
-                            <!-- post -->
-                            <div class="col-md-3 col-sm-3 col-xs-3">
-                                <a href="page-article.html">
-                                    <img src="~/Content/EponaTheme/assets/images/demo/portfolio/thumb/a2.jpg" width="50" alt="" />
+                        <!-- Media -->
+                        <div class="col-md-3 col-sm-9 col-xs-12">
+                            <div class="media mb-6">
+                                <div class="me-xl-4">
+                                    <img src="~/Content/EponaTheme/assets/images/logo/baoqk.jpg" style="width: 100px; height: 100px;">
+                                </div>
+                                <a target="_blank" href="http://baoquankhu5.vn/">
+                                    <div class="media-body" style="font-size: 10px; font-weight: bold; padding: 5px;">
+                                        <h3 class="text-success">Báo Quân Khu 5</h3>
+                                        <p></p>
+                                    </div>
                                 </a>
                             </div>
-                            <div class="col-md-9 col-sm-9 col-xs-9">
-                                <a href="page-article.html" class="tab-post-link">Curabitur pellentesque neque eget diam</a>
-                                <small>June 29 2014</small>
-                            </div>
-                        </div><!-- /post -->
-
-                        <div class="row tab-post">
-                            <!-- post -->
-                            <div class="col-md-3 col-sm-3 col-xs-3">
-                                <a href="page-article.html">
-                                    <img src="~/Content/EponaTheme/assets/images/demo/portfolio/thumb/a3.jpg" width="50" alt="" />
+                        </div>
+                        <!-- Media -->
+                        <div class="col-md-3 col-sm-9 col-xs-12">
+                            <div class="media mb-6">
+                                <div class="me-xl-4">
+                                    <img src="~/Content/EponaTheme/assets/images/logo/dvcqg.png" style="width: 100px; height: 100px;">
+                                </div>
+                                <a target="_blank" href="https://dichvucong.gov.vn/p/home/dvc-trang-chu.html">
+                                    <div class="media-body" style="font-size: 10px; font-weight: bold; padding: 5px;">
+                                        <h3 class="text-info">Dịch Vụ Công Quốc Gia</h3>
+                                        <p></p>
+                                    </div>
                                 </a>
                             </div>
-                            <div class="col-md-9 col-sm-9 col-xs-9">
-                                <a href="page-article.html" class="tab-post-link">Nam et lacus neque. Ut enim massa, sodales</a>
-                                <small>June 29 2014</small>
+                        </div>
+                        <!-- Media -->
+                        <div class="col-md-3 col-sm-9 col-xs-12">
+                            <div class="media mb-6">
+                                <div class="me-xl-4">
+                                    <img src="~/Content/EponaTheme/assets/images/logo/facebook.png" style="width: 130px; height: 100px;">
+                                </div>
+                                <a target="_blank" href="https://www.facebook.com/profile.php?id=61561956351002&mibextid=LQQJ4d">
+                                    <div class="media-body" style="font-size: 10px; font-weight: bold; padding: 5px;">
+                                        <h3 class="text-pink">Fanpage Đồng Bào Xa Tổ Quốc</h3>
+                                        <p></p>
+                                    </div>
+                                </a>
                             </div>
-                        </div><!-- /post -->
-
+                        </div>
                     </div>
-                    <!-- /POPULAR -->
-                    <!-- RECENT -->
-                    <div id="tab_2" class="tab-pane">
-
-                        <div class="row tab-post">
-                            <!-- post -->
-                            <div class="col-md-3 col-sm-3 col-xs-3">
-                                <a href="page-article.html">
-                                    <img src="~/Content/EponaTheme/assets/images/demo/portfolio/thumb/a3.jpg" width="50" alt="" />
+                    <div class="row"  style="text-align:center">
+                        <!-- Media -->
+                        <div class="col-md-3 col-sm-9 col-xs-12">
+                            <div class="media mb-6">
+                                <div class="me-xl-4">
+                                    <img src="~/Content/EponaTheme/assets/images/logo/zalo.png" alt="" style="width: 100px; height: 100px;">
+                                </div>
+                                <a target="_blank" href="https://zalo.me/g/wfcbaj188">
+                                    <div class="media-body" style="font-size: 10px; font-weight: bold; padding: 5px;">
+                                        <h3 class="text-primary">Group Zalo đồng bào xa Tổ quốc</h3>
+                                        <p></p>
+                                    </div>
                                 </a>
                             </div>
-                            <div class="col-md-9 col-sm-9 col-xs-9">
-                                <a href="page-article.html" class="tab-post-link">Curabitur pellentesque neque eget diam</a>
-                                <small>June 29 2014</small>
-                            </div>
-                        </div><!-- /post -->
+                        </div>
 
-                        <div class="row tab-post">
-                            <!-- post -->
-                            <div class="col-md-3 col-sm-3 col-xs-3">
-                                <a href="page-article.html">
-                                    <img src="~/Content/EponaTheme/assets/images/demo/portfolio/thumb/a4.jpg" width="50" alt="" />
+                        <!-- Media -->
+                        <div class="col-md-3 col-sm-9 col-xs-12">
+                            <div class="media mb-6">
+                                <div class="me-xl-4">
+                                    <img src="~/Content/EponaTheme/assets/images/logo/thuvienPL.jpg" style="width: 100px; height: 100px;">
+                                </div>
+                                <a target="_blank" href="https://thuvienphapluat.vn/">
+                                    <div class="media-body" style="font-size: 10px; font-weight: bold; padding: 5px;">
+                                        <h3 class="text-success">Thư viện Pháp luật Việt Nam</h3>
+                                        <p></p>
+                                    </div>
                                 </a>
                             </div>
-                            <div class="col-md-9 col-sm-9 col-xs-9">
-                                <a href="page-article.html" class="tab-post-link">Maecenas metus nulla</a>
-                                <small>June 29 2014</small>
-                            </div>
-                        </div><!-- /post -->
-
-                        <div class="row tab-post">
-                            <!-- post -->
-                            <div class="col-md-3 col-sm-3 col-xs-3">
-                                <a href="page-article.html">
-                                    <img src="~/Content/EponaTheme/assets/images/demo/portfolio/thumb/a2.jpg" width="50" alt="" />
+                        </div>
+                        <!-- Media -->
+                        <div class="col-md-3 col-sm-9 col-xs-12">
+                            <div class="media mb-6">
+                                <div class="me-xl-4">
+                                    <img src="~/Content/EponaTheme/assets/images/logo/viettel.jpg" style="width: 130px; height: 100px;">
+                                </div>
+                                <a target="_blank" href="https://viettel.com.vn/vi/">
+                                    <div class="media-body" style="font-size: 10px; font-weight: bold; padding: 5px;">
+                                        <h3 class="text-info">Tập đoàn Viễn Thông Quân Đội Viettel</h3>
+                                        <p></p>
+                                    </div>
                                 </a>
                             </div>
-                            <div class="col-md-9 col-sm-9 col-xs-9">
-                                <a href="page-article.html" class="tab-post-link">Quisque ut nulla at nunc</a>
-                                <small>June 29 2014</small>
+                        </div>
+                        <!-- Media -->
+                        <div class="col-md-3 col-sm-9 col-xs-12">
+                            <div class="media mb-6">
+                                <div class="me-xl-4">
+                                    <img src="~/Content/EponaTheme/assets/images/logo/MBbank.png" style="width: 130px; height: 100px;">
+                                </div>
+                                <a target="_blank" href="https://www.mbbank.com.vn/">
+                                    <div class="media-body" style="font-size:10px;  font-weight:bold; padding: 5px;">
+                                        <h3 class="text-pink">Ngân Hàng Quân Đội MB Bank</h3>
+                                        <p></p>
+                                    </div>
+                                </a>
                             </div>
-                        </div><!-- /post -->
+                        </div>
                     </div>
-                    <!-- /RECENT -->
+                </div>
+            </section>
+
+            <!-- /Banner -->
+            <!-- TIN DOAN THE -->
+            <section>
+                <h2 class="owl-featured"> <strong style="color:darkgreen; text-transform:uppercase; text-decoration:underline; text-underline-offset: 5px; text-decoration-thickness:5px;">TIN ĐOÀN THỂ</></strong> </h2>
+                <div class="owl-carousel featured" data-plugin-options='{"itemsDesktop":[1199,4], "itemsDesktopSmall":[980,3], "itemsTablet":[684,2], "itemsMobile":[490,1], "singleItem": false, "stopOnHover":false, "autoPlay":true, "autoHeight": false, "navigation": true, "pagination": false}'>
+                    @foreach (var item in doanthe_News)
+                    {
+                        @Html.Partial("_carouselNews", item)
+                    }
+                </div>
+            </section>
+          
+            <!-- TIN DOAN THE -->
+            <!-- TIN QUAN SU QUOC PHONG -->
+            <section>
+                <h2 class="owl-featured"> <strong style="color:darkgreen; text-transform:uppercase; text-decoration:underline; text-underline-offset: 5px; text-decoration-thickness:5px;">TIN AN NINH QUỐC PHÒNG</></strong> </h2>
+                <div class="owl-carousel featured" data-plugin-options='{"itemsDesktop":[1199,4], "itemsDesktopSmall":[980,3], "itemsTablet":[684,2], "itemsMobile":[490,1], "singleItem": false, "stopOnHover":false, "autoPlay":true, "autoHeight": false, "navigation": true, "pagination": false}'>
+                    @foreach (var item in anninh_News)
+                    {
+                        @Html.Partial("_carouselNews", item)
+                    }
+                </div>
+            </section>
+        
+            <!-- TIN QUAN SU QUOC PHONG -->
+            <!--Lĩnh vực kinh doanh-->
+            <section>
+                <h2 class="owl-featured"> <strong style="color:darkgreen; text-transform:uppercase; text-decoration:underline; text-underline-offset: 5px; text-decoration-thickness:5px;">Các hình ảnh sản xuất kinh kinh doanh của công ty</></strong></h2>
+                <div class="owl-carousel controlls-over buttons-bottom" style="background-color:#fff9e9;" data-plugin-options='{"autoPlay":3000, "itemsDesktop":[1199,3], "itemsDesktopSmall":[980,2], "itemsTablet":[768,2], "singleItem": false, "items":3, "autoHeight": false, "navigation": true, "pagination": false, "progressBar":"false"}'>
+                    @foreach (var item in linhvuckinhdoanh)
+                    {
+                        @Html.Partial("_CalrouselPicture", item)
+                    }
+                </div>
+            </section>
+         
+            <!--Lĩnh vực kinh doanh-->
+        </div>
+        <div class="col-md-2 col-sm-8 col-xs-12">
+            <!--<div class="col-md-12">-->
+            <!-- RIGHTSIDE MAINPAGE -->
+            <!--<div class="tabs nomargin">
+                <div class="tab-content">-->
+            <!-- tin xem nhiều -->
+            <!--<div id="tab_1" class="tab-pane active">
+                foreach (var item in hot_News_KhongUuTienSkip)
+                {
+                    Html.Partial("_RightSideMainPage", item)
+                }
+
+            </div>-->
+            <!-- tin xem nhiều -->
+            <!--</div>
+            </div>-->
+            <!-- RIGHTSIDE MAINPAGE -->
+            <!--</div>-->
+        </div>
+    </div>
+    <section>
+        <div class="">
+            <div class="slider fullwidthbanner-container roundedcorners">
+                <div class="fullwidthbanner" data-height="450">
+                    <ul class="hide">
+                        @foreach (var item in lstBanner)
+                        {
+                            @Html.Partial("_bannerMiddle", item)
+                        }
+                    </ul>
 
                 </div>
-
             </div>
-            <!-- JUSTIFIED TAB -->
-
-            <hr class="half-margins invisible" />
-
-            <!-- FACEBOOK -->
-            <iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2Fstepofweb&amp;width=263&amp;height=258&amp;colorscheme=light&amp;show_faces=true&amp;header=false&amp;stream=false&amp;show_border=false" style="border:none; overflow:hidden; width:263px; height:258px;"></iframe>
-
-            <a href="#" class="social fa fa-facebook"></a>
-            <a href="#" class="social fa fa-twitter"></a>
-            <a href="#" class="social fa fa-google-plus"></a>
-            <a href="#" class="social fa fa-linkedin"></a>
-            <a href="#" class="social fa fa-pinterest"></a>
-            <a href="#" class="social fa fa-youtube-square"></a>
-            <!--
-            <a href="#" class="social fa fa-vimeo-square"></a>
-            <a href="#" class="social fa fa-flickr"></a>
-            <a href="#" class="social fa fa-skype"></a>
-            <a href="#" class="social fa fa-rss"></a>
-            <a href="#" class="social fa fa-envelope"></a>
-            <a href="#" class="social default fa fa-cog"></a>
-            -->
-
-            <hr class="half-margins invisible" />
-
         </div>
-
-
-    </div>
-
-
-
-
+    </section>
 </div>

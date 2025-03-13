@@ -1,0 +1,78 @@
+﻿@model NamLao206.Models.TransportFile
+
+@{
+    ViewBag.Title = "Chi tiết - ";
+}
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            Số Văn Bản
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tenFile)
+        </dd>
+        <dt>
+            Trích Yếu
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mota)
+        </dd>
+        <dt>
+            Ngày gửi
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateDate)
+        </dd>
+
+        <dt>
+            Người gửi
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Account1.Employee.Name) -  @Html.DisplayFor(model => model.Account1.Employee.DM_PhongBans.TenKhoa)
+        </dd>
+        <dt>
+            Người nhận
+        </dt>
+        <dd>
+           @ViewBag.NguoiNhan
+        </dd>
+    </dl>
+    <div>
+        <a class="btn btn-primary mt-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Chuyển tiếp"
+           href="@Url.Action("ChuyenTiep", new { id = Model.Id })"><i class="ri-eye-line mr-0">Chuyển tiếp</i></a>
+    </div>
+    <div class="table-responsive">
+        <table id="datatable" class="table data-table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>TÊN VĂN BẢN</th>
+                    <th>DOWLOAD</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.TransportFileUrls)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Url)
+                        </td>
+                        <td>
+                            <a href="../../../Content/Uploads/HopThu/@item.TransportFilesId/@item.Url">Tải về</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+            </tfoot>
+        </table>
+    </div>
+</div>

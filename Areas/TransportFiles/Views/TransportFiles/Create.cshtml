@@ -1,0 +1,158 @@
+﻿@model NamLao206.Models.TransportFile
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="panel-body">
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-md-3 col-xs-12">
+                    <div class="form-group">
+                        @Html.Label("Số Văn Bản", htmlAttributes: new { @class = "control-label col-md-9" })
+                        <div class="col-md-9">
+                            @Html.EditorFor(model => model.tenFile, new { htmlAttributes = new { @class = "form-control is-invalid-cus", required = "required" } })
+                            @Html.ValidationMessageFor(model => model.tenFile, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-12">
+                    <div class="form-group">
+                        @Html.Label("Ngày ban hành", htmlAttributes: new { @class = "control-label col-md-9" })
+                        <input type="datetime-local" class="form-control" data-lang="en" data-RTL="false" id="NgayBanHanh" name="NgayBanHanh" value="@DateTime.Now.ToString("s")" />
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-12">
+                    <div class="form-group">
+                        @Html.Label("Người phê duyệt", htmlAttributes: new { @class = "control-label col-md-9" })
+                        <div class="col-md-9">
+                            @Html.DropDownListFor(model => model.NguoiPheDuyetId, (SelectList)ViewBag.Employees, htmlAttributes: new { @class = "js-states form-control multiple", @id = "NguoiPheDuyetId" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Trích Yếu", htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    <textarea class="form-control is-invalid-cus" name="Mota" id="Mota"></textarea>
+                    @Html.ValidationMessageFor(model => model.Mota, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-xs-12">
+                    <div class="input-group col-md-12">
+                        <input type="file" class="btn btn-outline-primary rounded-pill mt-2 is-invalid-cus" multiple name="pic" id="pic" placeholder="File" required />
+                    </div>
+                </div>
+                <div class="col-md-2 col-xs-12">
+                    <div class="input-group col-md-10">
+                        <div class="input-group-prepend text-center">
+                            <span class="input-group-text" id="basic-addon1">Khẩn cấp</span>
+                        </div>
+                        <input class="form-control" type="checkbox" name="KhanCap" id="KhanCap" value="true" />
+                    </div>
+                </div>
+                <div class="col-md-2 col-xs-12">
+                    <div class="input-group col-md-10">
+                        <div class="input-group-prepend text-center">
+                            @Html.Label("Số trang", htmlAttributes: new { @class = "input-group-text" })
+                        </div>
+                        @Html.EditorFor(model => model.SoTrang, new { htmlAttributes = new { @class = "form-control is-invalid-cus", required = "required" } })
+                    </div>
+                </div>
+                <div class="col-md-2 col-xs-12">
+                    <div class="input-group col-md-10">
+                        <div class="input-group-prepend text-center">
+                            @Html.Label("Độ mật", htmlAttributes: new { @class = "input-group-text" })
+                        </div>
+                        @Html.EditorFor(model => model.DoMat, new { htmlAttributes = new { @class = "form-control is-invalid-cus", required = "required" } })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="card col-md-12 col-xs-12">
+                    <div class="card-header justify-content-between">
+                        <div class="header-title">
+                            <h4 class="card-title">Nơi nhận qua mạng</h4>
+                        </div>
+                    </div>
+                    <div class="card-body text-center">
+                        <div class="custom-control custom-radio custom-radio-color-checked custom-control-inline">
+                            <input type="radio" id="customRadio-1" name="customRadio_10" class="custom-control-input bg-primary">
+                            <label class="custom-control-label" for="customRadio-1"> Gửi cá nhân </label>
+                        </div>
+                        <div class="custom-control custom-radio custom-radio-color-checked custom-control-inline">
+                            <input type="radio" id="customRadio-2" name="customRadio_10" class="custom-control-input bg-success">
+                            <label class="custom-control-label" for="customRadio-2"> Gửi phòng ban </label>
+                        </div>
+                        <div class="custom-control custom-radio custom-radio-color-checked custom-control-inline">
+                            <input type="radio" id="customRadio-3" name="customRadio_10" class="custom-control-input bg-danger">
+                            <label class="custom-control-label" for="customRadio-3"> Gửi đơn vị </label>
+                        </div>
+
+                    </div>
+                    <!--Sửa JS app.js -> js -> assets -> AdminBinhLt (multiple)-->
+                    <div class="card-body align-content-center">
+                        <div class="col-md-12" id="status1">
+                            <div class="form-group">
+                                @Html.Label("Chọn người gửi", htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-9">
+                                    @Html.DropDownList("lstReceiverUserId", (SelectList)ViewBag.Employees, htmlAttributes: new { @class = "js-states form-control multiple", @multiple = "multiple", @id = "lstReceiverUserId" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12" id="status2">
+                            <div class="form-group">
+                                @Html.Label("Chọn phòng gửi", htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-9">
+                                    @Html.DropDownList("lstReceiverRoomId", (SelectList)ViewBag.DM_PhongBans, htmlAttributes: new { @class = "js-states form-control multiple", @multiple = "multiple", @id = "lstReceiverRoomId" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12" id="status3">
+                            <div class="form-group">
+                                @Html.Label("Chọn đơn vị gửi", htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-9">
+                                    @Html.DropDownList("lstReceiverUnitId", (SelectList)ViewBag.DM_DonVis, htmlAttributes: new { @class = "js-states form-control multiple", @multiple = "multiple", @id = "lstReceiverUnitId" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="float:right">
+                <button type="submit" class="mt-2 btn btn-success">GỬI VĂN BẢN</button>
+                <button type="button" class="mt-2 btn btn-light" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+
+
+    </div>
+}
+<script>
+    $("#customRadio-1, #customRadio-2, #customRadio-3").change(function () {
+        var checkbox1 = $("#customRadio-1");
+        var checkbox2 = $("#customRadio-2");
+        var checkbox3 = $("#customRadio-3");
+        $("#status1").prop('hidden', true);
+        $("#status2").prop('hidden', true);
+        $("#status3").prop('hidden', true);
+
+        if (checkbox1.is(':checked')) {
+            $("#status1").prop('hidden', false);
+        }
+        else if (checkbox2.is(':checked')) {
+            $("#status2").prop('hidden', false);
+        }
+        else if (checkbox3.is(':checked')) {
+            $("#status3").prop('hidden', false);
+        }
+    });
+</script>

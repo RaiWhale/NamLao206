@@ -1,0 +1,22 @@
+﻿@model NamLao206.Models.News
+@using NamLao206.Utils
+@{
+    string src = MySecurity.GetSrcPicture(Model.TopicId);
+    var pic = Model.Picture;
+    if (!string.IsNullOrEmpty(pic))
+    {
+        src = "/Content/Uploads/News/" + pic;
+    }
+}
+
+<div>
+    <div class="owl-featured-item" style="background-color:white; color: black; font-weight:bold; padding:10px; border-radius: 5px;">
+        <a class="figure" href="~/Home/NewsDetail/?title=@Model.TitleChange&&newsid=@Model.Id">
+            <span><i class="fa fa-plus"></i></span>
+            <img alt="" src="@src" style=" min-height:150px; max-height:150px" />
+        </a>
+        <div class="owl-featured-detail truncateHai">
+            <a  data-toggle="tooltip" data-placement="top" title="" data-original-title="@Model.Title" class="featured-title" style="text-align: left; max-width: 100%; font-size: 14px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; text-overflow: ellipsis; " href="~/Home/NewsDetail/?title=@Model.TitleChange&&newsid=@Model.Id"><b>@Model.Title</b></a>
+        </div>
+    </div>
+</div>

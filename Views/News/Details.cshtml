@@ -1,0 +1,82 @@
+﻿@model NamLao206.Models.News
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>News</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Summary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Summary)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Details)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Details)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateUp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateUp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Views)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Views)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Administrator.AdminName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Administrator.AdminName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NewsPicture.Url)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NewsPicture.Url)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Topic.TopicName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Topic.TopicName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
