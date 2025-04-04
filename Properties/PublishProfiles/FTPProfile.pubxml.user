@@ -7,7 +7,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAANVCUxOTywUKnTTCBWKunVAAAAAACAAAAAAAQZgAAAAEAACAAAADWY3WXe8hRag78HhFhJAEy1UX31chw3PosdHgKJPnT5AAAAAAOgAAAAAIAACAAAADxvbXRDZaXooPo1YnLeD8VAuRH6lII29+jwNTDtbKXAyAAAAA1qlJiGWU1M4zIMnmwhS+2fZpr00phN+0dy1zZE+47tEAAAAALHbBL4AkEx2qMTXdo8vo19HWW0Ta3Onpyk7hnEjddAzw89SAUm80Lnpemw1kg2ZYniBDCujj6VRxJ/BYQ3C67</EncryptedPassword>
     <_PublishTargetUrl>ftp://210.211.113.139/httpdocs</_PublishTargetUrl>
-    <History>True|2025-03-07T04:21:33.4587442Z||;True|2025-03-07T11:10:58.4195578+07:00||;True|2025-02-27T15:46:45.0372380+07:00||;True|2025-02-27T09:12:46.5462033+07:00||;True|2025-01-14T09:37:13.6592822+07:00||;True|2024-12-18T15:23:25.8855725+07:00||;True|2024-12-18T11:51:44.2263852+07:00||;True|2024-12-18T11:31:01.3469046+07:00||;False|2024-12-18T11:26:25.2446434+07:00||;True|2024-12-12T15:37:55.7301646+07:00||;False|2024-12-12T15:13:45.1948290+07:00||;True|2024-12-12T10:59:33.5966617+07:00||;True|2024-12-11T16:57:09.6249689+07:00||;True|2024-10-29T11:52:58.2480653+07:00||;True|2024-10-29T08:40:42.4440935+07:00||;False|2024-10-29T08:20:24.7847713+07:00||;True|2024-10-29T08:16:40.6084522+07:00||;False|2024-10-29T07:46:41.1847253+07:00||;False|2024-10-29T07:41:48.3728224+07:00||;False|2024-10-29T07:41:24.7768120+07:00||;True|2024-10-28T19:20:36.3563289+07:00||;</History>
+    <History>True|2025-03-26T07:57:19.0969319Z||;True|2025-03-07T11:21:33.4587442+07:00||;True|2025-03-07T11:10:58.4195578+07:00||;True|2025-02-27T15:46:45.0372380+07:00||;True|2025-02-27T09:12:46.5462033+07:00||;True|2025-01-14T09:37:13.6592822+07:00||;True|2024-12-18T15:23:25.8855725+07:00||;True|2024-12-18T11:51:44.2263852+07:00||;True|2024-12-18T11:31:01.3469046+07:00||;False|2024-12-18T11:26:25.2446434+07:00||;True|2024-12-12T15:37:55.7301646+07:00||;False|2024-12-12T15:13:45.1948290+07:00||;True|2024-12-12T10:59:33.5966617+07:00||;True|2024-12-11T16:57:09.6249689+07:00||;True|2024-10-29T11:52:58.2480653+07:00||;True|2024-10-29T08:40:42.4440935+07:00||;False|2024-10-29T08:20:24.7847713+07:00||;True|2024-10-29T08:16:40.6084522+07:00||;False|2024-10-29T07:46:41.1847253+07:00||;False|2024-10-29T07:41:48.3728224+07:00||;False|2024-10-29T07:41:24.7768120+07:00||;True|2024-10-28T19:20:36.3563289+07:00||;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -369,7 +369,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/05/2024 12:19:34</publishTime>
     </File>
     <File Include="Areas/TransportFiles/Views/Shared/_Layout.cshtml">
-      <publishTime>12/18/2024 11:15:17</publishTime>
+      <publishTime>03/26/2025 12:54:13</publishTime>
     </File>
     <File Include="Areas/TransportFiles/Views/TransportFiles/ChuyenTiep.cshtml">
       <publishTime>10/25/2024 15:14:46</publishTime>
@@ -378,7 +378,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>12/10/2024 15:51:10</publishTime>
     </File>
     <File Include="Areas/TransportFiles/Views/TransportFiles/Create.cshtml">
-      <publishTime>12/12/2024 14:03:36</publishTime>
+      <publishTime>03/26/2025 14:25:35</publishTime>
     </File>
     <File Include="Areas/TransportFiles/Views/TransportFiles/Delete.cshtml">
       <publishTime>02/27/2025 09:05:56</publishTime>
@@ -390,10 +390,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/07/2024 10:51:41</publishTime>
     </File>
     <File Include="Areas/TransportFiles/Views/TransportFiles/HopThuDen.cshtml">
-      <publishTime>12/10/2024 15:50:00</publishTime>
+      <publishTime>03/26/2025 13:58:33</publishTime>
     </File>
     <File Include="Areas/TransportFiles/Views/TransportFiles/HopThuDi.cshtml">
-      <publishTime>02/27/2025 16:02:44</publishTime>
+      <publishTime>03/26/2025 14:50:47</publishTime>
     </File>
     <File Include="Areas/TransportFiles/Views/web.config">
       <publishTime>10/05/2024 11:57:34</publishTime>
@@ -459,10 +459,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/22/2024 09:21:17</publishTime>
     </File>
     <File Include="bin/NamLao206.dll">
-      <publishTime>03/07/2025 11:19:50</publishTime>
+      <publishTime>03/26/2025 14:55:33</publishTime>
     </File>
     <File Include="bin/NamLao206.pdb">
-      <publishTime>03/07/2025 11:19:50</publishTime>
+      <publishTime>03/26/2025 14:55:33</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.Bson.dll">
       <publishTime>08/22/2024 09:21:17</publishTime>
@@ -6960,7 +6960,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/22/2024 09:21:17</publishTime>
     </File>
     <File Include="Scripts/CascadingDropdownAjax.js">
-      <publishTime>08/22/2024 09:21:17</publishTime>
+      <publishTime>03/26/2025 12:51:08</publishTime>
     </File>
     <File Include="Scripts/jquery-3.7.1.js">
       <publishTime>08/22/2024 09:21:17</publishTime>
@@ -7053,7 +7053,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/25/2024 14:01:09</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>02/27/2025 09:01:25</publishTime>
+      <publishTime>03/26/2025 12:24:13</publishTime>
     </File>
     <File Include="Views/Shared/_menuPhongBan.cshtml">
       <publishTime>09/27/2024 09:18:14</publishTime>

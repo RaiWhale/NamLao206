@@ -123,8 +123,8 @@
                     <div class="iq-navbar-logo d-flex align-items-center justify-content-between">
                         <i class="ri-menu-line wrapper-menu"></i>
                         @*<a href="index.html" class="header-logo">
-                <img src="~/Content/TrangChu/assets/images/Logo/logodaixanh.jpg" class="img-fluid rounded-normal" alt="logo">
-            </a>*@
+                                <img src="~/Content/TrangChu/assets/images/Logo/logodaixanh.jpg" class="img-fluid rounded-normal" alt="logo">
+                            </a>*@
                     </div>
                     <div class="iq-search-bar device-search">
                         <form action="#" class="searchbox">
@@ -340,7 +340,7 @@
 
     <!-- PRELOADER -->
     @RenderSection("scripts", required: false)
-    <script src="~/Scripts/CascadingDropdownAjax.js"></script>
+
     <!--NEW-->
     <!-- Backend Bundle JavaScript -->
     <script src="/Content/AdminBinhLT/assets/js/backend-bundle.min.js"></script>
@@ -372,14 +372,8 @@
     <script src="/Content/AdminBinhLT/assets/js/slider.js"></script>
     <!-- app JavaScript -->
     <script src="/Content/AdminBinhLT/assets/js/app.js"></script>
-
-    <script>
-        jQuery(document).ready(function ($) {
-            $("#status1").prop('hidden', true);
-            $("#status2").prop('hidden', true);
-            $("#status3").prop('hidden', true);
-        });
-    </script>
+    <script src="~/Scripts/CascadingDropdownAjax.js"></script>
+ 
 
 </body>
 </html>
