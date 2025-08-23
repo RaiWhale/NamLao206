@@ -1,0 +1,98 @@
+﻿.body {
+    background-color: lightblue;
+    overflow: hidden;
+}
+
+.canvasCover {
+    overflow-x: hidden;
+    width: auto;
+    height: 400px;
+    overflow-y: scroll;
+}
+
+.canvasContainer {
+    overflow-y: hidden;
+    overflow-x: hidden;
+    width: auto;
+    height: 400px;
+}
+
+
+.x_panel {
+    padding: 0 0 0 0;
+}
+
+.tile_count {
+    padding: 10px 0 0 0;
+}
+
+
+.count_top {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.newstape {
+    height: 350px;
+    overflow: hidden;
+}
+
+.newstape-content {
+    position: relative;
+}
+
+.newstape-drag {
+    cursor: ns-resize;
+}
+
+.x_panel .btnUpdate {
+    display: none;
+}
+
+.x_panel:hover .btnUpdate {
+    display: inline;
+    color: black;
+    font-size: 16px;
+}
+
+/*Chỉnh lại hiển thị Alert id="alert-container"*/
+.custom-alert {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1050;
+    min-width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+.alert-show {
+    animation: slideIn 0.3s ease-out forwards;
+}
+
+.alert-hide {
+    animation: slideOut 0.3s ease-out forwards;
+}

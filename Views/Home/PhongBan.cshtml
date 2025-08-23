@@ -1,7 +1,7 @@
 ﻿@model NamLao206.Models.DM_PhongBans
 @using NamLao206.Models
 @{
-    namlao206dbEntities db = new namlao206dbEntities();
+    namlao206_websiteEntities db = new namlao206_websiteEntities();
     var pictures = ViewBag.Pictures as List<Picture>;
     var pic = db.Pictures.Where(x => x.KhoaphongId == Model.Id).FirstOrDefault();
 }

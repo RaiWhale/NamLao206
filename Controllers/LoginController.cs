@@ -11,7 +11,7 @@ namespace NamLao206.Controllers
 {
     public class LoginController : Controller
     {
-        namlao206dbEntities db = new namlao206dbEntities();
+        namlao206_websiteEntities db = new namlao206_websiteEntities();
 
         [Authorize]
         public ActionResult UpdateProfile()
@@ -105,7 +105,7 @@ namespace NamLao206.Controllers
                 if (acc.IsActive)
                 {
                     FormsAuthentication.SetAuthCookie(acc.Id.ToString(), false);
-                    if(acc.AccountType == 3)
+                    if(acc.LevelId == 3)
                     {
                         return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
                     }
@@ -141,7 +141,7 @@ namespace NamLao206.Controllers
         {
             FormsAuthentication.SignOut();
             Session.Abandon();
-            return RedirectToAction("Login","Login");
+            return RedirectToAction("Login","Login", new { area = "" });
         }
 
         protected override void Dispose(bool disposing)

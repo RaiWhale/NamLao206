@@ -76,6 +76,9 @@
     <Reference Include="ImageProcessor, Version=2.9.0.207, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\ImageProcessor.2.9.0\lib\net452\ImageProcessor.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Features, Version=5.0.17.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNetCore.Http.Features.5.0.17\lib\net461\Microsoft.AspNetCore.Http.Features.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=9.0.0.3, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.9.0.3\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
@@ -83,6 +86,9 @@
       <HintPath>packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\lib\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Extensions.Primitives, Version=5.0.0.1, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Extensions.Primitives.5.0.1\lib\net461\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.IO.RecyclableMemoryStream, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.IO.RecyclableMemoryStream.3.0.1\lib\netstandard2.0\Microsoft.IO.RecyclableMemoryStream.dll</HintPath>
     </Reference>
@@ -122,6 +128,9 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Drawing.Common, Version=9.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Drawing.Common.9.0.3\lib\net462\System.Drawing.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Pipelines, Version=5.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.IO.Pipelines.5.0.2\lib\net461\System.IO.Pipelines.dll</HintPath>
     </Reference>
     <Reference Include="System.Memory, Version=4.0.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Memory.4.6.2\lib\net462\System.Memory.dll</HintPath>
@@ -208,20 +217,27 @@
     <Compile Include="Areas\Admin\Controllers\BannersController.cs" />
     <Compile Include="Areas\Admin\Controllers\CalrouselPicturesController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DM_AddBangsController.cs" />
     <Compile Include="Areas\Admin\Controllers\DM_AdminListUpItemController.cs" />
     <Compile Include="Areas\Admin\Controllers\DM_ChucvusController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DM_DonvihanhchinhsController.cs" />
     <Compile Include="Areas\Admin\Controllers\DM_DonVisController.cs" />
     <Compile Include="Areas\Admin\Controllers\DM_hinhthuckinhdoanhController.cs" />
     <Compile Include="Areas\Admin\Controllers\DM_HocvisController.cs" />
     <Compile Include="Areas\Admin\Controllers\DM_NhomPhongBansController.cs" />
     <Compile Include="Areas\Admin\Controllers\DM_PhongBansController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DocumentTypesController.cs" />
     <Compile Include="Areas\Admin\Controllers\EmployeesController.cs" />
     <Compile Include="Areas\Admin\Controllers\AlbumPicturesController.cs" />
     <Compile Include="Areas\Admin\Controllers\AlbumsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\LevelsController.cs" />
     <Compile Include="Areas\Admin\Controllers\NewsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PhasesController.cs" />
     <Compile Include="Areas\Admin\Controllers\PicturesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\StatusProjectsController.cs" />
     <Compile Include="Areas\Admin\Controllers\SubMenusController.cs" />
     <Compile Include="Areas\Admin\Controllers\TopicsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UnitsController.cs" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
     <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
     <Compile Include="Areas\HelpPage\Controllers\HelpController.cs" />
@@ -251,8 +267,18 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Areas\TransportFiles\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\TransportFiles\Controllers\EmployeesController.cs" />
+    <Compile Include="Areas\TransportFiles\Controllers\GiamSatThiCongsController.cs" />
+    <Compile Include="Areas\TransportFiles\Controllers\HoatDongNhanSusController.cs" />
+    <Compile Include="Areas\TransportFiles\Controllers\HoSoPhapLiesController.cs" />
+    <Compile Include="Areas\TransportFiles\Controllers\KhaoSatsController.cs" />
+    <Compile Include="Areas\TransportFiles\Controllers\NghiemThusController.cs" />
+    <Compile Include="Areas\TransportFiles\Controllers\ProjectsController.cs" />
+    <Compile Include="Areas\TransportFiles\Controllers\SuppliersController.cs" />
+    <Compile Include="Areas\TransportFiles\Controllers\ThiCongsController.cs" />
     <Compile Include="Areas\TransportFiles\Controllers\TransportFilesController.cs" />
     <Compile Include="Areas\TransportFiles\TransportFilesAreaRegistration.cs" />
+    <Compile Include="Controllers\API\ApiController.cs" />
     <Compile Include="Controllers\CascadingDropdownController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -286,7 +312,13 @@
     <Compile Include="Models\CalrouselPicture.cs">
       <DependentUpon>namlao206DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Contract.cs">
+      <DependentUpon>namlao206DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Customer.cs">
+      <DependentUpon>namlao206DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DM_AddBangs.cs">
       <DependentUpon>namlao206DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DM_AdminListUpItem.cs">
@@ -316,6 +348,9 @@
     <Compile Include="Models\DM_PhongBans.cs">
       <DependentUpon>namlao206DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DocumentType.cs">
+      <DependentUpon>namlao206DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Employee.cs">
       <DependentUpon>namlao206DB.tt</DependentUpon>
     </Compile>
@@ -323,6 +358,18 @@
       <DependentUpon>namlao206DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Gender.cs">
+      <DependentUpon>namlao206DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GiamSatThiCong.cs">
+      <DependentUpon>namlao206DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HoatDongNhanSu.cs">
+      <DependentUpon>namlao206DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HoSoPhapLy.cs">
+      <DependentUpon>namlao206DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KhaoSat.cs">
       <DependentUpon>namlao206DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Level.cs">
@@ -361,10 +408,31 @@
     <Compile Include="Models\NewsPicture.cs">
       <DependentUpon>namlao206DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\NghiemThu.cs">
+      <DependentUpon>namlao206DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Phase.cs">
+      <DependentUpon>namlao206DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Picture.cs">
       <DependentUpon>namlao206DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Project.cs">
+      <DependentUpon>namlao206DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_GetDataForDashBoard_Result.cs">
+      <DependentUpon>namlao206DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StatusProject.cs">
+      <DependentUpon>namlao206DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SubMenu.cs">
+      <DependentUpon>namlao206DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Supplier.cs">
+      <DependentUpon>namlao206DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ThiCong.cs">
       <DependentUpon>namlao206DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Topic.cs">
@@ -379,11 +447,16 @@
     <Compile Include="Models\TransportFileUrl.cs">
       <DependentUpon>namlao206DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Unit.cs">
+      <DependentUpon>namlao206DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ViewModels\Donvihanhchinh.cs" />
     <Compile Include="Models\ViewModels\LoginVM.cs" />
     <Compile Include="Models\ViewModels\NhomKhoasVM.cs" />
+    <Compile Include="Models\ViewModels\QuocTich.cs" />
     <Compile Include="Models\ViewModels\RegisterVM.cs" />
     <Compile Include="Models\ViewModels\UpdateProfileVM.cs" />
+    <Compile Include="Models\ViewModels\UploadFileViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\MySecurity.cs" />
   </ItemGroup>
@@ -525,6 +598,20 @@
     <Content Include="Content\bootstrap.rtl.css.map" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\bootstrap.rtl.min.css.map" />
+    <Content Include="Content\chart\Libraries\css\bootstrap.min.css" />
+    <Content Include="Content\chart\Libraries\css\custom.min.css" />
+    <Content Include="Content\chart\Libraries\css\font-awesome.min.css" />
+    <Content Include="Content\chart\Libraries\css\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\chart\Libraries\css\green.css" />
+    <Content Include="Content\chart\Libraries\js\anychart-core.min.js" />
+    <Content Include="Content\chart\Libraries\js\anychart-treemap.min.js" />
+    <Content Include="Content\chart\Libraries\js\bootstrap-progressbar.min.js" />
+    <Content Include="Content\chart\Libraries\js\bootstrap.min.js" />
+    <Content Include="Content\chart\Libraries\js\Chart.bundle.min.js" />
+    <Content Include="Content\chart\Libraries\js\Chart.min.js" />
+    <Content Include="Content\chart\Libraries\js\Inits.js" />
+    <Content Include="Content\chart\Libraries\js\jquery.min.js" />
+    <Content Include="Content\chart\Libraries\js\jquery.newstape.js" />
     <Content Include="Content\ckeditor\adapters\jquery.js" />
     <Content Include="Content\ckeditor\build-config.js" />
     <Content Include="Content\ckeditor\ckeditor.js" />
@@ -1644,6 +1731,7 @@
     <Content Include="Content\ckeditor\skins\moono-lisa\images\spinner.gif" />
     <Content Include="Content\ckeditor\styles.js" />
     <Content Include="Content\ckeditor\vendor\promise.js" />
+    <Content Include="Content\customizedChartCSS.css" />
     <Content Include="Content\EponaTheme\assets\cssjs\default\css\.css" />
     <Content Include="Content\EponaTheme\assets\cssjs\default\css\core.min.css" />
     <Content Include="Content\EponaTheme\assets\css\.css" />
@@ -1823,6 +1911,65 @@
     <Content Include="Content\EponaTheme\cdn-cgi\scripts\5c5dd728\cloudflare-static\email-decode.min.js" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\smartadmin\css\app.bundle.css" />
+    <Content Include="Content\smartadmin\css\datagrid\datatables\datatables.bundle.css" />
+    <Content Include="Content\smartadmin\css\fa-brands.css" />
+    <Content Include="Content\smartadmin\css\fa-solid.css" />
+    <Content Include="Content\smartadmin\css\formplugins\bootstrap-daterangepicker\bootstrap-daterangepicker.css" />
+    <Content Include="Content\smartadmin\css\formplugins\select2\select2.bundle.css" />
+    <Content Include="Content\smartadmin\css\formplugins\summernote\summernote.css" />
+    <Content Include="Content\smartadmin\css\page-login-alt.css" />
+    <Content Include="Content\smartadmin\css\skins\skin-master.css" />
+    <Content Include="Content\smartadmin\css\statistics\chartist\chartist.css" />
+    <Content Include="Content\smartadmin\css\vendors.bundle.css" />
+    <Content Include="Content\smartadmin\img\backgrounds\background.jpg" />
+    <Content Include="Content\smartadmin\img\backgrounds\banner_darkboad1.png" />
+    <Content Include="Content\smartadmin\img\backgrounds\banner_darkboad2.png" />
+    <Content Include="Content\smartadmin\img\backgrounds\clouds.png" />
+    <Content Include="Content\smartadmin\img\backgrounds\prev-bg-1.png" />
+    <Content Include="Content\smartadmin\img\backgrounds\prev-bg-2.png" />
+    <Content Include="Content\smartadmin\img\backgrounds\prev-bg-3.png" />
+    <Content Include="Content\smartadmin\img\backgrounds\prev-bg-4.png" />
+    <Content Include="Content\smartadmin\img\card-backgrounds\cover-2-lg.png" />
+    <Content Include="Content\smartadmin\img\clouds.png" />
+    <Content Include="Content\smartadmin\img\demo\avatars\avatar-a.png" />
+    <Content Include="Content\smartadmin\img\demo\avatars\avatar-admin.png" />
+    <Content Include="Content\smartadmin\img\demo\avatars\avatar-b.png" />
+    <Content Include="Content\smartadmin\img\demo\avatars\avatar-c.png" />
+    <Content Include="Content\smartadmin\img\demo\avatars\avatar-d.png" />
+    <Content Include="Content\smartadmin\img\demo\avatars\avatar-e.png" />
+    <Content Include="Content\smartadmin\img\demo\avatars\avatar-g.png" />
+    <Content Include="Content\smartadmin\img\demo\avatars\avatar-h.png" />
+    <Content Include="Content\smartadmin\img\demo\avatars\avatar-j.png" />
+    <Content Include="Content\smartadmin\img\demo\avatars\avatar-k.png" />
+    <Content Include="Content\smartadmin\img\demo\avatars\avatar-m.png" />
+    <Content Include="Content\smartadmin\img\demo\s-1.png" />
+    <Content Include="Content\smartadmin\img\logo.jpg" />
+    <Content Include="Content\smartadmin\img\logo.png" />
+    <Content Include="Content\smartadmin\img\LOGOBVQY17.jpg" />
+    <Content Include="Content\smartadmin\img\svg\pattern-1.svg" />
+    <Content Include="Content\smartadmin\img\thumbs\pic-11.png" />
+    <Content Include="Content\smartadmin\img\thumbs\pic-12.png" />
+    <Content Include="Content\smartadmin\img\thumbs\pic-7.png" />
+    <Content Include="Content\smartadmin\img\thumbs\pic-8.png" />
+    <Content Include="Content\smartadmin\js\app.bundle.js" />
+    <Content Include="Content\smartadmin\js\chartCustomized.js" />
+    <Content Include="Content\smartadmin\js\datagrid\datatables\datatables.bundle.js" />
+    <Content Include="Content\smartadmin\js\dependency\moment\moment.js" />
+    <Content Include="Content\smartadmin\js\formplugins\bootstrap-daterangepicker\bootstrap-daterangepicker.js" />
+    <Content Include="Content\smartadmin\js\formplugins\select2\select2.bundle.js" />
+    <Content Include="Content\smartadmin\js\formplugins\summernote\summernote.js" />
+    <Content Include="Content\smartadmin\js\miscellaneous\fullcalendar\fullcalendar.bundle.js" />
+    <Content Include="Content\smartadmin\js\miscellaneous\jqvmap\jqvmap.bundle.js" />
+    <Content Include="Content\smartadmin\js\statistics\chartist\chartist.js" />
+    <Content Include="Content\smartadmin\js\statistics\chartjs\chartjs.bundle.js" />
+    <Content Include="Content\smartadmin\js\statistics\easypiechart\easypiechart.bundle.js" />
+    <Content Include="Content\smartadmin\js\statistics\flot\flot.bundle.js" />
+    <Content Include="Content\smartadmin\js\statistics\peity\peity.bundle.js" />
+    <Content Include="Content\smartadmin\js\statistics\sparkline\sparkline.bundle.js" />
+    <Content Include="Content\smartadmin\js\vendors.bundle.js" />
+    <Content Include="Content\smartadmin\media\video\cc.mp4" />
+    <Content Include="Content\smartadmin\media\video\cc.webm" />
     <Content Include="Content\Uploads\Albums\1\638629683029497833_namlao-lanhdao-1637898876.jpg" />
     <Content Include="Content\Uploads\Albums\1\638629683031463876_namlao-lanhdao-1637898895.jpg" />
     <Content Include="Content\Uploads\Albums\1\638629683031518797_namlao-lanhdao-1637898912.jpg" />
@@ -2499,13 +2646,6 @@
     <Content Include="Areas\TransportFiles\Views\TransportFiles\HopThuDi.cshtml" />
     <Content Include="Areas\TransportFiles\Views\TransportFiles\CongVanKhan.cshtml" />
     <Content Include="Areas\TransportFiles\Views\TransportFiles\ChuyenTiep.cshtml" />
-    <EntityDeploy Include="Models\namlao206DB.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>namlao206DB.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\namlao206DB.edmx.diagram">
-      <DependentUpon>namlao206DB.edmx</DependentUpon>
-    </Content>
     <Content Include="Content\Uploads\Excel\Danhsach.xlsx" />
     <Content Include="Content\Uploads\HopThu\1027\638660726408342464_Thong bao thuc hien che do mua lanh k24.pdf" />
     <Content Include="Content\Uploads\HopThu\1028\638688105849809072_back" />
@@ -2549,6 +2689,118 @@
     <Content Include="Content\ckeditor\skins\moono-lisa\readme.md" />
     <Content Include="Content\ckeditor\ckfinder\plugins\fileeditor\codemirror\LICENSE" />
     <Content Include="Content\ckeditor\ckfinder\userfiles\.htaccess" />
+    <Content Include="Content\smartadmin\media\data\manifest.json" />
+    <Content Include="Content\smartadmin\media\data\server-demo.json" />
+    <Content Include="Content\smartadmin\webfonts\fa-brands-400.svg#fontawesome" />
+    <Content Include="Content\smartadmin\webfonts\fa-brands-400.ttf" />
+    <Content Include="Content\smartadmin\webfonts\fa-brands-400.woff" />
+    <Content Include="Content\smartadmin\webfonts\fa-brands-400.woff2" />
+    <Content Include="Content\smartadmin\webfonts\fa-light-300.svg#fontawesome" />
+    <Content Include="Content\smartadmin\webfonts\fa-light-300.ttf" />
+    <Content Include="Content\smartadmin\webfonts\fa-light-300.woff" />
+    <Content Include="Content\smartadmin\webfonts\fa-light-300.woff2" />
+    <Content Include="Content\smartadmin\webfonts\fa-solid-900.svg#fontawesome" />
+    <Content Include="Content\smartadmin\webfonts\fa-solid-900.ttf" />
+    <Content Include="Content\smartadmin\webfonts\fa-solid-900.woff" />
+    <Content Include="Content\smartadmin\webfonts\fa-solid-900.woff2" />
+    <Content Include="Content\smartadmin\webfonts\nextgen-icons.woff2" />
+    <Content Include="Content\smartadmin\webfonts\summernote.ttf" />
+    <Content Include="Content\smartadmin\webfonts\summernote.woff" />
+    <Content Include="Content\smartadmin\webfonts\summernote.woff2" />
+    <Content Include="Content\chart\Libraries\css\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\chart\Libraries\css\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\chart\Libraries\css\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\chart\Libraries\css\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\chart\Libraries\css\fonts\FontAwesome.otf" />
+    <Content Include="Areas\TransportFiles\Views\Projects\Create.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\Projects\Delete.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\Projects\Details.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\Projects\Edit.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\Projects\Index.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\TransportFiles\ThungRac.cshtml" />
+    <Content Include="Areas\Admin\Views\DM_Donvihanhchinhs\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\DM_Donvihanhchinhs\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\DM_Donvihanhchinhs\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\DM_Donvihanhchinhs\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\DM_Donvihanhchinhs\Index.cshtml" />
+    <EntityDeploy Include="Models\namlao206DB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>namlao206DB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\namlao206DB.edmx.diagram">
+      <DependentUpon>namlao206DB.edmx</DependentUpon>
+    </Content>
+    <Content Include="Areas\Admin\Views\Levels\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Levels\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Levels\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Levels\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Levels\Index.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\Suppliers\Create.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\Suppliers\Delete.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\Suppliers\Details.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\Suppliers\Edit.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\Suppliers\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\StatusProjects\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\StatusProjects\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\StatusProjects\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\StatusProjects\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\StatusProjects\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\DocumentTypes\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\DocumentTypes\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\DocumentTypes\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\DocumentTypes\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\DocumentTypes\Index.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\GiamSatThiCongs\Create.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\GiamSatThiCongs\Delete.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\GiamSatThiCongs\Details.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\GiamSatThiCongs\Edit.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\GiamSatThiCongs\Index.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\NghiemThus\Create.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\NghiemThus\Delete.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\NghiemThus\Details.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\NghiemThus\Edit.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\NghiemThus\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Units\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Units\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Units\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Units\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Units\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Phases\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Phases\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Phases\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Phases\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Phases\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\DM_AddBangs\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\DM_AddBangs\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\DM_AddBangs\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\DM_AddBangs\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\DM_AddBangs\Index.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\HoSoPhapLies\Create.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\HoSoPhapLies\Delete.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\HoSoPhapLies\Details.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\HoSoPhapLies\Edit.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\HoSoPhapLies\Index.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\Projects\InformationProject.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\KhaoSats\Create.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\KhaoSats\Delete.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\KhaoSats\Details.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\KhaoSats\Edit.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\KhaoSats\Index.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\ThiCongs\Create.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\ThiCongs\Delete.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\ThiCongs\Details.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\ThiCongs\Edit.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\ThiCongs\Index.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\Employees\Create.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\Employees\Delete.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\Employees\Details.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\Employees\Edit.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\Employees\Index.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\HoatDongNhanSus\Create.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\HoatDongNhanSus\Delete.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\HoatDongNhanSus\Details.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\HoatDongNhanSus\Edit.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\HoatDongNhanSus\Index.cshtml" />
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.1.js" />
     <Content Include="Scripts\jquery-3.7.1.min.js" />
@@ -2556,12 +2808,6 @@
     <Content Include="Scripts\jquery-3.7.1.slim.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
@@ -2606,7 +2852,10 @@
     <Folder Include="Content\AdminBinhLT\assets\css\fonts\" />
     <Folder Include="Content\AdminBinhLT\assets\fonts\" />
     <Folder Include="Content\AdminBinhLT\assets\images\e-commerce\" />
+    <Folder Include="Content\smartadmin\css\formplugins\summernote\webfonts\" />
+    <Folder Include="Content\smartadmin\webfonts\webfonts\" />
     <Folder Include="Content\Uploads\KhoaPhongs\76\" />
+    <Folder Include="Views\Api\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

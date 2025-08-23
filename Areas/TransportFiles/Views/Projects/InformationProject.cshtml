@@ -1,0 +1,787 @@
+﻿@model NamLao206.Models.Project
+@using NamLao206.Models;
+
+@{
+
+}
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id)
+    <!-- Hiển thị thông báo (nếu có) -->
+    <div id="alert-container" data-message="@Html.Raw(HttpUtility.HtmlEncode(ViewBag.Message))"></div>
+    <div class="row">
+        <div class="container-fluid" style="margin-top:5px">
+            <div class="col-lg-12 col-sm-12 col-xs-12">
+                <div id="panel-2" class="panel panel-collapsed">
+                    <div class="panel-hdr">
+                        <h2 style="font-size: 150%">
+                            Tạo mới <span class="fw-300"><i><b class="color-success-900">và tìm kiếm dự án</b></i></span>
+                        </h2>
+                    </div>
+                    <div class="panel-container show">
+                        <div class="panel-content">
+                            @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <a href="@Url.Action(Model.DM_DonVis?.CreateBranch ?? "Create","Khaosats", new {projectID = Model.Id})" class="bcommand btn btn-md btn-success waves-effect waves-themed">
+                                            <span class="fal fa-download mr-1"></span>Khảo sát
+                                        </a>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <a href="@Url.Action(Model.DM_DonVis?.CreateBranch ?? "Create","GiamSatThiCongs",new {projectID = Model.Id})" class="bcommand btn btn-md btn-success waves-effect waves-themed">
+                                            <span class="fal fa-download mr-1"></span>Giám sát
+                                        </a>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <a href="@Url.Action(Model.DM_DonVis?.CreateBranch ?? "Create","ThiCongs",new {projectID = Model.Id})" class="bcommand btn btn-md btn-success waves-effect waves-themed">
+                                            <span class="fal fa-download mr-1"></span>Thi công
+                                        </a>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <a href="@Url.Action(Model.DM_DonVis?.CreateBranch ?? "Create","NghiemThus", new {projectID = Model.Id})" class="bcommand btn btn-md btn-success waves-effect waves-themed">
+                                            <span class="fal fa-vote-yea mr-1"></span>Nghiệm thu
+                                        </a>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <a href="@Url.Action("Create","HoSoPhapLies",new {projectID = Model.Id})" class="bcommand btn btn-md btn-primary waves-effect waves-themed">
+                                            <span class="fal fa-folder mr-1"></span>Hồ sơ pháp lý
+                                        </a>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="container-fluid" style="margin-top:5px">
+            @if (Model.KhaoSats != null && Model.KhaoSats.Any())
+            {
+                <div class="col-lg-12 col-sm-12 col-xs-12 ">
+                    <div id="panel-1" class="panel">
+                        <div class="panel-hdr">
+                            <h2>
+                                Quản lý <span class="fw-300"><i>khảo sát</i></span>
+                            </h2>
+                        </div>
+                        <div class="panel-container show">
+                            <div class="panel-content">
+                                <div class="form-horizontal">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover table-striped w-100 dt-basic-example" style="font-size: calc(0.3vw + 10px) ">
+                                            <thead class="bg-warning-200 text-center">
+                                                <tr>
+                                                    @if (Model.KhaoSats.Any(k => k.GiaTriHopDong != null))
+                                                    {
+                                                        <th>Giá trị hợp đồng</th>
+                                                    }
+                                                    @if (Model.KhaoSats.Any(k => k.GiaTriPLHopDong != null))
+                                                    {
+                                                        <th>Giá trị phụ lục hợp đồng</th>
+                                                    }
+                                                    @if (Model.KhaoSats.Any(k => k.GiaTriDuToan != null))
+                                                    {
+                                                        <th>Giá trị dự toán</th>
+                                                    }
+                                                    @if (Model.KhaoSats.Any(k => k.GiaTriKhaoSat != null))
+                                                    {
+                                                        <th>Giá trị khảo sát</th>
+                                                    }
+                                                    @if (Model.KhaoSats.Any(k => k.GiaTriThamDinh != null))
+                                                    {
+                                                        <th>Giá trị thẩm định</th>
+                                                    }
+                                                    @if (Model.KhaoSats.Any(k => k.GiaTriDuToanPheDuyet != null))
+                                                    {
+                                                        <th>Giá trị dự toán phê duyệt</th>
+                                                    }
+                                                    @if (Model.KhaoSats.Any(k => k.GiaTriKhaoSatPheDuyet != null))
+                                                    {
+                                                        <th>Giá trị khảo sát phê duyệt</th>
+                                                    }
+                                                    @if (Model.KhaoSats.Any(k => k.GiaTriThamDinhPheDuyet != null))
+                                                    {
+                                                        <th>Giá trị thẩm định phê duyệt</th>
+                                                    }
+                                                    @if (Model.KhaoSats.Any(k => k.KetQuaKhaoSat != null))
+                                                    {
+                                                        <th>Kết quả khảo sát</th>
+                                                    }
+                                                    @if (Model.KhaoSats.Any(k => k.ChiPhiGiamSat != null))
+                                                    {
+                                                        <th>Chi phí giám sát</th>
+                                                    }
+                                                    @if (Model.KhaoSats.Any(k => k.LandArea != null))
+                                                    {
+                                                        <th>Diện tích đất</th>
+                                                    }
+                                                    @if (Model.KhaoSats.Any(k => k.WaterArea != null))
+                                                    {
+                                                        <th>Diện tích vùng nước</th>
+                                                    }
+                                                    @if (Model.KhaoSats.Any(k => k.LandAreaKhaoSat != null))
+                                                    {
+                                                        <th>Diện tích đất khảo sát</th>
+                                                    }
+                                                    @if (Model.KhaoSats.Any(k => k.WaterAreaKhaoSat != null))
+                                                    {
+                                                        <th>Diện tích vùng nước khảo sát</th>
+                                                    }
+                                                    @if (Model.KhaoSats.Any(k => k.NguoiGiamSat != null))
+                                                    {
+                                                        <th>Người giám sát</th>
+                                                    }
+
+                                                    <th>Tình trạng công nợ</th>
+
+                                                    @if (Model.KhaoSats.Any(k => k.Note != null))
+                                                    {
+                                                        <th>Note</th>
+                                                    }
+                                                    @if (Model.KhaoSats.Any(k => k.DocumentType != null))
+                                                    {
+                                                        <th>Loại hợp đồng</th>
+                                                    }
+                                                    @if (Model.KhaoSats.Any(k => k.Supplier != null))
+                                                    {
+                                                        <th>Đơn vị khảo sát</th>
+                                                    }
+                                                    @if (Model.KhaoSats.Any(k => k.StatusProject != null))
+                                                    {
+                                                        <th>Trạng thái</th>
+                                                    }
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model.KhaoSats)
+                                                {
+                                                    if (item.IsActive == true)
+                                                    {
+                                                        <tr>
+                                                            @if (Model.KhaoSats.Any(k => k.GiaTriHopDong != null))
+                                                            {
+                                                                <td>
+                                                                    @String.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:#,##0} VNĐ", item.GiaTriHopDong)
+                                                                </td>
+                                                            }
+                                                            @if (Model.KhaoSats.Any(k => k.GiaTriPLHopDong != null))
+                                                            {
+                                                                <td>
+                                                                    @String.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:#,##0} VNĐ", item.GiaTriPLHopDong)
+                                                                </td>
+                                                            }
+                                                            @if (Model.KhaoSats.Any(k => k.GiaTriDuToan != null))
+                                                            {
+                                                                <td>
+                                                                    @String.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:#,##0} VNĐ", item.GiaTriDuToan)
+                                                                </td>
+                                                            }
+                                                            @if (Model.KhaoSats.Any(k => k.GiaTriKhaoSat != null))
+                                                            {
+                                                                <td>
+                                                                    @String.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:#,##0} VNĐ", item.GiaTriKhaoSat)
+                                                                </td>
+                                                            }
+                                                            @if (Model.KhaoSats.Any(k => k.GiaTriThamDinh != null))
+                                                            {
+                                                                <td>
+                                                                    @String.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:#,##0} VNĐ", item.GiaTriThamDinh)
+                                                                </td>
+                                                            }
+                                                            @if (Model.KhaoSats.Any(k => k.GiaTriDuToanPheDuyet != null))
+                                                            {
+                                                                <td>
+                                                                    @String.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:#,##0} VNĐ", item.GiaTriDuToanPheDuyet)
+                                                                </td>
+                                                            }
+                                                            @if (Model.KhaoSats.Any(k => k.GiaTriKhaoSatPheDuyet != null))
+                                                            {
+                                                                <td>
+                                                                    @String.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:#,##0} VNĐ", item.GiaTriKhaoSatPheDuyet)
+                                                                </td>
+                                                            }
+                                                            @if (Model.KhaoSats.Any(k => k.GiaTriThamDinhPheDuyet != null))
+                                                            {
+                                                                <td>
+                                                                    @String.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:#,##0} VNĐ", item.GiaTriThamDinhPheDuyet)
+                                                                </td>
+                                                            }
+                                                            @if (Model.KhaoSats.Any(k => k.KetQuaKhaoSat != null))
+                                                            {
+                                                                <td>
+                                                                    @item.KetQuaKhaoSat
+                                                                </td>
+                                                            }
+                                                            @if (Model.KhaoSats.Any(k => k.ChiPhiGiamSat != null))
+                                                            {
+                                                                <td>
+                                                                    @String.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:#,##0} VNĐ", item.ChiPhiGiamSat)
+                                                                </td>
+                                                            }
+                                                            @if (Model.KhaoSats.Any(k => k.LandArea != null))
+                                                            {
+                                                                <td>
+                                                                    @item.LandArea @item.Unit.UnitName
+                                                                </td>
+                                                            }
+                                                            @if (Model.KhaoSats.Any(k => k.WaterArea != null))
+                                                            {
+                                                                <td>
+                                                                    @item.WaterArea @item.Unit.UnitName
+                                                                </td>
+                                                            }
+                                                            @if (Model.KhaoSats.Any(k => k.LandAreaKhaoSat != null))
+                                                            {
+                                                                <td>
+                                                                    @item.LandAreaKhaoSat @item.Unit.UnitName
+                                                                </td>
+                                                            }
+                                                            @if (Model.KhaoSats.Any(k => k.WaterAreaKhaoSat != null))
+                                                            {
+                                                                <td>
+                                                                    @item.WaterAreaKhaoSat @item.Unit.UnitName
+                                                                </td>
+                                                            }
+                                                            @if (Model.KhaoSats.Any(k => k.NguoiGiamSat != null))
+                                                            {
+                                                                <td>
+                                                                    @item.NguoiGiamSat
+                                                                </td>
+                                                            }
+
+                                                            <td>
+                                                                @(item.TinhTrangCongNo ? "Có" : "Không")
+                                                            </td>
+
+                                                            @if (Model.KhaoSats.Any(k => k.Note != null))
+                                                            {
+                                                                <td>
+                                                                    @item.Note
+                                                                </td>
+                                                            }
+                                                            @if (Model.KhaoSats.Any(k => k.DocumentType != null))
+                                                            {
+                                                                <td>
+                                                                    @item.DocumentType.DocumentTypeName
+                                                                </td>
+                                                            }
+                                                            @if (Model.KhaoSats.Any(k => k.Supplier != null))
+                                                            {
+                                                                <td>
+                                                                    @item.Supplier.SupplierName
+                                                                </td>
+                                                            }
+                                                            @if (Model.KhaoSats.Any(k => k.StatusProject != null))
+                                                            {
+                                                                <td>
+                                                                    @item.StatusProject.StatusName
+                                                                </td>
+                                                            }
+                                                            <td>
+                                                                <div class="d-flex align-items-center list-action">
+                                                                    <a class="badge bg-success mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sửa"
+                                                                       href="@Url.Action(Model.DM_DonVis?.EditBranch ?? "Edit", "Khaosats", new { id = item.Id, projectID = Model.Id })"><i class="ni ni-wrench fa-2x"></i></a>
+                                                                    <a class="badge bg-warning mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xóa"
+                                                                       href="@Url.Action("Delete", "Khaosats", new { id = item.Id, projectID = Model.Id })"><i class="ni ni-trash fa-2x"></i></a>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            @if (Model.GiamSatThiCongs != null && Model.GiamSatThiCongs.Any())
+            {
+                <div class="col-lg-12 col-sm-12 col-xs-12 ">
+                    <div id="panel-1" class="panel">
+                        <div class="panel-hdr">
+                            <h2>
+                                Quản lý <span class="fw-300"><i>giám sát</i></span>
+                            </h2>
+                        </div>
+                        <div class="panel-container show">
+                            <div class="panel-content">
+                                <div class="form-horizontal">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover table-striped w-100 dt-basic-example" style="font-size: calc(0.3vw + 10px) ">
+                                            <thead class="bg-warning-200 text-center">
+                                                <tr>
+                                                    @if (Model.GiamSatThiCongs.Any(g => g.GiaTriHopDong != null))
+                                                    {
+                                                        <th>Giá trị hợp đồng</th>
+                                                    }
+                                                    @if (Model.GiamSatThiCongs.Any(g => g.GiaTriPLHopDong != null))
+                                                    {
+                                                        <th>Giá trị phụ lục hợp đồng</th>
+                                                    }
+                                                    @if (Model.GiamSatThiCongs.Any(g => g.LandVolumeContract != null))
+                                                    {
+                                                        <th>Khối lượng theo Hợp đồng (trên cạn)</th>
+                                                    }
+                                                    @if (Model.GiamSatThiCongs.Any(g => g.WaterVolumeContract != null))
+                                                    {
+                                                        <th>Khối lượng theo Hợp đồng (dưới nước)</th>
+                                                    }
+                                                    @if (Model.GiamSatThiCongs.Any(g => g.LandVolumeNghiemThu != null))
+                                                    {
+                                                        <th>Khối lượng nghiệm thu (trên cạn)</th>
+                                                    }
+                                                    @if (Model.GiamSatThiCongs.Any(g => g.WaterVolumeNghiemThu != null))
+                                                    {
+                                                        <th>Khối lượng nghiệm thu (dưới nước)</th>
+                                                    }
+                                                    @if (Model.GiamSatThiCongs.Any(g => g.DocumentType != null))
+                                                    {
+                                                        <th>Loại hợp đồng</th>
+                                                    }
+                                                    @if (Model.GiamSatThiCongs.Any(g => g.GiamSat != null))
+                                                    {
+                                                        <th>Cán bộ giám sát</th>
+                                                    }
+                                                    @if (Model.GiamSatThiCongs.Any(g => g.TinhTrangCongNo != null))
+                                                    {
+                                                        <th>Công nợ</th>
+                                                    }
+                                                    @if (Model.GiamSatThiCongs.Any(g => g.StatusProject != null))
+                                                    {
+                                                        <th>Tình trạng dự án</th>
+                                                    }
+                                                    @if (Model.GiamSatThiCongs.Any(g => g.Note != null))
+                                                    {
+                                                        <th>Ghi chú</th>
+                                                    }
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model.GiamSatThiCongs)
+                                                {
+                                                    if (item.IsActive == true)
+                                                    {
+                                                        <tr>
+                                                            @if (Model.GiamSatThiCongs.Any(g => g.GiaTriHopDong != null))
+                                                            {
+                                                                <td>
+                                                                    @String.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:#,##0} VNĐ", item.GiaTriHopDong)
+                                                                </td>
+                                                            }
+                                                            @if (Model.GiamSatThiCongs.Any(g => g.GiaTriPLHopDong != null))
+                                                            {
+                                                                <td>
+                                                                    @String.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:#,##0} VNĐ", item.GiaTriPLHopDong)
+                                                                </td>
+                                                            }
+                                                            @if (Model.GiamSatThiCongs.Any(g => g.LandVolumeContract != null))
+                                                            {
+                                                                <td>
+                                                                    @item.LandVolumeContract @item.Unit.UnitName
+                                                                </td>
+                                                            }
+                                                            @if (Model.GiamSatThiCongs.Any(g => g.WaterVolumeContract != null))
+                                                            {
+                                                                <td>
+                                                                    @item.WaterVolumeContract @item.Unit.UnitName
+                                                                </td>
+                                                            }
+                                                            @if (Model.GiamSatThiCongs.Any(g => g.LandVolumeNghiemThu != null))
+                                                            {
+                                                                <td>
+                                                                    @item.LandVolumeNghiemThu @item.Unit.UnitName
+                                                                </td>
+                                                            }
+                                                            @if (Model.GiamSatThiCongs.Any(g => g.WaterVolumeNghiemThu != null))
+                                                            {
+                                                                <td>
+                                                                    @item.WaterVolumeNghiemThu @item.Unit.UnitName
+                                                                </td>
+                                                            }
+                                                            @if (Model.GiamSatThiCongs.Any(g => g.DocumentType != null))
+                                                            {
+                                                                <td>
+                                                                    @item.DocumentType.DocumentTypeName
+                                                                </td>
+                                                            }
+                                                            @if (Model.GiamSatThiCongs.Any(g => g.GiamSat != null))
+                                                            {
+                                                                <td>
+                                                                    @item.GiamSat
+                                                                </td>
+                                                            }
+                                                            @if (Model.GiamSatThiCongs.Any(g => g.TinhTrangCongNo != null))
+                                                            {
+                                                                <td>
+                                                                    @(item.TinhTrangCongNo ? "Có" : "Không")
+                                                                </td>
+                                                            }
+                                                            @if (Model.GiamSatThiCongs.Any(g => g.StatusProject != null))
+                                                            {
+                                                                <td>
+                                                                    @item.StatusProject.StatusName
+                                                                </td>
+                                                            }
+                                                            @if (Model.GiamSatThiCongs.Any(g => g.Note != null))
+                                                            {
+                                                                <td>
+                                                                    @item.Note
+                                                                </td>
+                                                            }
+                                                            <td>
+                                                                <div class="d-flex align-items-center list-action">
+                                                                    <a class="badge bg-success mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sửa"
+                                                                       href="@Url.Action(Model.DM_DonVis?.EditBranch ?? "Edit", "GiamSatThiCongs", new { id = item.Id, projectID = Model.Id })"><i class="ni ni-wrench fa-2x"></i></a>
+                                                                    <a class="badge bg-warning mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xóa"
+                                                                       href="@Url.Action("Delete", "GiamSatThiCongs", new { id = item.Id, projectID = Model.Id })"><i class="ni ni-trash fa-2x"></i></a>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            @if (Model.ThiCongs != null && Model.ThiCongs.Any())
+            {
+                <div class="col-lg-12 col-sm-12 col-xs-12 ">
+                    <div id="panel-1" class="panel">
+                        <div class="panel-hdr">
+                            <h2>
+                                Quản lý <span class="fw-300"><i>thi công</i></span>
+                            </h2>
+                        </div>
+                        <div class="panel-container show">
+                            <div class="panel-content">
+                                <div class="form-horizontal">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover table-striped w-100 dt-basic-example" style="font-size: calc(0.3vw + 10px) ">
+                                            <thead class="bg-warning-200 text-center">
+                                                <tr>
+                                                    @if (Model.GiamSatThiCongs.Any(g => g.GiaTriHopDong != null))
+                                                    {
+                                                        <th>Giá trị hợp đồng</th>
+                                                    }
+                                                    @if (Model.GiamSatThiCongs.Any(g => g.GiaTriPLHopDong != null))
+                                                    {
+                                                        <th>Giá trị phụ lục hợp đồng</th>
+                                                    }
+                                                    @if (Model.GiamSatThiCongs.Any(g => g.LandVolumeContract != null))
+                                                    {
+                                                        <th>Khối lượng theo Hợp đồng (trên cạn)</th>
+                                                    }
+                                                    @if (Model.GiamSatThiCongs.Any(g => g.WaterVolumeContract != null))
+                                                    {
+                                                        <th>Khối lượng theo Hợp đồng (dưới nước)</th>
+                                                    }
+                                                    @if (Model.GiamSatThiCongs.Any(g => g.LandVolumeNghiemThu != null))
+                                                    {
+                                                        <th>Khối lượng nghiệm thu (trên cạn)</th>
+                                                    }
+                                                    @if (Model.GiamSatThiCongs.Any(g => g.WaterVolumeNghiemThu != null))
+                                                    {
+                                                        <th>Khối lượng nghiệm thu (dưới nước)</th>
+                                                    }
+                                                    @if (Model.GiamSatThiCongs.Any(g => g.DocumentType != null))
+                                                    {
+                                                        <th>Loại hợp đồng</th>
+                                                    }
+                                                    @if (Model.GiamSatThiCongs.Any(g => g.GiamSat != null))
+                                                    {
+                                                        <th>Cán bộ giám sát</th>
+                                                    }
+                                                    @if (Model.GiamSatThiCongs.Any(g => g.TinhTrangCongNo != null))
+                                                    {
+                                                        <th>Công nợ</th>
+                                                    }
+                                                    @if (Model.GiamSatThiCongs.Any(g => g.StatusProject != null))
+                                                    {
+                                                        <th>Tình trạng dự án</th>
+                                                    }
+                                                    @if (Model.GiamSatThiCongs.Any(g => g.Note != null))
+                                                    {
+                                                        <th>Ghi chú</th>
+                                                    }
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model.GiamSatThiCongs)
+                                                {
+                                                    if (item.IsActive == true)
+                                                    {
+                                                        <tr>
+                                                            @if (Model.GiamSatThiCongs.Any(g => g.GiaTriHopDong != null))
+                                                            {
+                                                                <td>
+                                                                    @String.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:#,##0} VNĐ", item.GiaTriHopDong)
+                                                                </td>
+                                                            }
+                                                            @if (Model.GiamSatThiCongs.Any(g => g.GiaTriPLHopDong != null))
+                                                            {
+                                                                <td>
+                                                                    @String.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:#,##0} VNĐ", item.GiaTriPLHopDong)
+                                                                </td>
+                                                            }
+                                                            @if (Model.GiamSatThiCongs.Any(g => g.LandVolumeContract != null))
+                                                            {
+                                                                <td>
+                                                                    @item.LandVolumeContract @item.Unit.UnitName
+                                                                </td>
+                                                            }
+                                                            @if (Model.GiamSatThiCongs.Any(g => g.WaterVolumeContract != null))
+                                                            {
+                                                                <td>
+                                                                    @item.WaterVolumeContract @item.Unit.UnitName
+                                                                </td>
+                                                            }
+                                                            @if (Model.GiamSatThiCongs.Any(g => g.LandVolumeNghiemThu != null))
+                                                            {
+                                                                <td>
+                                                                    @item.LandVolumeNghiemThu @item.Unit.UnitName
+                                                                </td>
+                                                            }
+                                                            @if (Model.GiamSatThiCongs.Any(g => g.WaterVolumeNghiemThu != null))
+                                                            {
+                                                                <td>
+                                                                    @item.WaterVolumeNghiemThu @item.Unit.UnitName
+                                                                </td>
+                                                            }
+                                                            @if (Model.GiamSatThiCongs.Any(g => g.DocumentType != null))
+                                                            {
+                                                                <td>
+                                                                    @item.DocumentType.DocumentTypeName
+                                                                </td>
+                                                            }
+                                                            @if (Model.GiamSatThiCongs.Any(g => g.GiamSat != null))
+                                                            {
+                                                                <td>
+                                                                    @item.GiamSat
+                                                                </td>
+                                                            }
+                                                            @if (Model.GiamSatThiCongs.Any(g => g.TinhTrangCongNo != null))
+                                                            {
+                                                                <td>
+                                                                    @(item.TinhTrangCongNo ? "Có" : "Không")
+                                                                </td>
+                                                            }
+                                                            @if (Model.GiamSatThiCongs.Any(g => g.StatusProject != null))
+                                                            {
+                                                                <td>
+                                                                    @item.StatusProject.StatusName
+                                                                </td>
+                                                            }
+                                                            @if (Model.GiamSatThiCongs.Any(g => g.Note != null))
+                                                            {
+                                                                <td>
+                                                                    @item.Note
+                                                                </td>
+                                                            }
+                                                            <td>
+                                                                <div class="d-flex align-items-center list-action">
+                                                                    <a class="badge bg-success mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sửa"
+                                                                       href="@Url.Action(Model.DM_DonVis?.EditBranch ?? "Edit", "ThiCongs", new { id = item.Id, projectID = Model.Id })"><i class="ni ni-wrench fa-2x"></i></a>
+                                                                    <a class="badge bg-warning mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xóa"
+                                                                       href="@Url.Action("Delete", "ThiCongs", new { id = item.Id, projectID = Model.Id })"><i class="ni ni-trash fa-2x"></i></a>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            @if (Model.NghiemThus != null && Model.NghiemThus.Any())
+            {
+                <div class="col-lg-12 col-sm-12 col-xs-12 ">
+                    <div id="panel-1" class="panel">
+                        <div class="panel-hdr">
+                            <h2>
+                                Quản lý <span class="fw-300"><i>nghiệm thu</i></span>
+                            </h2>
+                        </div>
+                        <div class="panel-container show">
+                            <div class="panel-content">
+                                <div class="form-horizontal">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover table-striped w-100 dt-basic-example" style="font-size: calc(0.3vw + 10px) ">
+                                            <thead class="bg-warning-200 text-center">
+                                                <tr>
+                                                    @if (Model.NghiemThus.Any(n => n.Phase != null))
+                                                    {
+                                                        <th>Đợt nghiệm thu</th>
+                                                    }
+                                                    @if (Model.NghiemThus.Any(n => n.PhaseValue != null))
+                                                    {
+                                                        <th>Giá trị nghiệm thu</th>
+                                                    }
+                                                    @if (Model.NghiemThus.Any(n => n.PhaseLand != null))
+                                                    {
+                                                        <th>Khối lượng nghiệm thu (trên cạn)</th>
+                                                    }
+                                                    @if (Model.NghiemThus.Any(n => n.PhaseWater != null))
+                                                    {
+                                                        <th>Khối lượng nghiệm thu (dưới nước)</th>
+                                                    }
+                                                    @if (Model.NghiemThus.Any(n => n.DaThanhToan != null))
+                                                    {
+                                                        <th>Đã thanh toán</th>
+                                                    }
+                                                    @if (Model.NghiemThus.Any(n => n.NoConLai != null))
+                                                    {
+                                                        <th>Công nợ</th>
+                                                    }
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model.NghiemThus)
+                                                {
+                                                    <tr>
+                                                        @if (Model.NghiemThus.Any(n => n.Phase != null))
+                                                        {
+                                                            <td>
+                                                                @item.Phase.PhaseName
+                                                            </td>
+                                                        }
+                                                        @if (Model.NghiemThus.Any(n => n.PhaseValue != null))
+                                                        {
+                                                            <td>
+                                                                @String.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:#,##0} VNĐ", item.PhaseValue)
+                                                            </td>
+                                                        }
+                                                        @if (Model.NghiemThus.Any(n => n.PhaseLand != null))
+                                                        {
+                                                            <td>
+                                                                @item.PhaseLand @item.Unit.UnitName
+                                                            </td>
+                                                        }
+                                                        @if (Model.NghiemThus.Any(n => n.PhaseWater != null))
+                                                        {
+                                                            <td>
+                                                                @item.PhaseWater @item.Unit.UnitName
+                                                            </td>
+                                                        }
+                                                        @if (Model.NghiemThus.Any(n => n.DaThanhToan != null))
+                                                        {
+                                                            <td>
+                                                                @String.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:#,##0} VNĐ", item.DaThanhToan)
+                                                            </td>
+                                                        }
+                                                        @if (Model.NghiemThus.Any(n => n.NoConLai != null))
+                                                        {
+                                                            <td>
+                                                                @String.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:#,##0} VNĐ", item.NoConLai)
+                                                            </td>
+                                                        }
+                                                        <td>
+                                                            <div class="d-flex align-items-center list-action">
+                                                                <a class="badge bg-success mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sửa"
+                                                                   href="@Url.Action(Model.DM_DonVis?.EditBranch ?? "Edit", "NghiemThus", new { id = item.Id, projectID = Model.Id })"><i class="ni ni-wrench fa-2x"></i></a>
+                                                                <a class="badge bg-warning mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xóa"
+                                                                   href="@Url.Action("Delete", "NghiemThus", new { id = item.Id, projectID = Model.Id })"><i class="ni ni-trash fa-2x"></i></a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            @if (Model.HoSoPhapLys != null && Model.HoSoPhapLys.Any())
+            {
+                <div class="col-lg-12 col-sm-12 col-xs-12 ">
+                    <div id="panel-1" class="panel">
+                        <div class="panel-hdr">
+                            <h2>
+                                Quản lý <span class="fw-300"><i>hồ sơ</i></span>
+                            </h2>
+                        </div>
+                        <div class="panel-container show">
+                            <div class="panel-content">
+                                <div class="form-horizontal">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover table-striped w-100 dt-basic-example" style="font-size: calc(0.3vw + 10px) ">
+                                            <thead class="bg-warning-200 text-center">
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Tên hồ sơ</th>
+                                                    <th>Loại hồ sơ</th>
+                                                    <th>Nhóm hồ sơ</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model.HoSoPhapLys)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.STT)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.TenHoSo)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.DocumentType.DocumentTypeName)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.DM_AddBangs.TenBang)
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex align-items-center list-action">
+                                                                <a class="badge bg-white mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Tải"
+                                                                   href="../../Uploads/@item.ProjectID/@item.AddBangId/@item.Url"><i class="fal fa-cloud-download fa-2x"></i></a>
+                                                                <a class="badge bg-success mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sửa"
+                                                                   href="@Url.Action("Edit","HoSoPhapLies", new { id = item.Id })"><i class="ni ni-wrench fa-2x"></i></a>
+                                                                <a class="badge bg-warning mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xóa"
+                                                                   href="@Url.Action("Delete","HoSoPhapLies", new { id = item.Id })"><i class="ni ni-trash fa-2x"></i></a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+
+
+}

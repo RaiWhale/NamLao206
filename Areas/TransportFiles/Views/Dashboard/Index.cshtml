@@ -1,1 +1,194 @@
-﻿
+﻿@using NamLao206.Models;
+@{
+    var projects = ViewBag.Projects as IEnumerable<Project>;
+}
+
+<div class="row" id="topInformation">
+
+</div>
+<div class="row">
+    <div class="col-lg-3 col-sm-6 col-xs-12">
+        <div id="panel-4" class="panel panel-locked" style="height:auto" data-panel-sortable data-panel-collapsed data-panel-close>
+            <div class="panel-hdr">
+                <h2 style="font-size: 150%">
+                    Tình hình <span class="fw-300"><i><b class="color-success-900">dự án</b></i></span>
+                </h2>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+                    <div id="pieChart" style="height:350px !important;">
+                        <canvas style="height:auto !important;"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-5 col-sm-9 col-xs-12">
+        <div id="panel-2" class="panel panel-locked" data-panel-sortable data-panel-collapsed data-panel-close>
+            <div class="panel-hdr">
+                <h2 style="font-size: 150%">
+                    Tăng trưởng <span class="fw-300"><i><b class="color-success-900">doanh thu</b></i></span>
+                </h2>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content poisition-relative">
+                    <!-- Canvas cho biểu đồ -->
+                    <canvas id="myLineChart" style="height:350px !important;"></canvas>
+                    <!-- datatable end-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-sm-8 col-xs-12">
+        <div class="panel-container show">
+            <div class="panel-content border-faded border-left-0 border-right-0 border-top-0">
+                <div class="row no-gutters">
+                    <div class="col-lg-9 col-xl-9 pl-lg-12">
+                        <div class="d-flex mt-2">
+                            My Tasks
+                            <span class="d-inline-block ml-auto">130 / 500</span>
+                        </div>
+                        <div class="progress progress-sm mb-3">
+                            <div class="progress-bar bg-fusion-400" role="progressbar" style="width: 65%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="d-flex">
+                            Transfered
+                            <span class="d-inline-block ml-auto">440 TB</span>
+                        </div>
+                        <div class="progress progress-sm mb-3">
+                            <div class="progress-bar bg-success-500" role="progressbar" style="width: 34%;" aria-valuenow="34" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="d-flex">
+                            Bugs Squashed
+                            <span class="d-inline-block ml-auto">77%</span>
+                        </div>
+                        <div class="progress progress-sm mb-3">
+                            <div class="progress-bar bg-info-400" role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="d-flex">
+                            User Testing
+                            <span class="d-inline-block ml-auto">7 days</span>
+                        </div>
+                        <div class="progress progress-sm mb-g">
+                            <div class="progress-bar bg-primary-300" role="progressbar" style="width: 84%;" aria-valuenow="84" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="row no-gutters">
+                            <div class="col-6 pr-1">
+                                <a href="#" class="btn btn-default btn-block">Generate PDF</a>
+                            </div>
+                            <div class="col-6 pl-1">
+                                <a href="#" class="btn btn-default btn-block">Report a Bug</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="container-fluid" style="margin-top:10px">
+        <div class="col-lg-12 col-sm-12 col-xs-12 ">
+            <div id="panel-1" class="panel">
+                <div class="panel-hdr">
+                    <h2>
+                        Dự<span class="fw-300"><i>Án</i></span>
+                    </h2>
+                    <a href="@Url.Action("Create","Projects")" class="bcommand btn btn-md btn-success waves-effect waves-themed">
+                        <span class="fal fa-download mr-1"></span>Tạo mới
+                    </a>
+                </div>
+                <div class="panel-container show">
+                    <div class="panel-content">
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover table-striped w-100 dt-basic-example" style="font-size: calc(0.3vw + 10px) ">
+                                    <thead class="bg-warning-200 text-center">
+                                        <tr>
+                                            <th>
+                                                Mã dự án
+                                            </th>
+                                            <th>
+                                                Tên dự án
+                                            </th>
+                                            <th>
+                                                Giám sát
+                                            </th>
+                                            <th>
+                                                Ngày bắt đầu
+                                            </th>
+                                            @*<th>
+                                                    Ngày kết thúc
+                                                </th>*@
+                                            <th>
+                                                Công nợ
+                                            </th>
+                                            <th>
+                                                Đơn vị
+                                            </th>
+                                            <th>
+                                                Chủ đầu tư
+                                            </th>
+                                            <th>
+                                                Tình trạng
+                                            </th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in projects)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <a href="@Url.Action("InformationProject", new { projectID = item.Id })">
+                                                        @Html.DisplayFor(modelItem => item.MaDuAn)
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a href="@Url.Action("InformationProject", new { projectID = item.Id })" style="text-decoration: underline;">
+                                                        @Html.DisplayFor(modelItem => item.TenDuAn)
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.GiamSat)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.StartDate)
+                                                </td>
+                                                @*<td>
+                                                        @Html.DisplayFor(modelItem => item.EndDate)
+                                                    </td>*@
+                                                <td>
+                                                    <input class="form-control" type="checkbox" checked="@item.TinhTrangCongNo" disabled />
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.DM_DonVis.TenDonVi)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Supplier.SupplierName) - @Html.DisplayFor(modelItem => item.Supplier.NguoiDaiDien)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.StatusProject.StatusName)
+                                                </td>
+                                                <td>
+                                                    @*<a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" data-title="Chi tiết" data-original-title="Chi tiết"
+                                                        href="@Url.Action("InformationProject", new { projectID = item.Id })"><i class="ni ni-wrench fa-2x"></i></a>*@
+                                                    <a class="badge bg-info mr-2 bcommand" data-toggle="tooltip" data-placement="top" data-title="Sửa" data-original-title="Sửa"
+                                                       href="@Url.Action("Edit","Projects", new { id = item.Id })"><i class="fal fa-edit fa-2x"></i></a>
+                                                    <a class="badge bg-warning mr-2 bcommand" data-toggle="tooltip" data-placement="top" data-title="Xóa" data-original-title="Xóa"
+                                                       href="@Url.Action("Delete","Projects", new { id = item.Id })"><i class="ni ni-trash fa-2x"></i></a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

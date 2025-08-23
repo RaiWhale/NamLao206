@@ -1,0 +1,152 @@
+﻿@model IEnumerable<NamLao206.Models.Project>
+
+@{
+
+}
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <!-- Hiển thị thông báo (nếu có) -->
+    <div id="alert-container" data-message="@Html.Raw(HttpUtility.HtmlEncode(ViewBag.Message))"></div>
+    <div class="row">
+        <div class="container-fluid" style="margin-top:10px">
+            <div class="col-lg-4 col-sm-8 col-xs-12">
+                <div id="panel-2" class="panel panel-collapsed">
+                    <div class="panel-hdr">
+                        <h2 style="font-size: 150%">
+                            Tạo mới <span class="fw-300"><i><b class="color-success-900">và tìm kiếm dự án</b></i></span>
+                        </h2>
+                    </div>
+                    <div class="panel-container show">
+                        <div class="panel-content">
+                            @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <a href="@Url.Action("Create")" class="bcommand btn btn-md btn-success waves-effect waves-themed">
+                                            <span class="fal fa-download mr-1"></span>Tạo mới
+                                        </a>
+                                    </div>
+                                    <div class="d-flex position-relative ml-auto" style="max-width: 23rem;">
+                                        <i class="fas fa-search position-absolute pos-left fs-lg px-3 py-2 mt-1"></i>
+                                        <input type="text" name="search" class="search form-control bg-subtlelight pl-6" placeholder="Tìm kiếm">
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="container-fluid" style="margin-top:10px">
+            <div class="col-lg-12 col-sm-12 col-xs-12 ">
+                <div id="panel-1" class="panel">
+                    <div class="panel-hdr">
+                        <h2>
+                            Dự<span class="fw-300"><i>Án</i></span>
+                        </h2>
+                    </div>
+                    <div class="panel-container show">
+                        <div class="panel-content">
+                            <div class="form-horizontal">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover table-striped w-100 dt-basic-example" style="font-size: calc(0.3vw + 10px) ">
+                                        <thead class="bg-warning-200 text-center">
+                                            <tr>
+                                                <th>
+                                                    Mã dự án
+                                                </th>
+                                                <th>
+                                                    Tên dự án
+                                                </th>
+                                                <th>
+                                                   Tọa độ
+                                                </th>
+                                                <th>
+                                                    Giám sát
+                                                </th>
+                                                <th>
+                                                    Ngày bắt đầu
+                                                </th>
+                                                <th>
+                                                    Ngày kết thúc
+                                                </th>
+                                                <th>
+                                                    Công nợ
+                                                </th>
+                                                <th>
+                                                    Đơn vị
+                                                </th>
+                                                <th>
+                                                    Chủ đầu tư
+                                                </th>
+                                                <th>
+                                                    Tình trạng
+                                                </th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                      <a href="@Url.Action("InformationProject", new { projectID = item.Id })">
+                                                          @Html.DisplayFor(modelItem => item.MaDuAn)
+                                                      </a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="@Url.Action("InformationProject", new { projectID = item.Id })" style="text-decoration: underline;">
+                                                            @Html.DisplayFor(modelItem => item.TenDuAn)
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.ProjectValue)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.GiamSat)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.StartDate)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.EndDate)
+                                                    </td>
+                                                    <td>
+                                                        <input class="form-control" type="checkbox" checked="@item.TinhTrangCongNo" disabled />
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.DM_DonVis.TenDonVi)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Supplier.SupplierName) - @Html.DisplayFor(modelItem => item.Supplier.NguoiDaiDien)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.StatusProject.StatusName)
+                                                    </td>
+                                                    <td>
+                                                        @*<a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" data-title="Chi tiết" data-original-title="Chi tiết"
+                                                           href="@Url.Action("InformationProject", new { projectID = item.Id })"><i class="ni ni-wrench fa-2x"></i></a>*@
+                                                        <a class="badge bg-info mr-2 bcommand" data-toggle="tooltip" data-placement="top" data-title="Sửa" data-original-title="Sửa"
+                                                           href="@Url.Action("Edit", new { id = item.Id })"><i class="fal fa-edit fa-2x"></i></a>
+                                                        <a class="badge bg-warning mr-2 bcommand" data-toggle="tooltip" data-placement="top" data-title="Xóa" data-original-title="Xóa"
+                                                           href="@Url.Action("Delete", new { id = item.Id })"><i class="ni ni-trash fa-2x"></i></a>                                                      
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}

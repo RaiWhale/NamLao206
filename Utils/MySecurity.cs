@@ -1,6 +1,7 @@
 ﻿using QRCoder;
 using System;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
@@ -9,8 +10,7 @@ using System.Text.RegularExpressions;
 namespace NamLao206.Utils
 {
     public class MySecurity
-    {
-
+    {	
         public static string Encrypt(string str)
         {
             SHA256 sha = SHA256Managed.Create();
@@ -86,67 +86,33 @@ namespace NamLao206.Utils
 			}	             
             return srcPic;
         }
-		public static string RemoveDiacritics(string input)
-		{
-			string[] VietnameseSigns = new string[]
-		  {
-			"aAeEoOuUiIdDyY",
-			"áàạảãâấầậẩẫăắằặẳẵ",
-			"ÁÀẠẢÃÂẤẦẬẨẪĂẮẰẶẲẴ",
-			"éèẹẻẽêếềệểễ",
-			"ÉÈẸẺẼÊẾỀỆỂỄ",
-			"óòọỏõôốồộổỗơớờợởỡ",
-			"ÓÒỌỎÕÔỐỒỘỔỖƠỚỜỢỞỠ",
-			"úùụủũưứừựửữ",
-			"ÚÙỤỦŨƯỨỪỰỬỮ",
-			"íìịỉĩ",
-			"ÍÌỊỈĨ",
-			"đ",
-			"Đ",
-			"ýỳỵỷỹ",
-			"ÝỲỴỶỸ"
-		  };
+        public static string RemoveDiacritics(string input)
+        {
+            if (string.IsNullOrEmpty(input)) return input;
 
-			// Loại bỏ ký tự đặc biệt và chuyển các ký tự tiếng Việt có dấu thành không dấu
-			for (int i = 1; i < VietnameseSigns.Length; i++)
-			{
-				for (int j = 0; j < VietnameseSigns[i].Length; j++)
-				{
-					input = input.Replace(VietnameseSigns[i][j], VietnameseSigns[0][i - 1]);
-				}
-			}
-			// Loại bỏ các ký tự không nằm trong bảng chữ cái tiếng Anh
-			//Regex regex = new Regex("[^a-zA-Z0-9]");
-			//input = regex.Replace(input, "");
+            // Normalize the string to decompose characters into base letters and diacritics
+            string normalizedString = input.Normalize(NormalizationForm.FormKD);
 
+            // Filter out diacritic marks and rebuild the string
+            var stringBuilder = new StringBuilder();
+            foreach (char c in normalizedString)
+            {
+                var unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(c);
+                if (unicodeCategory != UnicodeCategory.NonSpacingMark)
+                {
+                    stringBuilder.Append(c);
+                }
+            }
 
-			input = input.Replace(" ", "-");
-			input = input.Replace(" ", "-");
-			input = input.Replace("  ", " ");
-			input = input.Replace("    ", " ");
-			input = input.Replace("     ", " ");
-			input = input.Replace("--", "-");
-			input = input.Replace("---", "-");
-			input = input.Replace("----", "-");
-			input = input.Replace("@", "-");
-			input = input.Replace("#", "-");
-			input = input.Replace("/", "-");
-			input = input.Replace("|", "-");
-			input = input.Replace("*", "-");
-			input = input.Replace("-", "-");
-			input = input.Replace("+", "-");
-			input = input.Replace(".", "-");
-			input = input.Replace("!", "-");
-			input = input.Replace("'", "-");
-			input = input.Replace("?", "-");
-			input = input.Replace("$", "-");
-			input = input.Replace("%", "-");
-			input = input.Replace("^", "-");
-			input = input.Replace("&", "-");
-			input = input.Replace("(", "-");
-			input = input.Replace(")", "-");						
+            // Rebuild the string and normalize to FormC to ensure consistency
+            string result = stringBuilder.ToString().Normalize(NormalizationForm.FormC);
 
-			return input;
-		}
-	}
+            // Replace special characters and multiple spaces/hyphens with a single hyphen
+            result = Regex.Replace(result, "[^a-zA-Z0-9-]", "-");
+            result = Regex.Replace(result, "-{2,}", "-"); // Replace multiple hyphens with a single one
+            result = result.Trim('-'); // Remove leading/trailing hyphens
+
+            return result;
+        }
+    }
 }

@@ -2,33 +2,27 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Reflection;
-using System.Runtime.Remoting.Messaging;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using System.Windows.Documents;
-using Microsoft.Win32;
 using NamLao206.Models;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
 using PagedList;
-using static System.Net.WebRequestMethods;
+
 
 namespace NamLao206.Areas.TransportFiles.Controllers
 {
     [Authorize]
     public class TransportFilesController : Controller
     {
-        private namlao206dbEntities db = new namlao206dbEntities();
-
-        // GET: TransportFiles/TransportFiles
-        public ActionResult HopThuDen(string search, string message)
+        private namlao206_websiteEntities db = new namlao206_websiteEntities();
+		int pageSize = 50;
+		// GET: TransportFiles/TransportFiles
+		public ActionResult HopThuDen(int? page, string search, string message)
         {
 			try
 			{
@@ -53,24 +47,22 @@ namespace NamLao206.Areas.TransportFiles.Controllers
 				// Truy vấn danh sách Transport với các bảng liên quan
 				IQueryable<Transport> transports = db.Transports
 					.Include(x => x.TransportFile) // Tải trước TransportFile để tránh N+1 query
-					.Where(x => x.ReceiverUserId == acc.EmployeeId);
+					.Where(x => x.ReceiverUserId == acc.EmployeeId && x.IsActive == true);
 
 				// Áp dụng tìm kiếm nếu có
-				if (!string.IsNullOrEmpty(search))
+				if (!string.IsNullOrWhiteSpace(search))
 				{
-					string searchLower = search.Trim().ToLower(); // Chuẩn hóa chuỗi tìm kiếm một lần
-					transports = transports.Where(x => x.TransportFile.tenFile.ToLower().Contains(searchLower));
+					string searchLower = search.Trim().ToLower();
+					transports = transports.Where(x => x.TransportFile != null && x.TransportFile.Mota.ToLower().Contains(searchLower));
 				}
 
 				// Sắp xếp và lấy danh sách
-				var transportList = transports
-					.OrderByDescending(x => x.TransportFile.CreateDate)
-					.ToList();
+				transports = transports.OrderByDescending(x => x.TransportFile.CreateDate);
 
 				// Gán thông báo (nếu có)
 				ViewBag.Message = message;
-
-				return View(transportList);
+				int pageNumber = page ?? 1;
+				return View(transports.ToPagedList(pageNumber, pageSize));
 			}
 			catch (Exception ex)
 			{
@@ -81,7 +73,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
 			}
         }
 
-        public ActionResult HopThuDi(string search, string message)
+        public ActionResult HopThuDi(int? page, string search, string message)
         {
 			try
 			{
@@ -94,24 +86,22 @@ namespace NamLao206.Areas.TransportFiles.Controllers
 
 				// Truy vấn danh sách TransportFile
 				IQueryable<TransportFile> transportFiles = db.TransportFiles
-					.Where(x => x.CreateUserId == userId);
+					.Where(x => x.CreateUserId == userId && x.IsActive == true);
 
 				// Áp dụng tìm kiếm nếu có
 				if (!string.IsNullOrEmpty(search))
 				{
 					string searchLower = search.Trim().ToLower(); // Chuẩn hóa chuỗi tìm kiếm một lần
-					transportFiles = transportFiles.Where(x => x.tenFile.ToLower().Contains(searchLower));
+					transportFiles = transportFiles.Where(x => x.Mota.ToLower().Contains(searchLower));			
 				}
 
 				// Sắp xếp và lấy danh sách
-				var transportFilesList = transportFiles
-					.OrderByDescending(x => x.CreateDate)
-					.ToList();
+				transportFiles = transportFiles.OrderByDescending(x => x.CreateDate);
 
 				// Gán thông báo (nếu có)
 				ViewBag.Message = message;
-
-				return View(transportFilesList);
+				int pageNumber = page ?? 1;
+				return View(transportFiles.ToPagedList(pageNumber, pageSize));		
 			}
 			catch (Exception ex)
 			{
@@ -121,7 +111,45 @@ namespace NamLao206.Areas.TransportFiles.Controllers
 				return View(new List<TransportFile>());
 			}		
         }
-        public ActionResult CongVanKhan(string search, string message)
+		public ActionResult PheDuyet(int? page, string search, string message)
+		{
+			try
+			{
+				// Kiểm tra và lấy thông tin người dùng
+				if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
+				{
+					ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
+					return RedirectToAction("Login", "Login", new { area = "" });
+				}
+
+				// Truy vấn danh sách TransportFile
+				IQueryable<TransportFile> transportFiles = db.TransportFiles
+					.Where(x => (x.CreateUserId == userId || x.NguoiPheDuyetId == userId) && x.PheDuyet == false && x.IsActive == true);
+
+				// Áp dụng tìm kiếm nếu có
+				if (!string.IsNullOrEmpty(search))
+				{
+					string searchLower = search.Trim().ToLower(); // Chuẩn hóa chuỗi tìm kiếm một lần
+					transportFiles = transportFiles.Where(x => x.Mota.ToLower().Contains(searchLower));
+				}
+
+				// Sắp xếp và lấy danh sách
+				transportFiles = transportFiles.OrderByDescending(x => x.CreateDate);
+
+				// Gán thông báo (nếu có)
+				ViewBag.Message = message;
+				int pageNumber = page ?? 1;
+				return View(transportFiles.ToPagedList(pageNumber, pageSize));
+			}
+			catch (Exception ex)
+			{
+				// Ghi log lỗi (nên sử dụng logging framework như Serilog)
+				System.Diagnostics.Debug.WriteLine($"Lỗi khi lấy danh sách TransportFile: {ex.Message}");
+				ViewBag.Message = "Đã xảy ra lỗi khi lấy danh sách. Vui lòng thử lại.";
+				return View(new List<TransportFile>());
+			}		
+        }
+        public ActionResult CongVanKhan(int? page, string search, string message)
         {
 			try
 			{
@@ -146,24 +174,23 @@ namespace NamLao206.Areas.TransportFiles.Controllers
 				// Truy vấn danh sách Transport với các bảng liên quan
 				IQueryable<Transport> transports = db.Transports
 					.Include(x => x.TransportFile) // Tải trước TransportFile để tránh N+1 query
-					.Where(x => x.ReceiverUserId == acc.EmployeeId && x.TransportFile.KhanCap == true);
+					.Where(x => x.ReceiverUserId == acc.EmployeeId && x.TransportFile.KhanCap == true && x.IsActive == true);
 
 				// Áp dụng tìm kiếm nếu có
 				if (!string.IsNullOrEmpty(search))
 				{
-					string searchLower = search.Trim().ToLower(); // Chuẩn hóa chuỗi tìm kiếm một lần
-					transports = transports.Where(x => x.TransportFile.tenFile.ToLower().Contains(searchLower));
+					string searchLower = search.Trim().ToLower();
+					transports = transports.Where(x => x.TransportFile != null && x.TransportFile.Mota.ToLower().Contains(searchLower));
 				}
 
 				// Sắp xếp và lấy danh sách
-				var transportList = transports
-					.OrderByDescending(x => x.TransportFile.CreateDate)
-					.ToList();
+				transports = transports.OrderByDescending(x => x.TransportFile.CreateDate);
+
 
 				// Gán thông báo (nếu có)
 				ViewBag.Message = message;
-
-				return View(transportList);
+				int pageNumber = page ?? 1;
+				return View(transports.ToPagedList(pageNumber, pageSize));
 			}
 			catch (Exception ex)
 			{
@@ -173,6 +200,56 @@ namespace NamLao206.Areas.TransportFiles.Controllers
 				return View(new List<Transport>());
 			}		
         }
+		public ActionResult ThungRac(int? page, string search, string message)
+		{
+			try
+			{
+				// Kiểm tra và lấy thông tin người dùng
+				if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
+				{
+					ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
+					return RedirectToAction("Login", "Login", new { area = "" });
+				}
+
+				// Lấy thông tin tài khoản
+				var acc = db.Accounts
+					.Where(x => x.Id == userId)
+					.SingleOrDefault();
+
+				if (acc == null)
+				{
+					ViewBag.Message = "Tài khoản không tồn tại hoặc không liên kết với nhân viên.";
+					return RedirectToAction("Login", "Login", new { area = "" });
+				}
+
+				// Truy vấn danh sách Transport với các bảng liên quan
+				IQueryable<Transport> transports = db.Transports
+					.Include(x => x.TransportFile) // Tải trước TransportFile để tránh N+1 query
+					.Where(x => x.ReceiverUserId == acc.EmployeeId && x.IsActive == false);
+
+				// Áp dụng tìm kiếm nếu có
+				if (!string.IsNullOrEmpty(search))
+				{
+					string searchLower = search.Trim().ToLower();
+					transports = transports.Where(x => x.TransportFile != null && x.TransportFile.Mota.ToLower().Contains(searchLower));
+				}
+
+				// Sắp xếp và lấy danh sách
+				transports = transports.OrderByDescending(x => x.TransportFile.CreateDate);
+
+				// Gán thông báo (nếu có)
+				ViewBag.Message = message;
+				int pageNumber = page ?? 1;
+				return View(transports.ToPagedList(pageNumber, pageSize));
+			}
+			catch (Exception ex)
+			{
+				// Ghi log lỗi (nên sử dụng logging framework như Serilog)
+				System.Diagnostics.Debug.WriteLine($"Lỗi khi lấy danh sách Transport: {ex.Message}");
+				ViewBag.Message = "Đã xảy ra lỗi khi lấy danh sách. Vui lòng thử lại.";
+				return View(new List<Transport>());
+			}
+		}
 		// GET: TransportFiles/TransportFiles/Details/5
 		public async Task<ActionResult> Details(int? id, string flag)
 		{
@@ -221,6 +298,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
 						transport.DaXem = true;
 						await db.SaveChangesAsync();
 					}
+					ViewBag.Note = transport.Note ?? "";
 				}
 
 				// Lấy danh sách người nhận
@@ -245,7 +323,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
 				{
 					ViewBag.NguoiNhan = "Không có người nhận.";
 				}
-
+				PopulateDropdowns();
 				return View(transportFile);
 			}
 			catch (Exception ex)
@@ -255,9 +333,70 @@ namespace NamLao206.Areas.TransportFiles.Controllers
 				return new HttpStatusCodeResult(HttpStatusCode.InternalServerError, "Đã xảy ra lỗi khi xem chi tiết. Vui lòng thử lại.");
 			}
 		}
-		
-        // GET: TransportFiles/TransportFiles/Details/5
-        public ActionResult ChuyenTiep(int? id)
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		[ValidateInput(false)]
+		public async Task<ActionResult> Details([Bind(Include = "Id,CreateDate,Mota,NguoiPheDuyetId")] TransportFile transportFile,
+			List<string> lstReceiverUserId,
+			List<string> lstReceiverRoomId,
+			List<string> lstReceiverUnitId,
+			string customRadio_10, string Note)
+		{
+			try
+			{
+				// Kiểm tra và lấy thông tin người dùng
+				if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int createUserId))
+				{
+					ModelState.AddModelError("", "Không thể xác định người dùng. Vui lòng đăng nhập lại.");
+					PopulateDropdowns();
+					return View(transportFile);
+				}		
+				// Sử dụng transaction để đảm bảo tính nhất quán
+				using (var transaction = db.Database.BeginTransaction())
+				{
+					try
+					{
+						// Cập nhật thông tin TransportFile
+						var transportF = await db.TransportFiles
+							.FirstOrDefaultAsync(x => x.Id == transportFile.Id);					
+						transportF.ModifiedDate = DateTime.Now;
+						transportF.ModifiedUserId = createUserId;						
+						await db.SaveChangesAsync();
+						// Xử lý danh sách người nhận dựa trên customRadio_10
+						await ProcessReceivers(transportFile, lstReceiverUserId, lstReceiverRoomId, lstReceiverUnitId, customRadio_10, Note);
+
+						// Commit transaction
+						transaction.Commit();
+					}
+					catch (Exception ex)
+					{
+						transaction.Rollback();
+						// Ghi log lỗi (nên sử dụng logging framework như Serilog)
+						System.Diagnostics.Debug.WriteLine($"Lỗi khi tạo TransportFile: {ex.Message}");
+						//ModelState.AddModelError("", "Đã xảy ra lỗi khi tạo hồ sơ. Vui lòng thử lại.");
+						PopulateDropdowns();
+						ViewBag.Message = ex.Message;
+						return View(transportFile);
+					}
+				}
+
+				return RedirectToAction("HopThuDen", new { message = ViewBag.Message });
+			}
+
+			catch (Exception ex)
+			{
+				// Ghi log lỗi
+				System.Diagnostics.Debug.WriteLine($"Lỗi không xác định: {ex.Message}");
+				//ModelState.AddModelError("", "Đã xảy ra lỗi không xác định. Vui lòng thử lại.");
+				PopulateDropdowns();
+				ViewBag.Message = ex.Message;
+				return View(transportFile);
+			}
+
+			
+		}
+		// GET: TransportFiles/TransportFiles/Details/5
+		public ActionResult ChuyenTiep(int? id)
         {
             if (id == null)
             {
@@ -274,7 +413,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ChuyenTiep(TransportFile transportFile,List<string> lstReceiverUserId)
+        public async Task<ActionResult> ChuyenTiep(TransportFile transportFile,List<string> lstReceiverUserId, string Note)
         {
 			// Xử lý danh sách người nhận (lstReceiverUserId)
 			if (lstReceiverUserId?.Any() == true) // Kiểm tra danh sách không null và không rỗng
@@ -303,7 +442,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
 						// Kiểm tra trùng lặp
 						if (!existingReceiverUserIds.Contains(receiverUserId))
 						{
-							var transport = CreateTransport(transportFile, receiverUserId);
+							var transport = CreateTransport(transportFile, receiverUserId, Note);
 							newTransports.Add(transport);
 							existingReceiverUserIds.Add(receiverUserId); // Cập nhật HashSet để tránh trùng lặp trong cùng batch
 						}
@@ -330,11 +469,8 @@ namespace NamLao206.Areas.TransportFiles.Controllers
         // GET: TransportFiles/TransportFiles/Create
         public ActionResult Create()
         {
-            ViewBag.Employees = new SelectList(db.Employees, "Id", "Name");
-            ViewBag.DM_NhomPhongBans = new SelectList(db.DM_NhomPhongBans, "Id", "Nhomkhoa");
-            ViewBag.DM_PhongBans = new SelectList(db.DM_PhongBans, "Id", "TenKhoa");
-            ViewBag.DM_DonVis = new SelectList(db.DM_DonVis, "Id", "TenDonVi");
-            return View();
+			PopulateDropdowns();
+			return View();
         }
 
         // POST: TransportFiles/TransportFiles/Create
@@ -342,11 +478,12 @@ namespace NamLao206.Areas.TransportFiles.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+		[ValidateInput(false)]
         public async Task<ActionResult> Create([Bind(Include = "Id,tenFile,Mota,KhanCap,NgayBanHanh,NguoiPheDuyetId,SoTrang,DoMat")] TransportFile transportFile, 
             List<string> lstReceiverUserId, 
             List<string> lstReceiverRoomId, 
             List<string> lstReceiverUnitId, 
-            string customRadio_10 )
+            string customRadio_10, string Note)
         {
 			if (!ModelState.IsValid)
 			{
@@ -365,11 +502,37 @@ namespace NamLao206.Areas.TransportFiles.Controllers
 				// Cấu hình TransportFile
 				transportFile.CreateDate = DateTime.Now;
 				transportFile.CreateUserId = createUserId;
-				transportFile.NguoiPheDuyetId = db.Accounts
-					.Where(x => x.EmployeeId == transportFile.NguoiPheDuyetId)
-					.Select(x => x.Id)
-					.SingleOrDefault();
-				transportFile.IsActive = true;
+				// Gán NguoiPheDuyetId từ EmployeeId (giả sử đầu vào là EmployeeId)
+				if (transportFile.NguoiPheDuyetId.HasValue)
+				{
+					var accountId = db.Accounts
+						.Where(x => x.EmployeeId == transportFile.NguoiPheDuyetId)
+						.Select(x => x.Id)
+						.SingleOrDefault();
+
+					if (accountId == 0)
+					{
+						throw new Exception("Không tìm thấy tài khoản tương ứng với NguoiPheDuyetId.");
+					}
+
+					transportFile.NguoiPheDuyetId = accountId;
+				}
+
+				// Kiểm tra khi PheDuyet = true
+				if (transportFile.PheDuyet == true)
+				{
+					if (!transportFile.NguoiPheDuyetId.HasValue)
+					{
+						throw new Exception("Vui lòng chọn người phê duyệt.");
+					}
+
+					if (transportFile.NguoiPheDuyetId != createUserId)
+					{
+						throw new Exception("Người phê duyệt phải là người dùng hiện tại khi phê duyệt được bật.");
+					}
+				}
+
+				transportFile.IsActive = true;					
 				// Sử dụng transaction để đảm bảo tính nhất quán
 				using (var transaction = db.Database.BeginTransaction())
 				{
@@ -383,7 +546,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
 						await SaveAttachedFiles(transportFile);
 
 						// Xử lý danh sách người nhận dựa trên customRadio_10
-						await ProcessReceivers(transportFile, lstReceiverUserId, lstReceiverRoomId, lstReceiverUnitId, customRadio_10);
+						await ProcessReceivers(transportFile, lstReceiverUserId, lstReceiverRoomId, lstReceiverUnitId, customRadio_10, Note);
 
 						// Commit transaction
 						transaction.Commit();
@@ -399,8 +562,8 @@ namespace NamLao206.Areas.TransportFiles.Controllers
 						return View(transportFile);
 					}
 				}
-
-				return RedirectToAction("HopThuDen");
+				ViewBag.Message = "Thêm mới thành công!";
+				return RedirectToAction("HopThuDen", new { message = ViewBag.Message });			
 			}
 
 			catch (Exception ex)
@@ -436,7 +599,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,tenFile,url,CreateDate,ModifiedDate,CreateUserId,ModifiedUserId,IsActive,Mota")] TransportFile transportFile)
+        public ActionResult Edit([Bind(Include = "Id,tenFile,url,CreateDate,ModifiedDate,CreateUserId,ModifiedUserId,NguoiPheDuyetId,IsActive,Mota")] TransportFile transportFile)
         {
             if (ModelState.IsValid)
             {
@@ -487,7 +650,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
 					if (transportFile != null)
 					{
                         // Kiểm tra điều kiện xóa
-                        if (acc.AccountType != 1)
+                        if (acc.LevelId != 1)
                         {
                             // Tính thời gian tạo file
                             var timeElapsed = DateTime.Now - transportFile.CreateDate;
@@ -529,43 +692,49 @@ namespace NamLao206.Areas.TransportFiles.Controllers
 		private async Task SaveAttachedFiles(TransportFile transportFile)
 		{
 			if (Request.Files.Count == 0) return;
-	
+			int file_count = 0;
 			string dir = Path.Combine(Server.MapPath("~/Content/Uploads/HopThu"), transportFile.Id.ToString());
-			if (!Directory.Exists(dir))
+			if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
+
+			for (int i = 0; i < Request.Files.Count; i++)
 			{
-				Directory.CreateDirectory(dir);
+				try
+				{
+					HttpPostedFileBase file = Request.Files[i];
+					if (file == null || file.ContentLength == 0) continue;
+					if (!string.IsNullOrEmpty(file.FileName))
+					{
+						// Kiểm tra loại file và kích thước (ví dụ: chỉ cho phép PDF, tối đa 10MB)
+						string[] allowedExtensions = { ".pdf", ".doc", ".docx", ".rar", ".zip" };
+						int maxFileSize = 50 * 1024 * 1024; // 10MB
+						string fileExtension = Path.GetExtension(file.FileName).ToLower();
+						if (!allowedExtensions.Contains(fileExtension))
+						{
+							throw new Exception($"Loại file {fileExtension} không được phép. Chỉ cho phép: {string.Join(", ", allowedExtensions)}.");
+						}
+						if (file.ContentLength > maxFileSize)
+						{
+							throw new Exception($"Kích thước file vượt quá giới hạn ({maxFileSize / 1024 / 1024}MB).");
+						}
+						string filename = $"{DateTime.Now.Ticks}_{Path.GetFileName(file.FileName)}";
+						string filePath = Path.Combine(dir, filename);
+						file.SaveAs(filePath);
+
+						db.TransportFileUrls.Add(new TransportFileUrl
+						{
+							Url = filename,
+							TransportFilesId = transportFile.Id
+						});
+
+						file_count++;
+					}
+				}
+				catch { }
 			}
-
-			foreach (string fileKey in Request.Files)
+			if (file_count > 0)
 			{
-				HttpPostedFileBase file = Request.Files[fileKey];
-				if (file == null || file.ContentLength == 0) continue;
-
-				// Kiểm tra loại file và kích thước (ví dụ: chỉ cho phép PDF, tối đa 10MB)
-				string[] allowedExtensions = { ".pdf", ".doc", ".docx", ".rar", ".zip" };
-				int maxFileSize = 50 * 1024 * 1024; // 10MB
-				string fileExtension = Path.GetExtension(file.FileName).ToLower();
-				if (!allowedExtensions.Contains(fileExtension))
-				{
-					throw new Exception($"Loại file {fileExtension} không được phép. Chỉ cho phép: {string.Join(", ", allowedExtensions)}.");
-				}
-				if (file.ContentLength > maxFileSize)
-				{
-					throw new Exception($"Kích thước file vượt quá giới hạn ({maxFileSize / 1024 / 1024}MB).");
-				}
-
-				string filename = $"{DateTime.Now.Ticks}_{Path.GetFileName(file.FileName)}";
-				string filePath = Path.Combine(dir, filename);
-				file.SaveAs(filePath);
-
-				var transportFileUrl = new TransportFileUrl
-				{
-					Url = filename,
-					TransportFilesId = transportFile.Id
-				};
-				db.TransportFileUrls.Add(transportFileUrl);
 				await db.SaveChangesAsync();
-			}
+			}	
 		}
 		// Phương thức để xử lý danh sách người nhận
 		private async Task ProcessReceivers(
@@ -573,7 +742,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
 			List<string> lstReceiverUserId,
 			List<string> lstReceiverRoomId,
 			List<string> lstReceiverUnitId,
-			string receiverType)
+			string receiverType, string Note)
 		{
 			var transports = new List<Transport>();
 
@@ -594,7 +763,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
 					.ToListAsync();
 
 				// Tạo Transport cho từng người dùng
-				transports.AddRange(userIds.Select(userId => CreateTransport(transportFile, userId)));
+				transports.AddRange(userIds.Select(userId => CreateTransport(transportFile, userId, Note)));
 			}
 			else if (receiverType == "option2" && lstReceiverRoomId?.Any() == true)
 			{
@@ -606,18 +775,18 @@ namespace NamLao206.Areas.TransportFiles.Controllers
 					.ToListAsync();
 
 				// Tạo Transport cho từng người dùng
-				transports.AddRange(userIds.Select(userId => CreateTransport(transportFile, userId)));
+				transports.AddRange(userIds.Select(userId => CreateTransport(transportFile, userId, Note)));
 
 				// Thêm người dùng bổ sung (nếu có)
 				if (lstReceiverUserId?.Any() == true)
 				{
-					var existingUserIds = transports.Select(t => t.ReceiverUserId).ToHashSet();
+					var bonusUserIds = transports.Select(t => t.ReceiverUserId).ToHashSet();
 					var additionalUserIds = lstReceiverUserId
 						.Select(int.Parse)
-						.Where(userId => !existingUserIds.Contains(userId))
+						.Where(userId => !bonusUserIds.Contains(userId))
 						.ToList();
 
-					transports.AddRange(additionalUserIds.Select(userId => CreateTransport(transportFile, userId)));
+					transports.AddRange(additionalUserIds.Select(userId => CreateTransport(transportFile, userId, Note)));
 				}
 			}
 			else if (receiverType == "option1" && lstReceiverUserId?.Any() == true)
@@ -625,23 +794,35 @@ namespace NamLao206.Areas.TransportFiles.Controllers
 				// Tạo Transport cho từng người dùng được chọn
 				transports.AddRange(lstReceiverUserId
 					.Select(int.Parse)
-					.Select(userId => CreateTransport(transportFile, userId)));
+					.Select(userId => CreateTransport(transportFile, userId, Note)));
 			}
 
+			// Lấy danh sách userid đã có trong cơ sở dữ liệu cho transportFile.Id
+			var existingUserIds = await db.Transports
+				.Where(x => x.FileId == transportFile.Id && x.ReceiverUserId != null)
+				.Select(x => x.ReceiverUserId.Value)
+				.ToListAsync();
+
+			// Lọc ra các Transport mới mà userid chưa có trong cơ sở dữ liệu
+			var newTransports = transports
+				.Where(t => !existingUserIds.Contains(t.ReceiverUserId.Value))
+				.ToList();
+
 			// Thêm tất cả Transport vào database
-			if (transports.Any())
+			if (newTransports.Any())
 			{
-				db.Transports.AddRange(transports);
+				db.Transports.AddRange(newTransports);
 				await db.SaveChangesAsync();
 			}
 		}
-		private Transport CreateTransport(TransportFile transportFile, int receiverUserId)
+		private Transport CreateTransport(TransportFile transportFile, int receiverUserId, string Note)
 		{
 			return new Transport
 			{
 				FileId = transportFile.Id,
-				TransportDate = transportFile.CreateDate,
+				TransportDate = DateTime.Now,
 				ReceiverUserId = receiverUserId,
+				Note = Note,
 				DaXem = false,
 				IsActive = true
 			};
@@ -649,7 +830,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
 		}
 		private void PopulateDropdowns()
 		{
-			ViewBag.Employees = new SelectList(db.Employees, "Id", "Name");
+			ViewBag.Employees = new SelectList(db.Employees.Where(x => x.LevelId != 3 && x.LevelId != 4),"Id","Name");
 			ViewBag.DM_NhomPhongBans = new SelectList(db.DM_NhomPhongBans, "Id", "Nhomkhoa");
 			ViewBag.DM_PhongBans = new SelectList(db.DM_PhongBans, "Id", "TenKhoa");
 			ViewBag.DM_DonVis = new SelectList(db.DM_DonVis, "Id", "TenDonVi");
@@ -820,143 +1001,147 @@ namespace NamLao206.Areas.TransportFiles.Controllers
 				return new HttpStatusCodeResult(HttpStatusCode.InternalServerError, "Đã xảy ra lỗi khi xuất Excel. Vui lòng thử lại.");
 			}
 		}
-		//public ActionResult XuatExcel(DateTime? tuNgay, DateTime? denNgay)
-		//      {
-		//          string lstPhongBan = "";
-		//	string lstCoQuan = "";           
-		//          int sttDic = 1;
-		//          int STT = 1;
-		//          int sttCell = 10;
-		//          // Dữ liệu mẫu cần xuất ra Excel (thay thế bằng dữ liệu thực tế của bạn)    
-		//          var transportFiles = db.TransportFiles.Where(x => x.NgayBanHanh >= tuNgay && x.NgayBanHanh <= denNgay).OrderByDescending(x=>x.NgayBanHanh).ToList();
+		public JsonResult DeleteJqueryHopThuDen(List<int> id)
+		{
+			try
+			{
+				// Validate input
+				if (id == null || !id.Any())
+				{
+					return Json(new { success = false, message = "Không tìm thấy thư." });
+				}
 
-		//          // For non-commercial use:
-		//          ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+				// Get user ID from authenticated user
+				if (!int.TryParse(User.Identity.Name, out int userId))
+				{
+					return Json(new { success = false, message = "Không thể xác định người dùng. Vui lòng đăng nhập lại." });
+				}
 
-		//          // Tạo một gói Excel mới
-		//          try
-		//          {
-		//              using (var package = new ExcelPackage())
-		//              {
-		//                  // Tạo một worksheet mới
-		//                  var worksheet = package.Workbook.Worksheets.Add("CongVanDen");
-		//                  // Định dạng chung
+				var acc = db.Accounts.FirstOrDefault(x => x.Id == userId);
+				if (acc == null)
+				{
+					return Json(new { success = false, message = "Tài khoản không tồn tại hoặc không liên kết với nhân viên." });
+				}
 
-		//                  worksheet.Cells.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-		//                  worksheet.Cells.Style.Font.Size = 13;
+				using (var transaction = db.Database.BeginTransaction())
+				{
+					try
+					{
+						var transportsToUpdate = db.Transports
+							.Where(tf => id.Contains(tf.Id))
+							.ToList();
 
+						if (!transportsToUpdate.Any())
+						{
+							transaction.Rollback();
+							return Json(new { success = false, message = "Chưa chọn thư để xóa." });
+						}
 
-		//                  // Định dạng tiêu đề (hàng 1)           
-		//                  worksheet.Cells["A1:J1"].Style.Font.Bold = true;
-		//                  worksheet.Cells["A1:J1"].Style.Border.BorderAround(ExcelBorderStyle.Thin);
-		//                  // Đặt màu nền cho vùng A1:B10 thành màu vàng
-		//                  worksheet.Cells["A1:J1"].Style.Fill.PatternType = ExcelFillStyle.Solid;
-		//                  worksheet.Cells["A1:J1"].Style.Fill.SetBackground(System.Drawing.Color.Yellow);
+						foreach (var transport in transportsToUpdate)
+						{
+							if (transport.IsActive == true)
+							{
+								transport.IsActive = false; // Soft delete by setting IsActive to false
+							}
+							else
+							{
+								db.Transports.Remove(transport); // Hard delete if already inactive
+							}
+						}
 
-		//                  // Định dạng viền cho tất cả các cột
-		//                  int totalColumns = worksheet.Dimension.Columns;
-		//                  for (int col = 1; col <= totalColumns; col++)
-		//                  {
-		//                      worksheet.Column(col).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-		//                      worksheet.Column(col).Style.Border.BorderAround(ExcelBorderStyle.Thin);
-		//                      worksheet.Column(col).Style.Border.Top.Style = ExcelBorderStyle.Thin;
-		//                      worksheet.Column(col).Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
-		//                      worksheet.Column(col).Style.Font.Size = 13;
-		//                      worksheet.Column(col).AutoFit();
-		//                  }
-		//                  worksheet.Column(3).Style.Numberformat.Format = "dd-MM-yyyy";
-		//                  // Xác định tiêu đề các cột
-		//                  worksheet.Cells["A1"].Value = "STT";
-		//                  worksheet.Cells["B1"].Value = "Số công văn";
-		//                  worksheet.Cells["C1"].Value = "Ngày ban hành";
-		//                  worksheet.Cells["D1"].Value = "Số trang";
-		//                  worksheet.Cells["E1"].Value = "Trích yếu";
-		//                  worksheet.Cells["F1"].Value = "Người phê duyệt";
-		//                  worksheet.Cells["G1"].Value = "Độ mật";
-		//                  worksheet.Cells["H1"].Value = "Phòng nhận";
-		//                  worksheet.Cells["I1"].Value = "Cơ quan nhận";
-		//                  worksheet.Cells["J1"].Value = "Ghi chú";
-		//                  worksheet.Cells["A1:J1"].AutoFitColumns();
-		//                  // Điền dữ liệu vào worksheet
-		//                  int row = 2;
-		//                  foreach (var item in transportFiles)
-		//                  {
-		//				var lstReceiverId = db.Transports.Where(x => x.FileId == item.Id)
-		//						 .Select(x => x.ReceiverUserId)
-		//						 .ToList();
-		//				var query = from receiverId in lstReceiverId
-		//							join employee in db.Employees on receiverId equals employee.Id
-		//							select new
-		//							{
-		//								PhongBan = employee.DM_PhongBans.TenKhoa,
-		//								CoQuan = employee.DM_PhongBans.DM_DonVis.TenDonVi
-		//							};								
-		//				lstPhongBan = string.Join(",", query.Select(x => x.PhongBan).Distinct().ToList());
-		//				lstCoQuan = string.Join(",", query.Select(x => x.CoQuan).Distinct().ToList());
+						db.SaveChanges();
+						transaction.Commit();
 
-		//				Dictionary<int, string> dicCells = new Dictionary<int, string>()
-		//                  {
-		//                      {1,STT.ToString()},
-		//                      {2,item.tenFile},
-		//                      {3,item.NgayBanHanh.ToString()},
-		//                      {4,item.SoTrang.ToString()},
-		//                      {5,item.Mota},
-		//                      {6,item.Account2.Employee.Name},
-		//                      {7,item.DoMat},
-		//                      {8,lstPhongBan},
-		//                      {9,lstCoQuan}
-		//			};
-		//                      List<string> lstURL = db.TransportFileUrls.Where(x => x.TransportFilesId == item.Id)
-		//                          .Select(x => "https://www.namlao206.vn/Content/Uploads/HopThu" + "\\" + item.Id + "\\" + x.Url).ToList();
+						return Json(new { success = true, message = "Xóa thành công." });
+					}
+					catch (Exception ex)
+					{
+						transaction.Rollback();
+						// Log the exception (use your logging framework)
+						System.Diagnostics.Debug.WriteLine($"Error in DeleteJquery: {ex.Message}");
+						return Json(new { success = false, message = "Error during operation: " + ex.Message });
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				// Log the exception (use your logging framework)
+				System.Diagnostics.Debug.WriteLine($"Error in DeleteJquery: {ex.Message}");
+				return Json(new { success = false, message = "Unexpected error: " + ex.Message });
+			}
+		}
+        public JsonResult DeleteJqueryHopThuDi(List<int> id)
+        {
+            try
+            {
+                // Validate input
+                if (id == null || !id.Any())
+                {
+                    return Json(new { success = false, message = "Không tìm thấy thư." });
+                }
 
+                // Get user ID from authenticated user
+                if (!int.TryParse(User.Identity.Name, out int userId))
+                {
+                    return Json(new { success = false, message = "Không thể xác định người dùng. Vui lòng đăng nhập lại." });
+                }
 
-		//                      Dictionary<string, string> viewurl = new Dictionary<string, string>();
+                var acc = db.Accounts.FirstOrDefault(x => x.Id == userId);
+                if (acc == null)
+                {
+                    return Json(new { success = false, message = "Tài khoản không tồn tại hoặc không liên kết với nhân viên." });
+                }
 
-		//                      foreach (var url in lstURL)
-		//                      {
-		//                          sttDic = 1;
-		//                          viewurl.Add(url, "File" + sttDic);
-		//					sttDic++;
-		//				}
+                using (var transaction = db.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        var transportFilesToUpdate = db.TransportFiles.Include(tf => tf.Transports)
+                            .Where(tf => id.Contains(tf.Id) && tf.IsActive == true)
+                            .ToList();
 
-		//				// Tạo liên kết và đặt tên hiển thị
-		//				foreach (var entry in dicCells)
-		//                      {
-		//                          worksheet.Cells[row, entry.Key].Value = entry.Value;
-		//                      }
+                        if (!transportFilesToUpdate.Any())
+                        {
+                            transaction.Rollback();
+                            return Json(new { success = false, message = "Chưa chọn thư để xóa." });
+                        }
 
-		//                      foreach (var test in viewurl)
-		//                      {                        
-		//                          var hyperLink = new ExcelHyperLink(test.Key, UriKind.Absolute);
-		//                          hyperLink.Display = test.Value;
-		//                          worksheet.Cells[row, sttCell].Style.Font.Color.SetColor(System.Drawing.Color.Blue);
-		//                          worksheet.Cells[row, sttCell].Style.Font.UnderLine = true;
-		//                          worksheet.Cells[row, sttCell].Hyperlink = hyperLink;
-		//					sttCell++;
-		//				}
-		//                      sttCell = 10;
-		//				row++;
-		//                      STT++;
-		//                  }
-		//                  // Lưu vào bộ nhớ
-		//                  using (var memoryStream = new MemoryStream())
-		//                  {
-		//                      package.SaveAs(memoryStream);
-		//                      memoryStream.Position = 0;
+                        foreach (var transportFiles in transportFilesToUpdate)
+                        {
+                            if (transportFiles.IsActive == true)
+                            {
+                                transportFiles.IsActive = false; // Soft delete by setting IsActive to false
+                            }
+                            else
+                            {
+                                db.Transports.RemoveRange(transportFiles.Transports);
+                                db.TransportFileUrls.Remove(db.TransportFileUrls.FirstOrDefault(x => x.TransportFilesId == transportFiles.Id));                            
+                                db.TransportFiles.Remove(transportFiles); // Hard delete if already inactive
+                            }
+                        }
 
-		//                      return File(memoryStream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "DanhSach.xlsx");
-		//                  }
-		//              }
+                        db.SaveChanges();
+                        transaction.Commit();
 
-		//          }
-		//          catch (ObjectDisposedException ex)
-		//          {
-		//              // Xử lý lỗi, ví dụ: ghi log lỗi và trả về một thông báo lỗi cho người dùng
-		//              return ViewBag.Message(ex.Message);
-		//          }
-
-		//      }
-		protected override void Dispose(bool disposing)
+                        return Json(new { success = true, message = "Xóa thành công." });
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        // Log the exception (use your logging framework)
+                        System.Diagnostics.Debug.WriteLine($"Error in DeleteJquery: {ex.Message}");
+                        return Json(new { success = false, message = "Error during operation: " + ex.Message });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (use your logging framework)
+                System.Diagnostics.Debug.WriteLine($"Error in DeleteJquery: {ex.Message}");
+                return Json(new { success = false, message = "Unexpected error: " + ex.Message });
+            }
+        }
+        protected override void Dispose(bool disposing)
         {
             if (disposing)
             {

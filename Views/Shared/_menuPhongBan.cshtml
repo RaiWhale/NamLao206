@@ -2,7 +2,7 @@
 
 @foreach (var nhomkhoa in Model.Where(x => x.ParentId == 1))
 {
-    <div class="col-md-3">
+    <div class="col-md-auto col-sm-auto">
         <h3 style="color:white">@nhomkhoa.Nhomkhoa</h3>
         <ul>
             @foreach (var khoa in nhomkhoa.DM_PhongBans)

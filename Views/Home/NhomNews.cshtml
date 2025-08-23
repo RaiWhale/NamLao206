@@ -4,7 +4,7 @@
 @model PagedList.IPagedList<NamLao206.Models.News>
 
 @{
-    namlao206dbEntities db = new namlao206dbEntities();
+    namlao206_websiteEntities db = new namlao206_websiteEntities();
     var news = db.News.OrderByDescending(x => x.Id).FirstOrDefault();
     var topics = ViewBag.topics as List<Topic>;
 }

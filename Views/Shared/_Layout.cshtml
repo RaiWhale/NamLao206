@@ -1,22 +1,23 @@
 ﻿@using NamLao206.Models
 
 @{
-    namlao206dbEntities db = new namlao206dbEntities();
+    namlao206_websiteEntities db = new namlao206_websiteEntities();
+    Account acc = null;
+    List<Transport> ThuChuaXem = null;
     if (User.Identity.IsAuthenticated)
     {
-        var acc = db.Accounts.Where(x => x.Id.ToString().Equals(User.Identity.Name)).SingleOrDefault();
-        if (acc == null)
+        acc = db.Accounts.Where(x => x.Id.ToString().Equals(User.Identity.Name)).SingleOrDefault();
+        if (acc != null && acc.LevelId != 3)
+        {
+            ThuChuaXem = db.Transports.Where(x => x.ReceiverUserId == acc.EmployeeId && x.DaXem == false).OrderByDescending(x => x.TransportDate).ToList();
+        }
+        else
         {
             // Gọi hàm Logout()
-            Response.Redirect(Url.Action("Logout", "Login"));
+            Response.Redirect(Url.Action("Logout", "Login", new { area = "" }));
         }
-        ViewBag.acc = acc;
-        ViewBag.Hoten = acc.Employee.Name;
-        ViewBag.ThuChuaXem = db.Transports.Where(x => x.ReceiverUserId == acc.EmployeeId && x.DaXem == false).Take(5).ToList();
     }
-    var user = ViewBag.acc as Account;
     var banners = db.Banners.Where(x => x.isActive == true).OrderByDescending(x => x.Id).ToList();
-    var ThuChuaXem = ViewBag.ThuChuaXem as List<Transport>;
 }
 <!DOCTYPE html>
 <!--[if IE 8]>			<html class="ie ie8"> <![endif]-->
@@ -74,8 +75,7 @@
     <script type="text/javascript" src="~/Content/EponaTheme/assets/plugins/modernizr.min.js"></script>
     <script src="~/Scripts/bcommand.js"></script>
     <script src="~/Content/ckeditor/ckeditor.js"></script>
-    <script src="~/Content/ckeditor/ckfinder/ckfinder.js"></script>
-    <script src="~/Content/AdminBinhLT/assets/vendor/input-masks/cleave.min.js"></script>
+    <script src="~/Content/ckeditor/ckfinder/ckfinder.js"></script>   
     <!--[if lte IE 8]>
         <script src="~/Content/EponaTheme/assets/plugins/respond.js"></script>
     <![endif]-->  
@@ -120,13 +120,13 @@
                                 @if (User.Identity.IsAuthenticated)
                                 {
                                     <li class="quick-cart dropdown pull-right">
-                                        <a href="#" class="dropdown-toggle"><i class="fa fa-shopping-cart"></i>  Welcome, <strong>@ViewBag.Hoten</strong> <i class="fa fa-angle-down"></i></a>
+                                        <a href="#" class="dropdown-toggle"><i class="fa fa-shopping-cart"></i>  Welcome, <strong>@acc.Employee.Name</strong> <i class="fa fa-angle-down"></i></a>
                                         <ul class="dropdown-menu pull-right">
                                             <li>
                                                 <p style="color:red"><i class="fa fa-warning"></i><strong> Bạn có @ThuChuaXem.Count() công văn chưa xem</strong></p>
                                                 <!-- CART CONTENT -->
                                                 <div class="quick-cart-content">
-                                                    @foreach (var item in ThuChuaXem)
+                                                    @foreach (var item in ThuChuaXem.Take(5))
                                                     {
                                                         <a class="quick-cart-item" href="~/TransportFiles/TransportFiles/Details/@item.FileId?flag=HopThuDen">
                                                             <!-- item 1 -->
@@ -142,7 +142,7 @@
                                                             <a href="/Login/UpdateProfile" class="btn btn-primary fullwidth">My Settings</a>
                                                         </div>
                                                         <div class="col-md-6 nopadding-left">
-                                                            <a href="@Url.Action("Logout","Login")" class="btn btn-info fullwidth">Đăng xuất</a>
+                                                            <a href="@Url.Action("Logout", "Login", new { area = "" })" class="btn btn-info fullwidth">Đăng xuất</a>
                                                         </div>
                                                     </div><!-- /cart footer -->
 
@@ -157,7 +157,6 @@
                                 else
                                 {
                                     <li><a href="/Login/Login" style="font-size:15px;">Đăng nhập thành viên</a></li>
-
                                 }
 
                             </ul>
@@ -210,7 +209,7 @@
                                 <li class="dropdown">
                                     <a class="dropdown-toggle" href="#"><strong>GIỚI THIỆU</strong><span>Thông tin</span></a>
                                     <ul class="dropdown-menu">
-                                        @Html.Partial("_topicsGioiThieu", new namlao206dbEntities().Topics)
+                                        @Html.Partial("_topicsGioiThieu", new namlao206_websiteEntities().Topics)
 
                                     </ul>
                                 </li>
@@ -219,7 +218,7 @@
                                     <ul class="dropdown-menu">
                                         <li>
                                             <div class="row">
-                                                @Html.Partial("_menuPhongBan", new namlao206dbEntities().DM_NhomPhongBans)
+                                                @Html.Partial("_menuPhongBan", new namlao206_websiteEntities().DM_NhomPhongBans)
                                             </div>
                                         </li>
                                     </ul>
@@ -227,17 +226,17 @@
                                 <li class="dropdown">
                                     <a class="dropdown-toggle" href="#"><strong>TIN TỨC</strong><span>Sự kiện</span></a>
                                     <ul class="dropdown-menu">
-                                        @Html.Partial("_topicsNhom2", new namlao206dbEntities().Topics)
+                                        @Html.Partial("_topicsNhom2", new namlao206_websiteEntities().Topics)
                                     </ul>
                                 </li>
-                                @if (user != null)
+                                @if (acc != null)
                                 {
                                     <li class="dropdown">
                                         <a class="dropdown-toggle" href="#"><strong>CHỨC NĂNG</strong><span>nội bộ</span></a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="~/TransportFiles/TransportFiles/" style="color:white">Văn Phòng Điện Tử</a></li>
+                                            <li><a href="~/TransportFiles/" style="color:white">Văn Phòng Điện Tử</a></li>
                                         </ul>
-                                        @if (user.Employee.LevelId == 4)
+                                        @if (acc.Employee.LevelId == 4)
                                         {
                                             <ul class="dropdown-menu">
                                                 <li><a href="~/News/Index" style="color:white">Đăng bài viết</a></li>
@@ -290,7 +289,7 @@
                     <div class="col-md-6 col-sm-6">
                         <h3><strong>LĨNH VỰC KINH DOANH CHÍNH</strong></h3>
                         <ul class="list-icon spaced check-circle">
-                            @Html.Partial("_hinhThucKinhDoanh", new namlao206dbEntities().DM_hinhthuckinhdoanh)
+                            @Html.Partial("_hinhThucKinhDoanh", new namlao206_websiteEntities().DM_hinhthuckinhdoanh)
                         </ul>
                     </div>
                     <div class="col-md-6 col-sm-6">
@@ -397,7 +396,7 @@
     @RenderSection("Scripts", required: false)
     <!-- JAVASCRIPT FILES -->
     <script data-cfasync="false" src="~/Content/EponaTheme/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-
+    <script src="~/Content/smartadmin/js/formplugins/summernote/summernote.js"></script>
     <script type="text/javascript" src="~/Content/EponaTheme/assets/plugins/jquery.isotope.js"></script>
     <script type="text/javascript" src="~/Content/EponaTheme/assets/plugins/masonry.js"></script>
 
@@ -412,7 +411,7 @@
     <script type="text/javascript" src="~/Content/EponaTheme/assets/plugins/revolution-slider/js/jquery.themepunch.revolution.min.js"></script>
     <script type="text/javascript" src="~/Content/EponaTheme/assets/js/revolution_slider.js"></script>
 
-    <script type="text/javascript" src="~/Content/EponaTheme/assets/js/scripts.js"></script>
+    <script type="text/javascript" src="~/Content/EponaTheme/assets/js/scripts.js"></script>  
     <!-- Begin EMC Tracking Code -->
     <script type="text/javascript">
         var _govaq = window._govaq || [];

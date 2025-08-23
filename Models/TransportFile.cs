@@ -35,6 +35,7 @@ namespace NamLao206.Models
         public Nullable<int> SoTrang { get; set; }
         public Nullable<int> NguoiPheDuyetId { get; set; }
         public string DoMat { get; set; }
+        public Nullable<bool> PheDuyet { get; set; }
     
         public virtual Account Account { get; set; }
         public virtual Account Account1 { get; set; }

@@ -1,0 +1,122 @@
+﻿@model NamLao206.Models.HoatDongNhanSu
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>HoatDongNhanSu</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TongNhanSu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TongNhanSu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CongTac)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CongTac)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NghiPhep)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NghiPhep)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiHoc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiHoc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LyDoKhac)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LyDoKhac)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifiedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsActive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Note)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Note)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Account.LoginName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Account.LoginName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Account1.LoginName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Account1.LoginName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DM_DonVis.TenDonVi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DM_DonVis.TenDonVi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Employee.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Employee.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

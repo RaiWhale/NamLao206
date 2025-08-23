@@ -94,7 +94,7 @@
             <div id="portfolio">
                 <ul class="nav nav-pills isotope-filter isotope-filter" data-sort-id="isotope-list" data-option-key="filter">
                     <li data-option-value="*" class="active"><a style="color:green;" href="#">TIÊU ĐIỂM</a></li>
-                    @foreach (var item in new namlao206dbEntities().Topics.Where(x => x.HienThiNhom == true))
+                    @foreach (var item in new namlao206_websiteEntities().Topics.Where(x => x.HienThiNhom == true))
                     {
                         <li data-option-value=".@item.Id"><a style="color:green;" href="#">@item.TopicName</a></li>
                     } <!-- lấy từ bảng Topics ra các tiêu đề có Id như trên-->
@@ -102,7 +102,7 @@
                 <div class="row">
                     <ul class="sort-destination isotope" data-sort-id="isotope-list">
                         <!-- lấy từ bảng News ra các tin tức có TopicId như trên và chọn ra 3 tin tức với mỗi TopicId-->
-                        @foreach (var item in new namlao206dbEntities().News.Where(x => x.Topic.HienThiNhom == true)
+                        @foreach (var item in new namlao206_websiteEntities().News.Where(x => x.Topic.HienThiNhom == true)
                             .OrderByDescending(x => x.DateUp)
                             .GroupBy(x => x.TopicId)
                             .SelectMany(group => group.Take(3)))

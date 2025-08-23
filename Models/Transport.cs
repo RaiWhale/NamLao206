@@ -16,6 +16,7 @@ namespace NamLao206.Models
     {
         public int Id { get; set; }
         public int FileId { get; set; }
+        public string Note { get; set; }
         public System.DateTime TransportDate { get; set; }
         public Nullable<int> ReceiverUserId { get; set; }
         public string ReceiveGroups { get; set; }

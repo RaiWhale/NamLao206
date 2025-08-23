@@ -12,11 +12,13 @@ namespace NamLao206.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
-    public partial class namlao206dbEntities : DbContext
+    public partial class namlao206_websiteEntities : DbContext
     {
-        public namlao206dbEntities()
-            : base("name=namlao206dbEntities")
+        public namlao206_websiteEntities()
+            : base("name=namlao206_websiteEntities")
         {
         }
     
@@ -33,6 +35,7 @@ namespace NamLao206.Models
         public virtual DbSet<Album> Albums { get; set; }
         public virtual DbSet<Banner> Banners { get; set; }
         public virtual DbSet<CalrouselPicture> CalrouselPictures { get; set; }
+        public virtual DbSet<Contract> Contracts { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<DM_AdminListUpItem> DM_AdminListUpItem { get; set; }
         public virtual DbSet<DM_Chucvus> DM_Chucvus { get; set; }
@@ -43,6 +46,7 @@ namespace NamLao206.Models
         public virtual DbSet<DM_Nghenghieps> DM_Nghenghieps { get; set; }
         public virtual DbSet<DM_NhomPhongBans> DM_NhomPhongBans { get; set; }
         public virtual DbSet<DM_PhongBans> DM_PhongBans { get; set; }
+        public virtual DbSet<DocumentType> DocumentTypes { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<Feedback> Feedbacks { get; set; }
         public virtual DbSet<Gender> Genders { get; set; }
@@ -51,13 +55,46 @@ namespace NamLao206.Models
         public virtual DbSet<LuuVet> LuuVets { get; set; }
         public virtual DbSet<MaQuocGia> MaQuocGias { get; set; }
         public virtual DbSet<Nationality> Nationalities { get; set; }
+        public virtual DbSet<News> News { get; set; }
         public virtual DbSet<NewsPicture> NewsPictures { get; set; }
+        public virtual DbSet<NghiemThu> NghiemThus { get; set; }
+        public virtual DbSet<Phase> Phases { get; set; }
         public virtual DbSet<Picture> Pictures { get; set; }
+        public virtual DbSet<StatusProject> StatusProjects { get; set; }
         public virtual DbSet<SubMenu> SubMenus { get; set; }
+        public virtual DbSet<Supplier> Suppliers { get; set; }
         public virtual DbSet<Topic> Topics { get; set; }
+        public virtual DbSet<TransportFile> TransportFiles { get; set; }
         public virtual DbSet<TransportFileUrl> TransportFileUrls { get; set; }
         public virtual DbSet<Transport> Transports { get; set; }
-        public virtual DbSet<News> News { get; set; }
-        public virtual DbSet<TransportFile> TransportFiles { get; set; }
+        public virtual DbSet<Unit> Units { get; set; }
+        public virtual DbSet<HoSoPhapLy> HoSoPhapLys { get; set; }
+        public virtual DbSet<DM_AddBangs> DM_AddBangs { get; set; }
+        public virtual DbSet<KhaoSat> KhaoSats { get; set; }
+        public virtual DbSet<Project> Projects { get; set; }
+        public virtual DbSet<ThiCong> ThiCongs { get; set; }
+        public virtual DbSet<GiamSatThiCong> GiamSatThiCongs { get; set; }
+        public virtual DbSet<HoatDongNhanSu> HoatDongNhanSus { get; set; }
+    
+        public virtual ObjectResult<sp_GetDataForDashBoard_Result> sp_GetDataForDashBoard(string action, string fromDate, string toDate, Nullable<int> donvi_id)
+        {
+            var actionParameter = action != null ?
+                new ObjectParameter("Action", action) :
+                new ObjectParameter("Action", typeof(string));
+    
+            var fromDateParameter = fromDate != null ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(string));
+    
+            var toDateParameter = toDate != null ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(string));
+    
+            var donvi_idParameter = donvi_id.HasValue ?
+                new ObjectParameter("Donvi_id", donvi_id) :
+                new ObjectParameter("Donvi_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetDataForDashBoard_Result>("sp_GetDataForDashBoard", actionParameter, fromDateParameter, toDateParameter, donvi_idParameter);
+        }
     }
 }

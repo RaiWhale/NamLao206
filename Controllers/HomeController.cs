@@ -12,7 +12,7 @@ namespace NamLao206.Controllers
 {
 	public class HomeController : Controller
 	{
-		namlao206dbEntities db = new namlao206dbEntities();
+		namlao206_websiteEntities db = new namlao206_websiteEntities();
 		int pageSize = 0;
 		public ActionResult Trangchu()
 		{

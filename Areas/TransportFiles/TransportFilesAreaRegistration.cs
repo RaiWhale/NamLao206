@@ -17,7 +17,8 @@ namespace NamLao206.Areas.TransportFiles
             context.MapRoute(
                 "TransportFiles_default",
                 "TransportFiles/{controller}/{action}/{id}",
-                new { controller = "TransportFiles", action = "HopThuDen", id = UrlParameter.Optional },
+                      //new { controller = "TransportFiles", action = "HopThuDen", id = UrlParameter.Optional },
+                      new { controller = "Dashboard", action = "Index", id = UrlParameter.Optional },
                  new string[] { "NamLao206.Areas.TransportFiles.Controllers" }
             );
         }

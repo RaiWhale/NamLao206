@@ -8,7 +8,9 @@ namespace NamLao206.Models.ViewModels
         public string LoginName { get; set; }
         public string Password { get; set; }
 
-        public int? EmployeeId { get; set; }
+		public int LevelId { get; set; }
+
+		public int? EmployeeId { get; set; }
         public int? AccountType { get; set; }
     }
 }

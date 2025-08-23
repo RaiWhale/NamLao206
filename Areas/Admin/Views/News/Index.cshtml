@@ -4,93 +4,128 @@
 @using PagedList
 @model PagedList.IPagedList<NamLao206.Models.News>
 
-<div class="row">
-    <div class="col-sm-12">
-        <div class="card">
-            <div class="card-header d-flex justify-content-between">
-                <div class="header-title">
-                    <a href="@Url.Action("Create")" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Tạo mới</a>
-                </div>
-                @using (Html.BeginForm())
-                {
-                    <div class="search col-md-2 col-xl-auto col-sm-auto dt-buttons" style="float:right;">
-                        <div class="search-box">
-                            <div class="input-group">
-                                <input type="text" name="search" placeholder="Tìm theo tên" class="form-control" />
-                                <span class="input-group-btn">
-                                    <button class="btn btn-info add-list" type="submit">Tìm kiếm</button>
-                                </span>
-                            </div>
+
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <!-- Hiển thị thông báo (nếu có) -->
+    <div id="alert-container" data-message="@Html.Raw(HttpUtility.HtmlEncode(ViewBag.Message))"></div>
+    <div class="row">
+        <div class="container-fluid" style="margin-top:10px">
+            <div class="col-lg-4 col-sm-8 col-xs-12">
+                <div id="panel-2" class="panel panel-collapsed">
+                    <div class="panel-hdr">
+                        <h2 style="font-size: 150%">
+                            Tạo mới <span class="fw-300"><i><b class="color-success-900">và tìm kiếm</b></i></span>
+                        </h2>
+                    </div>
+                    <div class="panel-container show">
+                        <div class="panel-content">
+                            @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <a href="@Url.Action("Create")" class=" btn btn-md btn-success waves-effect waves-themed">
+                                            <span class="fal fa-download mr-1"></span>Tạo mới
+                                        </a>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <a href="@Url.Action("Create2")" class=" btn btn-md btn-success waves-effect waves-themed">
+                                            <span class="fal fa-download mr-1"></span>Tạo mới nhanh
+                                        </a>
+                                    </div>                            
+                                    <div class="d-flex position-relative ml-auto" style="max-width: 23rem;">
+                                        <i class="fas fa-search position-absolute pos-left fs-lg px-3 py-2 mt-1"></i>
+                                        <input type="text" name="search" class="search form-control bg-subtlelight pl-6" placeholder="Tìm kiếm" value="@ViewBag.search">
+                                    </div>
+                                </div>
+                            }
                         </div>
                     </div>
-                }
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table id="datatable" class="table data-table table-striped table-bordered">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th class="text-center" style="width:500px">Tiêu đề</th>
-                                <th class="text-center">Ngày đăng</th>
-                                <th class="text-center">Lượt xem</th>
-                                <th class="text-center">Người đăng</th>
-                                <th class="text-center">Nhóm tin</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model)
-                            {
-                                <tr>
-                                    <td>
-                                        @{
-                                            string src = "";
-
-                                            if (string.IsNullOrEmpty(item.Picture))
-                                            {
-                                                src = MySecurity.GetSrcPicture(item.TopicId);
-                                            }
-                                            else
-                                            {
-                                                src = "/Content/Uploads/News/" + item.Picture;
-                                            }
-                                        }
-                                        <img src="@src" width="50" />
-                                    </td>
-                                    <td style="width:500px; vertical-align:central">
-                                        @Html.DisplayFor(modelItem => item.Title)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.DateUp)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Views)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Account.Employee.Name)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Topic.TopicName)
-                                    </td>
-                                    <td>
-                                        <div class="d-flex align-items-center list-action">
-                                            <a class="badge bg-success mr-2 " data-toggle="tooltip" data-placement="top" title="" data-original-title="Sửa"
-                                               href="@Url.Action("Edit", new { id = item.Id , page = Model.PageNumber})"><i class="ri-pencil-line mr-0"></i></a>
-                                            <a class="badge bg-warning mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xóa"
-                                               href="@Url.Action("Delete", new { id = item.Id, page = Model.PageNumber })"><i class="ri-delete-bin-line mr-0"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                        <tfoot>
-                        </tfoot>
-                    </table>
-                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, search = ViewBag.search }))
                 </div>
             </div>
         </div>
     </div>
-</div>
+    <div class="row">
+        <div class="container-fluid" style="margin-top:10px">
+            <div class="col-lg-12 col-sm-12 col-xs-12 ">
+                <div id="panel-1" class="panel">
+                    <div class="panel-hdr">
+                        <h2>
+                            Quản lý <span class="fw-300"><i>@ViewBag.Title</i></span>
+                        </h2>
+                    </div>
+                    <div class="panel-container show">
+                        <div class="panel-content">
+                            <div class="form-horizontal">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover table-striped w-100 dt-basic-example" style="font-size: calc(0.3vw + 10px) ">
+                                        <thead class="bg-warning-200 text-center">
+                                            <tr>
+                                                <th>#</th>
+                                                <th class="text-center" style="width:500px">Tiêu đề</th>
+                                                <th class="text-center">Ngày đăng</th>
+                                                <th class="text-center">Lượt xem</th>
+                                                <th class="text-center">Người đăng</th>
+                                                <th class="text-center">Nhóm tin</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @{
+                                                            string src = "";
 
+                                                            if (string.IsNullOrEmpty(item.Picture))
+                                                            {
+                                                                src = MySecurity.GetSrcPicture(item.TopicId);
+                                                            }
+                                                            else
+                                                            {
+                                                                src = "/Content/Uploads/News/" + item.Picture;
+                                                            }
+                                                        }
+                                                        <img src="@src" width="50" />
+                                                    </td>
+                                                    <td style="width:500px; vertical-align:central">
+                                                        @Html.DisplayFor(modelItem => item.Title)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.DateUp)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Views)
+                                                    </td>
+                                                    <td>
+                                                      @Html.DisplayFor(modelItem => item.Account.Employee.Name)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Topic.TopicName)
+                                                    </td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center list-action">
+                                                            <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sửa"
+                                                               href="@Url.Action("Edit", new { id = item.Id, page = Model.PageNumber})"><i class="ni ni-wrench fa-2x"></i></a>
+                                                            <a class="badge bg-warning mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xóa"
+                                                               href="@Url.Action("Delete", new { id = item.Id, page = Model.PageNumber })"><i class="ni ni-trash fa-2x"></i></a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, search = ViewBag.search }))
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

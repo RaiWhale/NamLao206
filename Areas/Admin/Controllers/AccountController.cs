@@ -12,7 +12,7 @@ namespace NamLao206.Areas.Admin.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        private namlao206dbEntities db = new namlao206dbEntities();
+        private namlao206_websiteEntities db = new namlao206_websiteEntities();
 
 
         public ActionResult Index()
@@ -33,7 +33,7 @@ namespace NamLao206.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.AccountType = new SelectList(db.Levels, "Id", "LevelName", account.AccountType);
+            ViewBag.LevelId = new SelectList(db.Levels, "Id", "LevelName", account.LevelId);
             return PartialView(account);
         }
         // POST: Admin/Account/Edit/5
@@ -42,7 +42,7 @@ namespace NamLao206.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,AccountType,EmployeeId,LoginName,Password,ActivateCode,Token,IsActive")] Account account, string rePassword, string rePassword2)
+        public ActionResult Edit([Bind(Include = "Id,LevelId,EmployeeId,LoginName,Password,ActivateCode,Token,IsActive")] Account account, string rePassword, string rePassword2)
         {
             if (ModelState.IsValid)
             {
@@ -56,7 +56,7 @@ namespace NamLao206.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-			ViewBag.AccountType = new SelectList(db.Levels, "Id", "LevelName", account.AccountType);
+			ViewBag.LevelId = new SelectList(db.Levels, "Id", "LevelName", account.LevelId);
 			return PartialView(account);
         }
         // GET: Admin/Account
@@ -108,7 +108,7 @@ namespace NamLao206.Areas.Admin.Controllers
         {
             FormsAuthentication.SignOut();
             Session.Abandon();
-            return RedirectToAction("Login");
+            return RedirectToAction("Login", "Login", new { area = "" });
         }
 
         protected override void Dispose(bool disposing)

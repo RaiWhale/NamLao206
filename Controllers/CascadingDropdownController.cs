@@ -7,7 +7,7 @@ namespace PhusannhiHospital.Controllers
 {
     public class CascadingDropdownController : Controller
     {
-        private namlao206dbEntities db = new namlao206dbEntities();
+        private namlao206_websiteEntities db = new namlao206_websiteEntities();
         // GET: CascadingDropdown
         public JsonResult GetCityList()
         {

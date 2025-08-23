@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace PhusannhiHospital.Areas.Admin
+namespace NamLao206.Areas.Admin
 {
     public class AdminAreaRegistration : AreaRegistration
     {

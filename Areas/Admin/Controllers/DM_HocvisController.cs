@@ -9,7 +9,7 @@ namespace NamLao206.Areas.Admin.Controllers
     [Authorize]
     public class DM_HocvisController : Controller
     {
-        private namlao206dbEntities db = new namlao206dbEntities();
+        private namlao206_websiteEntities db = new namlao206_websiteEntities();
 
         // GET: Admin/DM_Hocvis
         public ActionResult Index()

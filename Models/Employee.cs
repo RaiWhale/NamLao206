@@ -18,6 +18,7 @@ namespace NamLao206.Models
         public Employee()
         {
             this.Accounts = new HashSet<Account>();
+            this.HoatDongNhanSus = new HashSet<HoatDongNhanSu>();
         }
     
         public int Id { get; set; }
@@ -37,11 +38,11 @@ namespace NamLao206.Models
         public string WardId { get; set; }
         public string Avatar { get; set; }
         public int GenderId { get; set; }
-        public string Birthday { get; set; }
         public bool TrangThaiChuyen { get; set; }
         public Nullable<bool> Canhan { get; set; }
         public bool Import { get; set; }
         public Nullable<int> GroupId { get; set; }
+        public System.DateTime Birthday { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Account> Accounts { get; set; }
@@ -52,5 +53,7 @@ namespace NamLao206.Models
         public virtual DM_PhongBans DM_PhongBans { get; set; }
         public virtual Level Level { get; set; }
         public virtual Gender Gender { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HoatDongNhanSu> HoatDongNhanSus { get; set; }
     }
 }

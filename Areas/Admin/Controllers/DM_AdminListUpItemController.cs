@@ -11,7 +11,7 @@ namespace NamLao206.Areas.Admin.Controllers
     [Authorize]
     public class DM_AdminListUpItemController : Controller
     {
-        private namlao206dbEntities db = new namlao206dbEntities();
+        private namlao206_websiteEntities db = new namlao206_websiteEntities();
 
         // GET: Admin/DM_AdminListUpItem
         public ActionResult Index()

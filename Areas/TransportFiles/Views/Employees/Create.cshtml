@@ -1,0 +1,106 @@
+﻿@model NamLao206.Models.Employee
+@using NamLao206.Models
+
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="panel-body">
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-lg-4 col-md-8 col-xs-12">
+                    <div class="form-group">
+                        @Html.Label("Họ tên", htmlAttributes: new { @class = "control-label col-md-6" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control is-invalid-cus", @placeholder = "Họ và tên", required = "required" } })
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-8 col-xs-12">
+                    <div class="form-group">
+                        @Html.Label("Điện thoại", htmlAttributes: new { @class = "control-label col-md-6" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control is-invalid-cus", @placeholder = "Số điện thoại", required = "required" } })
+                            @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-8 col-xs-12">
+                    <div class="form-group">
+                        @Html.Label("Ngày sinh", htmlAttributes: new { @class = "control-label col-md-6" })
+                        <div class="col-md-10">
+                            <input type="datetime-local" class="form-control" data-lang="en" data-RTL="false" id="Birthday" name="Birthday" data-date-autoclose="true" value="@DateTime.Now.ToString("s")" />
+                            @Html.ValidationMessageFor(model => model.Birthday, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-8 col-xs-12">
+                    <div class="form-group">
+                        @Html.Label("Giới tính", htmlAttributes: new { @class = "control-label col-md-6" })
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.GenderId, null, "--Chọn giới tính--", htmlAttributes: new { @class = "form-control is-invalid-cus select2", required = "required" })
+                            @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-8 col-xs-12">
+                    <div class="form-group">
+                        @Html.Label("Địa chỉ", htmlAttributes: new { @class = "control-label col-md-6" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control is-invalid-cus", @placeholder = "Địa chỉ" } })
+                            @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-8 col-xs-12">
+                    <div class="form-group">
+                        @Html.Label("Email", htmlAttributes: new { @class = "control-label col-md-6" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control is-invalid-cus", @placeholder = "Email" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>                              
+            <div class="row">
+                <div class="col-lg-4 col-md-8 col-xs-12">
+                    <div class="form-group">
+                        @Html.Label("Phòng/Ban", htmlAttributes: new { @class = "control-label col-md-6" })
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.KhoaphongId, null, "--Chọn phòng / ban --", htmlAttributes: new { @class = "form-control is-invalid-cus select2", @placeholder = "Phòng ban" })
+                            @Html.ValidationMessageFor(model => model.KhoaphongId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-8 col-xs-12">
+                    <div class="form-group">
+                        @Html.Label("Chức vụ", htmlAttributes: new { @class = "control-label col-md-6" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("ChucvuId", null, "--Chọn chức vụ --", htmlAttributes: new { @class = "form-control is-invalid-cus select2" })
+                            @Html.ValidationMessageFor(model => model.ChucvuId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-8 col-xs-12">
+                    <div class="form-group">
+                        @Html.Label("Avatar", htmlAttributes: new { @class = "control-label col-md-6" })
+                        <div class="col-md-10">
+                            <input type="file" class="btn btn-outline-primary rounded-pill mt-2 is-invalid-cus" name="pic" id="pic" placeholder="Hình ảnh" />
+                        </div>
+                    </div>
+                </div>
+            </div>   
+        </div>
+        <div class="form-group" style="float:right">
+            <button type="submit" class="mt-2 btn btn-success">Lưu</button>
+            <button type="button" class="mt-2 btn btn-light" data-dismiss="modal">Đóng</button>
+        </div>
+    </div>
+}
+
+
+

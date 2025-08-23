@@ -17,7 +17,7 @@ namespace NamLao206.Controllers
     [Authorize]
     public class NewsController : Controller
     {
-        private namlao206dbEntities db = new namlao206dbEntities();
+        private namlao206_websiteEntities db = new namlao206_websiteEntities();
         int pageSize = 10;
         // GET: News
         public ActionResult Index(int? page, string search)

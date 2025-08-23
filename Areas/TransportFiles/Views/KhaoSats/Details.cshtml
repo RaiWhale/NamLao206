@@ -1,0 +1,234 @@
+﻿@model NamLao206.Models.KhaoSat
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>KhaoSat</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.GiaTriHopDong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GiaTriHopDong)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GiaTriPLHopDong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GiaTriPLHopDong)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LandArea)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LandArea)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WaterArea)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WaterArea)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LandAreaKhaoSat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LandAreaKhaoSat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WaterAreaKhaoSat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WaterAreaKhaoSat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GiaTriThamDinh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GiaTriThamDinh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GiaTriDuToan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GiaTriDuToan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GiaTriKhaoSat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GiaTriKhaoSat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GiaTriDuToanPheDuyet)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GiaTriDuToanPheDuyet)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GiaTriKhaoSatPheDuyet)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GiaTriKhaoSatPheDuyet)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GiaTriThamDinhPheDuyet)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GiaTriThamDinhPheDuyet)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KetQuaKhaoSat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KetQuaKhaoSat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ChiPhiGiamSat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChiPhiGiamSat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NguoiGiamSat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NguoiGiamSat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TinhTrangCongNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TinhTrangCongNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsActive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifiedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Note)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Note)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Account.LoginName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Account.LoginName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Account1.LoginName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Account1.LoginName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Contract.ContractTypeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Contract.ContractTypeName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Supplier.SupplierName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Supplier.SupplierName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Project.TenDuAn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Project.TenDuAn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StatusProject.StatusName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StatusProject.StatusName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Unit.UnitName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Unit.UnitName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

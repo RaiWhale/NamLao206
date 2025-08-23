@@ -1,1 +1,289 @@
-﻿
+﻿@using DashboardMedi.Models.ViewModels
+@{
+    ViewBag.Title = "Home Page";
+    var rs = ViewBag.getDanhsachkhambenh_phongluu as List<danhsachkhambenh_phongluu>;
+    //var getdanhsachKTTC = ViewBag.getdanhsachKTTC as List<danhsachKTTC>;
+
+}
+
+
+<main id="js-page-content" role="main" class="page-content">
+    <div class="row" id="topInformation">
+
+    </div>
+
+    <div class="row" hidden>
+        <div class="col-lg-12 col-sm-12 col-xs-12">
+            <div class="col-lg-4 col-sm-12 col-xs-12 panel-date">
+                <h2 style="font-size: 150%">
+                    Ngày :<input type="date" id="js-datetime" name="js-datetime" data-date-format="DD/MM/YYYY">
+                    <button id="js-laysolieu-btn" onclick="f_laysolieu()" class="btn btn-success btn-lg" style="height:40px;">Xem</button>
+                </h2>
+            </div>
+            <div class="col-lg-8 col-sm-12 col-xs-12">
+                <b style="font-size: 300%;color:black;">
+                    TÌNH HÌNH KHÁM CHỮA BỆNH
+                </b>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-5 col-lg-5 col-xs-12">
+            <div id="panel-2" class="panel panel-locked" data-panel-sortable data-panel-collapsed data-panel-close>
+                <div class="panel-hdr">
+                    <h2 style="font-size: 150%">
+                        Tình hình <span class="fw-300"><i><b class="color-success-900">Tài chính</b></i></span>
+                    </h2>
+                </div>
+                <div class="panel-container show">
+                    <div class="panel-content poisition-relative">
+                        <div id="GetSoTienThuChi">
+
+                        </div>
+                        <!-- datatable end-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-lg-4 col-xs-12">
+            <div id="panel-4" class="panel panel-locked" style="height:440px"  data-panel-sortable data-panel-collapsed data-panel-close>
+                <div class="panel-hdr">
+                    <h2 style="font-size: 150%">
+                        Tình hình <span class="fw-300"><i><b class="color-success-900">xuất nhập khoa</b></i></span>
+                    </h2>
+                </div>
+                <div class="panel-container show">
+                    <div class="panel-content">
+                        <div class="newstape">
+                            <div id="topNhapXuatVien" class="newstape-content">
+
+                            </div>
+                        </div>                      
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-auto col-lg-auto col-xs-12">
+            <div id="panel-4" class="panel panel-locked" style="height:auto" data-panel-sortable data-panel-collapsed data-panel-close>
+                <div class="panel-hdr">
+                    <h2 style="font-size: 150%">
+                        Tình hình <span class="fw-300"><i><b class="color-success-900">khám bệnh</b></i></span>
+                    </h2>
+                </div>
+                <div class="panel-container show">
+                    <div class="panel-content">
+                        <div id="pieChart" style="height:auto !important;">
+                            <canvas></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-lg-4 col-sm-8 col-xs-12">
+            <div id="panel-2" class="panel panel-locked" data-panel-sortable data-panel-collapsed data-panel-close>
+                <div class="panel-hdr">
+                    <h2 style="font-size: 150%">
+                        Số lượng <span class="fw-300"><i><b class="color-success-900">CLS</b></i></span>
+                    </h2>
+                </div>
+                <div class="panel-container show">
+                    <div class="panel-content poisition-relative">
+                        <div class="canvasContainer">
+                            <div class="canvasCover">
+                                <canvas id="chartCLSTotal" width="500" height="800"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*<div class="col-lg-3 col-sm-6 col-xs-12">
+            <div id="panel-2" class="panel panel-locked" data-panel-sortable data-panel-collapsed data-panel-close>
+                <div class="panel-hdr">
+                    <h2 style="font-size: 150%">
+                        Số lượng khám bệnh <span class="fw-300"><i><b class="color-success-900">BHYT : </b><b id="tongcongBHYT"></b></i></span>
+                    </h2>
+                </div>
+                <div class="panel-container show">
+                    <div class="panel-content poisition-relative">
+                        <div class="canvasContainer">
+                            <div class="canvasCover">
+                                <canvas id="canvasSoLuongKhamBenhBHYT" width="500" height="900"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 col-xs-12">
+            <div id="panel-2" class="panel panel-locked" data-panel-sortable data-panel-collapsed data-panel-close>
+                <div class="panel-hdr">
+                    <h2 style="font-size: 150%">
+                        Số lượng khám bệnh <span class="fw-300"><i><b class="color-success-900">Dịch vụ : </b><b id="tongcongDV"></b></i></span>
+                    </h2>
+                </div>
+                <div class="panel-container show">
+                    <div class="panel-content poisition-relative">
+                        <div class="canvasContainer">
+                            <div class="canvasCover">
+                                <canvas id="canvasSoLuongKhamBenhDV" width="500" height="800"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+        <div class="col-lg-4 col-sm-8 col-xs-12">
+            <div id="panel-3" class="panel panel-locked" data-panel-sortable data-panel-collapsed data-panel-close>
+                <div class="panel-hdr">
+                    <h2 style="font-size: 150%">
+                        Số lượng khám bệnh <span class="fw-300"><i><b class="color-success-900">: </b><b id="tongcong"></b></i></span>
+                    </h2>
+                </div>
+                <div class="panel-container show">
+                    <div class="panel-content poisition-relative">
+                        <div class="canvasContainer">
+                            <div class="canvasCover">
+                                <canvas id="canvasSoLuongKhamBenh" width="400" height="800"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-sm-8 col-xs-12">
+            <div id="panel-4" class="panel panel-locked" data-panel-sortable data-panel-collapsed data-panel-close>
+                <div class="panel-hdr">
+                    <h2 style="font-size: 150%">
+                        Thời gian chờ <span class="fw-300"><i>trung bình</i></span>
+                    </h2>
+                </div>
+                <div class="panel-container show">
+                    <div class="panel-content poisition-relative">
+                        <div class="canvasContainer">
+                            <div class="canvasCover">
+                                <canvas id="chartAverageWaitingTime" width="400" height="800"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*<div class="row">
+        <div class="col-lg-3 col-sm-6 col-xs-12">
+            <div id="panel-2" class="panel panel-locked" data-panel-sortable data-panel-collapsed data-panel-close>
+                <div class="panel-hdr">
+                    <h2 style="font-size: 150%">
+                        Số lượng <span class="fw-300"><i><b class="color-success-900">Phiếu thuốc nội trú</b></i></span>
+                    </h2>
+                </div>
+                <div class="panel-container show">
+                    <div class="panel-content poisition-relative">
+                        <div class="canvasContainer">
+                            <canvas id="charttinhhinhPhieuThuocNoiTru" width="400" height="400"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 col-xs-12">
+            <div id="panel-4" class="panel panel-locked" data-panel-sortable data-panel-collapsed data-panel-close>
+                <div class="panel-hdr">
+                    <h2 style="font-size: 150%">
+                        Tình hình <span class="fw-300"><i><b class="color-success-900">Tài chính theo khoa</b></i></span>
+                    </h2>
+                </div>
+                <div class="panel-container show">
+                    <div class="panel-content">
+                        <div class="overflow_hidden" style="min-height:400px;">
+                            <div class="row col-md-12">
+                                <div class="table-responsive">
+                                    <div class="newstape">
+                                        <div class="newstape-content" id="topdanhsachKTTC_Khoa">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+<div class="row">
+    <!--<div class="col-lg-6 col-sm-9 col-xs-12">
+        <div id="panel-4" class="panel panel-locked" data-panel-sortable data-panel-collapsed data-panel-close>
+            <div class="panel-hdr">
+                <h2 style="font-size: 150%">
+                    Tình hình <span class="fw-300"><i><b class="color-success-900">chỉ tiêu</b></i></span>
+                </h2>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+                    <div class="overflow_hidden" style="height:500px;">
+
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover table-striped w-100" style="font-size: 100%">
+                                    <thead class="bg-warning-200">
+                                        <tr>-->
+    @*<th width=600px>Khoa</th>*@
+    <!--<th width=600px>Dịch vụ</th>
+                                            <th width=100px>Bảo hiểm</th>
+                                            <th width=100px>Viện phí</th>
+                                            <th>Tổng</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                                <div class="newstape">
+                                    <div id="lstChiTieu" class="newstape-content">
+                                    </div>
+                                </div>
+                            </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>-->
+    <div class="col-lg-4 col-sm-8 col-xs-12">
+        <div id="panel-2" class="panel panel-locked" data-panel-sortable data-panel-collapsed data-panel-close>
+            <div class="panel-hdr">
+                <h2 style="font-size: 150%">
+                    Số lượng <span class="fw-300"><i><b class="color-success-900">Toa thuốc</b></i></span>
+                </h2>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content poisition-relative">
+                    <div class="row" id="chartTinhHinhToaThuoc">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-8 col-sm-10 col-xs-12">
+        <div id="panel-2" class="panel panel-locked" data-panel-sortable data-panel-collapsed data-panel-close>
+            <div class="panel-hdr">
+                <h2 style="font-size: 150%">
+                    Đề án <span class="fw-300"><i><b class="color-success-900">06/CP</b></i></span>
+                </h2>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content poisition-relative">
+                    <div id="GetSoLieuDeAn06">
+
+                    </div>
+                    <!-- datatable end-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</main>

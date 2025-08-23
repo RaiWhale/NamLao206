@@ -18,6 +18,9 @@ namespace NamLao206.Models
         public DM_DonVis()
         {
             this.DM_PhongBans = new HashSet<DM_PhongBans>();
+            this.Suppliers = new HashSet<Supplier>();
+            this.Projects = new HashSet<Project>();
+            this.HoatDongNhanSus = new HashSet<HoatDongNhanSu>();
         }
     
         public int Id { get; set; }
@@ -26,8 +29,16 @@ namespace NamLao206.Models
         public System.DateTime CreateDate { get; set; }
         public string Description { get; set; }
         public int Parent_Id { get; set; }
+        public string CreateBranch { get; set; }
+        public string EditBranch { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DM_PhongBans> DM_PhongBans { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Supplier> Suppliers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Project> Projects { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HoatDongNhanSu> HoatDongNhanSus { get; set; }
     }
 }

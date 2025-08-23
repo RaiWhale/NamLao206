@@ -9,7 +9,7 @@ namespace NamLao206.Areas.Admin.Controllers
 {
     public class AdministratorsController : Controller
     {
-        private namlao206dbEntities db = new namlao206dbEntities();
+        private namlao206_websiteEntities db = new namlao206_websiteEntities();
 
         // GET: Admin/Administrators
         public ActionResult Index(string message)

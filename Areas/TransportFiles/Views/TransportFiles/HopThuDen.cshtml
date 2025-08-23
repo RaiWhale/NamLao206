@@ -1,108 +1,137 @@
-﻿@model IEnumerable<NamLao206.Models.Transport>
-
+﻿@using NamLao206.Models
+@using PagedList.Mvc
+@using PagedList
+@model PagedList.IPagedList<NamLao206.Models.Transport>
 @{
     ViewBag.Title = "Hộp thư - ";
     var color = "";
     int stt = 1; // Khởi tạo biến đếm
 }
 <!-- Hiển thị thông báo (nếu có) -->
-@if (!string.IsNullOrEmpty(@ViewBag.Message))
-{
-    <div class="alert alert-danger">
-        @ViewBag.Message
-    </div>
-}
-<div class="row">
-    <div class="col-sm-12">
-        <div class="card">
-            <div class="card-header d-flex justify-content-between">
-                <div class="header-title">
-                    @*<h4 class="card-title">Chức vụ</h4>*@
-                    <a href="@Url.Action("Create")" class="btn btn-primary add-list "><i class="las la-plus mr-3"></i>GỬI VĂN BẢN ĐI</a>
+<div id="alert-container" data-message="@Html.Raw(HttpUtility.HtmlEncode(ViewBag.Message))"></div>
+<!-- inbox container -->
+<div class="d-flex flex-column flex-grow-1 bg-white">
+    <!-- inbox header -->
+    <div class="flex-grow-0">
+        <!-- inbox title -->
+        <div class="d-flex align-items-center pl-2 pr-3 py-3 pl-sm-3 pr-sm-4 py-sm-4 px-lg-5 py-lg-4  border-faded border-top-0 border-left-0 border-right-0 flex-shrink-0">
+            <!-- button for mobile -->
+            <a href="javascript:void(0);" class="pl-3 pr-3 py-2 d-flex d-lg-none align-items-center justify-content-center mr-2 btn" data-action="toggle" data-class="slide-on-mobile-left-show" data-target="#js-inbox-menu">
+                <i class="fal fa-ellipsis-v h1 mb-0 "></i>
+            </a>
+            <a href="@Url.Action("Create")" class="btn btn-primary add-list "><i class="las la-plus mr-3"></i>GỬI VĂN BẢN ĐI</a>
+            <!-- end button for mobile -->
+            <h1 class="subheader-title ml-1 ml-lg-0">
+                <i class="fas fa-folder-open mr-2 hidden-lg-down"></i>
+                Inbox
+            </h1>
+
+            @using (Html.BeginForm())
+            {
+                <div class="d-flex position-relative ml-auto" style="max-width: 23rem;">
+                    <i class="fas fa-search position-absolute pos-left fs-lg px-3 py-2 mt-1"></i>
+                    <input type="text" name="search" class="search form-control bg-subtlelight pl-6" placeholder="Tìm văn bản">
                 </div>
+            }
+        </div>
+        <!-- end inbox title -->
+        <!-- inbox button shortcut -->
+        <div class="d-flex flex-wrap align-items-center pl-3 pr-1 py-2 px-sm-4 px-lg-5 border-faded border-top-0 border-left-0 border-right-0">
+            <div class="flex-1 d-flex align-items-center">
+                <div class="custom-control custom-checkbox mr-2 mr-lg-2 d-inline-block">
+                    <input type="checkbox" class="custom-control-input" id="js-msg-select-all">
+                    <label class="custom-control-label bolder" for="js-msg-select-all"></label>
+                </div>
+                <a href="javascript:void(0);" class="btn btn-icon rounded-circle mr-1">
+                    <i class="fas fa-redo fs-md"></i>
+                </a>
+                <a href="javascript:void(0);" class="btn btn-icon rounded-circle mr-1">
+                    <i class="fas fa-exclamation-circle fs-md"></i>
+                </a>
+                <a href="javascript:void(0);" id="js-delete-selected" class="btn btn-icon rounded-circle mr-1">
+                    <i class="fas fa-trash fs-md"></i>
+                </a>
             </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table id="datatable" class="table data-table table-striped table-bordered">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Số Công Văn</th>
-                                <th style="width:500px">Trích yếu</th>
-                                <th>Ngày tạo</th>
-                                <th>Ngày nhận</th>
-                                <th>Người tạo</th>
-                                <th>Khẩn cấp</th>
-                                <th>Xem Văn Bản</th>
-                                @*<th></th>*@
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model)
-                            {
-                                <tr>
-                                    <td>
-                                        @stt
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.TransportFile.tenFile)
-                                    </td>
-                                    <td style="width:500px">
-                                        @Html.DisplayFor(modelItem => item.TransportFile.Mota)
-
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.TransportFile.CreateDate)
-
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.TransportDate)
-
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.TransportFile.Account1.Employee.Name)
-                                    </td>
-                                    <td class="text-center">
-                                        @if (item.TransportFile.KhanCap == true)
-                                        {
-                                            color = "btn-danger";
-                                        }
-                                        else
-                                        {
-                                            color = "btn-secondary";
-                                        }
-                                        <button type="button" class="btn @color  mt-2"><i class="ri-star-fill pr-0"></i></button>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex align-items-center list-action gap-2">
-                                            <!-- Nút Xem chi tiết -->
-                                            <a class="btn btn-sm @(item.DaXem == true ? "btn-success" : "btn-danger")"
-                                               href="@Url.Action("Details", new { id = item.TransportFile.Id, flag = "HopThuDen" })"
-                                               data-bs-toggle="tooltip"
-                                               data-bs-placement="top"
-                                               title="@(item.DaXem == true ? "Đã xem" : "Chưa xem")">
-                                                <i class="@(item.DaXem == true ? "ri-check-line" : "ri-close-line") mr-1"></i>
-                                                @(item.DaXem == true ? "Đã xem" : "Chưa xem")
-                                            </a>
-
-                                          
-                                        </div>
-                                    </td>
-                                    @*<td>
-                                            <div class="d-flex align-items-center list-action">
-                                                <a class="badge bg-warning mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xóa"
-                                                   href="@Url.Action("Delete", new { id = item.Id })"><i class="ri-delete-bin-line mr-0"></i></a>
-                                            </div>
-                                        </td>*@
-                                </tr>
-                                stt++;
-                            }
-                        </tbody>
-                        <tfoot>
-                        </tfoot>
-                    </table>
+            <!-- Pagination Section -->
+            @if (Model != null && Model.Any())
+            {
+                <div class="d-flex align-items-center justify-content-between flex-wrap">
+                    <!-- Record Range -->
+                    <div class="text-muted mr-3">
+                        @((Model.PageNumber - 1) * Model.PageSize + 1) -
+                        @(Model.PageNumber * Model.PageSize > Model.TotalItemCount ? Model.TotalItemCount : Model.PageNumber * Model.PageSize)
+                        of @Model.TotalItemCount
+                    </div>
+                    <!-- PagedListPager with Custom Styling -->
+                    @Html.PagedListPager(Model, page => Url.Action("HopThuDen", new { page, search = ViewBag.Search }),
+                        new PagedListRenderOptions
+                        {
+                            LinkToPreviousPageFormat = " <button class=\"btn btn-icon rounded-circle\"><i class=\"fal fa-chevron-left fs-md\"></i></button>",
+                            LinkToNextPageFormat = "<button class=\"btn btn-icon rounded-circle\"><i class=\"fal fa-chevron-right fs-md\"></i></button>",
+                            DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+                            DisplayLinkToLastPage = PagedListDisplayMode.Never,
+                            DisplayLinkToIndividualPages = false, // Only show Previous/Next buttons
+                            UlElementClasses = new[] { "pagination", "justify-content-end", "mb-0" },
+                            LiElementClasses = new[] { "page-item" }
+                        })
                 </div>
+            }
+            else
+            {
+                <p>Không có dữ liệu để hiển thị.</p>
+            }
+        </div>
+        <!-- end inbox button shortcut -->
+    </div>
+    <!-- end inbox header -->
+    <!-- inbox message -->
+    <div class="flex-wrap align-items-center flex-grow-1 position-relative bg-gray-50">
+        <div class="position-absolute pos-top pos-bottom w-100 custom-scroll">
+            <div class="d-flex h-100 flex-column">
+                <!-- message list (the part that scrolls) -->
+                <ul class="notification notification-layout-2 email-list">
+                    @foreach (var item in Model)
+                    {
+                        <li class=" @(item.DaXem == true ? "" : "unread")">
+                            <div class="d-flex align-items-center px-3 px-sm-4 px-lg-5 py-1 py-lg-0 height-4 height-mobile-auto">
+                                <div class="custom-control custom-checkbox mr-3 order-1">
+                                    <input type="checkbox" class="custom-control-input" id="msg-@item.Id">
+                                    <label class="custom-control-label" for="msg-@item.Id"></label>
+                                </div>
+                                <a href="#" title="@(item.TransportFile.KhanCap == true ? "starred" : "Not starred")" class="d-flex align-items-center py-1 ml-2 mt-4 mt-lg-0 ml-lg-0 mr-lg-4 fs-lg @(item.TransportFile.KhanCap == true ? "color-warning-500" : "text-muted") order-3 order-lg-2">
+                                    <i class="@(item.TransportFile.KhanCap == true ? "fas" : "fal") fa-star"></i>
+                                </a>
+                                <div class="d-flex flex-row flex-wrap flex-1 align-items-stretch align-self-stretch order-2 order-lg-3">
+                                    <div class="row w-100">
+                                        <a href="@Url.Action("Details", new { id = item.TransportFile.Id, flag = "HopThuDen" })" class="name d-flex width-sm align-items-center pt-1 pb-0 py-lg-1 col-12 col-lg-auto">
+                                            @Html.DisplayFor(modelItem => item.TransportFile.Account1.Employee.Name)
+                                        </a>
+                                        <a href="@Url.Action("Details", new { id = item.TransportFile.Id, flag = "HopThuDen" })"
+                                           class="name d-flex align-items-center pt-0 pb-1 py-lg-1 flex-1 col-12 col-lg-auto"
+                                           title="@item.TransportFile.Mota">
+                                            @Html.DisplayFor(modelItem => item.TransportFile.Mota)
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="fs-sm text-muted ml-auto hide-on-hover-parent order-4 position-on-mobile-absolute pos-top pos-right mt-2 mr-3 mr-sm-4 mt-lg-0 mr-lg-0">
+                                    Người phê duyệt: @Html.DisplayFor(modelItem => item.TransportFile.Account2.Employee.Name) --
+                                    @if (item.TransportFile.CreateDate.Date != DateTime.Today)
+                                    {
+                                        @item.TransportFile.CreateDate.ToString("dd/MM/yyyy hh:mm:ss")
+                                    }
+                                    else
+                                    {
+                                        @item.TransportFile.CreateDate.ToString("hh:mm:ss")
+                                    }
+                                </div>
+                            </div>
+                        </li>
+                    }
+                </ul>
+                <!-- end message list -->
             </div>
         </div>
     </div>
+    <!-- end inbox message -->
 </div>
+<!-- end inbox container -->

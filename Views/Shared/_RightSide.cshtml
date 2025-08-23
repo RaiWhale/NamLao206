@@ -2,7 +2,7 @@
 @model NamLao206.Models.News
 @using NamLao206.Utils
 @{
-    namlao206dbEntities db = new namlao206dbEntities();
+    namlao206_websiteEntities db = new namlao206_websiteEntities();
     var calrouselPicture = ViewBag.calrouselPicture as List<CalrouselPicture>;
     var topics = ViewBag.topics as List<Topic>;
     var recentNewsRightSide = db.News.OrderByDescending(x => x.Id).Take(3);

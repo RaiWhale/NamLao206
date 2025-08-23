@@ -19,7 +19,8 @@
             <div class="form-group">
                 @Html.Label("Nhóm tin", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.NhomNews, new { htmlAttributes = new { @class = "form-control is-invalid-cus", required = "required" } })
+                @*@Html.EditorFor(model => model.NhomNews, new { htmlAttributes = new { @class = "form-control is-invalid-cus", required = "required", @value = "2" } })*@
+                <input type="number" value="2" class="form-control is-invalid-cus" required id="NhomNews" name="NhomNews" />
                     @Html.ValidationMessageFor(model => model.NhomNews, "", new { @class = "text-danger" })
                 </div>
             </div>

@@ -12,7 +12,7 @@ namespace NamLao206.Areas.Admin.Controllers
 {
     public class DM_hinhthuckinhdoanhController : Controller
     {
-        private namlao206dbEntities db = new namlao206dbEntities();
+        private namlao206_websiteEntities db = new namlao206_websiteEntities();
 
         // GET: Admin/DM_hinhthuckinhdoanh
         public ActionResult Index()

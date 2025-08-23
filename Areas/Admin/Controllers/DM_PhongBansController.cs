@@ -1,9 +1,11 @@
 ﻿using NamLao206.Models;
+using PagedList;
 using System;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -12,14 +14,36 @@ namespace NamLao206.Areas.Admin.Controllers
     [Authorize]
     public class DM_PhongBansController : Controller
     {
-        private namlao206dbEntities db = new namlao206dbEntities();
-
+        private namlao206_websiteEntities db = new namlao206_websiteEntities();
+		int pageSize = 10;
         // GET: Admin/DM_PhongBans
-        public ActionResult Index()
+		public ActionResult Index(int? page, string search, string message)
         {
-            ViewBag.Title = "Khoa / Phòng ban -";
-            var DM_PhongBans = db.DM_PhongBans.Include(d => d.DM_NhomPhongBans).Include(d => d.Picture);
-            return View(DM_PhongBans.ToList());
+			// 1. Kiểm tra xác thực người dùng
+			if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
+			{
+				ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
+				return RedirectToAction("Login", "Account");
+			}
+            IQueryable<DM_PhongBans> dM_Khoaphongs = db.DM_PhongBans.Include(d => d.DM_NhomPhongBans).Include(d => d.Picture);
+			if (!string.IsNullOrEmpty(search))
+			{
+				dM_Khoaphongs = dM_Khoaphongs.Where(d => d.TenKhoa.Trim().ToLower().Contains(search.Trim().ToLower()) || d.ChucNang.Trim().ToLower().Contains(search.Trim().ToLower()));
+				ViewBag.Search = search;
+			}
+			else
+			{
+				ViewBag.Search = "";
+			}
+			if (!string.IsNullOrEmpty(message))
+			{
+				ViewBag.Message = message;
+			}
+			dM_Khoaphongs = dM_Khoaphongs.OrderBy(x => x.Id);	
+			//Paging
+			int pageNumber = page ?? 1;
+			ViewBag.Title = "Khoa / Phòng ban -";
+            return View(dM_Khoaphongs.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Admin/DM_PhongBans/Details/5
@@ -38,10 +62,10 @@ namespace NamLao206.Areas.Admin.Controllers
         }
 
         // GET: Admin/DM_PhongBans/Create
-        public ActionResult Create()
+		public ActionResult Create(int? page)
         {
             ViewBag.NhomKhoaId = new SelectList(db.DM_NhomPhongBans, "Id", "Nhomkhoa");
-            ViewBag.PictureId = new SelectList(db.Pictures, "Id", "Url");
+            ViewBag.page = page;
             ViewBag.donvi_Id = new SelectList(db.DM_DonVis, "Id", "TenDonVi");
             return View();
         }
@@ -51,69 +75,108 @@ namespace NamLao206.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, ValidateInput(false)]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,TenKhoa,ChucNang,NhomKhoaId,PictureId,Description,donvi_Id")] DM_PhongBans DM_PhongBans)
+        public async Task<ActionResult> Create([Bind(Include = "Id,TenKhoa,ChucNang,NhomKhoaId,PictureId,Description,donvi_Id")] DM_PhongBans dM_Khoaphongs, int? page)
         {
-            if (ModelState.IsValid)
-            {
-                DM_PhongBans.CreateDate = DateTime.Now;
-                db.DM_PhongBans.Add(DM_PhongBans);
-                db.SaveChanges();
-                if (Request.Files.Count > 0)
+			// 1. Kiểm tra xác thực người dùng
+			if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
+			{
+				ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
+				return RedirectToAction("Login", "Account");
+			}
+			ViewBag.Title = "Khoa / Phòng ban -";
+			if (ModelState.IsValid)
+			{
+                try
                 {
-                    int file_count = 0;
-                    string dir = Server.MapPath("~/Content/Uploads/KhoaPhongs") + "\\" + DM_PhongBans.Id + "\\";
-                    if (!System.IO.Directory.Exists(dir)) System.IO.Directory.CreateDirectory(dir);
+					// 2. Kiểm tra xem tên khoa đã tồn tại chưa
+					var existingKhoa = db.DM_PhongBans.FirstOrDefault(k => k.TenKhoa.Trim().ToLower() == dM_Khoaphongs.TenKhoa.Trim().ToLower());
+					if (existingKhoa == null)
+					{
+						// 3. Nếu chưa tồn tại, thêm mới khoa
+						db.DM_PhongBans.Add(dM_Khoaphongs);
+						await db.SaveChangesAsync();
+						if (Request.Files.Count > 0)
+						{
+							int file_count = 0;
+							string uploadPath = Path.Combine(Server.MapPath("~/Content/Uploads/KhoaPhongs"), dM_Khoaphongs.Id.ToString());
+							if (!Directory.Exists(uploadPath)) Directory.CreateDirectory(uploadPath);// Creates directory if it doesn't exist
+                            var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
+							for (int i = 0; i < Request.Files.Count; i++)
+							{
+								try
+								{
+									HttpPostedFileBase file = Request.Files[i];
+									if (!string.IsNullOrEmpty(file.FileName))
+									{
+										string extension = Path.GetExtension(file.FileName).ToLowerInvariant();
+										if (!allowedExtensions.Contains(extension))
+										{
+											ModelState.AddModelError("", $"File {file.FileName} has an invalid extension.");
+											continue;
+										}
+										// Sanitize and generate unique file name
+										string fileName = $"{DateTime.UtcNow.Ticks}_{Path.GetFileNameWithoutExtension(file.FileName)}_{Guid.NewGuid().ToString("N").Substring(0, 8)}{extension}";
+										string filePath = Path.Combine(uploadPath, fileName);
 
-                    for (int i = 0; i < Request.Files.Count; i++)
-                    {
-                        try
-                        {
-                            HttpPostedFileBase file = Request.Files[i];
-                            if (!string.IsNullOrEmpty(file.FileName))
-                            {
-                                string filename = DateTime.Now.Ticks + "_" + file.FileName.Split('/').Last();
-                                file.SaveAs(dir + filename);
-                                db.Pictures.Add(new Picture
-                                {
-                                    Url = filename,
-                                    KhoaphongId = DM_PhongBans.Id
-                                });
-                                file_count++;
-                            }
-                        }
-                        catch { }
-                    }
-                    if (file_count > 0)
-                    {
-                        db.SaveChanges();
-                    }
-                    return RedirectToAction("Index");
-                }
-            }
-
-            ViewBag.NhomKhoaId = new SelectList(db.DM_NhomPhongBans, "Id", "Nhomkhoa", DM_PhongBans.NhomKhoaId);
-            ViewBag.PictureId = new SelectList(db.Pictures, "Id", "Url", DM_PhongBans.PictureId);
-            ViewBag.donvi_Id = new SelectList(db.DM_DonVis, "Id", "TenDonVi", DM_PhongBans.donvi_Id);
-            return View(DM_PhongBans);
-        }
+										// Save file asynchronously
+										using (var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
+										{
+											await file.InputStream.CopyToAsync(fileStream);
+										}
+										db.Pictures.Add(new Models.Picture
+										{
+											Url = fileName,
+											KhoaphongId = dM_Khoaphongs.Id
+										});
+										file_count++;
+									}
+								}
+								catch { }
+							}
+							if (file_count > 0)
+							{
+								await db.SaveChangesAsync();
+							}
+							ViewBag.Message = "Tạo mới thành công!";
+							return RedirectToAction("Index", new { message = ViewBag.Message, page = page });
+						}
+					}
+				}
+				catch (Exception ex)
+				{
+					// Ghi log lỗi và thiết lập thông báo lỗi
+					System.Diagnostics.Debug.WriteLine($"Lỗi khi tạo nhân viên: {ex.Message}");
+					ModelState.AddModelError("", "Đã xảy ra lỗi khi lưu dữ liệu. Vui lòng thử lại.");
+				}
+			}
+			ViewBag.Message = "Đã xảy ra lỗi nhập liệu!";
+			return RedirectToAction("Index", new { message = ViewBag.Message, page = page });
+		}
 
         // GET: Admin/DM_PhongBans/Edit/5
-        public ActionResult Edit(int? id)
+		public async Task<ActionResult> Edit(int? id, int? page)
         {
-            
-            if (id == null)
+			// 1. Kiểm tra xác thực người dùng
+			if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
+			{
+				ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
+				return RedirectToAction("Login", "Account");
+			}            
+			if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DM_PhongBans DM_PhongBans = db.DM_PhongBans.Find(id);
-            if (DM_PhongBans == null)
+            DM_PhongBans dM_Khoaphongs = await db.DM_PhongBans.FindAsync(id);
+            if (dM_Khoaphongs == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.NhomKhoaId = new SelectList(db.DM_NhomPhongBans, "Id", "Nhomkhoa", DM_PhongBans.NhomKhoaId);
-            ViewBag.PictureId = new SelectList(db.Pictures, "Id", "Url", DM_PhongBans.PictureId);
-            ViewBag.donvi_Id = new SelectList(db.DM_DonVis, "Id", "TenDonVi", DM_PhongBans.donvi_Id);
-            return View(DM_PhongBans);
+			ViewBag.Title = "Khoa / Phòng ban -";
+			ViewBag.page = page;
+            ViewBag.NhomKhoaId = new SelectList(db.DM_NhomPhongBans, "Id", "Nhomkhoa", dM_Khoaphongs.NhomKhoaId);
+            ViewBag.PictureId = new SelectList(db.Pictures, "Id", "Url", dM_Khoaphongs.PictureId);
+            ViewBag.donvi_Id = new SelectList(db.DM_DonVis, "Id", "TenDonVi", dM_Khoaphongs.donvi_Id);
+            return View(dM_Khoaphongs);
         }
 
         // POST: Admin/DM_PhongBans/Edit/5
@@ -121,80 +184,122 @@ namespace NamLao206.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, ValidateInput(false)]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,TenKhoa,ChucNang,NhomKhoaId,PictureId,Description,donvi_Id,CreateDate")] DM_PhongBans DM_PhongBans)
+		public async Task<ActionResult> Edit([Bind(Include = "Id,TenKhoa,ChucNang,NhomKhoaId,PictureId,Description,donvi_Id,CreateDate")] DM_PhongBans dM_Khoaphongs, int? page)
         {
-            if (ModelState.IsValid)
+			// 1. Kiểm tra xác thực người dùng
+			if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
+			{
+				ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
+				return RedirectToAction("Login", "Account");
+			}
+			if (ModelState.IsValid)
             {
-                db.Entry(DM_PhongBans).State = EntityState.Modified;
-                db.SaveChanges();
-                if (Request.Files.Count > 0)
-                {
-                    int file_count = 0;
-                    string dir = Server.MapPath("~/Content/Uploads/KhoaPhongs") + "\\" + DM_PhongBans.Id + "\\";
-                    if (!System.IO.Directory.Exists(dir)) System.IO.Directory.CreateDirectory(dir);
+				try {
+					db.Entry(dM_Khoaphongs).State = EntityState.Modified;
+					await db.SaveChangesAsync();
+					if (Request.Files.Count > 0)
+					{
+						int file_count = 0;
+						string uploadPath = Path.Combine(Server.MapPath("~/Content/Uploads/KhoaPhongs"), dM_Khoaphongs.Id.ToString());
+						if (!Directory.Exists(uploadPath)) Directory.CreateDirectory(uploadPath);// Creates directory if it doesn't exist
+						var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
+						for (int i = 0; i < Request.Files.Count; i++)
+						{
+							try
+							{
+								HttpPostedFileBase file = Request.Files[i];
+								if (!string.IsNullOrEmpty(file.FileName))
+								{
+									string extension = Path.GetExtension(file.FileName).ToLowerInvariant();
+									if (!allowedExtensions.Contains(extension))
+									{
+										ModelState.AddModelError("", $"File {file.FileName} has an invalid extension.");
+										continue;
+									}
+									// Sanitize and generate unique file name
+									string fileName = $"{DateTime.UtcNow.Ticks}_{Path.GetFileNameWithoutExtension(file.FileName)}_{Guid.NewGuid().ToString("N").Substring(0, 8)}{extension}";
+									string filePath = Path.Combine(uploadPath, fileName);
 
-                    for (int i = 0; i < Request.Files.Count; i++)
-                    {
-                        try
-                        {
-                            HttpPostedFileBase file = Request.Files[i];
-                            if (!string.IsNullOrEmpty(file.FileName))
-                            {
-                                string filename = DateTime.Now.Ticks + "_" + file.FileName.Split('/').Last();
-                                file.SaveAs(dir + filename);
-                                db.Pictures.Add(new Picture
-                                {
-                                    Url = filename,
-                                    KhoaphongId = DM_PhongBans.Id
-                                });
-                                file_count++;
-                            }
-                        }
-                        catch { }
-                    }
-                    if (file_count > 0)
-                    {
-                        db.SaveChanges();
-                    }
-                }
-                return RedirectToAction("Index");
-            }
-            ViewBag.NhomKhoaId = new SelectList(db.DM_NhomPhongBans, "Id", "Nhomkhoa", DM_PhongBans.NhomKhoaId);
-            ViewBag.PictureId = new SelectList(db.Pictures, "Id", "Url", DM_PhongBans.PictureId);
-            ViewBag.donvi_Id = new SelectList(db.DM_DonVis, "Id", "TenDonVi", DM_PhongBans.donvi_Id);
-            return View(DM_PhongBans);
-        }
+									// Save file asynchronously
+									using (var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
+									{
+										await file.InputStream.CopyToAsync(fileStream);
+									}
+									db.Pictures.Add(new Models.Picture
+									{
+										Url = fileName,
+										KhoaphongId = dM_Khoaphongs.Id
+									});
+									file_count++;
+								}
+							}
+							catch { }
+						}
+						if (file_count > 0)
+						{
+							await db.SaveChangesAsync();
+						}
+						ViewBag.Message = "Sửa thành công!";
+						return RedirectToAction("Index", new { message = ViewBag.Message, page = page });
+					}
+				}
+				catch (Exception ex)
+				{
+					// Ghi log lỗi và thiết lập thông báo lỗi
+					System.Diagnostics.Debug.WriteLine($"Lỗi khi tạo nhân viên: {ex.Message}");
+					ModelState.AddModelError("", "Đã xảy ra lỗi khi lưu dữ liệu. Vui lòng thử lại.");
+				}
+
+			}
+			ViewBag.Message = "Đã xảy ra lỗi nhập liệu!";
+			return RedirectToAction("Index", new { message = ViewBag.Message, page = page });
+		}
 
         // GET: Admin/DM_PhongBans/Delete/5
-        public ActionResult Delete(int? id)
+		public async Task<ActionResult> Delete(int? id, int? page)
         {
-            if (id == null)
+			// 1. Kiểm tra xác thực người dùng
+			if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
+			{
+				ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
+				return RedirectToAction("Login", "Account");
+			}
+			if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DM_PhongBans DM_PhongBans = db.DM_PhongBans.Find(id);
-            if (DM_PhongBans == null)
+            DM_PhongBans dM_Khoaphongs = await db.DM_PhongBans.FindAsync(id);
+            if (dM_Khoaphongs == null)
             {
                 return HttpNotFound();
             }
-            return PartialView(DM_PhongBans);
+			ViewBag.page = page;
+			return PartialView(dM_Khoaphongs);
         }
 
-        // POST: Admin/DM_PhongBans/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+		// POST: Admin/DM_Khoaphongs/Delete/5
+		[HttpPost, ActionName("Delete")]
+		[ValidateAntiForgeryToken]
+		public async Task<ActionResult> DeleteConfirmed(int id, int? page)
         {
-            DM_PhongBans DM_PhongBans = db.DM_PhongBans.Find(id);
-            db.DM_PhongBans.Remove(DM_PhongBans);
-            string path = Server.MapPath("~/Content/Uploads/KhoaPhongs") + "\\" + DM_PhongBans.Id;
-            if (Directory.Exists(path))
+			// 1. Kiểm tra xác thực người dùng
+			if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
+			{
+				ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
+				return RedirectToAction("Login", "Account");
+			}
+			// 2. Kiểm tra xem khoa có tồn tại không
+			DM_PhongBans dM_Khoaphongs = await db.DM_PhongBans.FindAsync(id);
+            db.DM_PhongBans.Remove(dM_Khoaphongs);
+			string uploadPath = Path.Combine(Server.MapPath("~/Content/Uploads/KhoaPhongs"), dM_Khoaphongs.Id.ToString());		
+            if (Directory.Exists(uploadPath))
             {
-                Directory.Delete(path, true);
+                Directory.Delete(uploadPath, true);
             }
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+            await db.SaveChangesAsync();
+			ViewBag.Message = "Xóa thành công!";
+			return RedirectToAction("Index", new { message = ViewBag.Message, page = page });
+		}
 
         protected override void Dispose(bool disposing)
         {

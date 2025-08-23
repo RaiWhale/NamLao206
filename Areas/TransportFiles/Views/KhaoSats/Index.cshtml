@@ -1,0 +1,189 @@
+﻿@model IEnumerable<NamLao206.Models.KhaoSat>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.GiaTriHopDong)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GiaTriPLHopDong)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LandArea)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WaterArea)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LandAreaKhaoSat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WaterAreaKhaoSat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GiaTriThamDinh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GiaTriDuToan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GiaTriKhaoSat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GiaTriDuToanPheDuyet)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GiaTriKhaoSatPheDuyet)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GiaTriThamDinhPheDuyet)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KetQuaKhaoSat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ChiPhiGiamSat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NguoiGiamSat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TinhTrangCongNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModifiedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Note)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Account.LoginName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Account1.LoginName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Contract.ContractTypeName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Supplier.SupplierName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Project.TenDuAn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StatusProject.StatusName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Unit.UnitName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.GiaTriHopDong)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GiaTriPLHopDong)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LandArea)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WaterArea)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LandAreaKhaoSat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WaterAreaKhaoSat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GiaTriThamDinh)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GiaTriDuToan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GiaTriKhaoSat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GiaTriDuToanPheDuyet)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GiaTriKhaoSatPheDuyet)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GiaTriThamDinhPheDuyet)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KetQuaKhaoSat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ChiPhiGiamSat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NguoiGiamSat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TinhTrangCongNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsActive)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreateDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModifiedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Note)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Account.LoginName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Account1.LoginName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Contract.ContractTypeName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Supplier.SupplierName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Project.TenDuAn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StatusProject.StatusName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Unit.UnitName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
