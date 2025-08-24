@@ -232,7 +232,80 @@ function drawPieChart(canvasId, counts, labels) {
 
     new Chart($("#pieChart > canvas").get(0).getContext("2d"), config);
 }
+async function drawChartNhanSu() {
+    const $chartNhanSu = $('#nhanSuChart');
+    $chartNhanSu.empty(); // Xóa nội dung cũ
+    try {
+        const response = await fetch(`/TransportFiles/Dashboard/HoatDongNhanSu`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        if (!Array.isArray(data)) {
+            throw new Error('Dữ liệu trả về không phải là mảng');
+        }
+        // Xây dựng HTML bằng mảng để tối ưu hiệu suất
+        const htmlArray = [];
+        data.forEach((item, index) => {
+            // Calculate percentages for each category, with checks for division by zero
+            const totalPercent = item.Counts > 0 ? Math.ceil((item.LastCounts / item.Counts) * 100) : 0;
+            const congTacPercent = item.Counts > 0 ? Math.ceil((item.str4 / item.Counts) * 100) : 0;
+            const nghiPhepPercent = item.Counts > 0 ? Math.ceil((item.str3 / item.Counts) * 100) : 0;
+            const diHocPercent = item.Counts > 0 ? Math.ceil((item.str5 / item.Counts) * 100) : 0; // Percentage for Đi học
+            const lyDoKhacPercent = item.Counts > 0 ? Math.ceil((item.str6 / item.Counts) * 100) : 0; // Percentage for Lý do khác
 
+            htmlArray.push(`
+        <div class="col-lg-11 col-xl-11 pl-lg-12">
+            <div class="d-flex mt-2">
+                Tổng nhân sự
+                <span class="d-inline-block ml-auto">${item.LastCounts} / ${item.Counts}</span>
+            </div>
+            <div class="progress progress-sm mb-3">
+                <div class="progress-bar bg-fusion-400" role="progressbar" style="width: ${totalPercent}%;" aria-valuenow="${item.LastCounts}" aria-valuemin="0" aria-valuemax="${item.Counts}"></div>
+            </div>
+            <div class="d-flex">
+                Công tác
+                <span class="d-inline-block ml-auto">${item.str4} / ${item.Counts}</span>
+            </div>
+            <div class="progress progress-sm mb-3">
+                <div class="progress-bar bg-success-500" role="progressbar" style="width: ${congTacPercent}%;" aria-valuenow="${item.str4}" aria-valuemin="0" aria-valuemax="${item.Counts}"></div>
+            </div>
+            <div class="d-flex">
+                Nghỉ phép
+                <span class="d-inline-block ml-auto">${item.str3} / ${item.Counts}</span>
+            </div>
+            <div class="progress progress-sm mb-3">
+                <div class="progress-bar bg-info-400" role="progressbar" style="width: ${nghiPhepPercent}%;" aria-valuenow="${item.str3}" aria-valuemin="0" aria-valuemax="${item.Counts}"></div>
+            </div>
+            <div class="d-flex">
+                Đi học
+                <span class="d-inline-block ml-auto">${item.str5} / ${item.Counts}</span>
+            </div>
+            <div class="progress progress-sm mb-3">
+                <div class="progress-bar bg-primary-300" role="progressbar" style="width: ${diHocPercent}%;" aria-valuenow="${item.str5}" aria-valuemin="0" aria-valuemax="${item.Counts}"></div>
+            </div>
+            <div class="d-flex">
+                Lý do khác
+                <span class="d-inline-block ml-auto">${item.str6} / ${item.Counts}</span>
+            </div>
+            <div class="progress progress-sm mb-g">
+                <div class="progress-bar bg-gradient-300" role="progressbar" style="width: ${lyDoKhacPercent}%;" aria-valuenow="${item.str6}" aria-valuemin="0" aria-valuemax="${item.Counts}"></div>
+            </div>
+        </div>
+    `);
+        });
+        // Append HTML một lần duy nhất
+        $chartNhanSu.html(htmlArray.join(''));
+    } catch (error) {
+        console.error('Lỗi khi lấy dữ liệu hoặc tạo biểu đồ:', error);
+        $chartNhanSu.html('<div class="alert alert-danger">Đã xảy ra lỗi khi tải dữ liệu. Vui lòng thử lại sau.</div>');
+    }
+}
 // Hàm chính để lấy và hiển thị thông tin bệnh nhân
 async function drawChartTinhHinhBenhNhan(today, yesterday) {
     const $topInformation = $('#topInformation');
@@ -1601,7 +1674,8 @@ async function refreshData(todayStr, yesterdayStr) {
             //drawChartThoiGianChoKhamBenh(todayStr, yesterdayStr),
             //drawChartTinhHinhToaThuoc(yesterdayStr),
             //drawTableNhapXuatKhoa(yesterdayStr),
-            ,drawLineChartTangTruongLoiNhuan()
+            , drawLineChartTangTruongLoiNhuan()
+            , drawChartNhanSu()
            // ,drawChartGetSoLoiNhuan()
         ]);
  
