@@ -2801,6 +2801,8 @@
     <Content Include="Areas\TransportFiles\Views\HoatDongNhanSus\Details.cshtml" />
     <Content Include="Areas\TransportFiles\Views\HoatDongNhanSus\Edit.cshtml" />
     <Content Include="Areas\TransportFiles\Views\HoatDongNhanSus\Index.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\Projects\CreateCumBan.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\Projects\EditCumBan.cshtml" />
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.1.js" />
     <Content Include="Scripts\jquery-3.7.1.min.js" />

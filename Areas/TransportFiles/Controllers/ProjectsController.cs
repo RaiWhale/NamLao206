@@ -55,7 +55,8 @@ namespace NamLao206.Areas.TransportFiles.Controllers
 			}
 
 			ViewBag.Title = "Dự án - ";
-			return View(projects.ToList());
+            ViewBag.DonVi = acc.Employee.DM_PhongBans.DM_DonVis;
+            return View(projects.ToList());
         }
 		public ActionResult InformationProject(int? projectID, string message)
 		{
@@ -115,6 +116,29 @@ namespace NamLao206.Areas.TransportFiles.Controllers
 			return PartialView();
         }
 
+        public ActionResult CreateCumBan()
+        {
+            if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
+            {
+                ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
+                return RedirectToAction("Login", "Login", new { area = "" });
+            }
+
+            // Lấy thông tin tài khoản
+            var acc = db.Accounts
+                .Where(x => x.Id == userId)
+                .SingleOrDefault();
+
+            if (acc == null)
+            {
+                ViewBag.Message = "Tài khoản không tồn tại hoặc không liên kết với nhân viên.";
+                return RedirectToAction("Login", "Login", new { area = "" });
+            }
+
+            ViewBag.DonViId = new SelectList(db.DM_DonVis.Where(x => x.Id == acc.Employee.DM_PhongBans.donvi_Id), "Id", "TenDonVi");
+            PopulateDropdowns();
+            return PartialView();
+        }
         // POST: TransportFiles/Projects/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -196,7 +220,38 @@ namespace NamLao206.Areas.TransportFiles.Controllers
 			ViewBag.ContractId = new SelectList(db.DocumentTypes, "Id", "DocumentTypeName", project.ContractId);
 			return PartialView(project);
         }
-
+        public async Task<ActionResult> EditCumBan(int? id)
+        {
+            if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
+            {
+                ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
+                return RedirectToAction("Login", "Login", new { area = "" });
+            }
+            // Lấy thông tin tài khoản
+            var acc = db.Accounts
+                .Where(x => x.Id == userId)
+                .SingleOrDefault();
+            if (acc == null)
+            {
+                ViewBag.Message = "Tài khoản không tồn tại hoặc không liên kết với nhân viên.";
+                return RedirectToAction("Login", "Login", new { area = "" });
+            }
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Project project = await db.Projects.FindAsync(id);
+            if (project == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.TinhId = new SelectList(db.DM_Donvihanhchinhs.Where(x => x.ParentId == "0"), "Id", "Ten");
+            ViewBag.DonViId = new SelectList(db.DM_DonVis.Where(x => x.Id == acc.Employee.DM_PhongBans.donvi_Id), "Id", "TenDonVi", project.DonViId);
+            ViewBag.InvestorId = new SelectList(db.Suppliers, "Id", "SupplierName", project.InvestorId);
+            ViewBag.TinhTrangDuAn = new SelectList(db.StatusProjects, "Id", "StatusName", project.TinhTrangDuAn);
+            ViewBag.ContractId = new SelectList(db.DocumentTypes, "Id", "DocumentTypeName", project.ContractId);
+            return PartialView(project);
+        }
         // POST: TransportFiles/Projects/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.

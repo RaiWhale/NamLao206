@@ -1,7 +1,10 @@
 ﻿@model IEnumerable<NamLao206.Models.Project>
-
+@using NamLao206.Models
 @{
 
+    namlao206_websiteEntities db = new namlao206_websiteEntities();
+
+    var Donvi = ViewBag.Donvi as DM_DonVis;
 }
 
 @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -24,7 +27,7 @@
                             {
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <a href="@Url.Action("Create")" class="bcommand btn btn-md btn-success waves-effect waves-themed">
+                                        <a href="@Url.Action(Donvi.CreateBranch ?? "Create")" class="bcommand btn btn-md btn-success waves-effect waves-themed">
                                             <span class="fal fa-download mr-1"></span>Tạo mới
                                         </a>
                                     </div>
@@ -62,10 +65,7 @@
                                                 </th>
                                                 <th>
                                                     Tên dự án
-                                                </th>
-                                                <th>
-                                                   Tọa độ
-                                                </th>
+                                                </th>                                      
                                                 <th>
                                                     Giám sát
                                                 </th>
@@ -95,18 +95,15 @@
                                             {
                                                 <tr>
                                                     <td>
-                                                      <a href="@Url.Action("InformationProject", new { projectID = item.Id })">
-                                                          @Html.DisplayFor(modelItem => item.MaDuAn)
-                                                      </a>
+                                                        <a href="@Url.Action("InformationProject", new { projectID = item.Id })">
+                                                            @Html.DisplayFor(modelItem => item.MaDuAn)
+                                                        </a>
                                                     </td>
                                                     <td>
                                                         <a href="@Url.Action("InformationProject", new { projectID = item.Id })" style="text-decoration: underline;">
                                                             @Html.DisplayFor(modelItem => item.TenDuAn)
                                                         </a>
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.ProjectValue)
-                                                    </td>
+                                                    </td>                                                
                                                     <td>
                                                         @Html.DisplayFor(modelItem => item.GiamSat)
                                                     </td>
@@ -130,11 +127,11 @@
                                                     </td>
                                                     <td>
                                                         @*<a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" data-title="Chi tiết" data-original-title="Chi tiết"
-                                                           href="@Url.Action("InformationProject", new { projectID = item.Id })"><i class="ni ni-wrench fa-2x"></i></a>*@
+                                                            href="@Url.Action("InformationProject", new { projectID = item.Id })"><i class="ni ni-wrench fa-2x"></i></a>*@
                                                         <a class="badge bg-info mr-2 bcommand" data-toggle="tooltip" data-placement="top" data-title="Sửa" data-original-title="Sửa"
                                                            href="@Url.Action("Edit", new { id = item.Id })"><i class="fal fa-edit fa-2x"></i></a>
                                                         <a class="badge bg-warning mr-2 bcommand" data-toggle="tooltip" data-placement="top" data-title="Xóa" data-original-title="Xóa"
-                                                           href="@Url.Action("Delete", new { id = item.Id })"><i class="ni ni-trash fa-2x"></i></a>                                                      
+                                                           href="@Url.Action("Delete", new { id = item.Id })"><i class="ni ni-trash fa-2x"></i></a>
                                                     </td>
                                                 </tr>
                                             }

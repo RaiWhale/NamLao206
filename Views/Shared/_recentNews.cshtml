@@ -21,15 +21,18 @@
                 <strong>Chi</strong> tiết
             </span>
         </a>
-        <img class="img-responsive" src="@src" height="80" alt="">
+        <img class="img-responsive" src="@src" style="height:150px" alt="">
     </figure>
     <div class="item-box-desc">
         @*<h4 class="">
             <a data-toggle="tooltip" data-placement="top" title="" data-original-title="@Model.Title" class="text-white font-size-20 d-block" href="~/Home/NewsDetail/?title=@Model.TitleChange&&newsid=@Model.Id">@Model.Title</a>
         </h4>*@
         <div class="owl-featured-detail">
-            <a data-toggle="tooltip" data-placement="bottom"  data-original-title="@Model.Title" class="featured-title" style="text-align: left; max-width: 100%; font-size: 14px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; text-overflow: ellipsis; " href="~/Home/NewsDetail/?title=@Model.TitleChange&&newsid=@Model.Id"><b>@Model.Title</b></a>
+            <a data-toggle="tooltip" data-placement="bottom" data-original-title="@Model.Title" class="featured-title" style="text-align: left; max-width: 100%; font-size: 14px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; text-overflow: ellipsis; " href="~/Home/NewsDetail/?title=@Model.TitleChange&&newsid=@Model.Id">
+                <b>@Model.Title</b>
+            </a>
+            <small class="styleColor">@Model.DateUp.ToString("dd/MM/yyyy")</small>
         </div>
-        <small class="styleColor">@Model.DateUp.ToString("dd/MM/yyyy")</small>
+        
     </div>
 </div>
