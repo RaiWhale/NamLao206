@@ -17,11 +17,11 @@ namespace NamLao206.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Project()
         {
+            this.GiamSatThiCongs = new HashSet<GiamSatThiCong>();
             this.HoSoPhapLys = new HashSet<HoSoPhapLy>();
             this.KhaoSats = new HashSet<KhaoSat>();
             this.NghiemThus = new HashSet<NghiemThu>();
             this.ThiCongs = new HashSet<ThiCong>();
-            this.GiamSatThiCongs = new HashSet<GiamSatThiCong>();
         }
     
         public int Id { get; set; }
@@ -55,6 +55,8 @@ namespace NamLao206.Models
         public virtual DM_DonVis DM_DonVis { get; set; }
         public virtual DocumentType DocumentType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GiamSatThiCong> GiamSatThiCongs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HoSoPhapLy> HoSoPhapLys { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<KhaoSat> KhaoSats { get; set; }
@@ -64,7 +66,5 @@ namespace NamLao206.Models
         public virtual StatusProject StatusProject { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ThiCong> ThiCongs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GiamSatThiCong> GiamSatThiCongs { get; set; }
     }
 }

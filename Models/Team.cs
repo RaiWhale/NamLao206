@@ -12,30 +12,30 @@ namespace NamLao206.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class NghiemThu
+    public partial class Team
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Team()
+        {
+            this.NhapBanMus = new HashSet<NhapBanMu>();
+        }
+    
         public int Id { get; set; }
-        public Nullable<int> ProjectID { get; set; }
-        public Nullable<int> PhaseId { get; set; }
-        public Nullable<decimal> PhaseValue { get; set; }
-        public Nullable<decimal> PhaseLand { get; set; }
-        public Nullable<decimal> PhaseWater { get; set; }
-        public Nullable<decimal> DoanhThu { get; set; }
-        public Nullable<decimal> DaThanhToan { get; set; }
-        public Nullable<decimal> NoConLai { get; set; }
+        public string TeamName { get; set; }
+        public string NguoiDaiDien { get; set; }
+        public string SoLuongNguoi { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public Nullable<int> CreateUserId { get; set; }
+        public Nullable<int> DonviId { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public Nullable<int> ModifiedUserId { get; set; }
         public string Note { get; set; }
-        public Nullable<int> UnitId { get; set; }
-        public Nullable<decimal> CongNo { get; set; }
     
         public virtual Account Account { get; set; }
         public virtual Account Account1 { get; set; }
-        public virtual Project Project { get; set; }
-        public virtual Phase Phase { get; set; }
-        public virtual Unit Unit { get; set; }
+        public virtual DM_DonVis DM_DonVis { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NhapBanMu> NhapBanMus { get; set; }
     }
 }

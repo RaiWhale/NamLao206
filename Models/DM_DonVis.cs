@@ -17,10 +17,14 @@ namespace NamLao206.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public DM_DonVis()
         {
-            this.DM_PhongBans = new HashSet<DM_PhongBans>();
-            this.Suppliers = new HashSet<Supplier>();
-            this.Projects = new HashSet<Project>();
+            this.DM_AddBangs = new HashSet<DM_AddBangs>();
             this.HoatDongNhanSus = new HashSet<HoatDongNhanSu>();
+            this.Projects = new HashSet<Project>();
+            this.DM_PhongBans = new HashSet<DM_PhongBans>();
+            this.HoSoPhapLys = new HashSet<HoSoPhapLy>();
+            this.NhapBanMus = new HashSet<NhapBanMu>();
+            this.Suppliers = new HashSet<Supplier>();
+            this.Teams = new HashSet<Team>();
         }
     
         public int Id { get; set; }
@@ -33,12 +37,20 @@ namespace NamLao206.Models
         public string EditBranch { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DM_PhongBans> DM_PhongBans { get; set; }
+        public virtual ICollection<DM_AddBangs> DM_AddBangs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Supplier> Suppliers { get; set; }
+        public virtual ICollection<HoatDongNhanSu> HoatDongNhanSus { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Project> Projects { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HoatDongNhanSu> HoatDongNhanSus { get; set; }
+        public virtual ICollection<DM_PhongBans> DM_PhongBans { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HoSoPhapLy> HoSoPhapLys { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NhapBanMu> NhapBanMus { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Supplier> Suppliers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Team> Teams { get; set; }
     }
 }

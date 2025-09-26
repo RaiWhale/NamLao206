@@ -20,32 +20,35 @@ namespace NamLao206.Models
             this.Contracts = new HashSet<Contract>();
             this.Contracts1 = new HashSet<Contract>();
             this.DocumentTypes = new HashSet<DocumentType>();
-            this.NghiemThus = new HashSet<NghiemThu>();
-            this.NghiemThus1 = new HashSet<NghiemThu>();
-            this.Phases = new HashSet<Phase>();
-            this.Phases1 = new HashSet<Phase>();
-            this.StatusProjects = new HashSet<StatusProject>();
-            this.StatusProjects1 = new HashSet<StatusProject>();
-            this.Suppliers = new HashSet<Supplier>();
-            this.Suppliers1 = new HashSet<Supplier>();
-            this.Units = new HashSet<Unit>();
-            this.Units1 = new HashSet<Unit>();
-            this.News = new HashSet<News>();
-            this.TransportFiles = new HashSet<TransportFile>();
-            this.TransportFiles1 = new HashSet<TransportFile>();
-            this.TransportFiles2 = new HashSet<TransportFile>();
-            this.HoSoPhapLys = new HashSet<HoSoPhapLy>();
-            this.HoSoPhapLys1 = new HashSet<HoSoPhapLy>();
-            this.KhaoSats = new HashSet<KhaoSat>();
-            this.KhaoSats1 = new HashSet<KhaoSat>();
-            this.Projects = new HashSet<Project>();
-            this.Projects1 = new HashSet<Project>();
-            this.ThiCongs = new HashSet<ThiCong>();
-            this.ThiCongs1 = new HashSet<ThiCong>();
             this.GiamSatThiCongs = new HashSet<GiamSatThiCong>();
             this.GiamSatThiCongs1 = new HashSet<GiamSatThiCong>();
             this.HoatDongNhanSus = new HashSet<HoatDongNhanSu>();
             this.HoatDongNhanSus1 = new HashSet<HoatDongNhanSu>();
+            this.HoSoPhapLys = new HashSet<HoSoPhapLy>();
+            this.HoSoPhapLys1 = new HashSet<HoSoPhapLy>();
+            this.KhaoSats = new HashSet<KhaoSat>();
+            this.KhaoSats1 = new HashSet<KhaoSat>();
+            this.NghiemThus = new HashSet<NghiemThu>();
+            this.NghiemThus1 = new HashSet<NghiemThu>();
+            this.Phases = new HashSet<Phase>();
+            this.Phases1 = new HashSet<Phase>();
+            this.Projects = new HashSet<Project>();
+            this.Projects1 = new HashSet<Project>();
+            this.StatusProjects = new HashSet<StatusProject>();
+            this.StatusProjects1 = new HashSet<StatusProject>();
+            this.Suppliers = new HashSet<Supplier>();
+            this.Suppliers1 = new HashSet<Supplier>();
+            this.Teams = new HashSet<Team>();
+            this.Teams1 = new HashSet<Team>();
+            this.ThiCongs = new HashSet<ThiCong>();
+            this.ThiCongs1 = new HashSet<ThiCong>();
+            this.Units = new HashSet<Unit>();
+            this.Units1 = new HashSet<Unit>();
+            this.News = new HashSet<News>();
+            this.NhapBanMus = new HashSet<NhapBanMu>();
+            this.TransportFiles = new HashSet<TransportFile>();
+            this.TransportFiles1 = new HashSet<TransportFile>();
+            this.TransportFiles2 = new HashSet<TransportFile>();
         }
     
         public int Id { get; set; }
@@ -67,35 +70,13 @@ namespace NamLao206.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DocumentType> DocumentTypes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<NghiemThu> NghiemThus { get; set; }
+        public virtual ICollection<GiamSatThiCong> GiamSatThiCongs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<NghiemThu> NghiemThus1 { get; set; }
+        public virtual ICollection<GiamSatThiCong> GiamSatThiCongs1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Phase> Phases { get; set; }
+        public virtual ICollection<HoatDongNhanSu> HoatDongNhanSus { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Phase> Phases1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<StatusProject> StatusProjects { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<StatusProject> StatusProjects1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Supplier> Suppliers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Supplier> Suppliers1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Unit> Units { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Unit> Units1 { get; set; }
-        public virtual Employee Employee { get; set; }
-        public virtual Level Level { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<News> News { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TransportFile> TransportFiles { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TransportFile> TransportFiles1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TransportFile> TransportFiles2 { get; set; }
+        public virtual ICollection<HoatDongNhanSu> HoatDongNhanSus1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HoSoPhapLy> HoSoPhapLys { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -105,20 +86,48 @@ namespace NamLao206.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<KhaoSat> KhaoSats1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NghiemThu> NghiemThus { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NghiemThu> NghiemThus1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Phase> Phases { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Phase> Phases1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Project> Projects { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Project> Projects1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StatusProject> StatusProjects { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StatusProject> StatusProjects1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Supplier> Suppliers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Supplier> Suppliers1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Team> Teams { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Team> Teams1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ThiCong> ThiCongs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ThiCong> ThiCongs1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GiamSatThiCong> GiamSatThiCongs { get; set; }
+        public virtual ICollection<Unit> Units { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GiamSatThiCong> GiamSatThiCongs1 { get; set; }
+        public virtual ICollection<Unit> Units1 { get; set; }
+        public virtual Employee Employee { get; set; }
+        public virtual Level Level { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HoatDongNhanSu> HoatDongNhanSus { get; set; }
+        public virtual ICollection<News> News { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HoatDongNhanSu> HoatDongNhanSus1 { get; set; }
+        public virtual ICollection<NhapBanMu> NhapBanMus { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TransportFile> TransportFiles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TransportFile> TransportFiles1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TransportFile> TransportFiles2 { get; set; }
     }
 }

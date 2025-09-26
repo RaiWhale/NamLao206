@@ -273,6 +273,7 @@
     <Compile Include="Areas\TransportFiles\Controllers\HoSoPhapLiesController.cs" />
     <Compile Include="Areas\TransportFiles\Controllers\KhaoSatsController.cs" />
     <Compile Include="Areas\TransportFiles\Controllers\NghiemThusController.cs" />
+    <Compile Include="Areas\TransportFiles\Controllers\NhapBanMusController.cs" />
     <Compile Include="Areas\TransportFiles\Controllers\ProjectsController.cs" />
     <Compile Include="Areas\TransportFiles\Controllers\SuppliersController.cs" />
     <Compile Include="Areas\TransportFiles\Controllers\ThiCongsController.cs" />
@@ -411,6 +412,9 @@
     <Compile Include="Models\NghiemThu.cs">
       <DependentUpon>namlao206DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\NhapBanMu.cs">
+      <DependentUpon>namlao206DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Phase.cs">
       <DependentUpon>namlao206DB.tt</DependentUpon>
     </Compile>
@@ -430,6 +434,9 @@
       <DependentUpon>namlao206DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Supplier.cs">
+      <DependentUpon>namlao206DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Team.cs">
       <DependentUpon>namlao206DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ThiCong.cs">
@@ -2803,6 +2810,11 @@
     <Content Include="Areas\TransportFiles\Views\HoatDongNhanSus\Index.cshtml" />
     <Content Include="Areas\TransportFiles\Views\Projects\CreateCumBan.cshtml" />
     <Content Include="Areas\TransportFiles\Views\Projects\EditCumBan.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\NhapBanMus\Create.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\NhapBanMus\Delete.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\NhapBanMus\Details.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\NhapBanMus\Edit.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\NhapBanMus\Index.cshtml" />
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.1.js" />
     <Content Include="Scripts\jquery-3.7.1.min.js" />

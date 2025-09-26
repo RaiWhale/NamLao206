@@ -37,6 +37,7 @@ namespace NamLao206.Models
         public virtual DbSet<CalrouselPicture> CalrouselPictures { get; set; }
         public virtual DbSet<Contract> Contracts { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<DM_AddBangs> DM_AddBangs { get; set; }
         public virtual DbSet<DM_AdminListUpItem> DM_AdminListUpItem { get; set; }
         public virtual DbSet<DM_Chucvus> DM_Chucvus { get; set; }
         public virtual DbSet<DM_Donvihanhchinhs> DM_Donvihanhchinhs { get; set; }
@@ -50,6 +51,10 @@ namespace NamLao206.Models
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<Feedback> Feedbacks { get; set; }
         public virtual DbSet<Gender> Genders { get; set; }
+        public virtual DbSet<GiamSatThiCong> GiamSatThiCongs { get; set; }
+        public virtual DbSet<HoatDongNhanSu> HoatDongNhanSus { get; set; }
+        public virtual DbSet<HoSoPhapLy> HoSoPhapLys { get; set; }
+        public virtual DbSet<KhaoSat> KhaoSats { get; set; }
         public virtual DbSet<LevelPermission> LevelPermissions { get; set; }
         public virtual DbSet<Level> Levels { get; set; }
         public virtual DbSet<LuuVet> LuuVets { get; set; }
@@ -58,23 +63,20 @@ namespace NamLao206.Models
         public virtual DbSet<News> News { get; set; }
         public virtual DbSet<NewsPicture> NewsPictures { get; set; }
         public virtual DbSet<NghiemThu> NghiemThus { get; set; }
+        public virtual DbSet<NhapBanMu> NhapBanMus { get; set; }
         public virtual DbSet<Phase> Phases { get; set; }
         public virtual DbSet<Picture> Pictures { get; set; }
+        public virtual DbSet<Project> Projects { get; set; }
         public virtual DbSet<StatusProject> StatusProjects { get; set; }
         public virtual DbSet<SubMenu> SubMenus { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
+        public virtual DbSet<Team> Teams { get; set; }
+        public virtual DbSet<ThiCong> ThiCongs { get; set; }
         public virtual DbSet<Topic> Topics { get; set; }
         public virtual DbSet<TransportFile> TransportFiles { get; set; }
         public virtual DbSet<TransportFileUrl> TransportFileUrls { get; set; }
         public virtual DbSet<Transport> Transports { get; set; }
         public virtual DbSet<Unit> Units { get; set; }
-        public virtual DbSet<HoSoPhapLy> HoSoPhapLys { get; set; }
-        public virtual DbSet<DM_AddBangs> DM_AddBangs { get; set; }
-        public virtual DbSet<KhaoSat> KhaoSats { get; set; }
-        public virtual DbSet<Project> Projects { get; set; }
-        public virtual DbSet<ThiCong> ThiCongs { get; set; }
-        public virtual DbSet<GiamSatThiCong> GiamSatThiCongs { get; set; }
-        public virtual DbSet<HoatDongNhanSu> HoatDongNhanSus { get; set; }
     
         public virtual ObjectResult<sp_GetDataForDashBoard_Result> sp_GetDataForDashBoard(string action, string fromDate, string toDate, Nullable<int> donvi_id)
         {

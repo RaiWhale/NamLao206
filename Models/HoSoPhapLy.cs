@@ -27,11 +27,14 @@ namespace NamLao206.Models
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public Nullable<int> ModifiedUserId { get; set; }
         public string Note { get; set; }
+        public Nullable<int> DonVi_Id { get; set; }
+        public Nullable<int> NhapBanMu_Id { get; set; }
     
         public virtual Account Account { get; set; }
         public virtual Account Account1 { get; set; }
-        public virtual DocumentType DocumentType { get; set; }
         public virtual DM_AddBangs DM_AddBangs { get; set; }
+        public virtual DM_DonVis DM_DonVis { get; set; }
+        public virtual DocumentType DocumentType { get; set; }
         public virtual Project Project { get; set; }
     }
 }

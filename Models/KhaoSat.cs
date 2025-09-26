@@ -49,8 +49,8 @@ namespace NamLao206.Models
         public virtual Account Account1 { get; set; }
         public virtual DocumentType DocumentType { get; set; }
         public virtual Supplier Supplier { get; set; }
+        public virtual Project Project { get; set; }
         public virtual StatusProject StatusProject { get; set; }
         public virtual Unit Unit { get; set; }
-        public virtual Project Project { get; set; }
     }
 }

@@ -28,7 +28,9 @@ namespace NamLao206.Models
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public Nullable<int> ModifiedUserId { get; set; }
         public string Note { get; set; }
+        public Nullable<int> DonVi_Id { get; set; }
     
+        public virtual DM_DonVis DM_DonVis { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HoSoPhapLy> HoSoPhapLys { get; set; }
     }

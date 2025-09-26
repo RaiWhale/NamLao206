@@ -19,6 +19,9 @@ namespace NamLao206.Models
         {
             this.Accounts = new HashSet<Account>();
             this.HoatDongNhanSus = new HashSet<HoatDongNhanSu>();
+            this.NhapBanMus = new HashSet<NhapBanMu>();
+            this.NhapBanMus1 = new HashSet<NhapBanMu>();
+            this.NhapBanMus2 = new HashSet<NhapBanMu>();
         }
     
         public int Id { get; set; }
@@ -55,5 +58,11 @@ namespace NamLao206.Models
         public virtual Gender Gender { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HoatDongNhanSu> HoatDongNhanSus { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NhapBanMu> NhapBanMus { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NhapBanMu> NhapBanMus1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NhapBanMu> NhapBanMus2 { get; set; }
     }
 }
