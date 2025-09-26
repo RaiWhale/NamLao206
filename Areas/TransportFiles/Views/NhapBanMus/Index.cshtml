@@ -1,0 +1,171 @@
+﻿@model IEnumerable<NamLao206.Models.NhapBanMu>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.LoaiMu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayNhap)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KhoiLuongThuVao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KhoiLuongTTTC)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KhoiLuongThuVaoLast)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KhoiLuongTTTCLast)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DonGia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Note)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SoDienThoai)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KhoiLuongTTL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NguoiCan_EMP_Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Account.LoginName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DM_DonVis.TenDonVi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DocumentType.DocumentTypeName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee1.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee2.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StatusProject.StatusName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Unit.UnitName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Unit1.UnitName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NhapBanMu1.LoaiMu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NhapBanMu2.LoaiMu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Supplier.SupplierName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Team.TeamName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.LoaiMu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgayNhap)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KhoiLuongThuVao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KhoiLuongTTTC)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KhoiLuongThuVaoLast)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KhoiLuongTTTCLast)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DonGia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Note)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SoDienThoai)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KhoiLuongTTL)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NguoiCan_EMP_Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Account.LoginName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DM_DonVis.TenDonVi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DocumentType.DocumentTypeName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee1.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee2.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StatusProject.StatusName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Unit.UnitName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Unit1.UnitName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NhapBanMu1.LoaiMu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NhapBanMu2.LoaiMu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Supplier.SupplierName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Team.TeamName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
