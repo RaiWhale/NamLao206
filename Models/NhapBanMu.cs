@@ -37,6 +37,12 @@ namespace NamLao206.Models
         public Nullable<int> DoiTac_Id { get; set; }
         public Nullable<int> DonViTienTe_Id { get; set; }
         public Nullable<int> NguoiCan_EMP_Id { get; set; }
+        public Nullable<bool> IsActive { get; set; }
+        public Nullable<int> ModifiedAccount_Id { get; set; }
+        public Nullable<System.DateTime> ModifiedDate { get; set; }
+        public string MaPhieu { get; set; }
+        public string TenPhieu { get; set; }
+        public Nullable<int> TinhTrang { get; set; }
     
         public virtual Account Account { get; set; }
         public virtual DM_DonVis DM_DonVis { get; set; }
@@ -51,5 +57,7 @@ namespace NamLao206.Models
         public virtual NhapBanMu NhapBanMu2 { get; set; }
         public virtual Supplier Supplier { get; set; }
         public virtual Team Team { get; set; }
+        public virtual Account Account1 { get; set; }
+        public virtual StatusProject StatusProject1 { get; set; }
     }
 }

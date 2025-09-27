@@ -156,6 +156,8 @@
         <AssociationConnector Association="namlao206_websiteModel.FK_ThiCongs_Units" />
         <AssociationConnector Association="namlao206_websiteModel.FK_TransportFileUrls_TransportFiles" />
         <AssociationConnector Association="namlao206_websiteModel.FK_Transports_TransportFiles" />
+        <AssociationConnector Association="namlao206_websiteModel.FK_NhapBanMu_NguoiSua" />
+        <AssociationConnector Association="namlao206_websiteModel.FK_NhapBanMu_TinhTrang" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

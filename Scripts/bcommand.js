@@ -396,6 +396,59 @@ function initializeModalAndAlert() {
     // Initialize alert
     showAlert();
 }
+// Function init để xử lý update sections và attach events
+function initUpdateSections() {
+    // Hàm để cập nhật hiển thị dựa trên lựa chọn
+    function updateSections() {
+        var loaiHs = $('#LoaiHs').val();
+        var loaiTK = $('#LoaiTK').val();
+
+        // Ẩn tất cả các phần đặc thù
+        $('#loaitk-section').hide();
+        $('#mua-ngay-section').hide();
+        $('#mua-thang-section').hide();
+        $('#ban-section').hide();
+
+        if (loaiHs == '3') { // Mua - Id=3
+            $('#loaitk-section').show();
+
+            if (loaiTK == '2') { // Ngày - Id=2
+                $('#mua-ngay-section').show();
+            } else if (loaiTK == '3') { // Tháng - Id=3
+                $('#mua-thang-section').show();
+            }
+        } else if (loaiHs == '4') { // Bán - Id=4
+            $('#ban-section').show();
+        }
+    }
+
+    // Attach events chỉ khi modal được shown (để tránh attach nhiều lần)
+    $('#myModal').on('shown.bs.modal', function () {
+        // Kiểm tra xem view hiện tại có chứa các element cần thiết không (để chỉ apply cho view NhapBanMu)
+        if ($('#LoaiHs').length > 0) {
+            // Lắng nghe sự kiện thay đổi trên LoaiHs
+            $('#LoaiHs').off('change.updateSections').on('change.updateSections', function () {
+                updateSections();
+            });
+
+            // Lắng nghe sự kiện thay đổi trên LoaiTK
+            $('#LoaiTK').off('change.updateSections').on('change.updateSections', function () {
+                updateSections();
+            });
+
+            // Gọi lần đầu để thiết lập dựa trên giá trị mặc định
+            updateSections();
+        }
+    });
+
+    // Optional: Clean up events khi modal ẩn, để tránh leak nếu modal dùng nhiều lần
+    $('#myModal').on('hidden.bs.modal', function () {
+        if ($('#LoaiHs').length > 0) {
+            $('#LoaiHs').off('change.updateSections');
+            $('#LoaiTK').off('change.updateSections');
+        }
+    });
+}
 
 
 // Hàm khởi tạo DataTables
@@ -438,6 +491,7 @@ jQuery(function ($) {
     // Start initial interval
     initializeModalAndAlert();
     initializeDataTables();
+    initUpdateSections();// xử lý nút màn hình create và edit NhapBanMu
     //initializeEmailManager();
     //initializeNewsTicker(tickerConfig);
     initializeSummernote('.Note');
@@ -457,28 +511,5 @@ jQuery(function ($) {
         });
     });
 
-    $('.datecus').each(function () {
-        var id = $(this).attr('id');
-        var cleave = new Cleave('#' + id, {
-            date: true,
-            delimiter: '-',
-            datePattern: ['d', 'm', 'Y']
-        });
-    });
 
-    $('.textarea-cus').each(function () {
-        var id = $(this).attr('id');
-        CKEDITOR.replace(id, {
-            extraPlugins: 'uploadimage', // Kích hoạt plugin upload hình ảnh
-            height: 300,
-            // Cấu hình CKFinder
-            ////baseHref = '../../../Content/ckeditor/ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=Images',
-            //filebrowserBrowseUrl: '../../../Content/ckeditor/ckfinder/ckfinder.html',
-            //filebrowserImageBrowseUrl: '../../../Content/ckeditor/ckfinder/ckfinder.html?Types=Images',
-            //filebrowserUploadUrl: '../../../Content/ckeditor/ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=File',
-            //filebrowserImageUploadUrl: '../../../Content/ckeditor/ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=Images',
-            //uploadUrl: '../../../Content/ckeditor/ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=Files&responseType=string', // Dùng cho kéo thả
-            //customConfig: "../../../Content/ckeditor/config.js"
-        });
-    });
 });

@@ -45,7 +45,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
         }
 
         // GET: TransportFiles/HoSoPhapLies/Create
-        public ActionResult Create(int? projectID)
+        public ActionResult Create(int? projectID, int? NhapBanMu_Id)
         {
             // 1. Kiểm tra xác thực người dùng
             if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
@@ -55,6 +55,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
             }
             ViewBag.DocumentTypeId = new SelectList(db.DocumentTypes, "Id", "DocumentTypeName");
             ViewBag.ProjectID = new SelectList(db.Projects.Where(x=>x.Id == projectID), "Id", "TenDuAn");
+            ViewBag.NhapBanMu_Id = new SelectList(db.NhapBanMus.Where(x => x.Id == NhapBanMu_Id), "Id", "TenPhieu");
             ViewBag.AddBangId = new SelectList(db.DM_AddBangs, "Id", "TenBang");
             ViewBag.Title = "Lưu trữ hồ sơ";
             return PartialView();
@@ -65,7 +66,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,STT,ProjectID,DocumentTypeId,TenHoSo,AddBangId,Url,IsActive,Note")] HoSoPhapLy hoSoPhapLy
+        public async Task<ActionResult> Create([Bind(Include = "Id,STT,ProjectID,NhapBanMu_Id,DocumentTypeId,TenHoSo,AddBangId,Url,IsActive,Note")] HoSoPhapLy hoSoPhapLy
             , HttpPostedFileBase file)
         {
             // 1. Kiểm tra xác thực người dùng

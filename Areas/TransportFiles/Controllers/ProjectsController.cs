@@ -111,8 +111,8 @@ namespace NamLao206.Areas.TransportFiles.Controllers
 				return RedirectToAction("Login", "Login", new { area = "" });
 			}
 			
-			ViewBag.DonViId = new SelectList(db.DM_DonVis.Where(x=>x.Id == acc.Employee.DM_PhongBans.donvi_Id), "Id", "TenDonVi");
-            PopulateDropdowns();
+			
+            PopulateDropdowns(acc);
 			return PartialView();
         }
 
@@ -134,9 +134,8 @@ namespace NamLao206.Areas.TransportFiles.Controllers
                 ViewBag.Message = "Tài khoản không tồn tại hoặc không liên kết với nhân viên.";
                 return RedirectToAction("Login", "Login", new { area = "" });
             }
-
-            ViewBag.DonViId = new SelectList(db.DM_DonVis.Where(x => x.Id == acc.Employee.DM_PhongBans.donvi_Id), "Id", "TenDonVi");
-            PopulateDropdowns();
+          
+            PopulateDropdowns(acc);
             return PartialView();
         }
         // POST: TransportFiles/Projects/Create
@@ -365,11 +364,12 @@ namespace NamLao206.Areas.TransportFiles.Controllers
             ViewBag.Message = "Xóa thành công!";
             return RedirectToAction("Index");
         }
-		private void PopulateDropdowns()
-		{		
-			ViewBag.TinhId = new SelectList(db.DM_Donvihanhchinhs.Where(x => x.ParentId == "0"), "Id", "Ten");			
-			ViewBag.InvestorId = new SelectList(db.Suppliers, "Id", "SupplierName");
-			ViewBag.TinhTrangDuAn = new SelectList(db.StatusProjects, "Id", "StatusName");
+		private void PopulateDropdowns(Account acc)
+		{
+            ViewBag.DonViId = new SelectList(db.DM_DonVis.Where(x => x.Id == acc.Employee.DM_PhongBans.donvi_Id), "Id", "TenDonVi");
+            ViewBag.TinhId = new SelectList(db.DM_Donvihanhchinhs.Where(x => x.ParentId == "0"), "Id", "Ten");			
+			ViewBag.InvestorId = new SelectList(db.Suppliers.Where(x => x.DonviId == acc.Employee.DM_PhongBans.donvi_Id), "Id", "SupplierName");
+			ViewBag.TinhTrangDuAn = new SelectList(db.StatusProjects.Where(x => x.PhanLoai == "1"), "Id", "StatusName");
 			ViewBag.ContractId = new SelectList(db.DocumentTypes, "Id", "DocumentTypeName");
 		}
 

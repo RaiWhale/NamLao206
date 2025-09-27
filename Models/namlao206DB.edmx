@@ -483,6 +483,8 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DonVi_Id" Type="int" />
+          <Property Name="MaPhieu" Type="varchar" MaxLength="500" />
+          <Property Name="TenPhieu" Type="nvarchar" MaxLength="500" />
           <Property Name="Team_Id" Type="int" />
           <Property Name="LoaiMu" Type="nvarchar" MaxLength="500" />
           <Property Name="NguoiNhap_ACC_Id" Type="int" />
@@ -504,6 +506,10 @@
           <Property Name="DoiTac_Id" Type="int" />
           <Property Name="DonViTienTe_Id" Type="int" />
           <Property Name="NguoiCan_EMP_Id" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="ModifiedAccount_Id" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="TinhTrang" Type="int" />
         </EntityType>
         <EntityType Name="Phases">
           <Key>
@@ -1752,6 +1758,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_NhapBanMu_NguoiSua">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="0..1" />
+          <End Role="NhapBanMu" Type="Self.NhapBanMu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NhapBanMu">
+              <PropertyRef Name="ModifiedAccount_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_NhapBanMu_NhapBanMu">
           <End Role="NhapBanMu" Type="Self.NhapBanMu" Multiplicity="1" />
           <End Role="NhapBanMu1" Type="Self.NhapBanMu" Multiplicity="0..1" />
@@ -1785,6 +1803,18 @@
             </Principal>
             <Dependent Role="NhapBanMu">
               <PropertyRef Name="Team_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NhapBanMu_TinhTrang">
+          <End Role="StatusProjects" Type="Self.StatusProjects" Multiplicity="0..1" />
+          <End Role="NhapBanMu" Type="Self.NhapBanMu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusProjects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NhapBanMu">
+              <PropertyRef Name="TinhTrang" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2325,6 +2355,10 @@
             <End Role="Employees" EntitySet="Employees" />
             <End Role="NhapBanMu" EntitySet="NhapBanMu" />
           </AssociationSet>
+          <AssociationSet Name="FK_NhapBanMu_NguoiSua" Association="Self.FK_NhapBanMu_NguoiSua">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="NhapBanMu" EntitySet="NhapBanMu" />
+          </AssociationSet>
           <AssociationSet Name="FK_NhapBanMu_NhapBanMu" Association="Self.FK_NhapBanMu_NhapBanMu">
             <End Role="NhapBanMu" EntitySet="NhapBanMu" />
             <End Role="NhapBanMu1" EntitySet="NhapBanMu" />
@@ -2335,6 +2369,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_NhapBanMu_Teams" Association="Self.FK_NhapBanMu_Teams">
             <End Role="Teams" EntitySet="Teams" />
+            <End Role="NhapBanMu" EntitySet="NhapBanMu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NhapBanMu_TinhTrang" Association="Self.FK_NhapBanMu_TinhTrang">
+            <End Role="StatusProjects" EntitySet="StatusProjects" />
             <End Role="NhapBanMu" EntitySet="NhapBanMu" />
           </AssociationSet>
           <AssociationSet Name="FK_NhapBanMu_TroLyKeHoach" Association="Self.FK_NhapBanMu_TroLyKeHoach">
@@ -2847,6 +2885,14 @@
             <End Role="TransportFile" EntitySet="TransportFiles" />
             <End Role="Transport" EntitySet="Transports" />
           </AssociationSet>
+          <AssociationSet Name="FK_NhapBanMu_NguoiSua" Association="namlao206_websiteModel.FK_NhapBanMu_NguoiSua">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="NhapBanMu" EntitySet="NhapBanMus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NhapBanMu_TinhTrang" Association="namlao206_websiteModel.FK_NhapBanMu_TinhTrang">
+            <End Role="StatusProject" EntitySet="StatusProjects" />
+            <End Role="NhapBanMu" EntitySet="NhapBanMus" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="sp_GetDataForDashBoard_Result">
           <Property Type="String" Name="Titles" Nullable="false" MaxLength="24" />
@@ -2915,6 +2961,7 @@
           <NavigationProperty Name="TransportFiles" Relationship="namlao206_websiteModel.FK_TransportFiles_AccountModified" FromRole="Account" ToRole="TransportFile" />
           <NavigationProperty Name="TransportFiles1" Relationship="namlao206_websiteModel.FK_TransportFiles_AccountsCreate" FromRole="Account" ToRole="TransportFile" />
           <NavigationProperty Name="TransportFiles2" Relationship="namlao206_websiteModel.FK_TransportFiles_AccountsPheDuyet" FromRole="Account" ToRole="TransportFile" />
+          <NavigationProperty Name="NhapBanMus1" Relationship="namlao206_websiteModel.FK_NhapBanMu_NguoiSua" FromRole="Account" ToRole="NhapBanMu" />
         </EntityType>
         <EntityType Name="Administrator">
           <Key>
@@ -3506,6 +3553,14 @@
           <NavigationProperty Name="NhapBanMu2" Relationship="namlao206_websiteModel.FK_NhapBanMu_NhapBanMu" FromRole="NhapBanMu1" ToRole="NhapBanMu" />
           <NavigationProperty Name="Supplier" Relationship="namlao206_websiteModel.FK_NhapBanMu_Suppliers" FromRole="NhapBanMu" ToRole="Supplier" />
           <NavigationProperty Name="Team" Relationship="namlao206_websiteModel.FK_NhapBanMu_Teams" FromRole="NhapBanMu" ToRole="Team" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="ModifiedAccount_Id" Type="Int32" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Account1" Relationship="namlao206_websiteModel.FK_NhapBanMu_NguoiSua" FromRole="NhapBanMu" ToRole="Account" />
+          <Property Name="MaPhieu" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="TenPhieu" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="TinhTrang" Type="Int32" />
+          <NavigationProperty Name="StatusProject1" Relationship="namlao206_websiteModel.FK_NhapBanMu_TinhTrang" FromRole="NhapBanMu" ToRole="StatusProject" />
         </EntityType>
         <EntityType Name="Phase">
           <Key>
@@ -3594,6 +3649,7 @@
           <NavigationProperty Name="NhapBanMus" Relationship="namlao206_websiteModel.FK_NhapBanMu_CLMu" FromRole="StatusProject" ToRole="NhapBanMu" />
           <NavigationProperty Name="Projects" Relationship="namlao206_websiteModel.FK__Projects__TinhTr__351DDF8C" FromRole="StatusProject" ToRole="Project" />
           <NavigationProperty Name="ThiCongs" Relationship="namlao206_websiteModel.FK__ThiCongs__TinhTr__77DFC722" FromRole="StatusProject" ToRole="ThiCong" />
+          <NavigationProperty Name="NhapBanMus1" Relationship="namlao206_websiteModel.FK_NhapBanMu_TinhTrang" FromRole="StatusProject" ToRole="NhapBanMu" />
         </EntityType>
         <EntityType Name="SubMenu">
           <Key>
@@ -4983,6 +5039,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_NhapBanMu_NguoiSua">
+          <End Type="namlao206_websiteModel.Account" Role="Account" Multiplicity="0..1" />
+          <End Type="namlao206_websiteModel.NhapBanMu" Role="NhapBanMu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NhapBanMu">
+              <PropertyRef Name="ModifiedAccount_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NhapBanMu_TinhTrang">
+          <End Type="namlao206_websiteModel.StatusProject" Role="StatusProject" Multiplicity="0..1" />
+          <End Type="namlao206_websiteModel.NhapBanMu" Role="NhapBanMu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusProject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NhapBanMu">
+              <PropertyRef Name="TinhTrang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5521,6 +5601,12 @@
           <EntitySetMapping Name="NhapBanMus">
             <EntityTypeMapping TypeName="namlao206_websiteModel.NhapBanMu">
               <MappingFragment StoreEntitySet="NhapBanMu">
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+                <ScalarProperty Name="TenPhieu" ColumnName="TenPhieu" />
+                <ScalarProperty Name="MaPhieu" ColumnName="MaPhieu" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedAccount_Id" ColumnName="ModifiedAccount_Id" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="NguoiCan_EMP_Id" ColumnName="NguoiCan_EMP_Id" />
                 <ScalarProperty Name="DonViTienTe_Id" ColumnName="DonViTienTe_Id" />
                 <ScalarProperty Name="DoiTac_Id" ColumnName="DoiTac_Id" />
