@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="096a5b62d2224a928519f72f2d4402aa" Name="Diagram1" ZoomLevel="67">
+      <Diagram DiagramId="096a5b62d2224a928519f72f2d4402aa" Name="Diagram1" ZoomLevel="67" ShowGrid="true">
         <EntityTypeShape EntityType="namlao206_websiteModel.Account" Width="1.5" PointX="16.5" PointY="48.375" />
         <EntityTypeShape EntityType="namlao206_websiteModel.Administrator" Width="1.5" PointX="11.25" PointY="44.625" />
         <EntityTypeShape EntityType="namlao206_websiteModel.AdminLevelPermission" Width="1.5" PointX="11.25" PointY="36.375" />
@@ -156,8 +156,17 @@
         <AssociationConnector Association="namlao206_websiteModel.FK_ThiCongs_Units" />
         <AssociationConnector Association="namlao206_websiteModel.FK_TransportFileUrls_TransportFiles" />
         <AssociationConnector Association="namlao206_websiteModel.FK_Transports_TransportFiles" />
+        <EntityTypeShape EntityType="namlao206_websiteModel.GroupPermission" Width="1.5" PointX="21.75" PointY="36.375" />
+        <EntityTypeShape EntityType="namlao206_websiteModel.MenuItem" Width="1.5" PointX="3.375" PointY="7.75" />
+        <EntityTypeShape EntityType="namlao206_websiteModel.PermissionGroup" Width="1.5" PointX="19.5" PointY="36.375" />
+        <EntityTypeShape EntityType="namlao206_websiteModel.Permission" Width="1.5" PointX="19.5" PointY="33.375" />
+        <EntityTypeShape EntityType="namlao206_websiteModel.UserPermissionGroup" Width="1.5" PointX="21.75" PointY="47.375" />
+        <AssociationConnector Association="namlao206_websiteModel.FK__UserPermi__Accou__414EAC47" />
         <AssociationConnector Association="namlao206_websiteModel.FK_NhapBanMu_NguoiSua" />
+        <AssociationConnector Association="namlao206_websiteModel.FK__GroupPerm__Group__3D7E1B63" />
+        <AssociationConnector Association="namlao206_websiteModel.FK__GroupPerm__Permi__3E723F9C" />
         <AssociationConnector Association="namlao206_websiteModel.FK_NhapBanMu_TinhTrang" />
+        <AssociationConnector Association="namlao206_websiteModel.FK__UserPermi__Group__4242D080" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

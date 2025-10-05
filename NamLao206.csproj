@@ -364,6 +364,9 @@
     <Compile Include="Models\GiamSatThiCong.cs">
       <DependentUpon>namlao206DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GroupPermission.cs">
+      <DependentUpon>namlao206DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\HoatDongNhanSu.cs">
       <DependentUpon>namlao206DB.tt</DependentUpon>
     </Compile>
@@ -383,6 +386,9 @@
       <DependentUpon>namlao206DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MaQuocGia.cs">
+      <DependentUpon>namlao206DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MenuItem.cs">
       <DependentUpon>namlao206DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\namlao206DB.Context.cs">
@@ -413,6 +419,12 @@
       <DependentUpon>namlao206DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\NhapBanMu.cs">
+      <DependentUpon>namlao206DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Permission.cs">
+      <DependentUpon>namlao206DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PermissionGroup.cs">
       <DependentUpon>namlao206DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Phase.cs">
@@ -455,6 +467,9 @@
       <DependentUpon>namlao206DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Unit.cs">
+      <DependentUpon>namlao206DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserPermissionGroup.cs">
       <DependentUpon>namlao206DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewModels\Donvihanhchinh.cs" />

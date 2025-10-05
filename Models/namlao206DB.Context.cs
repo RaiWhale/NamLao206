@@ -77,6 +77,11 @@ namespace NamLao206.Models
         public virtual DbSet<TransportFileUrl> TransportFileUrls { get; set; }
         public virtual DbSet<Transport> Transports { get; set; }
         public virtual DbSet<Unit> Units { get; set; }
+        public virtual DbSet<GroupPermission> GroupPermissions { get; set; }
+        public virtual DbSet<MenuItem> MenuItems { get; set; }
+        public virtual DbSet<PermissionGroup> PermissionGroups { get; set; }
+        public virtual DbSet<Permission> Permissions { get; set; }
+        public virtual DbSet<UserPermissionGroup> UserPermissionGroups { get; set; }
     
         public virtual ObjectResult<sp_GetDataForDashBoard_Result> sp_GetDataForDashBoard(string action, string fromDate, string toDate, Nullable<int> donvi_id)
         {

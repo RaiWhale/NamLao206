@@ -37,11 +37,11 @@ namespace NamLao206.Models
         public Nullable<int> DoiTac_Id { get; set; }
         public Nullable<int> DonViTienTe_Id { get; set; }
         public Nullable<int> NguoiCan_EMP_Id { get; set; }
+        public string MaPhieu { get; set; }
+        public string TenPhieu { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public Nullable<int> ModifiedAccount_Id { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
-        public string MaPhieu { get; set; }
-        public string TenPhieu { get; set; }
         public Nullable<int> TinhTrang { get; set; }
     
         public virtual Account Account { get; set; }
