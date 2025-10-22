@@ -308,8 +308,10 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="GroupId" Type="int" />
-          <Property Name="PermissionId" Type="int" />
+          <Property Name="GroupId" Type="int" Nullable="false" />
+          <Property Name="PermissionId" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
         </EntityType>
         <EntityType Name="HoatDongNhanSu">
           <Key>
@@ -436,7 +438,9 @@
           <Property Name="IconClass" Type="nvarchar" MaxLength="50" />
           <Property Name="PermissionCode" Type="nvarchar" MaxLength="50" />
           <Property Name="DisplayOrder" Type="int" />
-          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="DepartmentId" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
         </EntityType>
         <EntityType Name="Nationalities">
           <Key>
@@ -539,7 +543,9 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="GroupName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="255" />
-          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
         </EntityType>
         <EntityType Name="Permissions">
           <Key>
@@ -549,7 +555,10 @@
           <Property Name="PermissionName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="PermissionCode" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="255" />
-          <Property Name="IsActive" Type="bit" />
+          <Property Name="Module" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
         </EntityType>
         <EntityType Name="Phases">
           <Key>
@@ -759,8 +768,10 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="AccountId" Type="int" />
+          <Property Name="AccountId" Type="int" Nullable="false" />
           <Property Name="GroupId" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
         </EntityType>
         <Association Name="FK__Contracts__Creat__214BF109">
           <End Role="Accounts" Type="Self.Accounts" Multiplicity="0..1" />
@@ -870,8 +881,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__GroupPerm__Group__3D7E1B63">
-          <End Role="PermissionGroups" Type="Self.PermissionGroups" Multiplicity="0..1" />
+        <Association Name="FK__GroupPerm__Group__546180BB">
+          <End Role="PermissionGroups" Type="Self.PermissionGroups" Multiplicity="1" />
           <End Role="GroupPermissions" Type="Self.GroupPermissions" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PermissionGroups">
@@ -882,8 +893,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__GroupPerm__Permi__3E723F9C">
-          <End Role="Permissions" Type="Self.Permissions" Multiplicity="0..1" />
+        <Association Name="FK__GroupPerm__Permi__5555A4F4">
+          <End Role="Permissions" Type="Self.Permissions" Multiplicity="1" />
           <End Role="GroupPermissions" Type="Self.GroupPermissions" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Permissions">
@@ -1350,8 +1361,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__UserPermi__Accou__414EAC47">
-          <End Role="Accounts" Type="Self.Accounts" Multiplicity="0..1" />
+        <Association Name="FK__UserPermi__Accou__592635D8">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
           <End Role="UserPermissionGroups" Type="Self.UserPermissionGroups" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Accounts">
@@ -1362,7 +1373,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__UserPermi__Group__4242D080">
+        <Association Name="FK__UserPermi__Group__5A1A5A11">
           <End Role="PermissionGroups" Type="Self.PermissionGroups" Multiplicity="0..1" />
           <End Role="UserPermissionGroups" Type="Self.UserPermissionGroups" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1683,6 +1694,18 @@
             </Principal>
             <Dependent Role="LevelPermissions">
               <PropertyRef Name="LevelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuItem_Parent">
+          <End Role="MenuItems" Type="Self.MenuItems" Multiplicity="0..1" />
+          <End Role="MenuItems1" Type="Self.MenuItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MenuItems">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MenuItems1">
+              <PropertyRef Name="ParentId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2144,11 +2167,11 @@
             <End Role="StatusProjects" EntitySet="StatusProjects" />
             <End Role="GiamSatThiCongs" EntitySet="GiamSatThiCongs" />
           </AssociationSet>
-          <AssociationSet Name="FK__GroupPerm__Group__3D7E1B63" Association="Self.FK__GroupPerm__Group__3D7E1B63">
+          <AssociationSet Name="FK__GroupPerm__Group__546180BB" Association="Self.FK__GroupPerm__Group__546180BB">
             <End Role="PermissionGroups" EntitySet="PermissionGroups" />
             <End Role="GroupPermissions" EntitySet="GroupPermissions" />
           </AssociationSet>
-          <AssociationSet Name="FK__GroupPerm__Permi__3E723F9C" Association="Self.FK__GroupPerm__Permi__3E723F9C">
+          <AssociationSet Name="FK__GroupPerm__Permi__5555A4F4" Association="Self.FK__GroupPerm__Permi__5555A4F4">
             <End Role="Permissions" EntitySet="Permissions" />
             <End Role="GroupPermissions" EntitySet="GroupPermissions" />
           </AssociationSet>
@@ -2304,11 +2327,11 @@
             <End Role="Accounts" EntitySet="Accounts" />
             <End Role="Units" EntitySet="Units" />
           </AssociationSet>
-          <AssociationSet Name="FK__UserPermi__Accou__414EAC47" Association="Self.FK__UserPermi__Accou__414EAC47">
+          <AssociationSet Name="FK__UserPermi__Accou__592635D8" Association="Self.FK__UserPermi__Accou__592635D8">
             <End Role="Accounts" EntitySet="Accounts" />
             <End Role="UserPermissionGroups" EntitySet="UserPermissionGroups" />
           </AssociationSet>
-          <AssociationSet Name="FK__UserPermi__Group__4242D080" Association="Self.FK__UserPermi__Group__4242D080">
+          <AssociationSet Name="FK__UserPermi__Group__5A1A5A11" Association="Self.FK__UserPermi__Group__5A1A5A11">
             <End Role="PermissionGroups" EntitySet="PermissionGroups" />
             <End Role="UserPermissionGroups" EntitySet="UserPermissionGroups" />
           </AssociationSet>
@@ -2415,6 +2438,10 @@
           <AssociationSet Name="FK_LevelPermissions_ToLevels" Association="Self.FK_LevelPermissions_ToLevels">
             <End Role="Levels" EntitySet="Levels" />
             <End Role="LevelPermissions" EntitySet="LevelPermissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuItem_Parent" Association="Self.FK_MenuItem_Parent">
+            <End Role="MenuItems" EntitySet="MenuItems" />
+            <End Role="MenuItems1" EntitySet="MenuItems" />
           </AssociationSet>
           <AssociationSet Name="FK_News_NewsPictures" Association="Self.FK_News_NewsPictures">
             <End Role="News" EntitySet="News" />
@@ -3002,34 +3029,38 @@
             <End Role="TransportFile" EntitySet="TransportFiles" />
             <End Role="Transport" EntitySet="Transports" />
           </AssociationSet>
-          <EntitySet Name="GroupPermissions" EntityType="namlao206_websiteModel.GroupPermission" />
-          <EntitySet Name="MenuItems" EntityType="namlao206_websiteModel.MenuItem" />
-          <EntitySet Name="PermissionGroups" EntityType="namlao206_websiteModel.PermissionGroup" />
-          <EntitySet Name="Permissions" EntityType="namlao206_websiteModel.Permission" />
-          <EntitySet Name="UserPermissionGroups" EntityType="namlao206_websiteModel.UserPermissionGroup" />
-          <AssociationSet Name="FK__UserPermi__Accou__414EAC47" Association="namlao206_websiteModel.FK__UserPermi__Accou__414EAC47">
-            <End Role="Account" EntitySet="Accounts" />
-            <End Role="UserPermissionGroup" EntitySet="UserPermissionGroups" />
-          </AssociationSet>
           <AssociationSet Name="FK_NhapBanMu_NguoiSua" Association="namlao206_websiteModel.FK_NhapBanMu_NguoiSua">
             <End Role="Account" EntitySet="Accounts" />
             <End Role="NhapBanMu" EntitySet="NhapBanMus" />
-          </AssociationSet>
-          <AssociationSet Name="FK__GroupPerm__Group__3D7E1B63" Association="namlao206_websiteModel.FK__GroupPerm__Group__3D7E1B63">
-            <End Role="PermissionGroup" EntitySet="PermissionGroups" />
-            <End Role="GroupPermission" EntitySet="GroupPermissions" />
-          </AssociationSet>
-          <AssociationSet Name="FK__GroupPerm__Permi__3E723F9C" Association="namlao206_websiteModel.FK__GroupPerm__Permi__3E723F9C">
-            <End Role="Permission" EntitySet="Permissions" />
-            <End Role="GroupPermission" EntitySet="GroupPermissions" />
           </AssociationSet>
           <AssociationSet Name="FK_NhapBanMu_TinhTrang" Association="namlao206_websiteModel.FK_NhapBanMu_TinhTrang">
             <End Role="StatusProject" EntitySet="StatusProjects" />
             <End Role="NhapBanMu" EntitySet="NhapBanMus" />
           </AssociationSet>
-          <AssociationSet Name="FK__UserPermi__Group__4242D080" Association="namlao206_websiteModel.FK__UserPermi__Group__4242D080">
+          <EntitySet Name="GroupPermissions" EntityType="namlao206_websiteModel.GroupPermission" />
+          <EntitySet Name="UserPermissionGroups" EntityType="namlao206_websiteModel.UserPermissionGroup" />
+          <AssociationSet Name="FK__UserPermi__Accou__592635D8" Association="namlao206_websiteModel.FK__UserPermi__Accou__592635D8">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="UserPermissionGroup" EntitySet="UserPermissionGroups" />
+          </AssociationSet>
+          <EntitySet Name="PermissionGroups" EntityType="namlao206_websiteModel.PermissionGroup" />
+          <EntitySet Name="Permissions" EntityType="namlao206_websiteModel.Permission" />
+          <AssociationSet Name="FK__GroupPerm__Group__546180BB" Association="namlao206_websiteModel.FK__GroupPerm__Group__546180BB">
+            <End Role="PermissionGroup" EntitySet="PermissionGroups" />
+            <End Role="GroupPermission" EntitySet="GroupPermissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GroupPerm__Permi__5555A4F4" Association="namlao206_websiteModel.FK__GroupPerm__Permi__5555A4F4">
+            <End Role="Permission" EntitySet="Permissions" />
+            <End Role="GroupPermission" EntitySet="GroupPermissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserPermi__Group__5A1A5A11" Association="namlao206_websiteModel.FK__UserPermi__Group__5A1A5A11">
             <End Role="PermissionGroup" EntitySet="PermissionGroups" />
             <End Role="UserPermissionGroup" EntitySet="UserPermissionGroups" />
+          </AssociationSet>
+          <EntitySet Name="MenuItems" EntityType="namlao206_websiteModel.MenuItem" />
+          <AssociationSet Name="FK_MenuItem_Parent" Association="namlao206_websiteModel.FK_MenuItem_Parent">
+            <End Role="MenuItem" EntitySet="MenuItems" />
+            <End Role="MenuItem1" EntitySet="MenuItems" />
           </AssociationSet>
           </EntityContainer>
         <ComplexType Name="sp_GetDataForDashBoard_Result">
@@ -3099,8 +3130,8 @@
           <NavigationProperty Name="TransportFiles" Relationship="namlao206_websiteModel.FK_TransportFiles_AccountModified" FromRole="Account" ToRole="TransportFile" />
           <NavigationProperty Name="TransportFiles1" Relationship="namlao206_websiteModel.FK_TransportFiles_AccountsCreate" FromRole="Account" ToRole="TransportFile" />
           <NavigationProperty Name="TransportFiles2" Relationship="namlao206_websiteModel.FK_TransportFiles_AccountsPheDuyet" FromRole="Account" ToRole="TransportFile" />
-          <NavigationProperty Name="UserPermissionGroups" Relationship="namlao206_websiteModel.FK__UserPermi__Accou__414EAC47" FromRole="Account" ToRole="UserPermissionGroup" />
           <NavigationProperty Name="NhapBanMus1" Relationship="namlao206_websiteModel.FK_NhapBanMu_NguoiSua" FromRole="Account" ToRole="NhapBanMu" />
+          <NavigationProperty Name="UserPermissionGroups" Relationship="namlao206_websiteModel.FK__UserPermi__Accou__592635D8" FromRole="Account" ToRole="UserPermissionGroup" />
         </EntityType>
         <EntityType Name="Administrator">
           <Key>
@@ -5178,73 +5209,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="GroupPermission">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="GroupId" Type="Int32" />
-          <Property Name="PermissionId" Type="Int32" />
-          <NavigationProperty Name="PermissionGroup" Relationship="namlao206_websiteModel.FK__GroupPerm__Group__3D7E1B63" FromRole="GroupPermission" ToRole="PermissionGroup" />
-          <NavigationProperty Name="Permission" Relationship="namlao206_websiteModel.FK__GroupPerm__Permi__3E723F9C" FromRole="GroupPermission" ToRole="Permission" />
-        </EntityType>
-        <EntityType Name="MenuItem">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MenuName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="MenuUrl" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="ParentId" Type="Int32" />
-          <Property Name="IconClass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PermissionCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DisplayOrder" Type="Int32" />
-          <Property Name="IsActive" Type="Boolean" />
-        </EntityType>
-        <EntityType Name="PermissionGroup">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="GroupName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="IsActive" Type="Boolean" />
-          <NavigationProperty Name="GroupPermissions" Relationship="namlao206_websiteModel.FK__GroupPerm__Group__3D7E1B63" FromRole="PermissionGroup" ToRole="GroupPermission" />
-          <NavigationProperty Name="UserPermissionGroups" Relationship="namlao206_websiteModel.FK__UserPermi__Group__4242D080" FromRole="PermissionGroup" ToRole="UserPermissionGroup" />
-        </EntityType>
-        <EntityType Name="Permission">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PermissionName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="PermissionCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="IsActive" Type="Boolean" />
-          <NavigationProperty Name="GroupPermissions" Relationship="namlao206_websiteModel.FK__GroupPerm__Permi__3E723F9C" FromRole="Permission" ToRole="GroupPermission" />
-        </EntityType>
-        <EntityType Name="UserPermissionGroup">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="AccountId" Type="Int32" />
-          <Property Name="GroupId" Type="Int32" />
-          <NavigationProperty Name="Account" Relationship="namlao206_websiteModel.FK__UserPermi__Accou__414EAC47" FromRole="UserPermissionGroup" ToRole="Account" />
-          <NavigationProperty Name="PermissionGroup" Relationship="namlao206_websiteModel.FK__UserPermi__Group__4242D080" FromRole="UserPermissionGroup" ToRole="PermissionGroup" />
-        </EntityType>
-        <Association Name="FK__UserPermi__Accou__414EAC47">
-          <End Type="namlao206_websiteModel.Account" Role="Account" Multiplicity="0..1" />
-          <End Type="namlao206_websiteModel.UserPermissionGroup" Role="UserPermissionGroup" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Account">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserPermissionGroup">
-              <PropertyRef Name="AccountId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_NhapBanMu_NguoiSua">
           <End Type="namlao206_websiteModel.Account" Role="Account" Multiplicity="0..1" />
           <End Type="namlao206_websiteModel.NhapBanMu" Role="NhapBanMu" Multiplicity="*" />
@@ -5254,30 +5218,6 @@
             </Principal>
             <Dependent Role="NhapBanMu">
               <PropertyRef Name="ModifiedAccount_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__GroupPerm__Group__3D7E1B63">
-          <End Type="namlao206_websiteModel.PermissionGroup" Role="PermissionGroup" Multiplicity="0..1" />
-          <End Type="namlao206_websiteModel.GroupPermission" Role="GroupPermission" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PermissionGroup">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="GroupPermission">
-              <PropertyRef Name="GroupId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__GroupPerm__Permi__3E723F9C">
-          <End Type="namlao206_websiteModel.Permission" Role="Permission" Multiplicity="0..1" />
-          <End Type="namlao206_websiteModel.GroupPermission" Role="GroupPermission" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Permission">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="GroupPermission">
-              <PropertyRef Name="PermissionId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5293,7 +5233,94 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__UserPermi__Group__4242D080">
+        <EntityType Name="GroupPermission">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupId" Type="Int32" Nullable="false" />
+          <Property Name="PermissionId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <NavigationProperty Name="PermissionGroup" Relationship="namlao206_websiteModel.FK__GroupPerm__Group__546180BB" FromRole="GroupPermission" ToRole="PermissionGroup" />
+          <NavigationProperty Name="Permission" Relationship="namlao206_websiteModel.FK__GroupPerm__Permi__5555A4F4" FromRole="GroupPermission" ToRole="Permission" />
+        </EntityType>
+        <EntityType Name="UserPermissionGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountId" Type="Int32" Nullable="false" />
+          <Property Name="GroupId" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <NavigationProperty Name="Account" Relationship="namlao206_websiteModel.FK__UserPermi__Accou__592635D8" FromRole="UserPermissionGroup" ToRole="Account" />
+          <NavigationProperty Name="PermissionGroup" Relationship="namlao206_websiteModel.FK__UserPermi__Group__5A1A5A11" FromRole="UserPermissionGroup" ToRole="PermissionGroup" />
+        </EntityType>
+        <Association Name="FK__UserPermi__Accou__592635D8">
+          <End Type="namlao206_websiteModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="namlao206_websiteModel.UserPermissionGroup" Role="UserPermissionGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserPermissionGroup">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PermissionGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <NavigationProperty Name="GroupPermissions" Relationship="namlao206_websiteModel.FK__GroupPerm__Group__546180BB" FromRole="PermissionGroup" ToRole="GroupPermission" />
+          <NavigationProperty Name="UserPermissionGroups" Relationship="namlao206_websiteModel.FK__UserPermi__Group__5A1A5A11" FromRole="PermissionGroup" ToRole="UserPermissionGroup" />
+        </EntityType>
+        <EntityType Name="Permission">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PermissionName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PermissionCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Module" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <NavigationProperty Name="GroupPermissions" Relationship="namlao206_websiteModel.FK__GroupPerm__Permi__5555A4F4" FromRole="Permission" ToRole="GroupPermission" />
+        </EntityType>
+        <Association Name="FK__GroupPerm__Group__546180BB">
+          <End Type="namlao206_websiteModel.PermissionGroup" Role="PermissionGroup" Multiplicity="1" />
+          <End Type="namlao206_websiteModel.GroupPermission" Role="GroupPermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PermissionGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GroupPermission">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GroupPerm__Permi__5555A4F4">
+          <End Type="namlao206_websiteModel.Permission" Role="Permission" Multiplicity="1" />
+          <End Type="namlao206_websiteModel.GroupPermission" Role="GroupPermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Permission">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GroupPermission">
+              <PropertyRef Name="PermissionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserPermi__Group__5A1A5A11">
           <End Type="namlao206_websiteModel.PermissionGroup" Role="PermissionGroup" Multiplicity="0..1" />
           <End Type="namlao206_websiteModel.UserPermissionGroup" Role="UserPermissionGroup" Multiplicity="*" />
           <ReferentialConstraint>
@@ -5302,6 +5329,35 @@
             </Principal>
             <Dependent Role="UserPermissionGroup">
               <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="MenuItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MenuName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MenuUrl" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="IconClass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PermissionCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayOrder" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="DepartmentId" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="MenuItems1" Relationship="namlao206_websiteModel.FK_MenuItem_Parent" FromRole="MenuItem" ToRole="MenuItem1" />
+          <NavigationProperty Name="MenuItem1" Relationship="namlao206_websiteModel.FK_MenuItem_Parent" FromRole="MenuItem1" ToRole="MenuItem" />
+        </EntityType>
+        <Association Name="FK_MenuItem_Parent">
+          <End Type="namlao206_websiteModel.MenuItem" Role="MenuItem" Multiplicity="0..1" />
+          <End Type="namlao206_websiteModel.MenuItem" Role="MenuItem1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MenuItem">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MenuItem1">
+              <PropertyRef Name="ParentId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6094,22 +6150,21 @@
           <EntitySetMapping Name="GroupPermissions">
             <EntityTypeMapping TypeName="namlao206_websiteModel.GroupPermission">
               <MappingFragment StoreEntitySet="GroupPermissions">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="PermissionId" ColumnName="PermissionId" />
                 <ScalarProperty Name="GroupId" ColumnName="GroupId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="MenuItems">
-            <EntityTypeMapping TypeName="namlao206_websiteModel.MenuItem">
-              <MappingFragment StoreEntitySet="MenuItems">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
-                <ScalarProperty Name="PermissionCode" ColumnName="PermissionCode" />
-                <ScalarProperty Name="IconClass" ColumnName="IconClass" />
-                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
-                <ScalarProperty Name="MenuUrl" ColumnName="MenuUrl" />
-                <ScalarProperty Name="MenuName" ColumnName="MenuName" />
+          <EntitySetMapping Name="UserPermissionGroups">
+            <EntityTypeMapping TypeName="namlao206_websiteModel.UserPermissionGroup">
+              <MappingFragment StoreEntitySet="UserPermissionGroups">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -6117,6 +6172,8 @@
           <EntitySetMapping Name="PermissionGroups">
             <EntityTypeMapping TypeName="namlao206_websiteModel.PermissionGroup">
               <MappingFragment StoreEntitySet="PermissionGroups">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="GroupName" ColumnName="GroupName" />
@@ -6127,7 +6184,10 @@
           <EntitySetMapping Name="Permissions">
             <EntityTypeMapping TypeName="namlao206_websiteModel.Permission">
               <MappingFragment StoreEntitySet="Permissions">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Module" ColumnName="Module" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="PermissionCode" ColumnName="PermissionCode" />
                 <ScalarProperty Name="PermissionName" ColumnName="PermissionName" />
@@ -6135,11 +6195,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="UserPermissionGroups">
-            <EntityTypeMapping TypeName="namlao206_websiteModel.UserPermissionGroup">
-              <MappingFragment StoreEntitySet="UserPermissionGroups">
-                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
-                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+          <EntitySetMapping Name="MenuItems">
+            <EntityTypeMapping TypeName="namlao206_websiteModel.MenuItem">
+              <MappingFragment StoreEntitySet="MenuItems">
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+                <ScalarProperty Name="PermissionCode" ColumnName="PermissionCode" />
+                <ScalarProperty Name="IconClass" ColumnName="IconClass" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="MenuUrl" ColumnName="MenuUrl" />
+                <ScalarProperty Name="MenuName" ColumnName="MenuName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

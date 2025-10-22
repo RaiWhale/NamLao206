@@ -156,17 +156,18 @@
         <AssociationConnector Association="namlao206_websiteModel.FK_ThiCongs_Units" />
         <AssociationConnector Association="namlao206_websiteModel.FK_TransportFileUrls_TransportFiles" />
         <AssociationConnector Association="namlao206_websiteModel.FK_Transports_TransportFiles" />
-        <EntityTypeShape EntityType="namlao206_websiteModel.GroupPermission" Width="1.5" PointX="21.75" PointY="36.375" />
-        <EntityTypeShape EntityType="namlao206_websiteModel.MenuItem" Width="1.5" PointX="3.375" PointY="7.75" />
-        <EntityTypeShape EntityType="namlao206_websiteModel.PermissionGroup" Width="1.5" PointX="19.5" PointY="36.375" />
-        <EntityTypeShape EntityType="namlao206_websiteModel.Permission" Width="1.5" PointX="19.5" PointY="33.375" />
-        <EntityTypeShape EntityType="namlao206_websiteModel.UserPermissionGroup" Width="1.5" PointX="21.75" PointY="47.375" />
-        <AssociationConnector Association="namlao206_websiteModel.FK__UserPermi__Accou__414EAC47" />
         <AssociationConnector Association="namlao206_websiteModel.FK_NhapBanMu_NguoiSua" />
-        <AssociationConnector Association="namlao206_websiteModel.FK__GroupPerm__Group__3D7E1B63" />
-        <AssociationConnector Association="namlao206_websiteModel.FK__GroupPerm__Permi__3E723F9C" />
         <AssociationConnector Association="namlao206_websiteModel.FK_NhapBanMu_TinhTrang" />
-        <AssociationConnector Association="namlao206_websiteModel.FK__UserPermi__Group__4242D080" />
+        <EntityTypeShape EntityType="namlao206_websiteModel.GroupPermission" Width="1.5" PointX="5.625" PointY="8" />
+        <EntityTypeShape EntityType="namlao206_websiteModel.UserPermissionGroup" Width="1.5" PointX="18.75" PointY="32" />
+        <AssociationConnector Association="namlao206_websiteModel.FK__UserPermi__Accou__592635D8" />
+        <EntityTypeShape EntityType="namlao206_websiteModel.PermissionGroup" Width="1.5" PointX="3.375" PointY="19.875" />
+        <EntityTypeShape EntityType="namlao206_websiteModel.Permission" Width="1.5" PointX="3.375" PointY="7.75" />
+        <AssociationConnector Association="namlao206_websiteModel.FK__GroupPerm__Group__546180BB" />
+        <AssociationConnector Association="namlao206_websiteModel.FK__GroupPerm__Permi__5555A4F4" />
+        <AssociationConnector Association="namlao206_websiteModel.FK__UserPermi__Group__5A1A5A11" />
+        <EntityTypeShape EntityType="namlao206_websiteModel.MenuItem" Width="1.5" PointX="8.375" PointY="6.75" />
+        <AssociationConnector Association="namlao206_websiteModel.FK_MenuItem_Parent" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

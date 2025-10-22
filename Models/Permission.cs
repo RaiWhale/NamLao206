@@ -24,7 +24,10 @@ namespace NamLao206.Models
         public string PermissionName { get; set; }
         public string PermissionCode { get; set; }
         public string Description { get; set; }
-        public Nullable<bool> IsActive { get; set; }
+        public string Module { get; set; }
+        public bool IsActive { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<int> CreatedBy { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GroupPermission> GroupPermissions { get; set; }

@@ -14,6 +14,12 @@ namespace NamLao206.Models
     
     public partial class MenuItem
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public MenuItem()
+        {
+            this.MenuItems1 = new HashSet<MenuItem>();
+        }
+    
         public int Id { get; set; }
         public string MenuName { get; set; }
         public string MenuUrl { get; set; }
@@ -21,6 +27,12 @@ namespace NamLao206.Models
         public string IconClass { get; set; }
         public string PermissionCode { get; set; }
         public Nullable<int> DisplayOrder { get; set; }
-        public Nullable<bool> IsActive { get; set; }
+        public bool IsActive { get; set; }
+        public Nullable<int> DepartmentId { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MenuItem> MenuItems1 { get; set; }
+        public virtual MenuItem MenuItem1 { get; set; }
     }
 }

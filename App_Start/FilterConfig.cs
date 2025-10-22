@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using NamLao206.Filters;
+using System.Web;
 using System.Web.Mvc;
 
 namespace NamLao206
@@ -8,6 +9,7 @@ namespace NamLao206
 		public static void RegisterGlobalFilters(GlobalFilterCollection filters)
 		{
 			filters.Add(new HandleErrorAttribute());
-		}
-	}
+            // filters.Add(new DynamicAuthorizeAttribute()); // Optional: Áp dụng toàn cục
+        }
+    }
 }

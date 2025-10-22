@@ -26,7 +26,6 @@ namespace NamLao206
 
 				cfg.CreateMap<Models.ViewModels.RegisterVM, Account>();
 				cfg.CreateMap<Account, Models.ViewModels.RegisterVM>();
-
 				cfg.CreateMap<Models.ViewModels.UpdateProfileVM, Employee>();
 			});
 		}

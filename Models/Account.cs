@@ -49,8 +49,8 @@ namespace NamLao206.Models
             this.TransportFiles = new HashSet<TransportFile>();
             this.TransportFiles1 = new HashSet<TransportFile>();
             this.TransportFiles2 = new HashSet<TransportFile>();
-            this.UserPermissionGroups = new HashSet<UserPermissionGroup>();
             this.NhapBanMus1 = new HashSet<NhapBanMu>();
+            this.UserPermissionGroups = new HashSet<UserPermissionGroup>();
         }
     
         public int Id { get; set; }
@@ -132,8 +132,8 @@ namespace NamLao206.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TransportFile> TransportFiles2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserPermissionGroup> UserPermissionGroups { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NhapBanMu> NhapBanMus1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserPermissionGroup> UserPermissionGroups { get; set; }
     }
 }

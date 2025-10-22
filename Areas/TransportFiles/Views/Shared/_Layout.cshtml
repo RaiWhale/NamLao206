@@ -1,21 +1,36 @@
 ﻿@using NamLao206.Models
+@using NamLao206.Services
 @{
     namlao206_websiteEntities db = new namlao206_websiteEntities();
     Account acc = null;
     List<Transport> ThuChuaXem = null;
+    List<MenuItem> userMenu = null;
+    string userDepartmentName = "";
+    int userDepartmentId = 0;
     if (User.Identity.IsAuthenticated)
     {
         acc = db.Accounts.Where(x => x.Id.ToString().Equals(User.Identity.Name)).SingleOrDefault();
         if (acc != null && acc.LevelId != 3)
         {
-            ThuChuaXem = db.Transports.Where(x => x.ReceiverUserId == acc.EmployeeId && x.DaXem == false).OrderByDescending(x => x.TransportDate).ToList();
+            ThuChuaXem = db.Transports.Where(x => x.ReceiverUserId == acc.EmployeeId && x.DaXem == false)
+                .OrderByDescending(x => x.TransportDate).ToList();
+            // Load menu động THEO ĐƠN VỊ của user
+            var permissionService = new PermissionService(db);
+
+            userDepartmentId = permissionService.GetUserDepartment(acc.Id);
+            userDepartmentName = permissionService.GetUserFullDepartmentInfo(acc.Id);
+            userMenu = permissionService.GetUserMenuByUserDepartment(acc.Id);
+
+            // Lưu thông tin department vào ViewBag để sử dụng trong view
+            ViewBag.UserDepartmentId = userDepartmentId;
+            ViewBag.UserDepartmentName = userDepartmentName;
         }
         else
         {
             // Gọi hàm Logout()
             Response.Redirect(Url.Action("Logout", "Login", new { area = "" }));
         }
-    }  
+    }
 }
 <!--Layout load tất cả thư viện rồi gọi qua RouteConfig-->
 <!DOCTYPE html>
@@ -23,12 +38,11 @@
 <head>
     <meta charset="utf-8">
     <title>
-        @ViewBag.Title CÔNG TY TNHH MTV HỮU NGHỊ NAM LÀO @if (User.Identity.IsAuthenticated)
+        @ViewBag.Title CÔNG TY TNHH MTV HỮU NGHỊ NAM LÀO
+        @if (User.Identity.IsAuthenticated)
         {
-            <text>[@(ThuChuaXem?.Count() ?? 0)]</text>
+            <text>[@userDepartmentName - @(ThuChuaXem?.Count() ?? 0)]</text>
         }
-
-
     </title>
     <meta name="description" content="Marketing Dashboard">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -172,14 +186,24 @@
                         <a href="#" onclick="return false;" class="pull-trigger-btn" data-action="toggle" data-class="list-filter-active" data-target=".page-sidebar" data-focus="nav_filter_input">
                             <i class="fal fa-angle-down"></i>
                         </a>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <div class="info-card-text text-center mt-2">
+                                <div class="fs-sm text-white">@userDepartmentName</div>
+                                <small class="text-white opacity-70">@acc.Employee.Name</small>
+                            </div>
+                        }
                     </div>
                     <ul id="js-nav-menu" class="nav-menu">
+                        <!-- Menu Dashboard (luôn hiển thị) -->
                         <li class="active open">
                             <a href="~/TransportFiles/Dashboard/Index" title="Application Intel" data-filter-tags="Dashboard">
                                 <i class="fal fa-info"></i>
                                 <span class="nav-link-text" data-i18n="nav.application_intel">Dashboard</span>
                             </a>
                         </li>
+
+                        <!-- Menu Văn phòng điện tử (luôn hiển thị) -->
                         <li class="open">
                             <a href="#" title="Theme Settings" data-filter-tags="Hộp thư">
                                 <i class="ni ni-envelope"></i>
@@ -208,43 +232,46 @@
                                 </li>
                             </ul>
                         </li>
-                        @if (acc != null)
+                      
+                        <!-- MENU ĐỘNG THEO ĐƠN VỊ -->
+                        @if (userMenu != null && userMenu.Any())
                         {
-                            <li>
-                                <a href="#" title="Theme Settings" data-filter-tags="Văn phòng điện tử">
-                                    <i class="fal fa-chalkboard"></i>
-                                    <span class="nav-link-text" data-i18n="nav.theme_settings">Hệ thống quản trị điện tử</span>
-                                </a>
-                                <ul>
-                                    <li class=" ">
-                                        <a href="~/TransportFiles/Projects/Index">
-                                            <i class="las la-hotel"></i><span>Thông tin dự án</span>
-                                        </a>
-                                    </li>
-                                    <li class=" ">
-                                        <a href="~/TransportFiles/NhapBanMus/Index">
-                                            <i class="las la-hotel"></i><span>Quản lý mủ</span>
-                                        </a>
-                                    </li>
-                                    <li class=" ">
-                                        <a href="~/TransportFiles/Suppliers/Index">
-                                            <i class="las la-hotel"></i><span>Danh mục nhà đầu tư</span>
-                                        </a>
-                                    </li>
-                                    <li class=" ">
-                                        <a href="~/TransportFiles/Employees/Index">
-                                            <i class="las la-address-book"></i><span>Hồ sơ nhân viên</span>
-                                        </a>
-                                    </li>
-                                    <li class=" ">
-                                        <a href="~/TransportFiles/HoatDongNhanSus/Index">
-                                            <i class="las la-address-book"></i><span>Thống kê nhân sự</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
+                            foreach (var menu in userMenu)
+                            {
+                                <li>
+                                    <a href="@menu.MenuUrl"
+                                       title="@menu.MenuName"
+                                       data-filter-tags="@menu.MenuName">
+                                        @if (!string.IsNullOrEmpty(menu.IconClass))
+                                        {
+                                            <i class="@menu.IconClass"></i>
+                                        }
+                                        else
+                                        {
+                                            <i class="fal fa-folder"></i>
+                                        }
+                                        <span class="nav-link-text">@menu.MenuName</span>
+                                    </a>
+                                </li>
+                            }
                         }
 
+                        <!-- Menu mặc định khi không có menu theo đơn vị -->
+                        @if (userMenu == null || !userMenu.Any())
+                        {
+                            <li>
+                                <a href="~/Admin/Account/Edit">
+                                    <i class="fal fa-user"></i>
+                                    <span class="nav-link-text">Hồ sơ cá nhân</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="~/Account/ChangePassword">
+                                    <i class="fal fa-key"></i>
+                                    <span class="nav-link-text">Đổi mật khẩu</span>
+                                </a>
+                            </li>
+                        }
                     </ul>
                     <div class="filter-message js-filter-message bg-success-600"></div>
                 </nav>
@@ -283,6 +310,12 @@
                         <a href="#" class="page-logo-link press-scale-down d-flex align-items-center position-relative" data-toggle="modal" data-target="#modal-shortcut">
                             <img src="~/Content/smartadmin/img/logo.png" alt="SmartAdmin WebApp" aria-roledescription="logo">
                             <span class="page-logo-text mr-1">Nam Lào 206</span>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <span class="badge badge-info ml-2">
+                                    <i class="fal fa-building"></i> @userDepartmentName
+                                </span>
+                            }
                             <span class="position-absolute text-white opacity-50 small pos-top pos-right mr-2 mt-n2"></span>
                             <i class="fal fa-angle-down d-inline-block ml-1 fs-lg color-primary-300"></i>
                         </a>
@@ -444,7 +477,7 @@
                                             </span>
                                             <div class="info-card-text">
                                                 <div class="fs-lg text-truncate text-truncate-lg">@acc.Employee.Name</div>
-                                                <span class="text-truncate text-truncate-md opacity-80">@acc.Employee.DM_PhongBans.TenKhoa</span>
+                                                <span class="text-truncate text-truncate-md opacity-80">@userDepartmentName</span>
                                             </div>
                                         </div>
                                     </div>
@@ -475,6 +508,15 @@
                 <!-- BEGIN Page Content -->
                 <!-- the #js-page-content id is needed for some plugins to initialize -->
                 <main id="js-page-content" role="main" class="page-content">
+                    <!-- Hiển thị thông tin đơn vị trên các trang -->
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="alert alert-info mb-2">
+                            <i class="fal fa-building mr-2"></i>
+                            <strong>Đơn vị:</strong> @userDepartmentName
+                            <span class="ml-3"><strong>Nhân viên:</strong> @acc.Employee.Name</span>
+                        </div>
+                    }
                     @RenderBody() <!--đây là chỗ gọi các trang thay đổi-->
                 </main>
                 <!-- this overlay is activated only when mobile menu is triggered -->
@@ -640,8 +682,7 @@
 
     <!-- Plugin datalabels -->
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
-    <!-- Plugin datalabels -->
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+
     <!-- bootstrap-progressbar -->
     <script src="~/Content/chart/Libraries/js/bootstrap-progressbar.min.js"></script>
     <!-- Custom Theme Scripts -->

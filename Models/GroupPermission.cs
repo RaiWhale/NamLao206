@@ -15,8 +15,10 @@ namespace NamLao206.Models
     public partial class GroupPermission
     {
         public int Id { get; set; }
-        public Nullable<int> GroupId { get; set; }
-        public Nullable<int> PermissionId { get; set; }
+        public int GroupId { get; set; }
+        public int PermissionId { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<int> CreatedBy { get; set; }
     
         public virtual PermissionGroup PermissionGroup { get; set; }
         public virtual Permission Permission { get; set; }
