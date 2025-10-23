@@ -351,6 +351,7 @@
           <Property Name="Note" Type="nvarchar(max)" />
           <Property Name="DonVi_Id" Type="int" />
           <Property Name="NhapBanMu_Id" Type="int" />
+          <Property Name="ThietBi_Id" Type="int" />
         </EntityType>
         <EntityType Name="KhaoSats">
           <Key>
@@ -694,6 +695,28 @@
           <Property Name="UnitId" Type="int" />
           <Property Name="CongNo" Type="decimal" Precision="18" Scale="2" />
           <Property Name="SoPLHD" Type="nvarchar" MaxLength="2000" />
+        </EntityType>
+        <EntityType Name="ThietBiXeMay">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DonVi_Id" Type="int" Nullable="false" />
+          <Property Name="NgayNhap" Type="datetime" />
+          <Property Name="LoaiTrangThietBi" Type="nvarchar" MaxLength="255" />
+          <Property Name="BienSo" Type="nvarchar" MaxLength="50" />
+          <Property Name="NhanHieu" Type="nvarchar" MaxLength="255" />
+          <Property Name="SoKhung" Type="nvarchar" MaxLength="100" />
+          <Property Name="SoMay" Type="nvarchar" MaxLength="100" />
+          <Property Name="NamSanXuat" Type="varchar" MaxLength="50" />
+          <Property Name="XuatXu" Type="nvarchar" MaxLength="100" />
+          <Property Name="NguoiSuDung_Id" Type="int" />
+          <Property Name="TinhTrangKyThuat" Type="nvarchar(max)" />
+          <Property Name="HoSoPhapLy_Id" Type="int" />
+          <Property Name="GhiChu" Type="nvarchar(max)" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="CreateUser_Id" Type="int" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Topics">
           <Key>
@@ -1685,6 +1708,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_HoSoPhapLys_ThietBis">
+          <End Role="ThietBiXeMay" Type="Self.ThietBiXeMay" Multiplicity="0..1" />
+          <End Role="HoSoPhapLys" Type="Self.HoSoPhapLys" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ThietBiXeMay">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HoSoPhapLys">
+              <PropertyRef Name="ThietBi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_LevelPermissions_ToLevels">
           <End Role="Levels" Type="Self.Levels" Multiplicity="1" />
           <End Role="LevelPermissions" Type="Self.LevelPermissions" Multiplicity="*" />
@@ -2009,6 +2044,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ThietBiXeMay_DonVi">
+          <End Role="DM_DonVis" Type="Self.DM_DonVis" Multiplicity="1" />
+          <End Role="ThietBiXeMay" Type="Self.ThietBiXeMay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_DonVis">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ThietBiXeMay">
+              <PropertyRef Name="DonVi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ThietBiXeMay_NguoiSuDung">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+          <End Role="ThietBiXeMay" Type="Self.ThietBiXeMay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ThietBiXeMay">
+              <PropertyRef Name="NguoiSuDung_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TransportFiles_AccountModified">
           <End Role="Accounts" Type="Self.Accounts" Multiplicity="0..1" />
           <End Role="TransportFiles" Type="Self.TransportFiles" Multiplicity="*" />
@@ -2125,6 +2184,7 @@
           <EntitySet Name="Suppliers" EntityType="Self.Suppliers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Teams" EntityType="Self.Teams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ThiCongs" EntityType="Self.ThiCongs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ThietBiXeMay" EntityType="Self.ThietBiXeMay" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Topics" EntityType="Self.Topics" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TransportFiles" EntityType="Self.TransportFiles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TransportFileUrls" EntityType="Self.TransportFileUrls" Schema="dbo" store:Type="Tables" />
@@ -2435,6 +2495,10 @@
             <End Role="DM_DonVis" EntitySet="DM_DonVis" />
             <End Role="HoSoPhapLys" EntitySet="HoSoPhapLys" />
           </AssociationSet>
+          <AssociationSet Name="FK_HoSoPhapLys_ThietBis" Association="Self.FK_HoSoPhapLys_ThietBis">
+            <End Role="ThietBiXeMay" EntitySet="ThietBiXeMay" />
+            <End Role="HoSoPhapLys" EntitySet="HoSoPhapLys" />
+          </AssociationSet>
           <AssociationSet Name="FK_LevelPermissions_ToLevels" Association="Self.FK_LevelPermissions_ToLevels">
             <End Role="Levels" EntitySet="Levels" />
             <End Role="LevelPermissions" EntitySet="LevelPermissions" />
@@ -2542,6 +2606,14 @@
           <AssociationSet Name="FK_ThiCongs_Units" Association="Self.FK_ThiCongs_Units">
             <End Role="Units" EntitySet="Units" />
             <End Role="ThiCongs" EntitySet="ThiCongs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ThietBiXeMay_DonVi" Association="Self.FK_ThietBiXeMay_DonVi">
+            <End Role="DM_DonVis" EntitySet="DM_DonVis" />
+            <End Role="ThietBiXeMay" EntitySet="ThietBiXeMay" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ThietBiXeMay_NguoiSuDung" Association="Self.FK_ThietBiXeMay_NguoiSuDung">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="ThietBiXeMay" EntitySet="ThietBiXeMay" />
           </AssociationSet>
           <AssociationSet Name="FK_TransportFiles_AccountModified" Association="Self.FK_TransportFiles_AccountModified">
             <End Role="Accounts" EntitySet="Accounts" />
@@ -3062,6 +3134,19 @@
             <End Role="MenuItem" EntitySet="MenuItems" />
             <End Role="MenuItem1" EntitySet="MenuItems" />
           </AssociationSet>
+          <EntitySet Name="ThietBiXeMays" EntityType="namlao206_websiteModel.ThietBiXeMay" />
+          <AssociationSet Name="FK_ThietBiXeMay_DonVi" Association="namlao206_websiteModel.FK_ThietBiXeMay_DonVi">
+            <End Role="DM_DonVis" EntitySet="DM_DonVis" />
+            <End Role="ThietBiXeMay" EntitySet="ThietBiXeMays" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ThietBiXeMay_NguoiSuDung" Association="namlao206_websiteModel.FK_ThietBiXeMay_NguoiSuDung">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="ThietBiXeMay" EntitySet="ThietBiXeMays" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HoSoPhapLys_ThietBis" Association="namlao206_websiteModel.FK_HoSoPhapLys_ThietBis">
+            <End Role="ThietBiXeMay" EntitySet="ThietBiXeMays" />
+            <End Role="HoSoPhapLy" EntitySet="HoSoPhapLys" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="sp_GetDataForDashBoard_Result">
           <Property Type="String" Name="Titles" Nullable="false" MaxLength="24" />
@@ -3310,6 +3395,7 @@
           <NavigationProperty Name="NhapBanMus" Relationship="namlao206_websiteModel.FK_NhapBanMu_DonVis" FromRole="DM_DonVis" ToRole="NhapBanMu" />
           <NavigationProperty Name="Suppliers" Relationship="namlao206_websiteModel.FK_Suppliers_Donvis" FromRole="DM_DonVis" ToRole="Supplier" />
           <NavigationProperty Name="Teams" Relationship="namlao206_websiteModel.FK_Teams_Donvis" FromRole="DM_DonVis" ToRole="Team" />
+          <NavigationProperty Name="ThietBiXeMays" Relationship="namlao206_websiteModel.FK_ThietBiXeMay_DonVi" FromRole="DM_DonVis" ToRole="ThietBiXeMay" />
         </EntityType>
         <EntityType Name="DM_hinhthuckinhdoanh">
           <Key>
@@ -3421,6 +3507,7 @@
           <NavigationProperty Name="NhapBanMus" Relationship="namlao206_websiteModel.FK_NhapBanMu_KeToan" FromRole="Employee" ToRole="NhapBanMu" />
           <NavigationProperty Name="NhapBanMus1" Relationship="namlao206_websiteModel.FK_NhapBanMu_NguoiPheDuyet" FromRole="Employee" ToRole="NhapBanMu" />
           <NavigationProperty Name="NhapBanMus2" Relationship="namlao206_websiteModel.FK_NhapBanMu_TroLyKeHoach" FromRole="Employee" ToRole="NhapBanMu" />
+          <NavigationProperty Name="ThietBiXeMays" Relationship="namlao206_websiteModel.FK_ThietBiXeMay_NguoiSuDung" FromRole="Employee" ToRole="ThietBiXeMay" />
         </EntityType>
         <EntityType Name="Feedback">
           <Key>
@@ -3526,6 +3613,8 @@
           <NavigationProperty Name="DM_DonVis" Relationship="namlao206_websiteModel.FK_HoSoPhapLys_DonVis" FromRole="HoSoPhapLy" ToRole="DM_DonVis" />
           <NavigationProperty Name="DocumentType" Relationship="namlao206_websiteModel.FK__HoSoPhapL__Docum__3552E9B6" FromRole="HoSoPhapLy" ToRole="DocumentType" />
           <NavigationProperty Name="Project" Relationship="namlao206_websiteModel.FK__HoSoPhapL__Proje__345EC57D" FromRole="HoSoPhapLy" ToRole="Project" />
+          <Property Name="ThietBi_Id" Type="Int32" />
+          <NavigationProperty Name="ThietBiXeMay" Relationship="namlao206_websiteModel.FK_HoSoPhapLys_ThietBis" FromRole="HoSoPhapLy" ToRole="ThietBiXeMay" />
         </EntityType>
         <EntityType Name="KhaoSat">
           <Key>
@@ -5361,6 +5450,67 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ThietBiXeMay">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DonVi_Id" Type="Int32" Nullable="false" />
+          <Property Name="NgayNhap" Type="DateTime" Precision="3" />
+          <Property Name="LoaiTrangThietBi" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="BienSo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NhanHieu" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SoKhung" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SoMay" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NamSanXuat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="XuatXu" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NguoiSuDung_Id" Type="Int32" />
+          <Property Name="TinhTrangKyThuat" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HoSoPhapLy_Id" Type="Int32" />
+          <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateUser_Id" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="DM_DonVis" Relationship="namlao206_websiteModel.FK_ThietBiXeMay_DonVi" FromRole="ThietBiXeMay" ToRole="DM_DonVis" />
+          <NavigationProperty Name="Employee" Relationship="namlao206_websiteModel.FK_ThietBiXeMay_NguoiSuDung" FromRole="ThietBiXeMay" ToRole="Employee" />
+          <NavigationProperty Name="HoSoPhapLys" Relationship="namlao206_websiteModel.FK_HoSoPhapLys_ThietBis" FromRole="ThietBiXeMay" ToRole="HoSoPhapLy" />
+        </EntityType>
+        <Association Name="FK_ThietBiXeMay_DonVi">
+          <End Type="namlao206_websiteModel.DM_DonVis" Role="DM_DonVis" Multiplicity="1" />
+          <End Type="namlao206_websiteModel.ThietBiXeMay" Role="ThietBiXeMay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_DonVis">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ThietBiXeMay">
+              <PropertyRef Name="DonVi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ThietBiXeMay_NguoiSuDung">
+          <End Type="namlao206_websiteModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="namlao206_websiteModel.ThietBiXeMay" Role="ThietBiXeMay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ThietBiXeMay">
+              <PropertyRef Name="NguoiSuDung_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HoSoPhapLys_ThietBis">
+          <End Type="namlao206_websiteModel.ThietBiXeMay" Role="ThietBiXeMay" Multiplicity="0..1" />
+          <End Type="namlao206_websiteModel.HoSoPhapLy" Role="HoSoPhapLy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ThietBiXeMay">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HoSoPhapLy">
+              <PropertyRef Name="ThietBi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5734,6 +5884,7 @@
           <EntitySetMapping Name="HoSoPhapLys">
             <EntityTypeMapping TypeName="namlao206_websiteModel.HoSoPhapLy">
               <MappingFragment StoreEntitySet="HoSoPhapLys">
+                <ScalarProperty Name="ThietBi_Id" ColumnName="ThietBi_Id" />
                 <ScalarProperty Name="NhapBanMu_Id" ColumnName="NhapBanMu_Id" />
                 <ScalarProperty Name="DonVi_Id" ColumnName="DonVi_Id" />
                 <ScalarProperty Name="Note" ColumnName="Note" />
@@ -6207,6 +6358,29 @@
                 <ScalarProperty Name="ParentId" ColumnName="ParentId" />
                 <ScalarProperty Name="MenuUrl" ColumnName="MenuUrl" />
                 <ScalarProperty Name="MenuName" ColumnName="MenuName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ThietBiXeMays">
+            <EntityTypeMapping TypeName="namlao206_websiteModel.ThietBiXeMay">
+              <MappingFragment StoreEntitySet="ThietBiXeMay">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreateUser_Id" ColumnName="CreateUser_Id" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="HoSoPhapLy_Id" ColumnName="HoSoPhapLy_Id" />
+                <ScalarProperty Name="TinhTrangKyThuat" ColumnName="TinhTrangKyThuat" />
+                <ScalarProperty Name="NguoiSuDung_Id" ColumnName="NguoiSuDung_Id" />
+                <ScalarProperty Name="XuatXu" ColumnName="XuatXu" />
+                <ScalarProperty Name="NamSanXuat" ColumnName="NamSanXuat" />
+                <ScalarProperty Name="SoMay" ColumnName="SoMay" />
+                <ScalarProperty Name="SoKhung" ColumnName="SoKhung" />
+                <ScalarProperty Name="NhanHieu" ColumnName="NhanHieu" />
+                <ScalarProperty Name="BienSo" ColumnName="BienSo" />
+                <ScalarProperty Name="LoaiTrangThietBi" ColumnName="LoaiTrangThietBi" />
+                <ScalarProperty Name="NgayNhap" ColumnName="NgayNhap" />
+                <ScalarProperty Name="DonVi_Id" ColumnName="DonVi_Id" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

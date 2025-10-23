@@ -29,6 +29,7 @@ namespace NamLao206.Models
         public string Note { get; set; }
         public Nullable<int> DonVi_Id { get; set; }
         public Nullable<int> NhapBanMu_Id { get; set; }
+        public Nullable<int> ThietBi_Id { get; set; }
     
         public virtual Account Account { get; set; }
         public virtual Account Account1 { get; set; }
@@ -36,5 +37,6 @@ namespace NamLao206.Models
         public virtual DM_DonVis DM_DonVis { get; set; }
         public virtual DocumentType DocumentType { get; set; }
         public virtual Project Project { get; set; }
+        public virtual ThietBiXeMay ThietBiXeMay { get; set; }
     }
 }

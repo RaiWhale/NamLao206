@@ -168,7 +168,11 @@
         <AssociationConnector Association="namlao206_websiteModel.FK__UserPermi__Group__5A1A5A11" />
         <EntityTypeShape EntityType="namlao206_websiteModel.MenuItem" Width="1.5" PointX="8.375" PointY="6.75" />
         <AssociationConnector Association="namlao206_websiteModel.FK_MenuItem_Parent" />
-      </Diagram>
+        <EntityTypeShape EntityType="namlao206_websiteModel.ThietBiXeMay" Width="1.5" PointX="21.5" PointY="57" />
+        <AssociationConnector Association="namlao206_websiteModel.FK_ThietBiXeMay_DonVi" />
+        <AssociationConnector Association="namlao206_websiteModel.FK_ThietBiXeMay_NguoiSuDung" />
+        <AssociationConnector Association="namlao206_websiteModel.FK_HoSoPhapLys_ThietBis" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

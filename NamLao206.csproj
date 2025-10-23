@@ -464,6 +464,9 @@
     <Compile Include="Models\ThiCong.cs">
       <DependentUpon>namlao206DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ThietBiXeMay.cs">
+      <DependentUpon>namlao206DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Topic.cs">
       <DependentUpon>namlao206DB.tt</DependentUpon>
     </Compile>
