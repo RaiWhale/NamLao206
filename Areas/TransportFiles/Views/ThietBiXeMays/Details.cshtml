@@ -1,0 +1,146 @@
+﻿@model NamLao206.Models.ThietBiXeMay
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ThietBiXeMay</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayNhap)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayNhap)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LoaiTrangThietBi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoaiTrangThietBi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BienSo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BienSo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NhanHieu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NhanHieu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoKhung)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoKhung)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoMay)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoMay)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NamSanXuat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NamSanXuat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.XuatXu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.XuatXu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TinhTrangKyThuat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TinhTrangKyThuat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HoSoPhapLy_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HoSoPhapLy_Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GhiChu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GhiChu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateUser_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateUser_Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsActive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DM_DonVis.TenDonVi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DM_DonVis.TenDonVi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Employee.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Employee.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

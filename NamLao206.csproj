@@ -284,6 +284,7 @@
     <Compile Include="Areas\TransportFiles\Controllers\ProjectsController.cs" />
     <Compile Include="Areas\TransportFiles\Controllers\SuppliersController.cs" />
     <Compile Include="Areas\TransportFiles\Controllers\ThiCongsController.cs" />
+    <Compile Include="Areas\TransportFiles\Controllers\ThietBiXeMaysController.cs" />
     <Compile Include="Areas\TransportFiles\Controllers\TransportFilesController.cs" />
     <Compile Include="Areas\TransportFiles\TransportFilesAreaRegistration.cs" />
     <Compile Include="Controllers\API\ApiController.cs" />
@@ -2867,6 +2868,11 @@
     <Content Include="Areas\Admin\Views\Permissions\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Permissions\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Permissions\Index.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\ThietBiXeMays\Create.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\ThietBiXeMays\Delete.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\ThietBiXeMays\Details.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\ThietBiXeMays\Edit.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\ThietBiXeMays\Index.cshtml" />
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.1.js" />
     <Content Include="Scripts\jquery-3.7.1.min.js" />
