@@ -1,21 +1,23 @@
-﻿using System;
+﻿using NamLao206.Models;
+using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Drawing.Printing;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using NamLao206.Models;
 
 namespace NamLao206.Areas.Admin.Controllers
 {
-    public class PermissionsController : Controller
+    public class MenuItemsController : Controller
     {
         private namlao206_websiteEntities db = new namlao206_websiteEntities();
         int pageSize = 10;
-        // GET: Admin/Permissions
+        // GET: Admin/MenuItems
         public async Task<ActionResult> Index(int? page, string search, string message)
         {
             // 1. Kiểm tra xác thực người dùng
@@ -24,40 +26,40 @@ namespace NamLao206.Areas.Admin.Controllers
                 ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
                 return RedirectToAction("Login", "Account");
             }
-            IQueryable<Permission> permissions = db.Permissions;
-          
+            IQueryable<MenuItem> menuItems = db.MenuItems
+                  .Include(d => d.DM_DonVis);
             if (!string.IsNullOrEmpty(message))
             {
                 ViewBag.Message = message;
             }
             if (!string.IsNullOrEmpty(search))
             {
-                permissions = permissions.Where(c => c.PermissionName.ToLower().Contains(search.Trim().ToLower()));
+                menuItems = menuItems.Where(c => c.MenuName.ToLower().Contains(search.Trim().ToLower()));
             }
-            permissions = permissions.OrderByDescending(c => c.CreatedDate);
+            menuItems = menuItems.OrderByDescending(c => c.CreatedDate);
             //Paging		     
             //int pageNumber = page ?? 1;
             ViewBag.Title = "Menu phân quyền -";
             ViewBag.search = search;
-            return View(await permissions.ToListAsync());
+            return View(await menuItems.ToListAsync());
         }
 
-        // GET: Admin/Permissions/Details/5
+        // GET: Admin/MenuItems/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Permission permission = await db.Permissions.FindAsync(id);
-            if (permission == null)
+            MenuItem menuItem = await db.MenuItems.FindAsync(id);
+            if (menuItem == null)
             {
                 return HttpNotFound();
             }
-            return View(permission);
+            return View(menuItem);
         }
 
-        // GET: Admin/Permissions/Create
+        // GET: Admin/MenuItems/Create
         public ActionResult Create()
         {
             // 1. Kiểm tra xác thực người dùng
@@ -66,21 +68,22 @@ namespace NamLao206.Areas.Admin.Controllers
                 ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
                 return RedirectToAction("Login", "Account");
             }
+            ViewBag.ParentId = new SelectList(db.MenuItems.Where(x => x.IsActive == true), "Id", "MenuName");
+            ViewBag.Departments = new SelectList(db.DM_DonVis.Where(x => x.IsActive == true), "Id", "TenDonVi");
             return PartialView();
         }
 
-        // POST: Admin/Permissions/Create
+        // POST: Admin/MenuItems/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,PermissionName,PermissionCode,Description,Module")] Permission permission)
+        public async Task<ActionResult> Create([Bind(Include = "Id,MenuName,MenuUrl,ParentId,IconClass,PermissionCode,DisplayOrder,DepartmentId")] MenuItem menuItem)
         {
-            // 1. Kiểm tra xác thực người dùng
             if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
             {
                 ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction("Login", "Login", new { area = "" });
             }
             if (ModelState.IsValid)
             {
@@ -93,10 +96,9 @@ namespace NamLao206.Areas.Admin.Controllers
                     ViewBag.Message = "Tài khoản không tồn tại hoặc không liên kết với nhân viên.";
                     return RedirectToAction("Login", "Login", new { area = "" });
                 }
-                permission.IsActive = true;
-                permission.CreatedDate = DateTime.Now;
-                permission.CreatedBy = acc.EmployeeId;
-                db.Permissions.Add(permission);
+                menuItem.CreatedDate = DateTime.Now;
+                menuItem.IsActive = true;
+                db.MenuItems.Add(menuItem);
                 await db.SaveChangesAsync();
                 ViewBag.Message = "Thêm mới thành công!";
                 return RedirectToAction("Index", new { message = ViewBag.Message });
@@ -106,9 +108,10 @@ namespace NamLao206.Areas.Admin.Controllers
             return RedirectToAction("Index", new { message = ViewBag.Message });
         }
 
-        // GET: Admin/Permissions/Edit/5
+        // GET: Admin/MenuItems/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
+            
             if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
             {
                 ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
@@ -118,20 +121,22 @@ namespace NamLao206.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Permission permission = await db.Permissions.FindAsync(id);
-            if (permission == null)
+            MenuItem menuItem = await db.MenuItems.FindAsync(id);
+            if (menuItem == null)
             {
                 return HttpNotFound();
             }
-            return PartialView(permission);
+            ViewBag.ParentId = new SelectList(db.MenuItems.Where(x => x.IsActive == true), "Id", "MenuName", menuItem.IsActive);
+            ViewBag.DepartmentId = new SelectList(db.DM_DonVis.Where(x => x.IsActive == true), "Id", "TenDonVi", menuItem.DepartmentId);
+            return PartialView(menuItem);
         }
 
-        // POST: Admin/Permissions/Edit/5
+        // POST: Admin/MenuItems/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,PermissionName,PermissionCode,Description,Module,IsActive")] Permission permission)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,MenuName,MenuUrl,ParentId,IconClass,PermissionCode,DisplayOrder,IsActive,DepartmentId")] MenuItem menuItem)
         {
             if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
             {
@@ -149,7 +154,8 @@ namespace NamLao206.Areas.Admin.Controllers
                     ViewBag.Message = "Tài khoản không tồn tại hoặc không liên kết với nhân viên.";
                     return RedirectToAction("Login", "Login", new { area = "" });
                 }
-                db.Entry(permission).State = EntityState.Modified;
+                // Gán thông tin người sửa
+                db.Entry(menuItem).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 ViewBag.Message = "Sửa thành công!";
                 return RedirectToAction("Index", new { message = ViewBag.Message });
@@ -158,7 +164,7 @@ namespace NamLao206.Areas.Admin.Controllers
             return RedirectToAction("Index", new { message = ViewBag.Message });
         }
 
-        // GET: Admin/Permissions/Delete/5
+        // GET: Admin/MenuItems/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
@@ -170,15 +176,15 @@ namespace NamLao206.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Permission permission = await db.Permissions.FindAsync(id);
-            if (permission == null)
+            MenuItem menuItem = await db.MenuItems.FindAsync(id);
+            if (menuItem == null)
             {
                 return HttpNotFound();
             }
-            return PartialView(permission);
+            return PartialView(menuItem);
         }
 
-        // POST: Admin/Permissions/Delete/5
+        // POST: Admin/MenuItems/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
@@ -188,8 +194,8 @@ namespace NamLao206.Areas.Admin.Controllers
                 ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
                 return RedirectToAction("Login", "Login", new { area = "" });
             }
-            Permission permission = await db.Permissions.FindAsync(id);
-            permission.IsActive = false;
+            MenuItem menuItem = await db.MenuItems.FindAsync(id);
+            menuItem.IsActive = false;
             await db.SaveChangesAsync();
             ViewBag.Message = "Xóa thành công!";
             return RedirectToAction("Index", new { message = ViewBag.Message });

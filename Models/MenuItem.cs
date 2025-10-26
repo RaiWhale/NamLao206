@@ -34,5 +34,6 @@ namespace NamLao206.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MenuItem> MenuItems1 { get; set; }
         public virtual MenuItem MenuItem1 { get; set; }
+        public virtual DM_DonVis DM_DonVis { get; set; }
     }
 }

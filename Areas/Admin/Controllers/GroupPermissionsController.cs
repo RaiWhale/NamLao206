@@ -14,12 +14,32 @@ namespace NamLao206.Areas.Admin.Controllers
     public class GroupPermissionsController : Controller
     {
         private namlao206_websiteEntities db = new namlao206_websiteEntities();
-
+        int pageSize = 10;
         // GET: Admin/GroupPermissions
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int? page, string search, string message)
         {
-            var groupPermissions = db.GroupPermissions.Include(g => g.PermissionGroup).Include(g => g.Permission);
-            return View(await groupPermissions.ToListAsync());
+            // 1. Kiểm tra xác thực người dùng
+            if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
+            {
+                ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
+                return RedirectToAction("Login", "Account");
+            }
+            IQueryable<GroupPermission> groupPermissions = db.GroupPermissions.Include(g => g.PermissionGroup).Include(g => g.Permission);
+
+            if (!string.IsNullOrEmpty(message))
+            {
+                ViewBag.Message = message;
+            }
+            if (!string.IsNullOrEmpty(search))
+            {
+                groupPermissions = groupPermissions.Where(c => c.PermissionGroup.GroupName.ToLower().Contains(search.Trim().ToLower()));
+            }
+            groupPermissions = groupPermissions.OrderByDescending(c => c.CreatedDate);
+            //Paging		     
+            //int pageNumber = page ?? 1;
+            ViewBag.Title = "Menu phân quyền -";
+            ViewBag.search = search;
+            return View(await groupPermissions.ToListAsync());                 
         }
 
         // GET: Admin/GroupPermissions/Details/5

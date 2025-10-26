@@ -1,8 +1,9 @@
-﻿@model IEnumerable<NamLao206.Models.Permission>
+﻿@model IEnumerable<NamLao206.Models.MenuItem>
 
 @{
-    ViewBag.Title = "Quyền";
+
 }
+
 @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
@@ -57,27 +58,27 @@
                                         <thead class="bg-warning-200 text-center">
                                             <tr>
                                                 <th>
-                                                    @Html.DisplayNameFor(model => model.PermissionName)
+                                                    Tên Menu
+                                                </th>
+                                                <th>
+                                                    Đường dẫn Menu
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.IconClass)
                                                 </th>
                                                 <th>
                                                     @Html.DisplayNameFor(model => model.PermissionCode)
                                                 </th>
                                                 <th>
-                                                    @Html.DisplayNameFor(model => model.Description)
+                                                    Thể hiện thứ tự
                                                 </th>
                                                 <th>
-                                                    @Html.DisplayNameFor(model => model.Module)
+                                                    Trạng thái
                                                 </th>
                                                 <th>
-                                                    @Html.DisplayNameFor(model => model.IsActive)
-                                                </th>
-                                                <th>
-                                                    @Html.DisplayNameFor(model => model.CreatedDate)
-                                                </th>
-                                                <th>
-                                                    @Html.DisplayNameFor(model => model.CreatedBy)
-                                                </th>
-
+                                                    Tên Đơn Vị
+                                                </th>                                              
+                                           
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -86,26 +87,27 @@
                                             {
                                                 <tr>
                                                     <td>
-                                                        @Html.DisplayFor(modelItem => item.PermissionName)
+                                                        @Html.DisplayFor(modelItem => item.MenuName)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.MenuUrl)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.IconClass)
                                                     </td>
                                                     <td>
                                                         @Html.DisplayFor(modelItem => item.PermissionCode)
                                                     </td>
                                                     <td>
-                                                        @Html.DisplayFor(modelItem => item.Description)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.Module)
+                                                        @Html.DisplayFor(modelItem => item.DisplayOrder)
                                                     </td>
                                                     <td>
                                                         @Html.DisplayFor(modelItem => item.IsActive)
                                                     </td>
                                                     <td>
-                                                        @Html.DisplayFor(modelItem => item.CreatedDate)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.CreatedBy)
-                                                    </td>
+                                                        @Html.DisplayFor(modelItem => item.DM_DonVis.TenDonVi)
+                                                    </td>                                    
+                                                
                                                     <td>
                                                         <div class="d-flex align-items-center list-action">
                                                             <a class="badge bg-success mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sửa"
@@ -127,3 +129,4 @@
         </div>
     </div>
 }
+

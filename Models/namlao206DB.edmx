@@ -1744,6 +1744,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_MenuItems_Donvis">
+          <End Role="DM_DonVis" Type="Self.DM_DonVis" Multiplicity="0..1" />
+          <End Role="MenuItems" Type="Self.MenuItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_DonVis">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MenuItems">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_News_NewsPictures">
           <End Role="News" Type="Self.News" Multiplicity="1" />
           <End Role="News1" Type="Self.News" Multiplicity="0..1" />
@@ -2507,6 +2519,10 @@
             <End Role="MenuItems" EntitySet="MenuItems" />
             <End Role="MenuItems1" EntitySet="MenuItems" />
           </AssociationSet>
+          <AssociationSet Name="FK_MenuItems_Donvis" Association="Self.FK_MenuItems_Donvis">
+            <End Role="DM_DonVis" EntitySet="DM_DonVis" />
+            <End Role="MenuItems" EntitySet="MenuItems" />
+          </AssociationSet>
           <AssociationSet Name="FK_News_NewsPictures" Association="Self.FK_News_NewsPictures">
             <End Role="News" EntitySet="News" />
             <End Role="News1" EntitySet="News" />
@@ -3147,6 +3163,10 @@
             <End Role="ThietBiXeMay" EntitySet="ThietBiXeMays" />
             <End Role="HoSoPhapLy" EntitySet="HoSoPhapLys" />
           </AssociationSet>
+          <AssociationSet Name="FK_MenuItems_Donvis" Association="namlao206_websiteModel.FK_MenuItems_Donvis">
+            <End Role="DM_DonVis" EntitySet="DM_DonVis" />
+            <End Role="MenuItem" EntitySet="MenuItems" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="sp_GetDataForDashBoard_Result">
           <Property Type="String" Name="Titles" Nullable="false" MaxLength="24" />
@@ -3396,6 +3416,7 @@
           <NavigationProperty Name="Suppliers" Relationship="namlao206_websiteModel.FK_Suppliers_Donvis" FromRole="DM_DonVis" ToRole="Supplier" />
           <NavigationProperty Name="Teams" Relationship="namlao206_websiteModel.FK_Teams_Donvis" FromRole="DM_DonVis" ToRole="Team" />
           <NavigationProperty Name="ThietBiXeMays" Relationship="namlao206_websiteModel.FK_ThietBiXeMay_DonVi" FromRole="DM_DonVis" ToRole="ThietBiXeMay" />
+          <NavigationProperty Name="MenuItems" Relationship="namlao206_websiteModel.FK_MenuItems_Donvis" FromRole="DM_DonVis" ToRole="MenuItem" />
         </EntityType>
         <EntityType Name="DM_hinhthuckinhdoanh">
           <Key>
@@ -5437,6 +5458,7 @@
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="MenuItems1" Relationship="namlao206_websiteModel.FK_MenuItem_Parent" FromRole="MenuItem" ToRole="MenuItem1" />
           <NavigationProperty Name="MenuItem1" Relationship="namlao206_websiteModel.FK_MenuItem_Parent" FromRole="MenuItem1" ToRole="MenuItem" />
+          <NavigationProperty Name="DM_DonVis" Relationship="namlao206_websiteModel.FK_MenuItems_Donvis" FromRole="MenuItem" ToRole="DM_DonVis" />
         </EntityType>
         <Association Name="FK_MenuItem_Parent">
           <End Type="namlao206_websiteModel.MenuItem" Role="MenuItem" Multiplicity="0..1" />
@@ -5508,6 +5530,18 @@
             </Principal>
             <Dependent Role="HoSoPhapLy">
               <PropertyRef Name="ThietBi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuItems_Donvis">
+          <End Type="namlao206_websiteModel.DM_DonVis" Role="DM_DonVis" Multiplicity="0..1" />
+          <End Type="namlao206_websiteModel.MenuItem" Role="MenuItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_DonVis">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MenuItem">
+              <PropertyRef Name="DepartmentId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

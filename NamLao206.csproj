@@ -245,6 +245,7 @@
     <Compile Include="Areas\Admin\Controllers\SubMenusController.cs" />
     <Compile Include="Areas\Admin\Controllers\TopicsController.cs" />
     <Compile Include="Areas\Admin\Controllers\UnitsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MenuItemsController.cs" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
     <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
     <Compile Include="Areas\HelpPage\Controllers\HelpController.cs" />
@@ -2873,6 +2874,11 @@
     <Content Include="Areas\TransportFiles\Views\ThietBiXeMays\Details.cshtml" />
     <Content Include="Areas\TransportFiles\Views\ThietBiXeMays\Edit.cshtml" />
     <Content Include="Areas\TransportFiles\Views\ThietBiXeMays\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\MenuItems\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\MenuItems\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\MenuItems\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\MenuItems\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\MenuItems\Index.cshtml" />
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.1.js" />
     <Content Include="Scripts\jquery-3.7.1.min.js" />

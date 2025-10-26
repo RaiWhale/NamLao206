@@ -12,7 +12,7 @@
         else
         {
             // Gọi hàm Logout()
-            Response.Redirect(Url.Action("Logout", "Account"));
+            Response.Redirect(Url.Action("Logout", "Login", new { area = "" }));
         }
     }
 }
@@ -134,8 +134,8 @@
     <div class="page-wrapper">
 
         <div class="page-inner">
-            <aside class="page-sidebar">
-                <div class="">
+            <aside class="page-sidebar" style="background-image: url(/Content/smartadmin/img/backgrounds/banner_darkboad2.png);">
+                <div class="" style="background-image: url(/Content/smartadmin/img/backgrounds/banner_darkboad2.png);">
                     <a href="/Home/TrangChu" class="header-logo text-center">
                         <img src="~/Content/AdminBinhLT/assets/images/login/logongangcongty.png" class="img-fluid rounded-normal" alt="logo">
                     </a>
@@ -158,11 +158,11 @@
                     </div>
                     <ul id="js-nav-menu" class="nav-menu">
                         @*<li class="active open">
-                                <a href="/Admin/Dashboard" title="Application Intel" data-filter-tags="Dashboard">
-                                    <i class="fal fa-info-cirDefaultcle"></i>
-                                    <span class="nav-link-text" data-i18n="nav.application_intel">Dashboard</span>
-                                </a>
-                            </li>*@
+                        <a href="/Admin/Dashboard" title="Application Intel" data-filter-tags="Dashboard">
+                            <i class="fal fa-info-cirDefaultcle"></i>
+                            <span class="nav-link-text" data-i18n="nav.application_intel">Dashboard</span>
+                        </a>
+                    </li>*@
                         <li class="active open">
                             <a href="#" title="Theme Settings" data-filter-tags="Cập nhật trang chủ">
                                 <i class="ni ni-envelope"></i>
@@ -184,33 +184,33 @@
                 <!-- END PRIMARY NAVIGATION -->
                 <!-- NAV FOOTER -->
                 @*<div class="nav-footer shadow-top">
-                        <a href="#" onclick="return false;" data-action="toggle" data-class="nav-function-minify" class="hidden-md-down">
-                            <i class="ni ni-chevron-right"></i>
-                            <i class="ni ni-chevron-right"></i>
+                <a href="#" onclick="return false;" data-action="toggle" data-class="nav-function-minify" class="hidden-md-down">
+                    <i class="ni ni-chevron-right"></i>
+                    <i class="ni ni-chevron-right"></i>
+                </a>
+                <ul class="list-table m-auto nav-footer-buttons">
+                    <li>
+                        <a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Chat logs">
+                            <i class="fal fa-comments"></i>
                         </a>
-                        <ul class="list-table m-auto nav-footer-buttons">
-                            <li>
-                                <a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Chat logs">
-                                    <i class="fal fa-comments"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Support Chat">
-                                    <i class="fal fa-life-ring"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Make a call">
-                                    <i class="fal fa-phone"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>*@
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Support Chat">
+                            <i class="fal fa-life-ring"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Make a call">
+                            <i class="fal fa-phone"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>*@
                 <!-- END NAV FOOTER -->
             </aside>
             <div class="page-content-wrapper">
                 <!-- BEGIN Page Header -->
-                <header class="page-header" role="banner">
+                <header class="page-header" role="banner" style="background-image: url(/Content/smartadmin/img/backgrounds/banner_darkboad1.png);">
                     <!-- we need this logo when user switches to nav-function-top -->
                     <div class="page-logo">
                         <a href="#" class="page-logo-link press-scale-down d-flex align-items-center position-relative" data-toggle="modal" data-target="#modal-shortcut">
@@ -245,13 +245,13 @@
                         </a>
                     </div>
                     @*<div class="search">
-                            <form class="app-forms hidden-xs-down" role="search" action="page_search.html" autocomplete="off">
-                                <input type="text" id="search-field" placeholder="Search for anything" class="form-control" tabindex="1">
-                                <a href="#" onclick="return false;" class="btn-danger btn-search-close js-waves-off d-none" data-action="toggle" data-class="mobile-search-on">
-                                    <i class="fal fa-times"></i>
-                                </a>
-                            </form>
-                        </div>*@
+                    <form class="app-forms hidden-xs-down" role="search" action="page_search.html" autocomplete="off">
+                        <input type="text" id="search-field" placeholder="Search for anything" class="form-control" tabindex="1">
+                        <a href="#" onclick="return false;" class="btn-danger btn-search-close js-waves-off d-none" data-action="toggle" data-class="mobile-search-on">
+                            <i class="fal fa-times"></i>
+                        </a>
+                    </form>
+                </div>*@
                     <div class="ml-auto d-flex">
                         <!-- activate app search icon (mobile) -->
                         <div class="hidden-sm-up">
@@ -302,24 +302,24 @@
                                             <a class="nav-link px-4 fs-md js-waves-on fw-500" data-toggle="tab" href="#tab-messages" data-i18n="drpdwn.messages">Thư</a>
                                         </li>
                                         @*<li class="nav-item">
-                                                <a class="nav-link px-4 fs-md js-waves-on fw-500" data-toggle="tab" href="#tab-feeds" data-i18n="drpdwn.feeds">Feeds</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link px-4 fs-md js-waves-on fw-500" data-toggle="tab" href="#tab-events" data-i18n="drpdwn.events">Events</a>
-                                            </li>*@
+                                        <a class="nav-link px-4 fs-md js-waves-on fw-500" data-toggle="tab" href="#tab-feeds" data-i18n="drpdwn.feeds">Feeds</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link px-4 fs-md js-waves-on fw-500" data-toggle="tab" href="#tab-events" data-i18n="drpdwn.events">Events</a>
+                                    </li>*@
                                     </ul>
                                     <div class="tab-content tab-notification">
                                         @*<div class="tab-pane active p-3 text-center">
-                                                <h5 class="mt-4 pt-4 fw-500">
-                                                    <span class="d-block fa-3x pb-4 text-muted">
-                                                        <i class="ni ni-arrow-up text-gradient opacity-70"></i>
-                                                    </span> Select a tab above to activate
-                                                    <small class="mt-3 fs-b fw-400 text-muted">
-                                                        This blank page message helps protect your privacy, or you can show the first message here automatically through
-                                                        <a href="#">settings page</a>
-                                                    </small>
-                                                </h5>
-                                            </div>*@
+                                        <h5 class="mt-4 pt-4 fw-500">
+                                            <span class="d-block fa-3x pb-4 text-muted">
+                                                <i class="ni ni-arrow-up text-gradient opacity-70"></i>
+                                            </span> Select a tab above to activate
+                                            <small class="mt-3 fs-b fw-400 text-muted">
+                                                This blank page message helps protect your privacy, or you can show the first message here automatically through
+                                                <a href="#">settings page</a>
+                                            </small>
+                                        </h5>
+                                    </div>*@
                                         <div class="tab-pane active" id="tab-messages" role="tabpanel">
                                             <div class="custom-scroll h-100">
                                                 <ul class="notification">

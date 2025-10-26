@@ -172,6 +172,7 @@
         <AssociationConnector Association="namlao206_websiteModel.FK_ThietBiXeMay_DonVi" />
         <AssociationConnector Association="namlao206_websiteModel.FK_ThietBiXeMay_NguoiSuDung" />
         <AssociationConnector Association="namlao206_websiteModel.FK_HoSoPhapLys_ThietBis" />
+        <AssociationConnector Association="namlao206_websiteModel.FK_MenuItems_Donvis" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

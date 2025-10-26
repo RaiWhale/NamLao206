@@ -1,0 +1,90 @@
+﻿@model NamLao206.Models.MenuItem
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MenuItem</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MenuName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MenuName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MenuUrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MenuUrl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IconClass)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IconClass)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PermissionCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PermissionCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DisplayOrder)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DisplayOrder)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsActive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DepartmentId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DepartmentId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MenuItem1.MenuName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MenuItem1.MenuName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
