@@ -38,7 +38,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
         }
 
         // GET: TransportFiles/ThiCongs/Create
-        public ActionResult Create(int? projectID)
+        public ActionResult CreateBomMin(int? projectID)
         {
             // 1. Kiểm tra xác thực người dùng
             if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
@@ -59,7 +59,27 @@ namespace NamLao206.Areas.TransportFiles.Controllers
             ViewBag.UnitId = new SelectList(db.Units, "Id", "UnitName");
             return PartialView();
         }
-
+        public ActionResult CreateCumBan(int? projectID)
+        {
+            // 1. Kiểm tra xác thực người dùng
+            if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
+            {
+                ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
+                return RedirectToAction("Login", "Login", new { area = "" });
+            }
+            else if (projectID == null)
+            {
+                ViewBag.Message = "Không tìm thấy dự án ID!";
+                return RedirectToAction("Index", new { message = ViewBag.Message });
+            }
+            var project = db.Projects.Find(projectID);
+            ViewBag.ContractID = new SelectList(db.DocumentTypes, "Id", "DocumentTypeName");
+            ViewBag.DonViThiCongId = new SelectList(db.Suppliers.Where(x => x.DonviId == project.DonViId), "Id", "SupplierName");
+            ViewBag.ProjectID = new SelectList(db.Projects.Where(x => x.Id == projectID), "Id", "TenDuAn");
+            ViewBag.TinhTrangDuAn = new SelectList(db.StatusProjects, "Id", "StatusName");
+            ViewBag.UnitId = new SelectList(db.Units, "Id", "UnitName");
+            return PartialView();
+        }
         // POST: TransportFiles/ThiCongs/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -101,7 +121,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
         }
 
         // GET: TransportFiles/ThiCongs/Edit/5
-        public async Task<ActionResult> Edit(int? id)
+        public async Task<ActionResult> EditBomMin(int? id)
         {
             // 1. Kiểm tra xác thực người dùng
             if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
@@ -125,7 +145,30 @@ namespace NamLao206.Areas.TransportFiles.Controllers
             ViewBag.UnitId = new SelectList(db.Units, "Id", "UnitName", thiCong.UnitId);
             return PartialView(thiCong);
         }
-
+        public async Task<ActionResult> EditCumBan(int? id)
+        {
+            // 1. Kiểm tra xác thực người dùng
+            if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
+            {
+                ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
+                return RedirectToAction("Login", "Login", new { area = "" });
+            }
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ThiCong thiCong = await db.ThiCongs.FindAsync(id);
+            if (thiCong == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.ContractID = new SelectList(db.DocumentTypes, "Id", "DocumentTypeName", thiCong.ContractID);
+            ViewBag.DonViThiCongId = new SelectList(db.Suppliers.Where(x => x.DonviId == thiCong.Project.DonViId), thiCong.DonViThiCongId);
+            ViewBag.ProjectID = new SelectList(db.Projects.Where(x => x.Id == thiCong.ProjectID), "Id", "TenDuAn", thiCong.ProjectID);
+            ViewBag.TinhTrangDuAn = new SelectList(db.StatusProjects, "Id", "StatusName", thiCong.TinhTrangDuAn);
+            ViewBag.UnitId = new SelectList(db.Units, "Id", "UnitName", thiCong.UnitId);
+            return PartialView(thiCong);
+        }
         // POST: TransportFiles/ThiCongs/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.

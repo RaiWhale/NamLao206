@@ -19,6 +19,7 @@ namespace NamLao206.Areas.Admin.Controllers
     public class NewsController : Controller
     {
         private namlao206_websiteEntities db = new namlao206_websiteEntities();
+        private static string UploadPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Uploads", "News");
         int pageSize = 10;
         // GET: Admin/News
         public ActionResult Index(int? page, string search, string message)
@@ -116,13 +117,12 @@ namespace NamLao206.Areas.Admin.Controllers
 					string filename = "";
 					if (pic != null && pic.ContentLength > 0)
 					{
-						filename = $"{DateTime.Now.Ticks}_{pic.FileName.Split('/').Last()}";
-						string path = Server.MapPath("~/Content/Uploads/News");
-						if (!Directory.Exists(path))
+						filename = $"{DateTime.Now.Ticks}_{pic.FileName.Split('/').Last()}";		
+						if (!Directory.Exists(UploadPath))
 						{
-							Directory.CreateDirectory(path);
+							Directory.CreateDirectory(UploadPath);
 						}
-						pic.SaveAs(Path.Combine(path, filename));
+						pic.SaveAs(Path.Combine(UploadPath, filename));
 
 					}				
 					news.TitleChange = MySecurity.RemoveDiacritics(news.Title);			
@@ -196,17 +196,16 @@ namespace NamLao206.Areas.Admin.Controllers
 					if (pic != null && pic.ContentLength > 0)
 					{
 						filename = $"{DateTime.Now.Ticks}_{pic.FileName.Split('/').Last()}";
-						string path = Server.MapPath("~/Content/Uploads/News");
-						if (!Directory.Exists(path))
+						if (!Directory.Exists(UploadPath))
 						{
-							Directory.CreateDirectory(path);
+							Directory.CreateDirectory(UploadPath);
 						}
-						pic.SaveAs(Path.Combine(path, filename));
+						pic.SaveAs(Path.Combine(UploadPath, filename));
 
 						// Xóa ảnh cũ nếu có
 						if (!string.IsNullOrEmpty(news.Picture))
 						{
-							string oldPicturePath = Path.Combine(Server.MapPath("~/Content/Uploads/News"), news.Picture);
+							string oldPicturePath = Path.Combine(UploadPath, news.Picture);
 							if (System.IO.File.Exists(oldPicturePath))
 							{
 								System.IO.File.Delete(oldPicturePath);
@@ -276,7 +275,7 @@ namespace NamLao206.Areas.Admin.Controllers
 			// Xóa ảnh cũ nếu có
 			if (!string.IsNullOrEmpty(news.Picture))
 			{
-				string oldPicturePath = Path.Combine(Server.MapPath("~/Content/Uploads/News"), news.Picture);
+				string oldPicturePath = Path.Combine(UploadPath, news.Picture);
 				if (System.IO.File.Exists(oldPicturePath))
 				{
 					System.IO.File.Delete(oldPicturePath);

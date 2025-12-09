@@ -45,7 +45,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
         }
 
         // GET: TransportFiles/NghiemThus/Create
-        public ActionResult Create(int? projectID)
+        public ActionResult CreateBomMin(int? projectID)
         {
 			if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
 			{
@@ -55,10 +55,22 @@ namespace NamLao206.Areas.TransportFiles.Controllers
           
             ViewBag.ProjectID = new SelectList(db.Projects.Where(x => x.Id == projectID), "Id", "TenDuAn");                   
             ViewBag.PhaseId = new SelectList(db.Phases, "Id", "PhaseName");
-            ViewBag.UnitId = new SelectList(db.Units, "Id", "UnitName");
+            ViewBag.UnitId = new SelectList(db.Units.Where(x => x.PhanLoai == "1"), "Id", "UnitName");
             return PartialView();
         }
+        public ActionResult CreateCumBan(int? projectID)
+        {
+            if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
+            {
+                ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
+                return RedirectToAction("Login", "Login", new { area = "" });
+            }
 
+            ViewBag.ProjectID = new SelectList(db.Projects.Where(x => x.Id == projectID), "Id", "TenDuAn");
+            ViewBag.PhaseId = new SelectList(db.Phases, "Id", "PhaseName");
+            ViewBag.UnitId = new SelectList(db.Units.Where(x => x.PhanLoai == "1"), "Id", "UnitName");
+            return PartialView();
+        }
         // POST: TransportFiles/NghiemThus/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -99,7 +111,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
         }
 
         // GET: TransportFiles/NghiemThus/Edit/5
-        public async Task<ActionResult> Edit(int? id)
+        public async Task<ActionResult> EditBomMin(int? id)
         {
 			if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
 			{
@@ -117,10 +129,30 @@ namespace NamLao206.Areas.TransportFiles.Controllers
             }	
 			ViewBag.ProjectID = new SelectList(db.Projects, "Id", "TenDuAn", nghiemThu.ProjectID);
             ViewBag.PhaseId = new SelectList(db.Phases, "Id", "PhaseName", nghiemThu.PhaseId);
-            ViewBag.UnitId = new SelectList(db.Units, "Id", "UnitName", nghiemThu.UnitId);
+            ViewBag.UnitId = new SelectList(db.Units.Where(x => x.PhanLoai == "1"), "Id", "UnitName", nghiemThu.UnitId);
             return PartialView(nghiemThu);
         }
-
+        public async Task<ActionResult> EditCumBan(int? id)
+        {
+            if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
+            {
+                ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
+                return RedirectToAction("Login", "Login", new { area = "" });
+            }
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            NghiemThu nghiemThu = await db.NghiemThus.FindAsync(id);
+            if (nghiemThu == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.ProjectID = new SelectList(db.Projects, "Id", "TenDuAn", nghiemThu.ProjectID);
+            ViewBag.PhaseId = new SelectList(db.Phases, "Id", "PhaseName", nghiemThu.PhaseId);
+            ViewBag.UnitId = new SelectList(db.Units.Where(x => x.PhanLoai == "1"), "Id", "UnitName", nghiemThu.UnitId);
+            return PartialView(nghiemThu);
+        }
         // POST: TransportFiles/NghiemThus/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.

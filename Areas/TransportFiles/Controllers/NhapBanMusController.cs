@@ -188,7 +188,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "Id,TenPhieu,Team_Id,LoaiMu" +
             ",NgayNhap,NguoiPheDuyet_EMP_Id,TroLyKeHoach_EMP_Id,KhoiLuongThuVao,KhoiLuongTTTC,KhoiLuongThuVaoLast,KhoiLuongTTTCLast" +
-            ",LoaiTK,DonGia,Note,SoDienThoai,KeToan_EMP_Id,KhoiLuongTTL,DanhGiaCLMu,DoiTac_Id,DonViTienTe_Id,NguoiCan_EMP_Id,TinhTrang")] NhapBanMu nhapBanMu)
+            ",LoaiHs,LoaiTK,DonGia,Note,SoDienThoai,KeToan_EMP_Id,KhoiLuongTTL,DanhGiaCLMu,DoiTac_Id,DonViTienTe_Id,NguoiCan_EMP_Id,TinhTrang")] NhapBanMu nhapBanMu)
         {
             if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
             {

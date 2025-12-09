@@ -52,6 +52,7 @@ namespace NamLao206.Models
         public virtual DbSet<Feedback> Feedbacks { get; set; }
         public virtual DbSet<Gender> Genders { get; set; }
         public virtual DbSet<GiamSatThiCong> GiamSatThiCongs { get; set; }
+        public virtual DbSet<GroupPermission> GroupPermissions { get; set; }
         public virtual DbSet<HoatDongNhanSu> HoatDongNhanSus { get; set; }
         public virtual DbSet<HoSoPhapLy> HoSoPhapLys { get; set; }
         public virtual DbSet<KhaoSat> KhaoSats { get; set; }
@@ -59,11 +60,14 @@ namespace NamLao206.Models
         public virtual DbSet<Level> Levels { get; set; }
         public virtual DbSet<LuuVet> LuuVets { get; set; }
         public virtual DbSet<MaQuocGia> MaQuocGias { get; set; }
+        public virtual DbSet<MenuItem> MenuItems { get; set; }
         public virtual DbSet<Nationality> Nationalities { get; set; }
         public virtual DbSet<News> News { get; set; }
         public virtual DbSet<NewsPicture> NewsPictures { get; set; }
         public virtual DbSet<NghiemThu> NghiemThus { get; set; }
         public virtual DbSet<NhapBanMu> NhapBanMus { get; set; }
+        public virtual DbSet<PermissionGroup> PermissionGroups { get; set; }
+        public virtual DbSet<Permission> Permissions { get; set; }
         public virtual DbSet<Phase> Phases { get; set; }
         public virtual DbSet<Picture> Pictures { get; set; }
         public virtual DbSet<Project> Projects { get; set; }
@@ -72,17 +76,13 @@ namespace NamLao206.Models
         public virtual DbSet<Supplier> Suppliers { get; set; }
         public virtual DbSet<Team> Teams { get; set; }
         public virtual DbSet<ThiCong> ThiCongs { get; set; }
+        public virtual DbSet<ThietBiXeMay> ThietBiXeMays { get; set; }
         public virtual DbSet<Topic> Topics { get; set; }
         public virtual DbSet<TransportFile> TransportFiles { get; set; }
         public virtual DbSet<TransportFileUrl> TransportFileUrls { get; set; }
         public virtual DbSet<Transport> Transports { get; set; }
         public virtual DbSet<Unit> Units { get; set; }
-        public virtual DbSet<GroupPermission> GroupPermissions { get; set; }
         public virtual DbSet<UserPermissionGroup> UserPermissionGroups { get; set; }
-        public virtual DbSet<PermissionGroup> PermissionGroups { get; set; }
-        public virtual DbSet<Permission> Permissions { get; set; }
-        public virtual DbSet<MenuItem> MenuItems { get; set; }
-        public virtual DbSet<ThietBiXeMay> ThietBiXeMays { get; set; }
     
         public virtual ObjectResult<sp_GetDataForDashBoard_Result> sp_GetDataForDashBoard(string action, string fromDate, string toDate, Nullable<int> donvi_id)
         {

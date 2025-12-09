@@ -1,0 +1,51 @@
+﻿@model NamLao206.Models.MenuItem
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="panel-body">
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.CreatedDate)
+            @Html.HiddenFor(model => model.MenuName)
+            @Html.HiddenFor(model => model.PermissionCode)
+            @Html.HiddenFor(model => model.MenuUrl)
+            @Html.HiddenFor(model => model.IconClass)
+            @Html.HiddenFor(model => model.DisplayOrder)
+            @Html.HiddenFor(model => model.IsActive)
+            @Html.HiddenFor(model => model.ParentId)
+            @Html.HiddenFor(model => model.PermissionID)
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-xs-12">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.MenuName, null, htmlAttributes: new { @class = "control-label col-md-6" })
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-xs-12">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PermissionCode, null, htmlAttributes: new { @class = "control-label col-md-6" })
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-xs-12">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Permission.PermissionName, null, htmlAttributes: new { @class = "control-label col-md-6" })
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-9 col-xs-12">
+                    <div class="form-group">
+                        @Html.Label("DonViDich_Id", "Đơn vị đích", htmlAttributes: new { @class = "control-label col-md-6" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("DonViDich_Id", null, "--Chọn đơn vị--", htmlAttributes: new { @class = "form-control select2" })
+                            @Html.ValidationMessage("DonViDich_Id", "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="float:right">
+            <button type="submit" class="mt-2 btn btn-success">Lưu</button>
+            <button type="button" class="mt-2 btn btn-light" data-dismiss="modal">Đóng</button>
+        </div>
+    </div>
+}

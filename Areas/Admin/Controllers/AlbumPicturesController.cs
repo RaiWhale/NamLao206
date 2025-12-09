@@ -16,6 +16,7 @@ namespace NamLao206.Areas.Admin.Controllers
     public class AlbumPicturesController : Controller
     {
         private namlao206_websiteEntities db = new namlao206_websiteEntities();
+        private static string UploadPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Uploads", "Albums");
         // GET: Admin/AlbumPictures
         public ActionResult Index(int? id)
         {
@@ -66,7 +67,7 @@ namespace NamLao206.Areas.Admin.Controllers
             if (Request.Files.Count > 0)
             {
                 int file_count = 0;
-                string dir = Server.MapPath("~/Content/Uploads/Albums") + "\\" + albumPicture.AlbumId + "\\";
+                string dir = UploadPath + "\\" + albumPicture.AlbumId + "\\";
                 if (!System.IO.Directory.Exists(dir)) System.IO.Directory.CreateDirectory(dir);
 
                 for (int i = 0; i < Request.Files.Count; i++)
@@ -147,7 +148,7 @@ namespace NamLao206.Areas.Admin.Controllers
         {
             AlbumPicture albumPicture = db.AlbumPictures.Find(id);
             db.AlbumPictures.Remove(albumPicture);
-            string path = Server.MapPath("~/Content/Uploads/Album") + "\\" + albumPicture.AlbumId + "\\";
+            string path = UploadPath + "\\" + albumPicture.AlbumId + "\\";
             if (System.IO.File.Exists(path  + albumPicture.PictureName))
             {
                 System.IO.File.Delete(path  + albumPicture.PictureName);
@@ -175,7 +176,7 @@ namespace NamLao206.Areas.Admin.Controllers
                 AlbumPicture pic = db.AlbumPictures.Find(id);
                 db.AlbumPictures.Remove(pic);
                 db.SaveChanges();
-                string file = Server.MapPath("~/Content/Uploads/Albums") + "\\" + pic.Id + "\\" + pic.PictureName;
+                string file = UploadPath + "\\" + pic.Id + "\\" + pic.PictureName;
                 if (System.IO.File.Exists(file)) System.IO.File.Delete(file);
                 return Content("Ok");
             }

@@ -17,6 +17,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
     public class EmployeesController : Controller
     {
         private namlao206_websiteEntities db = new namlao206_websiteEntities();
+        private static string UploadPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Uploads", "Avatars");
         int pageSize = 10;
         // GET: TransportFiles/Employees
         public ActionResult Index(int? page, string message, string search)
@@ -136,12 +137,11 @@ namespace NamLao206.Areas.TransportFiles.Controllers
                     if (pic != null && pic.ContentLength > 0)
                     {
                         string filename = $"{DateTime.Now.Ticks}_{pic.FileName.Split('/').Last()}";
-                        string path = Server.MapPath("~/Content/Uploads/Avatars");
-                        if (!Directory.Exists(path))
+                        if (!Directory.Exists(UploadPath))
                         {
-                            Directory.CreateDirectory(path);
+                            Directory.CreateDirectory(UploadPath);
                         }
-                        pic.SaveAs(Path.Combine(path, filename));
+                        pic.SaveAs(Path.Combine(UploadPath, filename));
                         employee.Avatar = filename;
                     }
                     else
@@ -241,12 +241,11 @@ namespace NamLao206.Areas.TransportFiles.Controllers
                     if (pic != null && pic.ContentLength > 0)
                     {
                         string filename = $"{DateTime.Now.Ticks}_{pic.FileName.Split('/').Last()}";
-                        string path = Server.MapPath("~/Content/Uploads/Avatars");
-                        if (!Directory.Exists(path))
+                        if (!Directory.Exists(UploadPath))
                         {
-                            Directory.CreateDirectory(path);
+                            Directory.CreateDirectory(UploadPath);
                         }
-                        pic.SaveAs(Path.Combine(path, filename));
+                        pic.SaveAs(Path.Combine(UploadPath, filename));
                         // Xóa ảnh cũ nếu có
                         if (!string.IsNullOrEmpty(employee.Avatar))
                         {

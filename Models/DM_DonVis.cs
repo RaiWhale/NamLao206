@@ -22,11 +22,12 @@ namespace NamLao206.Models
             this.Projects = new HashSet<Project>();
             this.DM_PhongBans = new HashSet<DM_PhongBans>();
             this.HoSoPhapLys = new HashSet<HoSoPhapLy>();
+            this.MenuItems = new HashSet<MenuItem>();
             this.NhapBanMus = new HashSet<NhapBanMu>();
+            this.PermissionGroups = new HashSet<PermissionGroup>();
             this.Suppliers = new HashSet<Supplier>();
             this.Teams = new HashSet<Team>();
             this.ThietBiXeMays = new HashSet<ThietBiXeMay>();
-            this.MenuItems = new HashSet<MenuItem>();
         }
     
         public int Id { get; set; }
@@ -49,14 +50,16 @@ namespace NamLao206.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HoSoPhapLy> HoSoPhapLys { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MenuItem> MenuItems { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NhapBanMu> NhapBanMus { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PermissionGroup> PermissionGroups { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Supplier> Suppliers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Team> Teams { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ThietBiXeMay> ThietBiXeMays { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MenuItem> MenuItems { get; set; }
     }
 }

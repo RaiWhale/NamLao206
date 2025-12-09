@@ -19,6 +19,7 @@ namespace NamLao206.Models
         public Nullable<int> GroupId { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<int> CreatedBy { get; set; }
+        public Nullable<bool> IsActive { get; set; }
     
         public virtual Account Account { get; set; }
         public virtual PermissionGroup PermissionGroup { get; set; }

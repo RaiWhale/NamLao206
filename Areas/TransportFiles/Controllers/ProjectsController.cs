@@ -90,9 +90,30 @@ namespace NamLao206.Areas.TransportFiles.Controllers
             }
             return View(project);
         }
+        // GET: TransportFiles/Projects/Create
+        public ActionResult Create()
+        {
+            if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
+            {
+                ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
+                return RedirectToAction("Login", "Login", new { area = "" });
+            }
 
-		// GET: TransportFiles/Projects/Create
-		public ActionResult Create()
+            // Lấy thông tin tài khoản
+            var acc = db.Accounts
+                .Where(x => x.Id == userId)
+                .SingleOrDefault();
+
+            if (acc == null)
+            {
+                ViewBag.Message = "Tài khoản không tồn tại hoặc không liên kết với nhân viên.";
+                return RedirectToAction("Login", "Login", new { area = "" });
+            }
+            PopulateDropdowns(acc);
+            return PartialView();
+        }
+        // GET: TransportFiles/Projects/CreateBomMin
+        public ActionResult CreateBomMin()
         {
 			if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
 			{
@@ -109,9 +130,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
 			{
 				ViewBag.Message = "Tài khoản không tồn tại hoặc không liên kết với nhân viên.";
 				return RedirectToAction("Login", "Login", new { area = "" });
-			}
-			
-			
+			}						
             PopulateDropdowns(acc);
 			return PartialView();
         }
@@ -185,9 +204,40 @@ namespace NamLao206.Areas.TransportFiles.Controllers
 			ViewBag.Message = "Đã xảy ra lỗi nhập liệu!";
 			return RedirectToAction("Index", new { message = ViewBag.Message });
 		}
-
-		// GET: TransportFiles/Projects/Edit/5
-		public async Task<ActionResult> Edit(int? id)
+        public async Task<ActionResult> Edit(int? id)
+        {
+            if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
+            {
+                ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
+                return RedirectToAction("Login", "Login", new { area = "" });
+            }
+            // Lấy thông tin tài khoản
+            var acc = db.Accounts
+                .Where(x => x.Id == userId)
+                .SingleOrDefault();
+            if (acc == null)
+            {
+                ViewBag.Message = "Tài khoản không tồn tại hoặc không liên kết với nhân viên.";
+                return RedirectToAction("Login", "Login", new { area = "" });
+            }
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Project project = await db.Projects.FindAsync(id);
+            if (project == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.TinhId = new SelectList(db.DM_Donvihanhchinhs.Where(x => x.ParentId == "0"), "Id", "Ten");
+            ViewBag.DonViId = new SelectList(db.DM_DonVis.Where(x => x.Id == acc.Employee.DM_PhongBans.donvi_Id), "Id", "TenDonVi", project.DonViId);
+            ViewBag.InvestorId = new SelectList(db.Suppliers, "Id", "SupplierName", project.InvestorId);
+            ViewBag.TinhTrangDuAn = new SelectList(db.StatusProjects, "Id", "StatusName", project.TinhTrangDuAn);
+            ViewBag.ContractId = new SelectList(db.DocumentTypes, "Id", "DocumentTypeName", project.ContractId);
+            return PartialView(project);
+        }
+        // GET: TransportFiles/Projects/Edit/5
+        public async Task<ActionResult> EditBomMin(int? id)
         {
 			if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
 			{

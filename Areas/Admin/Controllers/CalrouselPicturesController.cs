@@ -2,6 +2,7 @@
 using System;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -13,6 +14,7 @@ namespace NamLao206.Areas.Admin.Controllers
     public class CalrouselPicturesController : Controller
     {
         private namlao206_websiteEntities db = new namlao206_websiteEntities();
+        private static string UploadPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Uploads", "CalrouselPicture");
 
         // GET: Admin/CalrouselPictures
         public ActionResult Index()
@@ -55,7 +57,7 @@ namespace NamLao206.Areas.Admin.Controllers
                 if (Request.Files.Count > 0)
                 {
                     int file_count = 0;
-                    string dir = Server.MapPath("~/Content/Uploads/CalrouselPicture");
+                    string dir = UploadPath;
                     if (!System.IO.Directory.Exists(dir)) System.IO.Directory.CreateDirectory(dir);
 
                     for (int i = 0; i < Request.Files.Count; i++)
@@ -145,7 +147,7 @@ namespace NamLao206.Areas.Admin.Controllers
             CalrouselPicture calrouselPicture = db.CalrouselPictures.Find(id);
             db.CalrouselPictures.Remove(calrouselPicture);
             db.SaveChanges();
-            string path = Server.MapPath("~/Content/Uploads/CalrouselPicture");
+            string path = UploadPath;
             if (System.IO.File.Exists(path + "\\" + calrouselPicture.Url))
             {
                 System.IO.File.Delete(path + "\\" + calrouselPicture.Url);

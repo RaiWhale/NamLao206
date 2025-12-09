@@ -18,5 +18,6 @@ namespace NamLao206.Models
         public string ItemName { get; set; }
         public string Name { get; set; }
         public Nullable<int> NhomItemId { get; set; }
+        public string STT { get; set; }
     }
 }

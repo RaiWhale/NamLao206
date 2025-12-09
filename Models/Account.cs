@@ -44,13 +44,13 @@ namespace NamLao206.Models
             this.ThiCongs1 = new HashSet<ThiCong>();
             this.Units = new HashSet<Unit>();
             this.Units1 = new HashSet<Unit>();
+            this.UserPermissionGroups = new HashSet<UserPermissionGroup>();
             this.News = new HashSet<News>();
             this.NhapBanMus = new HashSet<NhapBanMu>();
+            this.NhapBanMus1 = new HashSet<NhapBanMu>();
             this.TransportFiles = new HashSet<TransportFile>();
             this.TransportFiles1 = new HashSet<TransportFile>();
             this.TransportFiles2 = new HashSet<TransportFile>();
-            this.NhapBanMus1 = new HashSet<NhapBanMu>();
-            this.UserPermissionGroups = new HashSet<UserPermissionGroup>();
         }
     
         public int Id { get; set; }
@@ -119,6 +119,8 @@ namespace NamLao206.Models
         public virtual ICollection<Unit> Units { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Unit> Units1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserPermissionGroup> UserPermissionGroups { get; set; }
         public virtual Employee Employee { get; set; }
         public virtual Level Level { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -126,14 +128,12 @@ namespace NamLao206.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NhapBanMu> NhapBanMus { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NhapBanMu> NhapBanMus1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TransportFile> TransportFiles { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TransportFile> TransportFiles1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TransportFile> TransportFiles2 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<NhapBanMu> NhapBanMus1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserPermissionGroup> UserPermissionGroups { get; set; }
     }
 }

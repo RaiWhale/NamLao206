@@ -15,7 +15,8 @@ namespace NamLao206.Areas.Admin.Controllers
     public class DM_PhongBansController : Controller
     {
         private namlao206_websiteEntities db = new namlao206_websiteEntities();
-		int pageSize = 10;
+        private static string UploadPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Uploads", "KhoaPhongs");
+        int pageSize = 10;
         // GET: Admin/DM_PhongBans
 		public ActionResult Index(int? page, string search, string message)
         {
@@ -98,41 +99,65 @@ namespace NamLao206.Areas.Admin.Controllers
 						if (Request.Files.Count > 0)
 						{
 							int file_count = 0;
-							string uploadPath = Path.Combine(Server.MapPath("~/Content/Uploads/KhoaPhongs"), dM_Khoaphongs.Id.ToString());
+							string uploadPath = Path.Combine(UploadPath, dM_Khoaphongs.Id.ToString());
 							if (!Directory.Exists(uploadPath)) Directory.CreateDirectory(uploadPath);// Creates directory if it doesn't exist
                             var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
 							for (int i = 0; i < Request.Files.Count; i++)
 							{
-								try
-								{
-									HttpPostedFileBase file = Request.Files[i];
-									if (!string.IsNullOrEmpty(file.FileName))
-									{
-										string extension = Path.GetExtension(file.FileName).ToLowerInvariant();
-										if (!allowedExtensions.Contains(extension))
-										{
-											ModelState.AddModelError("", $"File {file.FileName} has an invalid extension.");
-											continue;
-										}
-										// Sanitize and generate unique file name
-										string fileName = $"{DateTime.UtcNow.Ticks}_{Path.GetFileNameWithoutExtension(file.FileName)}_{Guid.NewGuid().ToString("N").Substring(0, 8)}{extension}";
-										string filePath = Path.Combine(uploadPath, fileName);
+                                try
+                                {
+                                    HttpPostedFileBase file = Request.Files[i];
 
-										// Save file asynchronously
-										using (var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
-										{
-											await file.InputStream.CopyToAsync(fileStream);
-										}
-										db.Pictures.Add(new Models.Picture
-										{
-											Url = fileName,
-											KhoaphongId = dM_Khoaphongs.Id
-										});
-										file_count++;
-									}
-								}
-								catch { }
-							}
+                                    if (file == null || file.ContentLength == 0) continue;
+
+                                    // Kiểm tra size
+                                    if (file.ContentLength > 10 * 1024 * 1024)
+                                    {
+                                        ModelState.AddModelError("", $"File too large (max 10MB)");
+                                        continue;
+                                    }
+
+                                    // Lấy và kiểm tra extension
+                                    string extension = Path.GetExtension(file.FileName)?.ToLowerInvariant();
+                                    if (string.IsNullOrEmpty(extension) || !allowedExtensions.Contains(extension))
+                                    {
+                                        ModelState.AddModelError("", $"Invalid file type");
+                                        continue;
+                                    }
+
+                                    // Tạo tên file AN TOÀN
+                                    string safeFileName = Path.GetFileName(file.FileName) ?? "file";
+                                    string baseName = Path.GetFileNameWithoutExtension(safeFileName);
+
+                                    // Loại bỏ ký tự nguy hiểm
+                                    baseName = new string(baseName.Where(c => !Path.GetInvalidFileNameChars().Contains(c)).ToArray());
+                                    baseName = baseName.Length > 50 ? baseName.Substring(0, 50) : baseName;
+
+                                    string fileName = $"{DateTime.UtcNow:yyyyMMddHHmmss}_{baseName}_{Guid.NewGuid():N}{extension}";
+                                    string filePath = Path.Combine(uploadPath, fileName);
+
+                                    // Lưu file
+                                    using (var fileStream = new FileStream(filePath, FileMode.CreateNew))
+                                    {
+                                        await file.InputStream.CopyToAsync(fileStream);
+                                    }
+
+                                    // Lưu DB
+                                    db.Pictures.Add(new Models.Picture
+                                    {
+                                        Url = fileName,
+                                        KhoaphongId = dM_Khoaphongs.Id
+                                    });
+
+                                    file_count++;
+                                }
+                                catch (Exception ex)
+                                {
+                                    // KHÔNG BAO GIỜ bỏ trống catch
+                                    ModelState.AddModelError("", $"Upload error: {ex.Message}");
+                                    // Logger.Error(ex, "Upload failed");
+                                }
+                            }
 							if (file_count > 0)
 							{
 								await db.SaveChangesAsync();
@@ -200,7 +225,7 @@ namespace NamLao206.Areas.Admin.Controllers
 					if (Request.Files.Count > 0)
 					{
 						int file_count = 0;
-						string uploadPath = Path.Combine(Server.MapPath("~/Content/Uploads/KhoaPhongs"), dM_Khoaphongs.Id.ToString());
+						string uploadPath = Path.Combine(UploadPath, dM_Khoaphongs.Id.ToString());
 						if (!Directory.Exists(uploadPath)) Directory.CreateDirectory(uploadPath);// Creates directory if it doesn't exist
 						var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
 						for (int i = 0; i < Request.Files.Count; i++)
@@ -291,7 +316,7 @@ namespace NamLao206.Areas.Admin.Controllers
 			// 2. Kiểm tra xem khoa có tồn tại không
 			DM_PhongBans dM_Khoaphongs = await db.DM_PhongBans.FindAsync(id);
             db.DM_PhongBans.Remove(dM_Khoaphongs);
-			string uploadPath = Path.Combine(Server.MapPath("~/Content/Uploads/KhoaPhongs"), dM_Khoaphongs.Id.ToString());		
+			string uploadPath = Path.Combine(UploadPath, dM_Khoaphongs.Id.ToString());		
             if (Directory.Exists(uploadPath))
             {
                 Directory.Delete(uploadPath, true);

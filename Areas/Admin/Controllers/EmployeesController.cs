@@ -18,6 +18,7 @@ namespace NamLao206.Areas.Admin.Controllers
     public class EmployeesController : Controller
     {
         private namlao206_websiteEntities db = new namlao206_websiteEntities();
+        private static string UploadPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Uploads", "Avatars");
         int pageSize = 10;
         // GET: Admin/Employee
         public ActionResult Index(int? page, string search, string message)
@@ -105,7 +106,7 @@ namespace NamLao206.Areas.Admin.Controllers
 					if (pic != null && pic.ContentLength > 0)
 					{
 						string filename = $"{DateTime.Now.Ticks}_{pic.FileName.Split('/').Last()}";
-						string path = Server.MapPath("~/Content/Uploads/Avatars");
+						string path = UploadPath;
 						if (!Directory.Exists(path))
 						{
 							Directory.CreateDirectory(path);
@@ -201,7 +202,7 @@ namespace NamLao206.Areas.Admin.Controllers
 					if (pic != null && pic.ContentLength > 0)
 					{
 						string filename = $"{DateTime.Now.Ticks}_{pic.FileName.Split('/').Last()}";
-						string path = Server.MapPath("~/Content/Uploads/Avatars");
+						string path = UploadPath;
 						if (!Directory.Exists(path))
 						{
 							Directory.CreateDirectory(path);
@@ -210,7 +211,7 @@ namespace NamLao206.Areas.Admin.Controllers
 						// Xóa ảnh cũ nếu có
 						if (!string.IsNullOrEmpty(employee.Avatar))
 						{
-							string oldAvatarPath = Path.Combine(Server.MapPath("~/Content/Uploads/Avatars"), employee.Avatar);
+							string oldAvatarPath = Path.Combine(UploadPath, employee.Avatar);
 							if (System.IO.File.Exists(oldAvatarPath))
 							{
 								System.IO.File.Delete(oldAvatarPath);
@@ -275,7 +276,7 @@ namespace NamLao206.Areas.Admin.Controllers
 			// Xóa ảnh cũ nếu có
 			if (!string.IsNullOrEmpty(employee.Avatar))
 			{
-				string oldAvatarPath = Path.Combine(Server.MapPath("~/Content/Uploads/Avatars"), employee.Avatar);
+				string oldAvatarPath = Path.Combine(UploadPath, employee.Avatar);
 				if (System.IO.File.Exists(oldAvatarPath))
 				{
 					System.IO.File.Delete(oldAvatarPath);

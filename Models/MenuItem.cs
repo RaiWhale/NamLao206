@@ -30,10 +30,12 @@ namespace NamLao206.Models
         public bool IsActive { get; set; }
         public Nullable<int> DepartmentId { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<int> PermissionID { get; set; }
     
+        public virtual DM_DonVis DM_DonVis { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MenuItem> MenuItems1 { get; set; }
         public virtual MenuItem MenuItem1 { get; set; }
-        public virtual DM_DonVis DM_DonVis { get; set; }
+        public virtual Permission Permission { get; set; }
     }
 }

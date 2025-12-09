@@ -27,18 +27,18 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-9 col-xs-12">
+                @*<div class="col-lg-6 col-md-9 col-xs-12">
                     <div class="form-group">
-                        @Html.LabelFor(model => model.ParentId, "ParentId", htmlAttributes: new { @class = "control-label col-md-6" })
+                        @Html.LabelFor(model => model.ParentId, "Phụ thuộc", htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-10">
                             @Html.DropDownList("ParentId", null, "--Chọn loại phụ thuộc--", htmlAttributes: new { @class = "form-control select2" })
                             @Html.ValidationMessageFor(model => model.ParentId, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                </div>
+                </div>*@
                 <div class="col-lg-6 col-md-9 col-xs-12">
                     <div class="form-group">
-                        @Html.LabelFor(model => model.IconClass, htmlAttributes: new { @class = "control-label col-md-6" })
+                        @Html.LabelFor(model => model.IconClass,"Mã Icon", htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-10">
                             @Html.EditorFor(model => model.IconClass, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.IconClass, "", new { @class = "text-danger" })
@@ -47,10 +47,10 @@
                 </div>
                 <div class="col-lg-6 col-md-9 col-xs-12">
                     <div class="form-group">
-                        @Html.LabelFor(model => model.PermissionCode, htmlAttributes: new { @class = "control-label col-md-6" })
+                        @Html.LabelFor(model => model.PermissionID, "Mã phân quyền", htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-10">
-                            @Html.EditorFor(model => model.PermissionCode, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.PermissionCode, "", new { @class = "text-danger" })
+                            @Html.DropDownList("PermissionID", null, "--Chọn mã--", htmlAttributes: new { @class = "form-control select2" })              
+                            @Html.ValidationMessageFor(model => model.PermissionID, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
@@ -67,7 +67,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.DepartmentId, "Đơn vị", htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-10">
-                            @Html.DropDownList("Departments",  null, "--Chọn đơn vị--", htmlAttributes: new { @class = "form-control select2" })
+                            @Html.DropDownList("DepartmentId",  null, "--Chọn đơn vị--", htmlAttributes: new { @class = "form-control select2" })
                             @Html.ValidationMessageFor(model => model.DepartmentId, "", new { @class = "text-danger" })
                         </div>
                     </div>

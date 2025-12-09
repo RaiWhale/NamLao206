@@ -66,6 +66,7 @@ namespace NamLao206.Areas.Admin.Controllers
                 ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
                 return RedirectToAction("Login", "Account");
             }
+            ViewBag.Donvi_ID = new SelectList(db.DM_DonVis, "Id", "TenDonVi");
             return PartialView();
         }
 
@@ -74,7 +75,7 @@ namespace NamLao206.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,GroupName,Description,IsActive")] PermissionGroup permissionGroup)
+        public async Task<ActionResult> Create([Bind(Include = "Id,GroupName,Description,IsActive, Donvi_Id")] PermissionGroup permissionGroup)
         {
             // 1. Kiểm tra xác thực người dùng
             if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
@@ -98,11 +99,34 @@ namespace NamLao206.Areas.Admin.Controllers
                 permissionGroup.CreatedBy = userId;
                 db.PermissionGroups.Add(permissionGroup);
                 await db.SaveChangesAsync();
+
+                // Thêm mới UserPermissionGroups
+                var lstUserNew = await db.Accounts
+                    .Where(x => x.Employee.DM_PhongBans.donvi_Id == permissionGroup.DonVi_Id)
+                    .ToListAsync();
+
+                if (lstUserNew.Any())
+                {
+                    var userPermissionGroups = lstUserNew
+                        .Select(user => new UserPermissionGroup
+                        {
+                            AccountId = user.Id,
+                            GroupId = permissionGroup.Id,
+                            IsActive = true,
+                            CreatedBy = userId,
+                            CreatedDate = DateTime.Now
+                        })
+                        .ToList();
+
+                    db.UserPermissionGroups.AddRange(userPermissionGroups);
+                }
+                await db.SaveChangesAsync();
                 ViewBag.Message = "Thêm mới thành công!";
                 return RedirectToAction("Index", new { message = ViewBag.Message });
             }
 
-            return View(permissionGroup);
+            ViewBag.Message = "Đã xảy ra lỗi nhập liệu!";
+            return RedirectToAction("Index", new { message = ViewBag.Message });
         }
 
         // GET: Admin/PermissionGroups/Edit/5
@@ -122,6 +146,7 @@ namespace NamLao206.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Donvi_ID = new SelectList(db.DM_DonVis, "Id", "TenDonVi", permissionGroup.DonVi_Id);
             return PartialView(permissionGroup);
         }
 
@@ -130,33 +155,83 @@ namespace NamLao206.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,GroupName,Description,IsActive")] PermissionGroup permissionGroup)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,GroupName,Description,IsActive,Donvi_Id")] PermissionGroup permissionGroup)
         {
             if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
             {
                 ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
                 return RedirectToAction("Login", "Login", new { area = "" });
             }
+
             if (ModelState.IsValid)
             {
-                // Lấy thông tin tài khoản
-                var acc = db.Accounts
-                    .Where(x => x.Id == userId)
-                    .SingleOrDefault();
-                if (acc == null)
+                try
                 {
-                    ViewBag.Message = "Tài khoản không tồn tại hoặc không liên kết với nhân viên.";
-                    return RedirectToAction("Login", "Login", new { area = "" });
+                    var acc = await db.Accounts.Where(x => x.Id == userId).SingleOrDefaultAsync();
+                    if (acc == null)
+                    {
+                        ViewBag.Message = "Tài khoản không tồn tại hoặc không liên kết với nhân viên.";
+                        return RedirectToAction("Login", "Login", new { area = "" });
+                    }
+
+                    var existingGroup = await db.PermissionGroups.FindAsync(permissionGroup.Id);
+                    if (existingGroup == null)
+                    {
+                        ViewBag.Message = "Nhóm quyền không tồn tại!";
+                        return RedirectToAction("Index", new { message = ViewBag.Message });
+                    }
+
+                    // Cập nhật PermissionGroup
+                    existingGroup.GroupName = permissionGroup.GroupName;
+                    existingGroup.Description = permissionGroup.Description;
+                    existingGroup.IsActive = permissionGroup.IsActive;
+                    existingGroup.DonVi_Id = permissionGroup.DonVi_Id;
+
+                    // Xóa các UserPermissionGroup cũ
+                    var lstUserOld = await db.UserPermissionGroups
+                        .Where(x => x.GroupId == permissionGroup.Id)
+                        .ToListAsync();
+
+                    if (lstUserOld.Count > 0)
+                    {
+                        db.UserPermissionGroups.RemoveRange(lstUserOld);
+                    }
+
+                    // Thêm mới UserPermissionGroups
+                    var lstUserNew = await db.Accounts
+                        .Where(x => x.Employee.DM_PhongBans.donvi_Id == permissionGroup.DonVi_Id)
+                        .ToListAsync();
+
+                    if (lstUserNew.Any())
+                    {
+                        var userPermissionGroups = lstUserNew
+                            .Select(user => new UserPermissionGroup
+                            {
+                                AccountId = user.Id,
+                                GroupId = permissionGroup.Id,
+                                IsActive = true,
+                                CreatedBy = userId,
+                                CreatedDate = DateTime.Now
+                            })
+                            .ToList();
+
+                        db.UserPermissionGroups.AddRange(userPermissionGroups);
+                    }
+            
+                    await db.SaveChangesAsync();
+                    ViewBag.Message = "Sửa thành công!";
+                    return RedirectToAction("Index", new { message = ViewBag.Message });
                 }
-                db.Entry(permissionGroup).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-                ViewBag.Message = "Sửa thành công!";
-                return RedirectToAction("Index", new { message = ViewBag.Message });
+                catch (Exception ex)
+                {
+                    ViewBag.Message = "Đã xảy ra lỗi: " + ex.Message;
+                    return RedirectToAction("Index", new { message = ViewBag.Message });
+                }
             }
+
             ViewBag.Message = "Đã xảy ra lỗi nhập liệu!";
             return RedirectToAction("Index", new { message = ViewBag.Message });
         }
-
         // GET: Admin/PermissionGroups/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {

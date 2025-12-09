@@ -39,7 +39,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
         }
 
         // GET: TransportFiles/KhaoSats/Create
-        public ActionResult Create(int? projectID)
+        public ActionResult CreateBomMin(int? projectID)
         {
             // 1. Kiểm tra xác thực người dùng
             if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
@@ -61,7 +61,28 @@ namespace NamLao206.Areas.TransportFiles.Controllers
             ViewBag.TinhTrangDuAn = new SelectList(db.StatusProjects, "Id", "StatusName");
             return PartialView();
         }
+        public ActionResult CreateCumBan(int? projectID)
+        {
+            // 1. Kiểm tra xác thực người dùng
+            if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
+            {
+                ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
+                return RedirectToAction("Login", "Login", new { area = "" });
+            }
+            else if (projectID == null)
+            {
+                ViewBag.Message = "Không tìm thấy dự án ID!";
+                return RedirectToAction("Index", new { message = ViewBag.Message });
+            }
 
+            var project = db.Projects.Find(projectID);
+            ViewBag.ProjectID = new SelectList(db.Projects.Where(x => x.Id == projectID), "Id", "TenDuAn");
+            ViewBag.ContractID = new SelectList(db.DocumentTypes, "Id", "DocumentTypeName");
+            ViewBag.DonViKhaoSatId = new SelectList(db.Suppliers.Where(x => x.DonviId == project.DonViId), "Id", "SupplierName");
+            ViewBag.UnitId = new SelectList(db.Units, "Id", "UnitName");
+            ViewBag.TinhTrangDuAn = new SelectList(db.StatusProjects, "Id", "StatusName");
+            return PartialView();
+        }
         // POST: TransportFiles/KhaoSats/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -105,7 +126,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
         }
 
         // GET: TransportFiles/KhaoSats/Edit/5
-        public async Task<ActionResult> Edit(int? id)
+        public async Task<ActionResult> EditBomMin(int? id)
         {
             // 1. Kiểm tra xác thực người dùng
             if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
@@ -130,7 +151,31 @@ namespace NamLao206.Areas.TransportFiles.Controllers
             ViewBag.TinhTrangDuAn = new SelectList(db.StatusProjects, "Id", "StatusName", khaoSat.TinhTrangDuAn);
             return PartialView(khaoSat);
         }
+        public async Task<ActionResult> EditCumBan(int? id)
+        {
+            // 1. Kiểm tra xác thực người dùng
+            if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
+            {
+                ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
+                return RedirectToAction("Login", "Login", new { area = "" });
+            }
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            KhaoSat khaoSat = await db.KhaoSats.FindAsync(id);
+            if (khaoSat == null)
+            {
+                return HttpNotFound();
+            }
 
+            ViewBag.DonViKhaoSatId = new SelectList(db.Suppliers.Where(x => x.DonviId == khaoSat.Project.DonViId), "Id", "SupplierName", khaoSat.DonViKhaoSatId);
+            ViewBag.ProjectID = new SelectList(db.Projects.Where(x => x.Id == khaoSat.ProjectID), "Id", "TenDuAn", khaoSat.ProjectID);
+            ViewBag.ContractID = new SelectList(db.DocumentTypes, "Id", "DocumentTypeName", khaoSat.ContractID);
+            ViewBag.UnitId = new SelectList(db.Units, "Id", "UnitName", khaoSat.UnitId);
+            ViewBag.TinhTrangDuAn = new SelectList(db.StatusProjects, "Id", "StatusName", khaoSat.TinhTrangDuAn);
+            return PartialView(khaoSat);
+        }
         // POST: TransportFiles/KhaoSats/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.

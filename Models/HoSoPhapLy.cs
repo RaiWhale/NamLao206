@@ -30,6 +30,7 @@ namespace NamLao206.Models
         public Nullable<int> DonVi_Id { get; set; }
         public Nullable<int> NhapBanMu_Id { get; set; }
         public Nullable<int> ThietBi_Id { get; set; }
+        public Nullable<int> XayDung_Id { get; set; }
     
         public virtual Account Account { get; set; }
         public virtual Account Account1 { get; set; }

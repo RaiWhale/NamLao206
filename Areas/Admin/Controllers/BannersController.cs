@@ -13,6 +13,7 @@ namespace NamLao206.Areas.Admin.Controllers
     public class BannersController : Controller
     {
         private namlao206_websiteEntities db = new namlao206_websiteEntities();
+        private static string UploadPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Uploads", "Banners");
 
         // GET: Admin/Banners
         public ActionResult Index()
@@ -57,7 +58,7 @@ namespace NamLao206.Areas.Admin.Controllers
                 db.Banners.Add(banner);
                 db.SaveChanges();
 
-                string path = Server.MapPath("~/Content/Uploads/Banners") + "\\" + banner.Id;
+                string path = UploadPath + "\\" + banner.Id;
                 if (!Directory.Exists(path)) Directory.CreateDirectory(path);
                 pic.SaveAs(path + "\\" + filename);
 
@@ -97,7 +98,7 @@ namespace NamLao206.Areas.Admin.Controllers
                 {
                     string filename = DateTime.Now.Ticks + "_" + pic.FileName.Split('/').Last();
                     banner.Url = filename;
-                    string path = Server.MapPath("~/Content/Uploads/Banners") + "\\" + banner.Id;
+                    string path = UploadPath + "\\" + banner.Id;
                     if (!Directory.Exists(path)) Directory.CreateDirectory(path);
                     pic.SaveAs(path + "\\" + filename);
 
@@ -131,7 +132,7 @@ namespace NamLao206.Areas.Admin.Controllers
         {
             Banner banner = db.Banners.Find(id);
             db.Banners.Remove(banner);
-            string path = Server.MapPath("~/Content/Uploads/Banners") + "\\" + banner.Id;
+            string path = UploadPath + "\\" + banner.Id;
             if (Directory.Exists(path))
             {
                 Directory.Delete(path, true);

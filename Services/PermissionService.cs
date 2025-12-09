@@ -280,8 +280,8 @@ namespace NamLao206.Services
           .ToDictionary(
               g => g.Key,
               g => g.Select(ug => ug.GroupId)
-                    .Where(id => id.HasValue) // Lọc bỏ null
-                    .Select(id => id.Value)   // Convert int? thành int
+                
+                    .Select(id => id)   // Convert int? thành int
                     .ToList()
           );
 
@@ -289,7 +289,7 @@ namespace NamLao206.Services
             {
                 user.SelectedGroupIds = userGroups.ContainsKey(user.AccountId)
                     ? userGroups[user.AccountId]
-                    : new List<int>();
+                    : new List<int?>();
 
                 user.UserPermissions = GetUserPermissions(user.AccountId).PermissionCodes;
             }
@@ -309,8 +309,8 @@ namespace NamLao206.Services
          DepartmentName = a.Employee.DM_PhongBans.DM_DonVis.TenDonVi,
          DepartmentId = a.Employee.DM_PhongBans.DM_DonVis.Id,
          SelectedGroupIds = a.UserPermissionGroups
-             .Where(ug => ug.PermissionGroup.IsActive && ug.GroupId.HasValue)
-             .Select(ug => ug.GroupId.Value)  // Sử dụng .Value
+             .Where(ug => ug.PermissionGroup.IsActive)
+             .Select(ug => ug.GroupId)  // Sử dụng .Value
              .ToList(),
          UserPermissions = GetUserPermissions(accountId).PermissionCodes
      })

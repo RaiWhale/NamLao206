@@ -131,7 +131,7 @@ namespace NamLao206.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,PermissionName,PermissionCode,Description,Module,IsActive")] Permission permission)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,PermissionName,PermissionCode,Description,Module,CreatedDate,CreatedBy,IsActive")] Permission permission)
         {
             if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
             {

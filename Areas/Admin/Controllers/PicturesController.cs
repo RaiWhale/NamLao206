@@ -1,4 +1,5 @@
 ﻿using NamLao206.Models;
+using System;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace NamLao206.Areas.Admin.Controllers
     public class PicturesController : Controller
     {
         private namlao206_websiteEntities db = new namlao206_websiteEntities();
-
+        private static string UploadPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Uploads", "KhoaPhongs");
         // GET: Admin/Pictures
         public ActionResult Index()
         {
@@ -114,7 +115,7 @@ namespace NamLao206.Areas.Admin.Controllers
         {
             Picture picture = db.Pictures.Find(id);
             db.Pictures.Remove(picture);
-            string path = Server.MapPath("~/Content/Uploads/KhoaPhongs") + "\\" + picture.KhoaphongId + "\\" + picture.Url;
+            string path = UploadPath + "\\" + picture.KhoaphongId + "\\" + picture.Url;
             if (Directory.Exists(path))
             {
                 Directory.Delete(path, true);

@@ -141,6 +141,7 @@
           <Property Name="ItemName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" />
           <Property Name="NhomItemId" Type="int" />
+          <Property Name="STT" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="DM_Chucvus">
           <Key>
@@ -352,6 +353,7 @@
           <Property Name="DonVi_Id" Type="int" />
           <Property Name="NhapBanMu_Id" Type="int" />
           <Property Name="ThietBi_Id" Type="int" />
+          <Property Name="XayDung_Id" Type="int" />
         </EntityType>
         <EntityType Name="KhaoSats">
           <Key>
@@ -442,6 +444,7 @@
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="DepartmentId" Type="int" />
           <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="PermissionID" Type="int" />
         </EntityType>
         <EntityType Name="Nationalities">
           <Key>
@@ -547,6 +550,7 @@
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="CreatedBy" Type="int" />
+          <Property Name="DonVi_Id" Type="int" />
         </EntityType>
         <EntityType Name="Permissions">
           <Key>
@@ -795,6 +799,7 @@
           <Property Name="GroupId" Type="int" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="CreatedBy" Type="int" />
+          <Property Name="IsActive" Type="bit" />
         </EntityType>
         <Association Name="FK__Contracts__Creat__214BF109">
           <End Role="Accounts" Type="Self.Accounts" Multiplicity="0..1" />
@@ -1756,6 +1761,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_MenuItems_Permissions">
+          <End Role="Permissions" Type="Self.Permissions" Multiplicity="0..1" />
+          <End Role="MenuItems" Type="Self.MenuItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Permissions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MenuItems">
+              <PropertyRef Name="PermissionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_News_NewsPictures">
           <End Role="News" Type="Self.News" Multiplicity="1" />
           <End Role="News1" Type="Self.News" Multiplicity="0..1" />
@@ -1993,6 +2010,18 @@
             </Principal>
             <Dependent Role="NhapBanMu">
               <PropertyRef Name="TroLyKeHoach_EMP_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PermissionGroups_DonVi">
+          <End Role="DM_DonVis" Type="Self.DM_DonVis" Multiplicity="0..1" />
+          <End Role="PermissionGroups" Type="Self.PermissionGroups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_DonVis">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PermissionGroups">
+              <PropertyRef Name="DonVi_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2523,6 +2552,10 @@
             <End Role="DM_DonVis" EntitySet="DM_DonVis" />
             <End Role="MenuItems" EntitySet="MenuItems" />
           </AssociationSet>
+          <AssociationSet Name="FK_MenuItems_Permissions" Association="Self.FK_MenuItems_Permissions">
+            <End Role="Permissions" EntitySet="Permissions" />
+            <End Role="MenuItems" EntitySet="MenuItems" />
+          </AssociationSet>
           <AssociationSet Name="FK_News_NewsPictures" Association="Self.FK_News_NewsPictures">
             <End Role="News" EntitySet="News" />
             <End Role="News1" EntitySet="News" />
@@ -2602,6 +2635,10 @@
           <AssociationSet Name="FK_NhapBanMu_TroLyKeHoach" Association="Self.FK_NhapBanMu_TroLyKeHoach">
             <End Role="Employees" EntitySet="Employees" />
             <End Role="NhapBanMu" EntitySet="NhapBanMu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PermissionGroups_DonVi" Association="Self.FK_PermissionGroups_DonVi">
+            <End Role="DM_DonVis" EntitySet="DM_DonVis" />
+            <End Role="PermissionGroups" EntitySet="PermissionGroups" />
           </AssociationSet>
           <AssociationSet Name="FK_Pictures_ToDM_PhongBans" Association="Self.FK_Pictures_ToDM_PhongBans">
             <End Role="DM_PhongBans" EntitySet="DM_PhongBans" />
@@ -2688,6 +2725,7 @@
           <EntitySet Name="Feedbacks" EntityType="namlao206_websiteModel.Feedback" />
           <EntitySet Name="Genders" EntityType="namlao206_websiteModel.Gender" />
           <EntitySet Name="GiamSatThiCongs" EntityType="namlao206_websiteModel.GiamSatThiCong" />
+          <EntitySet Name="GroupPermissions" EntityType="namlao206_websiteModel.GroupPermission" />
           <EntitySet Name="HoatDongNhanSus" EntityType="namlao206_websiteModel.HoatDongNhanSu" />
           <EntitySet Name="HoSoPhapLys" EntityType="namlao206_websiteModel.HoSoPhapLy" />
           <EntitySet Name="KhaoSats" EntityType="namlao206_websiteModel.KhaoSat" />
@@ -2695,11 +2733,14 @@
           <EntitySet Name="Levels" EntityType="namlao206_websiteModel.Level" />
           <EntitySet Name="LuuVets" EntityType="namlao206_websiteModel.LuuVet" />
           <EntitySet Name="MaQuocGias" EntityType="namlao206_websiteModel.MaQuocGia" />
+          <EntitySet Name="MenuItems" EntityType="namlao206_websiteModel.MenuItem" />
           <EntitySet Name="Nationalities" EntityType="namlao206_websiteModel.Nationality" />
           <EntitySet Name="News" EntityType="namlao206_websiteModel.News" />
           <EntitySet Name="NewsPictures" EntityType="namlao206_websiteModel.NewsPicture" />
           <EntitySet Name="NghiemThus" EntityType="namlao206_websiteModel.NghiemThu" />
           <EntitySet Name="NhapBanMus" EntityType="namlao206_websiteModel.NhapBanMu" />
+          <EntitySet Name="PermissionGroups" EntityType="namlao206_websiteModel.PermissionGroup" />
+          <EntitySet Name="Permissions" EntityType="namlao206_websiteModel.Permission" />
           <EntitySet Name="Phases" EntityType="namlao206_websiteModel.Phase" />
           <EntitySet Name="Pictures" EntityType="namlao206_websiteModel.Picture" />
           <EntitySet Name="Projects" EntityType="namlao206_websiteModel.Project" />
@@ -2708,11 +2749,13 @@
           <EntitySet Name="Suppliers" EntityType="namlao206_websiteModel.Supplier" />
           <EntitySet Name="Teams" EntityType="namlao206_websiteModel.Team" />
           <EntitySet Name="ThiCongs" EntityType="namlao206_websiteModel.ThiCong" />
+          <EntitySet Name="ThietBiXeMays" EntityType="namlao206_websiteModel.ThietBiXeMay" />
           <EntitySet Name="Topics" EntityType="namlao206_websiteModel.Topic" />
           <EntitySet Name="TransportFiles" EntityType="namlao206_websiteModel.TransportFile" />
           <EntitySet Name="TransportFileUrls" EntityType="namlao206_websiteModel.TransportFileUrl" />
           <EntitySet Name="Transports" EntityType="namlao206_websiteModel.Transport" />
           <EntitySet Name="Units" EntityType="namlao206_websiteModel.Unit" />
+          <EntitySet Name="UserPermissionGroups" EntityType="namlao206_websiteModel.UserPermissionGroup" />
           <AssociationSet Name="FK__Contracts__Creat__214BF109" Association="namlao206_websiteModel.FK__Contracts__Creat__214BF109">
             <End Role="Account" EntitySet="Accounts" />
             <End Role="Contract" EntitySet="Contracts" />
@@ -2821,6 +2864,10 @@
             <End Role="Account" EntitySet="Accounts" />
             <End Role="Unit" EntitySet="Units" />
           </AssociationSet>
+          <AssociationSet Name="FK__UserPermi__Accou__592635D8" Association="namlao206_websiteModel.FK__UserPermi__Accou__592635D8">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="UserPermissionGroup" EntitySet="UserPermissionGroups" />
+          </AssociationSet>
           <AssociationSet Name="FK_Accounts_Employees" Association="namlao206_websiteModel.FK_Accounts_Employees">
             <End Role="Employee" EntitySet="Employees" />
             <End Role="Account" EntitySet="Accounts" />
@@ -2834,6 +2881,10 @@
             <End Role="News" EntitySet="News" />
           </AssociationSet>
           <AssociationSet Name="FK_NhapBanMu_NguoiNhap" Association="namlao206_websiteModel.FK_NhapBanMu_NguoiNhap">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="NhapBanMu" EntitySet="NhapBanMus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NhapBanMu_NguoiSua" Association="namlao206_websiteModel.FK_NhapBanMu_NguoiSua">
             <End Role="Account" EntitySet="Accounts" />
             <End Role="NhapBanMu" EntitySet="NhapBanMus" />
           </AssociationSet>
@@ -2909,9 +2960,17 @@
             <End Role="DM_DonVis" EntitySet="DM_DonVis" />
             <End Role="HoSoPhapLy" EntitySet="HoSoPhapLys" />
           </AssociationSet>
+          <AssociationSet Name="FK_MenuItems_Donvis" Association="namlao206_websiteModel.FK_MenuItems_Donvis">
+            <End Role="DM_DonVis" EntitySet="DM_DonVis" />
+            <End Role="MenuItem" EntitySet="MenuItems" />
+          </AssociationSet>
           <AssociationSet Name="FK_NhapBanMu_DonVis" Association="namlao206_websiteModel.FK_NhapBanMu_DonVis">
             <End Role="DM_DonVis" EntitySet="DM_DonVis" />
             <End Role="NhapBanMu" EntitySet="NhapBanMus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PermissionGroups_DonVi" Association="namlao206_websiteModel.FK_PermissionGroups_DonVi">
+            <End Role="DM_DonVis" EntitySet="DM_DonVis" />
+            <End Role="PermissionGroup" EntitySet="PermissionGroups" />
           </AssociationSet>
           <AssociationSet Name="FK_Suppliers_Donvis" Association="namlao206_websiteModel.FK_Suppliers_Donvis">
             <End Role="DM_DonVis" EntitySet="DM_DonVis" />
@@ -2920,6 +2979,10 @@
           <AssociationSet Name="FK_Teams_Donvis" Association="namlao206_websiteModel.FK_Teams_Donvis">
             <End Role="DM_DonVis" EntitySet="DM_DonVis" />
             <End Role="Team" EntitySet="Teams" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ThietBiXeMay_DonVi" Association="namlao206_websiteModel.FK_ThietBiXeMay_DonVi">
+            <End Role="DM_DonVis" EntitySet="DM_DonVis" />
+            <End Role="ThietBiXeMay" EntitySet="ThietBiXeMays" />
           </AssociationSet>
           <AssociationSet Name="FK_DM_Nhanviens_ToDM_Hocvis" Association="namlao206_websiteModel.FK_DM_Nhanviens_ToDM_Hocvis">
             <End Role="DM_Hocvis" EntitySet="DM_Hocvis" />
@@ -2993,6 +3056,10 @@
             <End Role="Employee" EntitySet="Employees" />
             <End Role="NhapBanMu" EntitySet="NhapBanMus" />
           </AssociationSet>
+          <AssociationSet Name="FK_ThietBiXeMay_NguoiSuDung" Association="namlao206_websiteModel.FK_ThietBiXeMay_NguoiSuDung">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="ThietBiXeMay" EntitySet="ThietBiXeMays" />
+          </AssociationSet>
           <AssociationSet Name="FK__GiamSatTh__DonVi__44952D46" Association="namlao206_websiteModel.FK__GiamSatTh__DonVi__44952D46">
             <End Role="Supplier" EntitySet="Suppliers" />
             <End Role="GiamSatThiCong" EntitySet="GiamSatThiCongs" />
@@ -3009,8 +3076,20 @@
             <End Role="Unit" EntitySet="Units" />
             <End Role="GiamSatThiCong" EntitySet="GiamSatThiCongs" />
           </AssociationSet>
+          <AssociationSet Name="FK__GroupPerm__Group__546180BB" Association="namlao206_websiteModel.FK__GroupPerm__Group__546180BB">
+            <End Role="PermissionGroup" EntitySet="PermissionGroups" />
+            <End Role="GroupPermission" EntitySet="GroupPermissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GroupPerm__Permi__5555A4F4" Association="namlao206_websiteModel.FK__GroupPerm__Permi__5555A4F4">
+            <End Role="Permission" EntitySet="Permissions" />
+            <End Role="GroupPermission" EntitySet="GroupPermissions" />
+          </AssociationSet>
           <AssociationSet Name="FK__HoSoPhapL__Proje__345EC57D" Association="namlao206_websiteModel.FK__HoSoPhapL__Proje__345EC57D">
             <End Role="Project" EntitySet="Projects" />
+            <End Role="HoSoPhapLy" EntitySet="HoSoPhapLys" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HoSoPhapLys_ThietBis" Association="namlao206_websiteModel.FK_HoSoPhapLys_ThietBis">
+            <End Role="ThietBiXeMay" EntitySet="ThietBiXeMays" />
             <End Role="HoSoPhapLy" EntitySet="HoSoPhapLys" />
           </AssociationSet>
           <AssociationSet Name="FK__KhaoSats__DonViK__3A179ED3" Association="namlao206_websiteModel.FK__KhaoSats__DonViK__3A179ED3">
@@ -3032,6 +3111,14 @@
           <AssociationSet Name="FK_LevelPermissions_ToLevels" Association="namlao206_websiteModel.FK_LevelPermissions_ToLevels">
             <End Role="Level" EntitySet="Levels" />
             <End Role="LevelPermission" EntitySet="LevelPermissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuItem_Parent" Association="namlao206_websiteModel.FK_MenuItem_Parent">
+            <End Role="MenuItem" EntitySet="MenuItems" />
+            <End Role="MenuItem1" EntitySet="MenuItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuItems_Permissions" Association="namlao206_websiteModel.FK_MenuItems_Permissions">
+            <End Role="Permission" EntitySet="Permissions" />
+            <End Role="MenuItem" EntitySet="MenuItems" />
           </AssociationSet>
           <AssociationSet Name="FK_News_NewsPictures" Association="namlao206_websiteModel.FK_News_NewsPictures">
             <End Role="News" EntitySet="News" />
@@ -3081,6 +3168,14 @@
             <End Role="Team" EntitySet="Teams" />
             <End Role="NhapBanMu" EntitySet="NhapBanMus" />
           </AssociationSet>
+          <AssociationSet Name="FK_NhapBanMu_TinhTrang" Association="namlao206_websiteModel.FK_NhapBanMu_TinhTrang">
+            <End Role="StatusProject" EntitySet="StatusProjects" />
+            <End Role="NhapBanMu" EntitySet="NhapBanMus" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserPermi__Group__5A1A5A11" Association="namlao206_websiteModel.FK__UserPermi__Group__5A1A5A11">
+            <End Role="PermissionGroup" EntitySet="PermissionGroups" />
+            <End Role="UserPermissionGroup" EntitySet="UserPermissionGroups" />
+          </AssociationSet>
           <AssociationSet Name="FK__Projects__Invest__2AD55B43" Association="namlao206_websiteModel.FK__Projects__Invest__2AD55B43">
             <End Role="Supplier" EntitySet="Suppliers" />
             <End Role="Project" EntitySet="Projects" />
@@ -3117,59 +3212,9 @@
             <End Role="TransportFile" EntitySet="TransportFiles" />
             <End Role="Transport" EntitySet="Transports" />
           </AssociationSet>
-          <AssociationSet Name="FK_NhapBanMu_NguoiSua" Association="namlao206_websiteModel.FK_NhapBanMu_NguoiSua">
-            <End Role="Account" EntitySet="Accounts" />
-            <End Role="NhapBanMu" EntitySet="NhapBanMus" />
-          </AssociationSet>
-          <AssociationSet Name="FK_NhapBanMu_TinhTrang" Association="namlao206_websiteModel.FK_NhapBanMu_TinhTrang">
-            <End Role="StatusProject" EntitySet="StatusProjects" />
-            <End Role="NhapBanMu" EntitySet="NhapBanMus" />
-          </AssociationSet>
-          <EntitySet Name="GroupPermissions" EntityType="namlao206_websiteModel.GroupPermission" />
-          <EntitySet Name="UserPermissionGroups" EntityType="namlao206_websiteModel.UserPermissionGroup" />
-          <AssociationSet Name="FK__UserPermi__Accou__592635D8" Association="namlao206_websiteModel.FK__UserPermi__Accou__592635D8">
-            <End Role="Account" EntitySet="Accounts" />
-            <End Role="UserPermissionGroup" EntitySet="UserPermissionGroups" />
-          </AssociationSet>
-          <EntitySet Name="PermissionGroups" EntityType="namlao206_websiteModel.PermissionGroup" />
-          <EntitySet Name="Permissions" EntityType="namlao206_websiteModel.Permission" />
-          <AssociationSet Name="FK__GroupPerm__Group__546180BB" Association="namlao206_websiteModel.FK__GroupPerm__Group__546180BB">
-            <End Role="PermissionGroup" EntitySet="PermissionGroups" />
-            <End Role="GroupPermission" EntitySet="GroupPermissions" />
-          </AssociationSet>
-          <AssociationSet Name="FK__GroupPerm__Permi__5555A4F4" Association="namlao206_websiteModel.FK__GroupPerm__Permi__5555A4F4">
-            <End Role="Permission" EntitySet="Permissions" />
-            <End Role="GroupPermission" EntitySet="GroupPermissions" />
-          </AssociationSet>
-          <AssociationSet Name="FK__UserPermi__Group__5A1A5A11" Association="namlao206_websiteModel.FK__UserPermi__Group__5A1A5A11">
-            <End Role="PermissionGroup" EntitySet="PermissionGroups" />
-            <End Role="UserPermissionGroup" EntitySet="UserPermissionGroups" />
-          </AssociationSet>
-          <EntitySet Name="MenuItems" EntityType="namlao206_websiteModel.MenuItem" />
-          <AssociationSet Name="FK_MenuItem_Parent" Association="namlao206_websiteModel.FK_MenuItem_Parent">
-            <End Role="MenuItem" EntitySet="MenuItems" />
-            <End Role="MenuItem1" EntitySet="MenuItems" />
-          </AssociationSet>
-          <EntitySet Name="ThietBiXeMays" EntityType="namlao206_websiteModel.ThietBiXeMay" />
-          <AssociationSet Name="FK_ThietBiXeMay_DonVi" Association="namlao206_websiteModel.FK_ThietBiXeMay_DonVi">
-            <End Role="DM_DonVis" EntitySet="DM_DonVis" />
-            <End Role="ThietBiXeMay" EntitySet="ThietBiXeMays" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ThietBiXeMay_NguoiSuDung" Association="namlao206_websiteModel.FK_ThietBiXeMay_NguoiSuDung">
-            <End Role="Employee" EntitySet="Employees" />
-            <End Role="ThietBiXeMay" EntitySet="ThietBiXeMays" />
-          </AssociationSet>
-          <AssociationSet Name="FK_HoSoPhapLys_ThietBis" Association="namlao206_websiteModel.FK_HoSoPhapLys_ThietBis">
-            <End Role="ThietBiXeMay" EntitySet="ThietBiXeMays" />
-            <End Role="HoSoPhapLy" EntitySet="HoSoPhapLys" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MenuItems_Donvis" Association="namlao206_websiteModel.FK_MenuItems_Donvis">
-            <End Role="DM_DonVis" EntitySet="DM_DonVis" />
-            <End Role="MenuItem" EntitySet="MenuItems" />
-          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="sp_GetDataForDashBoard_Result">
-          <Property Type="String" Name="Titles" Nullable="false" MaxLength="24" />
+          <Property Type="String" Name="Titles" Nullable="false" MaxLength="21" />
           <Property Type="Decimal" Name="Counts" Nullable="true" Precision="18" Scale="2" />
           <Property Type="Decimal" Name="LastCounts" Nullable="true" Precision="18" Scale="2" />
           <Property Type="String" Name="Thang" Nullable="true" MaxLength="10" />
@@ -3228,15 +3273,15 @@
           <NavigationProperty Name="ThiCongs1" Relationship="namlao206_websiteModel.FK__ThiCongs__Modif__4B422AD5" FromRole="Account" ToRole="ThiCong" />
           <NavigationProperty Name="Units" Relationship="namlao206_websiteModel.FK__Units__CreateUse__17C286CF" FromRole="Account" ToRole="Unit" />
           <NavigationProperty Name="Units1" Relationship="namlao206_websiteModel.FK__Units__ModifiedU__18B6AB08" FromRole="Account" ToRole="Unit" />
+          <NavigationProperty Name="UserPermissionGroups" Relationship="namlao206_websiteModel.FK__UserPermi__Accou__592635D8" FromRole="Account" ToRole="UserPermissionGroup" />
           <NavigationProperty Name="Employee" Relationship="namlao206_websiteModel.FK_Accounts_Employees" FromRole="Account" ToRole="Employee" />
           <NavigationProperty Name="Level" Relationship="namlao206_websiteModel.FK_Accounts_Levels" FromRole="Account" ToRole="Level" />
           <NavigationProperty Name="News" Relationship="namlao206_websiteModel.FK_News_ToAccounts" FromRole="Account" ToRole="News" />
           <NavigationProperty Name="NhapBanMus" Relationship="namlao206_websiteModel.FK_NhapBanMu_NguoiNhap" FromRole="Account" ToRole="NhapBanMu" />
+          <NavigationProperty Name="NhapBanMus1" Relationship="namlao206_websiteModel.FK_NhapBanMu_NguoiSua" FromRole="Account" ToRole="NhapBanMu" />
           <NavigationProperty Name="TransportFiles" Relationship="namlao206_websiteModel.FK_TransportFiles_AccountModified" FromRole="Account" ToRole="TransportFile" />
           <NavigationProperty Name="TransportFiles1" Relationship="namlao206_websiteModel.FK_TransportFiles_AccountsCreate" FromRole="Account" ToRole="TransportFile" />
           <NavigationProperty Name="TransportFiles2" Relationship="namlao206_websiteModel.FK_TransportFiles_AccountsPheDuyet" FromRole="Account" ToRole="TransportFile" />
-          <NavigationProperty Name="NhapBanMus1" Relationship="namlao206_websiteModel.FK_NhapBanMu_NguoiSua" FromRole="Account" ToRole="NhapBanMu" />
-          <NavigationProperty Name="UserPermissionGroups" Relationship="namlao206_websiteModel.FK__UserPermi__Accou__592635D8" FromRole="Account" ToRole="UserPermissionGroup" />
         </EntityType>
         <EntityType Name="Administrator">
           <Key>
@@ -3372,6 +3417,7 @@
           <Property Name="ItemName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="NhomItemId" Type="Int32" />
+          <Property Name="STT" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="DM_Chucvus">
           <Key>
@@ -3412,11 +3458,12 @@
           <NavigationProperty Name="Projects" Relationship="namlao206_websiteModel.FK__Projects__DonViI__324172E1" FromRole="DM_DonVis" ToRole="Project" />
           <NavigationProperty Name="DM_PhongBans" Relationship="namlao206_websiteModel.FK_DM_PhongBans_DM_Donvis" FromRole="DM_DonVis" ToRole="DM_PhongBans" />
           <NavigationProperty Name="HoSoPhapLys" Relationship="namlao206_websiteModel.FK_HoSoPhapLys_DonVis" FromRole="DM_DonVis" ToRole="HoSoPhapLy" />
+          <NavigationProperty Name="MenuItems" Relationship="namlao206_websiteModel.FK_MenuItems_Donvis" FromRole="DM_DonVis" ToRole="MenuItem" />
           <NavigationProperty Name="NhapBanMus" Relationship="namlao206_websiteModel.FK_NhapBanMu_DonVis" FromRole="DM_DonVis" ToRole="NhapBanMu" />
+          <NavigationProperty Name="PermissionGroups" Relationship="namlao206_websiteModel.FK_PermissionGroups_DonVi" FromRole="DM_DonVis" ToRole="PermissionGroup" />
           <NavigationProperty Name="Suppliers" Relationship="namlao206_websiteModel.FK_Suppliers_Donvis" FromRole="DM_DonVis" ToRole="Supplier" />
           <NavigationProperty Name="Teams" Relationship="namlao206_websiteModel.FK_Teams_Donvis" FromRole="DM_DonVis" ToRole="Team" />
           <NavigationProperty Name="ThietBiXeMays" Relationship="namlao206_websiteModel.FK_ThietBiXeMay_DonVi" FromRole="DM_DonVis" ToRole="ThietBiXeMay" />
-          <NavigationProperty Name="MenuItems" Relationship="namlao206_websiteModel.FK_MenuItems_Donvis" FromRole="DM_DonVis" ToRole="MenuItem" />
         </EntityType>
         <EntityType Name="DM_hinhthuckinhdoanh">
           <Key>
@@ -3586,6 +3633,18 @@
           <NavigationProperty Name="StatusProject" Relationship="namlao206_websiteModel.FK__GiamSatTh__TinhT__2116E6DF" FromRole="GiamSatThiCong" ToRole="StatusProject" />
           <NavigationProperty Name="Unit" Relationship="namlao206_websiteModel.FK_GiamSatThiCongs_Units" FromRole="GiamSatThiCong" ToRole="Unit" />
         </EntityType>
+        <EntityType Name="GroupPermission">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupId" Type="Int32" Nullable="false" />
+          <Property Name="PermissionId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <NavigationProperty Name="PermissionGroup" Relationship="namlao206_websiteModel.FK__GroupPerm__Group__546180BB" FromRole="GroupPermission" ToRole="PermissionGroup" />
+          <NavigationProperty Name="Permission" Relationship="namlao206_websiteModel.FK__GroupPerm__Permi__5555A4F4" FromRole="GroupPermission" ToRole="Permission" />
+        </EntityType>
         <EntityType Name="HoatDongNhanSu">
           <Key>
             <PropertyRef Name="Id" />
@@ -3628,13 +3687,14 @@
           <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DonVi_Id" Type="Int32" />
           <Property Name="NhapBanMu_Id" Type="Int32" />
+          <Property Name="ThietBi_Id" Type="Int32" />
+          <Property Name="XayDung_Id" Type="Int32" />
           <NavigationProperty Name="Account" Relationship="namlao206_websiteModel.FK__HoSoPhapL__Creat__36470DEF" FromRole="HoSoPhapLy" ToRole="Account" />
           <NavigationProperty Name="Account1" Relationship="namlao206_websiteModel.FK__HoSoPhapL__Modif__373B3228" FromRole="HoSoPhapLy" ToRole="Account" />
           <NavigationProperty Name="DM_AddBangs" Relationship="namlao206_websiteModel.FK_HoSoPhapLys_AddBangs" FromRole="HoSoPhapLy" ToRole="DM_AddBangs" />
           <NavigationProperty Name="DM_DonVis" Relationship="namlao206_websiteModel.FK_HoSoPhapLys_DonVis" FromRole="HoSoPhapLy" ToRole="DM_DonVis" />
           <NavigationProperty Name="DocumentType" Relationship="namlao206_websiteModel.FK__HoSoPhapL__Docum__3552E9B6" FromRole="HoSoPhapLy" ToRole="DocumentType" />
           <NavigationProperty Name="Project" Relationship="namlao206_websiteModel.FK__HoSoPhapL__Proje__345EC57D" FromRole="HoSoPhapLy" ToRole="Project" />
-          <Property Name="ThietBi_Id" Type="Int32" />
           <NavigationProperty Name="ThietBiXeMay" Relationship="namlao206_websiteModel.FK_HoSoPhapLys_ThietBis" FromRole="HoSoPhapLy" ToRole="ThietBiXeMay" />
         </EntityType>
         <EntityType Name="KhaoSat">
@@ -3723,6 +3783,26 @@
           <Property Name="idQuocgia" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ten" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="MenuItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MenuName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MenuUrl" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="IconClass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PermissionCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayOrder" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="DepartmentId" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="PermissionID" Type="Int32" />
+          <NavigationProperty Name="DM_DonVis" Relationship="namlao206_websiteModel.FK_MenuItems_Donvis" FromRole="MenuItem" ToRole="DM_DonVis" />
+          <NavigationProperty Name="MenuItems1" Relationship="namlao206_websiteModel.FK_MenuItem_Parent" FromRole="MenuItem" ToRole="MenuItem1" />
+          <NavigationProperty Name="MenuItem1" Relationship="namlao206_websiteModel.FK_MenuItem_Parent" FromRole="MenuItem1" ToRole="MenuItem" />
+          <NavigationProperty Name="Permission" Relationship="namlao206_websiteModel.FK_MenuItems_Permissions" FromRole="MenuItem" ToRole="Permission" />
+        </EntityType>
         <EntityType Name="Nationality">
           <Key>
             <PropertyRef Name="Id" />
@@ -3799,6 +3879,8 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DonVi_Id" Type="Int32" />
+          <Property Name="MaPhieu" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="TenPhieu" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Team_Id" Type="Int32" />
           <Property Name="LoaiMu" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="NguoiNhap_ACC_Id" Type="Int32" />
@@ -3820,7 +3902,12 @@
           <Property Name="DoiTac_Id" Type="Int32" />
           <Property Name="DonViTienTe_Id" Type="Int32" />
           <Property Name="NguoiCan_EMP_Id" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="ModifiedAccount_Id" Type="Int32" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="TinhTrang" Type="Int32" />
           <NavigationProperty Name="Account" Relationship="namlao206_websiteModel.FK_NhapBanMu_NguoiNhap" FromRole="NhapBanMu" ToRole="Account" />
+          <NavigationProperty Name="Account1" Relationship="namlao206_websiteModel.FK_NhapBanMu_NguoiSua" FromRole="NhapBanMu" ToRole="Account" />
           <NavigationProperty Name="DM_DonVis" Relationship="namlao206_websiteModel.FK_NhapBanMu_DonVis" FromRole="NhapBanMu" ToRole="DM_DonVis" />
           <NavigationProperty Name="DocumentType" Relationship="namlao206_websiteModel.FK_NhapBanMu_LoaiHoSo" FromRole="NhapBanMu" ToRole="DocumentType" />
           <NavigationProperty Name="Employee" Relationship="namlao206_websiteModel.FK_NhapBanMu_KeToan" FromRole="NhapBanMu" ToRole="Employee" />
@@ -3833,14 +3920,37 @@
           <NavigationProperty Name="NhapBanMu2" Relationship="namlao206_websiteModel.FK_NhapBanMu_NhapBanMu" FromRole="NhapBanMu1" ToRole="NhapBanMu" />
           <NavigationProperty Name="Supplier" Relationship="namlao206_websiteModel.FK_NhapBanMu_Suppliers" FromRole="NhapBanMu" ToRole="Supplier" />
           <NavigationProperty Name="Team" Relationship="namlao206_websiteModel.FK_NhapBanMu_Teams" FromRole="NhapBanMu" ToRole="Team" />
-          <Property Name="MaPhieu" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="TenPhieu" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="IsActive" Type="Boolean" />
-          <Property Name="ModifiedAccount_Id" Type="Int32" />
-          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-          <Property Name="TinhTrang" Type="Int32" />
-          <NavigationProperty Name="Account1" Relationship="namlao206_websiteModel.FK_NhapBanMu_NguoiSua" FromRole="NhapBanMu" ToRole="Account" />
           <NavigationProperty Name="StatusProject1" Relationship="namlao206_websiteModel.FK_NhapBanMu_TinhTrang" FromRole="NhapBanMu" ToRole="StatusProject" />
+        </EntityType>
+        <EntityType Name="PermissionGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="DonVi_Id" Type="Int32" />
+          <NavigationProperty Name="DM_DonVis" Relationship="namlao206_websiteModel.FK_PermissionGroups_DonVi" FromRole="PermissionGroup" ToRole="DM_DonVis" />
+          <NavigationProperty Name="GroupPermissions" Relationship="namlao206_websiteModel.FK__GroupPerm__Group__546180BB" FromRole="PermissionGroup" ToRole="GroupPermission" />
+          <NavigationProperty Name="UserPermissionGroups" Relationship="namlao206_websiteModel.FK__UserPermi__Group__5A1A5A11" FromRole="PermissionGroup" ToRole="UserPermissionGroup" />
+        </EntityType>
+        <EntityType Name="Permission">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PermissionName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PermissionCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Module" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <NavigationProperty Name="GroupPermissions" Relationship="namlao206_websiteModel.FK__GroupPerm__Permi__5555A4F4" FromRole="Permission" ToRole="GroupPermission" />
+          <NavigationProperty Name="MenuItems" Relationship="namlao206_websiteModel.FK_MenuItems_Permissions" FromRole="Permission" ToRole="MenuItem" />
         </EntityType>
         <EntityType Name="Phase">
           <Key>
@@ -3927,9 +4037,9 @@
           <NavigationProperty Name="GiamSatThiCongs" Relationship="namlao206_websiteModel.FK__GiamSatTh__TinhT__2116E6DF" FromRole="StatusProject" ToRole="GiamSatThiCong" />
           <NavigationProperty Name="KhaoSats" Relationship="namlao206_websiteModel.FK__KhaoSats__TinhTr__2AA05119" FromRole="StatusProject" ToRole="KhaoSat" />
           <NavigationProperty Name="NhapBanMus" Relationship="namlao206_websiteModel.FK_NhapBanMu_CLMu" FromRole="StatusProject" ToRole="NhapBanMu" />
+          <NavigationProperty Name="NhapBanMus1" Relationship="namlao206_websiteModel.FK_NhapBanMu_TinhTrang" FromRole="StatusProject" ToRole="NhapBanMu" />
           <NavigationProperty Name="Projects" Relationship="namlao206_websiteModel.FK__Projects__TinhTr__351DDF8C" FromRole="StatusProject" ToRole="Project" />
           <NavigationProperty Name="ThiCongs" Relationship="namlao206_websiteModel.FK__ThiCongs__TinhTr__77DFC722" FromRole="StatusProject" ToRole="ThiCong" />
-          <NavigationProperty Name="NhapBanMus1" Relationship="namlao206_websiteModel.FK_NhapBanMu_TinhTrang" FromRole="StatusProject" ToRole="NhapBanMu" />
         </EntityType>
         <EntityType Name="SubMenu">
           <Key>
@@ -4022,6 +4132,31 @@
           <NavigationProperty Name="Supplier" Relationship="namlao206_websiteModel.FK__ThiCongs__DonVi__44952D46" FromRole="ThiCong" ToRole="Supplier" />
           <NavigationProperty Name="Unit" Relationship="namlao206_websiteModel.FK_ThiCongs_Units" FromRole="ThiCong" ToRole="Unit" />
         </EntityType>
+        <EntityType Name="ThietBiXeMay">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DonVi_Id" Type="Int32" Nullable="false" />
+          <Property Name="NgayNhap" Type="DateTime" Precision="3" />
+          <Property Name="LoaiTrangThietBi" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="BienSo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NhanHieu" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SoKhung" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SoMay" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NamSanXuat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="XuatXu" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NguoiSuDung_Id" Type="Int32" />
+          <Property Name="TinhTrangKyThuat" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HoSoPhapLy_Id" Type="Int32" />
+          <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateUser_Id" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="DM_DonVis" Relationship="namlao206_websiteModel.FK_ThietBiXeMay_DonVi" FromRole="ThietBiXeMay" ToRole="DM_DonVis" />
+          <NavigationProperty Name="Employee" Relationship="namlao206_websiteModel.FK_ThietBiXeMay_NguoiSuDung" FromRole="ThietBiXeMay" ToRole="Employee" />
+          <NavigationProperty Name="HoSoPhapLys" Relationship="namlao206_websiteModel.FK_HoSoPhapLys_ThietBis" FromRole="ThietBiXeMay" ToRole="HoSoPhapLy" />
+        </EntityType>
         <EntityType Name="Topic">
           <Key>
             <PropertyRef Name="Id" />
@@ -4106,6 +4241,19 @@
           <NavigationProperty Name="NhapBanMus" Relationship="namlao206_websiteModel.FK_NhapBanMu_DonViTienTe" FromRole="Unit" ToRole="NhapBanMu" />
           <NavigationProperty Name="NhapBanMus1" Relationship="namlao206_websiteModel.FK_NhapBanMu_LoaiThongKe" FromRole="Unit" ToRole="NhapBanMu" />
           <NavigationProperty Name="ThiCongs" Relationship="namlao206_websiteModel.FK_ThiCongs_Units" FromRole="Unit" ToRole="ThiCong" />
+        </EntityType>
+        <EntityType Name="UserPermissionGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountId" Type="Int32" Nullable="false" />
+          <Property Name="GroupId" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="Account" Relationship="namlao206_websiteModel.FK__UserPermi__Accou__592635D8" FromRole="UserPermissionGroup" ToRole="Account" />
+          <NavigationProperty Name="PermissionGroup" Relationship="namlao206_websiteModel.FK__UserPermi__Group__5A1A5A11" FromRole="UserPermissionGroup" ToRole="PermissionGroup" />
         </EntityType>
         <Association Name="FK__Contracts__Creat__214BF109">
           <End Type="namlao206_websiteModel.Account" Role="Account" Multiplicity="0..1" />
@@ -4431,6 +4579,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__UserPermi__Accou__592635D8">
+          <End Type="namlao206_websiteModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="namlao206_websiteModel.UserPermissionGroup" Role="UserPermissionGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserPermissionGroup">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Accounts_Employees">
           <End Type="namlao206_websiteModel.Employee" Role="Employee" Multiplicity="1" />
           <End Type="namlao206_websiteModel.Account" Role="Account" Multiplicity="*" />
@@ -4476,6 +4636,18 @@
             </Principal>
             <Dependent Role="NhapBanMu">
               <PropertyRef Name="NguoiNhap_ACC_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NhapBanMu_NguoiSua">
+          <End Type="namlao206_websiteModel.Account" Role="Account" Multiplicity="0..1" />
+          <End Type="namlao206_websiteModel.NhapBanMu" Role="NhapBanMu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NhapBanMu">
+              <PropertyRef Name="ModifiedAccount_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4695,6 +4867,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_MenuItems_Donvis">
+          <End Type="namlao206_websiteModel.DM_DonVis" Role="DM_DonVis" Multiplicity="0..1" />
+          <End Type="namlao206_websiteModel.MenuItem" Role="MenuItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_DonVis">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MenuItem">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_NhapBanMu_DonVis">
           <End Type="namlao206_websiteModel.DM_DonVis" Role="DM_DonVis" Multiplicity="0..1" />
           <End Type="namlao206_websiteModel.NhapBanMu" Role="NhapBanMu" Multiplicity="*" />
@@ -4703,6 +4887,18 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="NhapBanMu">
+              <PropertyRef Name="DonVi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PermissionGroups_DonVi">
+          <End Type="namlao206_websiteModel.DM_DonVis" Role="DM_DonVis" Multiplicity="0..1" />
+          <End Type="namlao206_websiteModel.PermissionGroup" Role="PermissionGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_DonVis">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PermissionGroup">
               <PropertyRef Name="DonVi_Id" />
             </Dependent>
           </ReferentialConstraint>
@@ -4728,6 +4924,18 @@
             </Principal>
             <Dependent Role="Team">
               <PropertyRef Name="DonviId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ThietBiXeMay_DonVi">
+          <End Type="namlao206_websiteModel.DM_DonVis" Role="DM_DonVis" Multiplicity="1" />
+          <End Type="namlao206_websiteModel.ThietBiXeMay" Role="ThietBiXeMay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_DonVis">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ThietBiXeMay">
+              <PropertyRef Name="DonVi_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4947,6 +5155,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ThietBiXeMay_NguoiSuDung">
+          <End Type="namlao206_websiteModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="namlao206_websiteModel.ThietBiXeMay" Role="ThietBiXeMay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ThietBiXeMay">
+              <PropertyRef Name="NguoiSuDung_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__GiamSatTh__DonVi__44952D46">
           <End Type="namlao206_websiteModel.Supplier" Role="Supplier" Multiplicity="0..1" />
           <End Type="namlao206_websiteModel.GiamSatThiCong" Role="GiamSatThiCong" Multiplicity="*" />
@@ -4995,6 +5215,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__GroupPerm__Group__546180BB">
+          <End Type="namlao206_websiteModel.PermissionGroup" Role="PermissionGroup" Multiplicity="1" />
+          <End Type="namlao206_websiteModel.GroupPermission" Role="GroupPermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PermissionGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GroupPermission">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GroupPerm__Permi__5555A4F4">
+          <End Type="namlao206_websiteModel.Permission" Role="Permission" Multiplicity="1" />
+          <End Type="namlao206_websiteModel.GroupPermission" Role="GroupPermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Permission">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GroupPermission">
+              <PropertyRef Name="PermissionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__HoSoPhapL__Proje__345EC57D">
           <End Type="namlao206_websiteModel.Project" Role="Project" Multiplicity="0..1" />
           <End Type="namlao206_websiteModel.HoSoPhapLy" Role="HoSoPhapLy" Multiplicity="*" />
@@ -5004,6 +5248,18 @@
             </Principal>
             <Dependent Role="HoSoPhapLy">
               <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HoSoPhapLys_ThietBis">
+          <End Type="namlao206_websiteModel.ThietBiXeMay" Role="ThietBiXeMay" Multiplicity="0..1" />
+          <End Type="namlao206_websiteModel.HoSoPhapLy" Role="HoSoPhapLy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ThietBiXeMay">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HoSoPhapLy">
+              <PropertyRef Name="ThietBi_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5064,6 +5320,30 @@
             </Principal>
             <Dependent Role="LevelPermission">
               <PropertyRef Name="LevelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuItem_Parent">
+          <End Type="namlao206_websiteModel.MenuItem" Role="MenuItem" Multiplicity="0..1" />
+          <End Type="namlao206_websiteModel.MenuItem" Role="MenuItem1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MenuItem">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MenuItem1">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuItems_Permissions">
+          <End Type="namlao206_websiteModel.Permission" Role="Permission" Multiplicity="0..1" />
+          <End Type="namlao206_websiteModel.MenuItem" Role="MenuItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Permission">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MenuItem">
+              <PropertyRef Name="PermissionID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5211,6 +5491,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_NhapBanMu_TinhTrang">
+          <End Type="namlao206_websiteModel.StatusProject" Role="StatusProject" Multiplicity="0..1" />
+          <End Type="namlao206_websiteModel.NhapBanMu" Role="NhapBanMu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusProject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NhapBanMu">
+              <PropertyRef Name="TinhTrang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserPermi__Group__5A1A5A11">
+          <End Type="namlao206_websiteModel.PermissionGroup" Role="PermissionGroup" Multiplicity="0..1" />
+          <End Type="namlao206_websiteModel.UserPermissionGroup" Role="UserPermissionGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PermissionGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserPermissionGroup">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Projects__Invest__2AD55B43">
           <End Type="namlao206_websiteModel.Supplier" Role="Supplier" Multiplicity="0..1" />
           <End Type="namlao206_websiteModel.Project" Role="Project" Multiplicity="*" />
@@ -5316,232 +5620,6 @@
             </Principal>
             <Dependent Role="Transport">
               <PropertyRef Name="FileId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_NhapBanMu_NguoiSua">
-          <End Type="namlao206_websiteModel.Account" Role="Account" Multiplicity="0..1" />
-          <End Type="namlao206_websiteModel.NhapBanMu" Role="NhapBanMu" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Account">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="NhapBanMu">
-              <PropertyRef Name="ModifiedAccount_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_NhapBanMu_TinhTrang">
-          <End Type="namlao206_websiteModel.StatusProject" Role="StatusProject" Multiplicity="0..1" />
-          <End Type="namlao206_websiteModel.NhapBanMu" Role="NhapBanMu" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="StatusProject">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="NhapBanMu">
-              <PropertyRef Name="TinhTrang" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="GroupPermission">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="GroupId" Type="Int32" Nullable="false" />
-          <Property Name="PermissionId" Type="Int32" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="Int32" />
-          <NavigationProperty Name="PermissionGroup" Relationship="namlao206_websiteModel.FK__GroupPerm__Group__546180BB" FromRole="GroupPermission" ToRole="PermissionGroup" />
-          <NavigationProperty Name="Permission" Relationship="namlao206_websiteModel.FK__GroupPerm__Permi__5555A4F4" FromRole="GroupPermission" ToRole="Permission" />
-        </EntityType>
-        <EntityType Name="UserPermissionGroup">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="AccountId" Type="Int32" Nullable="false" />
-          <Property Name="GroupId" Type="Int32" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="Int32" />
-          <NavigationProperty Name="Account" Relationship="namlao206_websiteModel.FK__UserPermi__Accou__592635D8" FromRole="UserPermissionGroup" ToRole="Account" />
-          <NavigationProperty Name="PermissionGroup" Relationship="namlao206_websiteModel.FK__UserPermi__Group__5A1A5A11" FromRole="UserPermissionGroup" ToRole="PermissionGroup" />
-        </EntityType>
-        <Association Name="FK__UserPermi__Accou__592635D8">
-          <End Type="namlao206_websiteModel.Account" Role="Account" Multiplicity="1" />
-          <End Type="namlao206_websiteModel.UserPermissionGroup" Role="UserPermissionGroup" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Account">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserPermissionGroup">
-              <PropertyRef Name="AccountId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="PermissionGroup">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="GroupName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="Int32" />
-          <NavigationProperty Name="GroupPermissions" Relationship="namlao206_websiteModel.FK__GroupPerm__Group__546180BB" FromRole="PermissionGroup" ToRole="GroupPermission" />
-          <NavigationProperty Name="UserPermissionGroups" Relationship="namlao206_websiteModel.FK__UserPermi__Group__5A1A5A11" FromRole="PermissionGroup" ToRole="UserPermissionGroup" />
-        </EntityType>
-        <EntityType Name="Permission">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PermissionName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="PermissionCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Module" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="Int32" />
-          <NavigationProperty Name="GroupPermissions" Relationship="namlao206_websiteModel.FK__GroupPerm__Permi__5555A4F4" FromRole="Permission" ToRole="GroupPermission" />
-        </EntityType>
-        <Association Name="FK__GroupPerm__Group__546180BB">
-          <End Type="namlao206_websiteModel.PermissionGroup" Role="PermissionGroup" Multiplicity="1" />
-          <End Type="namlao206_websiteModel.GroupPermission" Role="GroupPermission" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PermissionGroup">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="GroupPermission">
-              <PropertyRef Name="GroupId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__GroupPerm__Permi__5555A4F4">
-          <End Type="namlao206_websiteModel.Permission" Role="Permission" Multiplicity="1" />
-          <End Type="namlao206_websiteModel.GroupPermission" Role="GroupPermission" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Permission">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="GroupPermission">
-              <PropertyRef Name="PermissionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__UserPermi__Group__5A1A5A11">
-          <End Type="namlao206_websiteModel.PermissionGroup" Role="PermissionGroup" Multiplicity="0..1" />
-          <End Type="namlao206_websiteModel.UserPermissionGroup" Role="UserPermissionGroup" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PermissionGroup">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserPermissionGroup">
-              <PropertyRef Name="GroupId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="MenuItem">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MenuName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="MenuUrl" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="ParentId" Type="Int32" />
-          <Property Name="IconClass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PermissionCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DisplayOrder" Type="Int32" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="DepartmentId" Type="Int32" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="MenuItems1" Relationship="namlao206_websiteModel.FK_MenuItem_Parent" FromRole="MenuItem" ToRole="MenuItem1" />
-          <NavigationProperty Name="MenuItem1" Relationship="namlao206_websiteModel.FK_MenuItem_Parent" FromRole="MenuItem1" ToRole="MenuItem" />
-          <NavigationProperty Name="DM_DonVis" Relationship="namlao206_websiteModel.FK_MenuItems_Donvis" FromRole="MenuItem" ToRole="DM_DonVis" />
-        </EntityType>
-        <Association Name="FK_MenuItem_Parent">
-          <End Type="namlao206_websiteModel.MenuItem" Role="MenuItem" Multiplicity="0..1" />
-          <End Type="namlao206_websiteModel.MenuItem" Role="MenuItem1" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MenuItem">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="MenuItem1">
-              <PropertyRef Name="ParentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="ThietBiXeMay">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DonVi_Id" Type="Int32" Nullable="false" />
-          <Property Name="NgayNhap" Type="DateTime" Precision="3" />
-          <Property Name="LoaiTrangThietBi" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="BienSo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="NhanHieu" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="SoKhung" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="SoMay" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="NamSanXuat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="XuatXu" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="NguoiSuDung_Id" Type="Int32" />
-          <Property Name="TinhTrangKyThuat" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="HoSoPhapLy_Id" Type="Int32" />
-          <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CreateDate" Type="DateTime" Precision="3" />
-          <Property Name="CreateUser_Id" Type="Int32" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="DM_DonVis" Relationship="namlao206_websiteModel.FK_ThietBiXeMay_DonVi" FromRole="ThietBiXeMay" ToRole="DM_DonVis" />
-          <NavigationProperty Name="Employee" Relationship="namlao206_websiteModel.FK_ThietBiXeMay_NguoiSuDung" FromRole="ThietBiXeMay" ToRole="Employee" />
-          <NavigationProperty Name="HoSoPhapLys" Relationship="namlao206_websiteModel.FK_HoSoPhapLys_ThietBis" FromRole="ThietBiXeMay" ToRole="HoSoPhapLy" />
-        </EntityType>
-        <Association Name="FK_ThietBiXeMay_DonVi">
-          <End Type="namlao206_websiteModel.DM_DonVis" Role="DM_DonVis" Multiplicity="1" />
-          <End Type="namlao206_websiteModel.ThietBiXeMay" Role="ThietBiXeMay" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DM_DonVis">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ThietBiXeMay">
-              <PropertyRef Name="DonVi_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ThietBiXeMay_NguoiSuDung">
-          <End Type="namlao206_websiteModel.Employee" Role="Employee" Multiplicity="0..1" />
-          <End Type="namlao206_websiteModel.ThietBiXeMay" Role="ThietBiXeMay" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employee">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ThietBiXeMay">
-              <PropertyRef Name="NguoiSuDung_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_HoSoPhapLys_ThietBis">
-          <End Type="namlao206_websiteModel.ThietBiXeMay" Role="ThietBiXeMay" Multiplicity="0..1" />
-          <End Type="namlao206_websiteModel.HoSoPhapLy" Role="HoSoPhapLy" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ThietBiXeMay">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="HoSoPhapLy">
-              <PropertyRef Name="ThietBi_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MenuItems_Donvis">
-          <End Type="namlao206_websiteModel.DM_DonVis" Role="DM_DonVis" Multiplicity="0..1" />
-          <End Type="namlao206_websiteModel.MenuItem" Role="MenuItem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DM_DonVis">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="MenuItem">
-              <PropertyRef Name="DepartmentId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5714,6 +5792,7 @@
           <EntitySetMapping Name="DM_AdminListUpItem">
             <EntityTypeMapping TypeName="namlao206_websiteModel.DM_AdminListUpItem">
               <MappingFragment StoreEntitySet="DM_AdminListUpItem">
+                <ScalarProperty Name="STT" ColumnName="STT" />
                 <ScalarProperty Name="NhomItemId" ColumnName="NhomItemId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ItemName" ColumnName="ItemName" />
@@ -5895,6 +5974,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="GroupPermissions">
+            <EntityTypeMapping TypeName="namlao206_websiteModel.GroupPermission">
+              <MappingFragment StoreEntitySet="GroupPermissions">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="PermissionId" ColumnName="PermissionId" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="HoatDongNhanSus">
             <EntityTypeMapping TypeName="namlao206_websiteModel.HoatDongNhanSu">
               <MappingFragment StoreEntitySet="HoatDongNhanSu">
@@ -5918,6 +6008,7 @@
           <EntitySetMapping Name="HoSoPhapLys">
             <EntityTypeMapping TypeName="namlao206_websiteModel.HoSoPhapLy">
               <MappingFragment StoreEntitySet="HoSoPhapLys">
+                <ScalarProperty Name="XayDung_Id" ColumnName="XayDung_Id" />
                 <ScalarProperty Name="ThietBi_Id" ColumnName="ThietBi_Id" />
                 <ScalarProperty Name="NhapBanMu_Id" ColumnName="NhapBanMu_Id" />
                 <ScalarProperty Name="DonVi_Id" ColumnName="DonVi_Id" />
@@ -6017,6 +6108,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="MenuItems">
+            <EntityTypeMapping TypeName="namlao206_websiteModel.MenuItem">
+              <MappingFragment StoreEntitySet="MenuItems">
+                <ScalarProperty Name="PermissionID" ColumnName="PermissionID" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+                <ScalarProperty Name="PermissionCode" ColumnName="PermissionCode" />
+                <ScalarProperty Name="IconClass" ColumnName="IconClass" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="MenuUrl" ColumnName="MenuUrl" />
+                <ScalarProperty Name="MenuName" ColumnName="MenuName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Nationalities">
             <EntityTypeMapping TypeName="namlao206_websiteModel.Nationality">
               <MappingFragment StoreEntitySet="Nationalities">
@@ -6088,8 +6196,6 @@
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
                 <ScalarProperty Name="ModifiedAccount_Id" ColumnName="ModifiedAccount_Id" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="TenPhieu" ColumnName="TenPhieu" />
-                <ScalarProperty Name="MaPhieu" ColumnName="MaPhieu" />
                 <ScalarProperty Name="NguoiCan_EMP_Id" ColumnName="NguoiCan_EMP_Id" />
                 <ScalarProperty Name="DonViTienTe_Id" ColumnName="DonViTienTe_Id" />
                 <ScalarProperty Name="DoiTac_Id" ColumnName="DoiTac_Id" />
@@ -6111,7 +6217,36 @@
                 <ScalarProperty Name="NguoiNhap_ACC_Id" ColumnName="NguoiNhap_ACC_Id" />
                 <ScalarProperty Name="LoaiMu" ColumnName="LoaiMu" />
                 <ScalarProperty Name="Team_Id" ColumnName="Team_Id" />
+                <ScalarProperty Name="TenPhieu" ColumnName="TenPhieu" />
+                <ScalarProperty Name="MaPhieu" ColumnName="MaPhieu" />
                 <ScalarProperty Name="DonVi_Id" ColumnName="DonVi_Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PermissionGroups">
+            <EntityTypeMapping TypeName="namlao206_websiteModel.PermissionGroup">
+              <MappingFragment StoreEntitySet="PermissionGroups">
+                <ScalarProperty Name="DonVi_Id" ColumnName="DonVi_Id" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Permissions">
+            <EntityTypeMapping TypeName="namlao206_websiteModel.Permission">
+              <MappingFragment StoreEntitySet="Permissions">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Module" ColumnName="Module" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PermissionCode" ColumnName="PermissionCode" />
+                <ScalarProperty Name="PermissionName" ColumnName="PermissionName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -6259,6 +6394,29 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ThietBiXeMays">
+            <EntityTypeMapping TypeName="namlao206_websiteModel.ThietBiXeMay">
+              <MappingFragment StoreEntitySet="ThietBiXeMay">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreateUser_Id" ColumnName="CreateUser_Id" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="HoSoPhapLy_Id" ColumnName="HoSoPhapLy_Id" />
+                <ScalarProperty Name="TinhTrangKyThuat" ColumnName="TinhTrangKyThuat" />
+                <ScalarProperty Name="NguoiSuDung_Id" ColumnName="NguoiSuDung_Id" />
+                <ScalarProperty Name="XuatXu" ColumnName="XuatXu" />
+                <ScalarProperty Name="NamSanXuat" ColumnName="NamSanXuat" />
+                <ScalarProperty Name="SoMay" ColumnName="SoMay" />
+                <ScalarProperty Name="SoKhung" ColumnName="SoKhung" />
+                <ScalarProperty Name="NhanHieu" ColumnName="NhanHieu" />
+                <ScalarProperty Name="BienSo" ColumnName="BienSo" />
+                <ScalarProperty Name="LoaiTrangThietBi" ColumnName="LoaiTrangThietBi" />
+                <ScalarProperty Name="NgayNhap" ColumnName="NgayNhap" />
+                <ScalarProperty Name="DonVi_Id" ColumnName="DonVi_Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Topics">
             <EntityTypeMapping TypeName="namlao206_websiteModel.Topic">
               <MappingFragment StoreEntitySet="Topics">
@@ -6332,20 +6490,10 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="GroupPermissions">
-            <EntityTypeMapping TypeName="namlao206_websiteModel.GroupPermission">
-              <MappingFragment StoreEntitySet="GroupPermissions">
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="PermissionId" ColumnName="PermissionId" />
-                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="UserPermissionGroups">
             <EntityTypeMapping TypeName="namlao206_websiteModel.UserPermissionGroup">
               <MappingFragment StoreEntitySet="UserPermissionGroups">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="GroupId" ColumnName="GroupId" />
@@ -6354,72 +6502,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PermissionGroups">
-            <EntityTypeMapping TypeName="namlao206_websiteModel.PermissionGroup">
-              <MappingFragment StoreEntitySet="PermissionGroups">
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Permissions">
-            <EntityTypeMapping TypeName="namlao206_websiteModel.Permission">
-              <MappingFragment StoreEntitySet="Permissions">
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="Module" ColumnName="Module" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="PermissionCode" ColumnName="PermissionCode" />
-                <ScalarProperty Name="PermissionName" ColumnName="PermissionName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="MenuItems">
-            <EntityTypeMapping TypeName="namlao206_websiteModel.MenuItem">
-              <MappingFragment StoreEntitySet="MenuItems">
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
-                <ScalarProperty Name="PermissionCode" ColumnName="PermissionCode" />
-                <ScalarProperty Name="IconClass" ColumnName="IconClass" />
-                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
-                <ScalarProperty Name="MenuUrl" ColumnName="MenuUrl" />
-                <ScalarProperty Name="MenuName" ColumnName="MenuName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ThietBiXeMays">
-            <EntityTypeMapping TypeName="namlao206_websiteModel.ThietBiXeMay">
-              <MappingFragment StoreEntitySet="ThietBiXeMay">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreateUser_Id" ColumnName="CreateUser_Id" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
-                <ScalarProperty Name="HoSoPhapLy_Id" ColumnName="HoSoPhapLy_Id" />
-                <ScalarProperty Name="TinhTrangKyThuat" ColumnName="TinhTrangKyThuat" />
-                <ScalarProperty Name="NguoiSuDung_Id" ColumnName="NguoiSuDung_Id" />
-                <ScalarProperty Name="XuatXu" ColumnName="XuatXu" />
-                <ScalarProperty Name="NamSanXuat" ColumnName="NamSanXuat" />
-                <ScalarProperty Name="SoMay" ColumnName="SoMay" />
-                <ScalarProperty Name="SoKhung" ColumnName="SoKhung" />
-                <ScalarProperty Name="NhanHieu" ColumnName="NhanHieu" />
-                <ScalarProperty Name="BienSo" ColumnName="BienSo" />
-                <ScalarProperty Name="LoaiTrangThietBi" ColumnName="LoaiTrangThietBi" />
-                <ScalarProperty Name="NgayNhap" ColumnName="NgayNhap" />
-                <ScalarProperty Name="DonVi_Id" ColumnName="DonVi_Id" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

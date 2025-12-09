@@ -1,13 +1,14 @@
-﻿using System;
+﻿using NamLao206.Models;
+using NamLao206.Models.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using NamLao206.Models;
 
 namespace NamLao206.Areas.Admin.Controllers
 {
@@ -60,9 +61,15 @@ namespace NamLao206.Areas.Admin.Controllers
         // GET: Admin/GroupPermissions/Create
         public ActionResult Create()
         {
+            // 1. Kiểm tra xác thực người dùng
+            if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
+            {
+                ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
+                return RedirectToAction("Login", "Account");
+            }
             ViewBag.GroupId = new SelectList(db.PermissionGroups, "Id", "GroupName");
             ViewBag.PermissionId = new SelectList(db.Permissions, "Id", "PermissionName");
-            return View();
+            return PartialView();
         }
 
         // POST: Admin/GroupPermissions/Create
@@ -72,21 +79,42 @@ namespace NamLao206.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "Id,GroupId,PermissionId,CreatedDate,CreatedBy")] GroupPermission groupPermission)
         {
+            // 1. Kiểm tra xác thực người dùng
+            if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
+            {
+                ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
+                return RedirectToAction("Login", "Account");
+            }
             if (ModelState.IsValid)
             {
+                // Lấy thông tin tài khoản
+                var acc = db.Accounts
+                    .Where(x => x.Id == userId)
+                    .SingleOrDefault();
+                if (acc == null)
+                {
+                    ViewBag.Message = "Tài khoản không tồn tại hoặc không liên kết với nhân viên.";
+                    return RedirectToAction("Login", "Login", new { area = "" });
+                }
+                groupPermission.CreatedDate = DateTime.Now;
+                groupPermission.CreatedBy = userId;
                 db.GroupPermissions.Add(groupPermission);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                ViewBag.Message = "Thêm mới thành công!";
+                return RedirectToAction("Index", new { message = ViewBag.Message });
             }
-
-            ViewBag.GroupId = new SelectList(db.PermissionGroups, "Id", "GroupName", groupPermission.GroupId);
-            ViewBag.PermissionId = new SelectList(db.Permissions, "Id", "PermissionName", groupPermission.PermissionId);
-            return View(groupPermission);
+            ViewBag.Message = "Đã xảy ra lỗi nhập liệu!";
+            return RedirectToAction("Index", new { message = ViewBag.Message });
         }
 
         // GET: Admin/GroupPermissions/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
+            if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
+            {
+                ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
+                return RedirectToAction("Login", "Login", new { area = "" });
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -98,7 +126,7 @@ namespace NamLao206.Areas.Admin.Controllers
             }
             ViewBag.GroupId = new SelectList(db.PermissionGroups, "Id", "GroupName", groupPermission.GroupId);
             ViewBag.PermissionId = new SelectList(db.Permissions, "Id", "PermissionName", groupPermission.PermissionId);
-            return View(groupPermission);
+            return PartialView(groupPermission);
         }
 
         // POST: Admin/GroupPermissions/Edit/5
@@ -106,22 +134,41 @@ namespace NamLao206.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,GroupId,PermissionId,CreatedDate,CreatedBy")] GroupPermission groupPermission)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,GroupId,PermissionId")] GroupPermission groupPermission)
         {
+            if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
+            {
+                ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
+                return RedirectToAction("Login", "Login", new { area = "" });
+            }
             if (ModelState.IsValid)
             {
+                // Lấy thông tin tài khoản
+                var acc = db.Accounts
+                    .Where(x => x.Id == userId)
+                    .SingleOrDefault();
+                if (acc == null)
+                {
+                    ViewBag.Message = "Tài khoản không tồn tại hoặc không liên kết với nhân viên.";
+                    return RedirectToAction("Login", "Login", new { area = "" });
+                }
                 db.Entry(groupPermission).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                ViewBag.Message = "Sửa thành công!";
+                return RedirectToAction("Index", new { message = ViewBag.Message });
             }
-            ViewBag.GroupId = new SelectList(db.PermissionGroups, "Id", "GroupName", groupPermission.GroupId);
-            ViewBag.PermissionId = new SelectList(db.Permissions, "Id", "PermissionName", groupPermission.PermissionId);
-            return View(groupPermission);
+            ViewBag.Message = "Đã xảy ra lỗi nhập liệu!";
+            return RedirectToAction("Index", new { message = ViewBag.Message });
         }
 
         // GET: Admin/GroupPermissions/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
+            if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
+            {
+                ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
+                return RedirectToAction("Login", "Login", new { area = "" });
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -131,7 +178,7 @@ namespace NamLao206.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            return View(groupPermission);
+            return PartialView(groupPermission);
         }
 
         // POST: Admin/GroupPermissions/Delete/5
@@ -139,10 +186,16 @@ namespace NamLao206.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            GroupPermission groupPermission = await db.GroupPermissions.FindAsync(id);
+            if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
+            {
+                ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
+                return RedirectToAction("Login", "Login", new { area = "" });
+            }
+            GroupPermission groupPermission = await db.GroupPermissions.FindAsync(id);       
             db.GroupPermissions.Remove(groupPermission);
             await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            ViewBag.Message = "Xóa thành công!";
+            return RedirectToAction("Index", new { message = ViewBag.Message });
         }
 
         protected override void Dispose(bool disposing)

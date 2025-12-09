@@ -14,7 +14,7 @@ namespace NamLao206.Models.ViewModels
         public string DepartmentName { get; set; }
         public int DepartmentId { get; set; }
         public List<PermissionGroupVM> AvailableGroups { get; set; }
-        public List<int> SelectedGroupIds { get; set; }
+        public List<int?> SelectedGroupIds { get; set; }
         public List<string> UserPermissions { get; set; }
     }
 }

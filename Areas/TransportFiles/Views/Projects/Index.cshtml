@@ -65,7 +65,7 @@
                                                 </th>
                                                 <th>
                                                     Tên dự án
-                                                </th>                                      
+                                                </th>
                                                 <th>
                                                     Giám sát
                                                 </th>
@@ -103,7 +103,7 @@
                                                         <a href="@Url.Action("InformationProject", new { projectID = item.Id })" style="text-decoration: underline;">
                                                             @Html.DisplayFor(modelItem => item.TenDuAn)
                                                         </a>
-                                                    </td>                                                
+                                                    </td>
                                                     <td>
                                                         @Html.DisplayFor(modelItem => item.GiamSat)
                                                     </td>
@@ -127,15 +127,16 @@
                                                     </td>
                                                     <td>
                                                         @*<a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" data-title="Chi tiết" data-original-title="Chi tiết"
-                                                            href="@Url.Action("InformationProject", new { projectID = item.Id })"><i class="ni ni-wrench fa-2x"></i></a>*@
+                        href="@Url.Action("InformationProject", new { projectID = item.Id })"><i class="ni ni-wrench fa-2x"></i></a>*@
                                                         <a class="badge bg-info mr-2 bcommand" data-toggle="tooltip" data-placement="top" data-title="Sửa" data-original-title="Sửa"
-                                                           href="@Url.Action("Edit", new { id = item.Id })"><i class="fal fa-edit fa-2x"></i></a>
+                                                           href="@Url.Action(Donvi.EditBranch ?? "Edit", new { id = item.Id })"><i class="fal fa-edit fa-2x"></i></a>
                                                         <a class="badge bg-warning mr-2 bcommand" data-toggle="tooltip" data-placement="top" data-title="Xóa" data-original-title="Xóa"
                                                            href="@Url.Action("Delete", new { id = item.Id })"><i class="ni ni-trash fa-2x"></i></a>
                                                     </td>
                                                 </tr>
                                             }
                                         </tbody>
+                                   
                                     </table>
                                 </div>
                             </div>
