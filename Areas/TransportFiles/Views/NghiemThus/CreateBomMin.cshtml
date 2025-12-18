@@ -57,7 +57,7 @@
             </div>
             <div class="col-lg-6 col-sm-9 col-xs-12">
                 <div class="form-group">
-                    @Html.LabelFor(model => model.UnitId, htmlAttributes: new { @class = "control-label col-md-10" })
+                    @Html.LabelFor(model => model.UnitId,"Đơn vị", htmlAttributes: new { @class = "control-label col-md-10" })
                     <div class="col-md-10">
                         @Html.DropDownListFor(model => model.UnitId, null, htmlAttributes: new { @class = "form-control select2" })
                         @Html.ValidationMessageFor(model => model.UnitId, "", new { @class = "text-danger" })
@@ -66,7 +66,7 @@
             </div>
             <div class="col-lg-6 col-sm-9 col-xs-12">
                 <div class="form-group">
-                    @Html.LabelFor(model => model.DoanhThu, htmlAttributes: new { @class = "control-label col-md-6" })
+                    @Html.LabelFor(model => model.DoanhThu,"Doanh thu", htmlAttributes: new { @class = "control-label col-md-6" })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.DoanhThu, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "0", @value = "0" } })
                         @Html.ValidationMessageFor(model => model.DoanhThu, "", new { @class = "text-danger" })
@@ -75,7 +75,7 @@
             </div>
             <div class="col-lg-6 col-sm-9 col-xs-12">
                 <div class="form-group">
-                    @Html.LabelFor(model => model.DaThanhToan, htmlAttributes: new { @class = "control-label col-md-6" })
+                    @Html.LabelFor(model => model.DaThanhToan,"Tình trạng thanh toán", htmlAttributes: new { @class = "control-label col-md-6" })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.DaThanhToan, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "0", @value = "0" } })
                         @Html.ValidationMessageFor(model => model.DaThanhToan, "", new { @class = "text-danger" })

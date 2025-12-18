@@ -11,9 +11,9 @@
     <!-- Hiển thị thông báo (nếu có) -->
     <div id="alert-container" data-message="@Html.Raw(HttpUtility.HtmlEncode(ViewBag.Message))"></div>
     <input name="page" id="page" value="@page" hidden />
-    <div class="row">
-        <div class="container-fluid" style="margin-top:10px">
-            <div class="col-lg-12 col-sm-12 col-xs-12 ">
+    <div class="container-fluid" style="margin-top:10px">
+        <div class="row">
+            <div class="col-lg-9 col-sm-12 col-xs-12 ">
                 <div id="panel-1" class="panel">
                     <div class="panel-hdr">
                         <h2>
@@ -71,40 +71,46 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    @*<div class="col-lg-3 col-sm-8 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3" for="Logo">Hình ảnh:</label>
+                                                <div class="col-md-10">
+                                                    <input type="file" class="btn btn-outline-primary rounded-pill mt-2 is-invalid-cus" name="pic" id="pic" placeholder="Hình ảnh" />
+                                                </div>
+                                            </div>
+                                        </div>*@
+                                    <div class="col-lg-3 col-sm-8 col-xs-12">
                                         <div class="form-group">
-                                            <label class="control-label col-md-3" for="Logo">Hình ảnh:</label>
-                                            <div class="col-md-9">
-                                                <input type="file" class="btn btn-outline-primary rounded-pill mt-2 is-invalid-cus" name="pic" id="pic" placeholder="Hình ảnh" />
+                                            <label class="control-label col-md-4" for="Logo">Upload file PDF:</label>
+                                            <div class="col-md-10">
+                                                <input type="file" class="btn btn-outline-primary rounded-pill mt-2 is-invalid-cus" name="pdf" id="pdf" placeholder="PDF" multiple />
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        @Html.Label("Tác giả", htmlAttributes: new { @class = "control-label col-md-3" })
-                                        <div class="col-md-9">
+                                    <div class="col-lg-2 col-sm-8 col-xs-12">
+                                        @Html.Label("Tác giả", htmlAttributes: new { @class = "control-label col-md-6" })
+                                        <div class="col-md-10">
                                             @Html.EditorFor(model => model.Author, new { htmlAttributes = new { @class = "form-control is-invalid-cus", @placeholder = "Tác giả", required = "required" } })
                                             @Html.ValidationMessageFor(model => model.Author, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        @Html.Label("Ngày đăng", htmlAttributes: new { @class = "control-label col-md-3" })
-                                        <div class="col-md-9">
+                                    <div class="col-lg-2 col-sm-8 col-xs-12">
+                                        @Html.Label("Ngày đăng", htmlAttributes: new { @class = "control-label col-md-6" })
+                                        <div class="col-md-10">
                                             <input type="datetime-local" class="form-control" data-lang="en" data-RTL="false" id="DateUp" name="DateUp" data-date-autoclose="true" required value="@Model.DateUp.ToString("s")" />
                                             @Html.ValidationMessageFor(model => model.DateUp, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row" style="margin-top:20px">
-                                    <div class="col-md-6">
-                                        <div class="input-group  col-md-3">
+                                    <div class="col-lg-2 col-sm-8 col-xs-12">
+                                        <div class="input-group col-md-7">
                                             <div class="input-group-prepend text-center">
                                                 <span class="input-group-text" id="basic-addon1">Ưu tiên</span>
                                             </div>
                                             <input class="form-control" type="checkbox" name="uutien" id="uutien" value="true" checked="@Model.uutien" />
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="input-group  col-md-3">
+                                    <div class="col-lg-2 col-sm-8 col-xs-12">
+                                        <div class="input-group col-md-7">
                                             <div class="input-group-prepend text-center">
                                                 <span class="input-group-text" id="basic-addon1">Duyệt</span>
                                             </div>
@@ -116,6 +122,49 @@
                             <div class="form-group" style="float:right">
                                 <button type="submit" class="mt-2 btn btn-success">Lưu</button>
                                 <a class="mt-2 btn btn-light" href="/Admin/News">Đóng</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-xs-12 ">
+                <div id="panel-1" class="panel">
+                    <div class="panel-hdr">
+                        <h2>
+                            Quản lý <span class="fw-300"><i>@ViewBag.Title</i></span>
+                        </h2>
+                    </div>
+                    <div class="panel-container show">
+                        <div class="panel-content">
+                            <div class="form-horizontal">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover table-striped w-100 dt-basic-example" style="font-size: calc(0.3vw + 10px) ">
+                                        <thead class="bg-warning-200 text-center">
+                                            <tr>
+
+                                                <th class="text-center">Tên File</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model.StorageFiles.ToList())
+                                            {
+                                                <tr id="file-@item.Id">
+                                                    <td>
+                                                        @item.TenFile
+                                                    </td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center list-action">                                                         
+                                                            <a class="badge bg-warning mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xóa"
+                                                               href="@Url.Action("DeleteFile", new { id = item.Id, area = "Admin"  })"><i class="ni ni-trash fa-2x"></i></a>                                                        
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>

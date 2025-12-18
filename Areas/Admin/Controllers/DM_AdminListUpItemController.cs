@@ -17,7 +17,7 @@ namespace NamLao206.Areas.Admin.Controllers
         public ActionResult Index()
         {
 			ViewBag.Title = "List Admin -";
-			return View(db.DM_AdminListUpItem.ToList());
+			return View(db.DM_AdminListUpItem.OrderByDescending(x=>x.STT).ToList());
         }
 
         // GET: Admin/DM_AdminListUpItem/Details/5

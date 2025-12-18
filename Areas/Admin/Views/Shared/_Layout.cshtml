@@ -169,7 +169,7 @@
                                 <span class="nav-link-text" data-i18n="nav.theme_settings">Cập nhật trang chủ</span>
                             </a>
                             <ul>
-                                @Html.Partial("_adminListItem", new namlao206_websiteEntities().DM_AdminListUpItem)
+                                @Html.Partial("_adminListItem", new namlao206_websiteEntities().DM_AdminListUpItem.OrderBy(x=>x.STT))
                             </ul>
                         </li>
                         <li class="">

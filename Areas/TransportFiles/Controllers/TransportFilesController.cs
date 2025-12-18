@@ -669,7 +669,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
                         db.TransportFileUrls.Remove(db.TransportFileUrls.FirstOrDefault(x => x.TransportFilesId == id));
 						db.TransportFiles.Remove(transportFile);
 						db.SaveChanges();					
-						string dir = Server.MapPath("~/Content/Uploads/HopThu") + "\\" + transportFile.Id;
+						string dir = Server.MapPath("~/Uploads/HopThu") + "\\" + transportFile.Id;
 						if (Directory.Exists(dir))
 						{
 							Directory.Delete(dir, true);
@@ -693,7 +693,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
 		{
 			if (Request.Files.Count == 0) return;
 			int file_count = 0;
-			string dir = Path.Combine(Server.MapPath("~/Content/Uploads/HopThu"), transportFile.Id.ToString());
+			string dir = Path.Combine(Server.MapPath("~/Uploads/HopThu"), transportFile.Id.ToString());
 			if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
 
 			for (int i = 0; i < Request.Files.Count; i++)
@@ -706,16 +706,16 @@ namespace NamLao206.Areas.TransportFiles.Controllers
 					{
 						// Kiểm tra loại file và kích thước (ví dụ: chỉ cho phép PDF, tối đa 10MB)
 						string[] allowedExtensions = { ".pdf", ".doc", ".docx", ".rar", ".zip" };
-						int maxFileSize = 50 * 1024 * 1024; // 10MB
+						//int maxFileSize = 50 * 1024 * 1024; // 10MB
 						string fileExtension = Path.GetExtension(file.FileName).ToLower();
 						if (!allowedExtensions.Contains(fileExtension))
 						{
 							throw new Exception($"Loại file {fileExtension} không được phép. Chỉ cho phép: {string.Join(", ", allowedExtensions)}.");
 						}
-						if (file.ContentLength > maxFileSize)
-						{
-							throw new Exception($"Kích thước file vượt quá giới hạn ({maxFileSize / 1024 / 1024}MB).");
-						}
+						//if (file.ContentLength > maxFileSize)
+						//{
+						//	throw new Exception($"Kích thước file vượt quá giới hạn ({maxFileSize / 1024 / 1024}MB).");
+						//}
 						string filename = $"{DateTime.Now.Ticks}_{Path.GetFileName(file.FileName)}";
 						string filePath = Path.Combine(dir, filename);
 						file.SaveAs(filePath);
@@ -891,7 +891,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
 							CoQuan = string.Join(", ", g.Select(x => x.CoQuan).Distinct())
 						});
 
-				const string baseUrl = "https://www.namlao206.vn/Content/Uploads/HopThu";
+				const string baseUrl = "https://www.namlao206.vn/Uploads/HopThu";
 				ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
 				using (var package = new ExcelPackage())

@@ -42,9 +42,9 @@ namespace NamLao206.Models
         public string WardId { get; set; }
         public string Avatar { get; set; }
         public int GenderId { get; set; }
-        public bool TrangThaiChuyen { get; set; }
+        public Nullable<bool> TrangThaiChuyen { get; set; }
         public Nullable<bool> Canhan { get; set; }
-        public bool Import { get; set; }
+        public Nullable<bool> Import { get; set; }
         public Nullable<int> GroupId { get; set; }
         public System.DateTime Birthday { get; set; }
     

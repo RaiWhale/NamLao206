@@ -48,9 +48,6 @@ namespace NamLao206.Models
         public virtual Account Account1 { get; set; }
         public virtual DM_DonVis DM_DonVis { get; set; }
         public virtual DocumentType DocumentType { get; set; }
-        public virtual Employee Employee { get; set; }
-        public virtual Employee Employee1 { get; set; }
-        public virtual Employee Employee2 { get; set; }
         public virtual StatusProject StatusProject { get; set; }
         public virtual Unit Unit { get; set; }
         public virtual Unit Unit1 { get; set; }
@@ -59,5 +56,8 @@ namespace NamLao206.Models
         public virtual Supplier Supplier { get; set; }
         public virtual Team Team { get; set; }
         public virtual StatusProject StatusProject1 { get; set; }
+        public virtual Employee Employee { get; set; }
+        public virtual Employee Employee1 { get; set; }
+        public virtual Employee Employee2 { get; set; }
     }
 }

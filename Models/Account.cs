@@ -48,6 +48,7 @@ namespace NamLao206.Models
             this.News = new HashSet<News>();
             this.NhapBanMus = new HashSet<NhapBanMu>();
             this.NhapBanMus1 = new HashSet<NhapBanMu>();
+            this.StorageFiles = new HashSet<StorageFile>();
             this.TransportFiles = new HashSet<TransportFile>();
             this.TransportFiles1 = new HashSet<TransportFile>();
             this.TransportFiles2 = new HashSet<TransportFile>();
@@ -121,7 +122,6 @@ namespace NamLao206.Models
         public virtual ICollection<Unit> Units1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserPermissionGroup> UserPermissionGroups { get; set; }
-        public virtual Employee Employee { get; set; }
         public virtual Level Level { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<News> News { get; set; }
@@ -130,10 +130,13 @@ namespace NamLao206.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NhapBanMu> NhapBanMus1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StorageFile> StorageFiles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TransportFile> TransportFiles { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TransportFile> TransportFiles1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TransportFile> TransportFiles2 { get; set; }
+        public virtual Employee Employee { get; set; }
     }
 }

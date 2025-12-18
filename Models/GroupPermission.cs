@@ -20,7 +20,7 @@ namespace NamLao206.Models
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<int> CreatedBy { get; set; }
     
-        public virtual PermissionGroup PermissionGroup { get; set; }
         public virtual Permission Permission { get; set; }
+        public virtual PermissionGroup PermissionGroup { get; set; }
     }
 }

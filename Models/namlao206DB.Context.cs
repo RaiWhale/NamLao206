@@ -38,7 +38,6 @@ namespace NamLao206.Models
         public virtual DbSet<Contract> Contracts { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<DM_AddBangs> DM_AddBangs { get; set; }
-        public virtual DbSet<DM_AdminListUpItem> DM_AdminListUpItem { get; set; }
         public virtual DbSet<DM_Chucvus> DM_Chucvus { get; set; }
         public virtual DbSet<DM_Donvihanhchinhs> DM_Donvihanhchinhs { get; set; }
         public virtual DbSet<DM_DonVis> DM_DonVis { get; set; }
@@ -48,7 +47,6 @@ namespace NamLao206.Models
         public virtual DbSet<DM_NhomPhongBans> DM_NhomPhongBans { get; set; }
         public virtual DbSet<DM_PhongBans> DM_PhongBans { get; set; }
         public virtual DbSet<DocumentType> DocumentTypes { get; set; }
-        public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<Feedback> Feedbacks { get; set; }
         public virtual DbSet<Gender> Genders { get; set; }
         public virtual DbSet<GiamSatThiCong> GiamSatThiCongs { get; set; }
@@ -66,12 +64,12 @@ namespace NamLao206.Models
         public virtual DbSet<NewsPicture> NewsPictures { get; set; }
         public virtual DbSet<NghiemThu> NghiemThus { get; set; }
         public virtual DbSet<NhapBanMu> NhapBanMus { get; set; }
-        public virtual DbSet<PermissionGroup> PermissionGroups { get; set; }
         public virtual DbSet<Permission> Permissions { get; set; }
         public virtual DbSet<Phase> Phases { get; set; }
         public virtual DbSet<Picture> Pictures { get; set; }
         public virtual DbSet<Project> Projects { get; set; }
         public virtual DbSet<StatusProject> StatusProjects { get; set; }
+        public virtual DbSet<StorageFile> StorageFiles { get; set; }
         public virtual DbSet<SubMenu> SubMenus { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
         public virtual DbSet<Team> Teams { get; set; }
@@ -83,6 +81,9 @@ namespace NamLao206.Models
         public virtual DbSet<Transport> Transports { get; set; }
         public virtual DbSet<Unit> Units { get; set; }
         public virtual DbSet<UserPermissionGroup> UserPermissionGroups { get; set; }
+        public virtual DbSet<PermissionGroup> PermissionGroups { get; set; }
+        public virtual DbSet<DM_AdminListUpItem> DM_AdminListUpItem { get; set; }
+        public virtual DbSet<Employee> Employees { get; set; }
     
         public virtual ObjectResult<sp_GetDataForDashBoard_Result> sp_GetDataForDashBoard(string action, string fromDate, string toDate, Nullable<int> donvi_id)
         {

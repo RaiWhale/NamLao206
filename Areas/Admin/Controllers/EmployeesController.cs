@@ -92,13 +92,13 @@ namespace NamLao206.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 		public async Task<ActionResult> Create(
-	[Bind(Include = "Id,Name,Phone,Email,Address,LevelId,IsActive,KhoaphongId,NghenghiepId,ChucvuId,HocviId,CreatedDate,CityId,DistrictId,WardId,Avatar,GenderId,Birthday")] Employee employee,
+	[Bind(Include = "Id,Name,Phone,Email,Address,LevelId,KhoaphongId,NghenghiepId,ChucvuId,HocviId,CityId,DistrictId,WardId,Avatar,GenderId,Birthday")] Employee employee,
 	RegisterVM data,
 	string LoginName,
 	string Password,
 	HttpPostedFileBase pic)
 		{
-			if (!ModelState.IsValid)
+			if (ModelState.IsValid)
 			{
 			try
 			{

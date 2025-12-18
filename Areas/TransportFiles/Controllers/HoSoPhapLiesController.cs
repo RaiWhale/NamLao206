@@ -103,7 +103,6 @@ namespace NamLao206.Areas.TransportFiles.Controllers
             {
                 try
                 {
-
                     var uploadResult = await MySecurity.HandleFileUpload(hoSoPhapLy, file, UploadPath);
 
                     if (!uploadResult.Success)
@@ -117,7 +116,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
                     hoSoPhapLy.IsActive = true;
                     db.HoSoPhapLys.Add(hoSoPhapLy);
                     await db.SaveChangesAsync();
-                    return RedirectWithMessage("Tạo mới thành công!", hoSoPhapLy);
+                    return RedirectWithMessage("Tạo mới thành công! "+ uploadResult.Message, hoSoPhapLy);
                 }
                 catch (Exception ex)
                 {
