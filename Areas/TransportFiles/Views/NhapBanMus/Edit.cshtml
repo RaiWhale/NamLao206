@@ -199,7 +199,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.NguoiCan_EMP_Id, "Người cân", htmlAttributes: new { @class = "control-label col-md-6" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.NguoiCan_EMP_Id, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.DropDownList("NguoiCan_EMP_Id", null, htmlAttributes: new { @class = "js-states form-control select2" })
                         @Html.ValidationMessageFor(model => model.NguoiCan_EMP_Id, "", new { @class = "text-danger" })
                     </div>
                 </div>

@@ -31,6 +31,7 @@ namespace NamLao206.Models
         public Nullable<int> DepartmentId { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<int> PermissionID { get; set; }
+        public string STT { get; set; }
     
         public virtual DM_DonVis DM_DonVis { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

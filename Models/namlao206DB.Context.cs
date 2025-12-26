@@ -67,7 +67,6 @@ namespace NamLao206.Models
         public virtual DbSet<Permission> Permissions { get; set; }
         public virtual DbSet<Phase> Phases { get; set; }
         public virtual DbSet<Picture> Pictures { get; set; }
-        public virtual DbSet<Project> Projects { get; set; }
         public virtual DbSet<StatusProject> StatusProjects { get; set; }
         public virtual DbSet<StorageFile> StorageFiles { get; set; }
         public virtual DbSet<SubMenu> SubMenus { get; set; }
@@ -84,6 +83,7 @@ namespace NamLao206.Models
         public virtual DbSet<PermissionGroup> PermissionGroups { get; set; }
         public virtual DbSet<DM_AdminListUpItem> DM_AdminListUpItem { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<Project> Projects { get; set; }
     
         public virtual ObjectResult<sp_GetDataForDashBoard_Result> sp_GetDataForDashBoard(string action, string fromDate, string toDate, Nullable<int> donvi_id)
         {

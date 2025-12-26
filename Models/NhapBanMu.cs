@@ -59,5 +59,6 @@ namespace NamLao206.Models
         public virtual Employee Employee { get; set; }
         public virtual Employee Employee1 { get; set; }
         public virtual Employee Employee2 { get; set; }
+        public virtual Account Account2 { get; set; }
     }
 }

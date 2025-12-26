@@ -19,7 +19,6 @@ namespace NamLao206.Models
         {
             this.DM_AddBangs = new HashSet<DM_AddBangs>();
             this.HoatDongNhanSus = new HashSet<HoatDongNhanSu>();
-            this.Projects = new HashSet<Project>();
             this.DM_PhongBans = new HashSet<DM_PhongBans>();
             this.HoSoPhapLys = new HashSet<HoSoPhapLy>();
             this.MenuItems = new HashSet<MenuItem>();
@@ -28,6 +27,7 @@ namespace NamLao206.Models
             this.Teams = new HashSet<Team>();
             this.ThietBiXeMays = new HashSet<ThietBiXeMay>();
             this.PermissionGroups = new HashSet<PermissionGroup>();
+            this.Projects = new HashSet<Project>();
         }
     
         public int Id { get; set; }
@@ -44,8 +44,6 @@ namespace NamLao206.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HoatDongNhanSu> HoatDongNhanSus { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Project> Projects { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DM_PhongBans> DM_PhongBans { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HoSoPhapLy> HoSoPhapLys { get; set; }
@@ -61,5 +59,7 @@ namespace NamLao206.Models
         public virtual ICollection<ThietBiXeMay> ThietBiXeMays { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PermissionGroup> PermissionGroups { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Project> Projects { get; set; }
     }
 }

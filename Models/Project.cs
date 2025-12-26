@@ -37,7 +37,7 @@ namespace NamLao206.Models
         public Nullable<System.DateTime> StartDate { get; set; }
         public Nullable<System.DateTime> EndDate { get; set; }
         public Nullable<int> TinhTrangDuAn { get; set; }
-        public bool TinhTrangCongNo { get; set; }
+        public Nullable<bool> TinhTrangCongNo { get; set; }
         public Nullable<int> ContractId { get; set; }
         public Nullable<int> CreateUserId { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }

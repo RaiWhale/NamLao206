@@ -1,92 +1,93 @@
-﻿using NamLao206.Models;
-using NamLao206.Models.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using NamLao206.Models;
 
-namespace NamLao206.Areas.Admin.Controllers
+namespace NamLao206.Areas.TransportFiles.Controllers
 {
-    public class GroupPermissionsController : Controller
+    public class TeamsController : Controller
     {
         private namlao206_websiteEntities db = new namlao206_websiteEntities();
-        int pageSize = 10;
-        // GET: Admin/GroupPermissions
-        public async Task<ActionResult> Index(int? page, string search, string message)
+
+        // GET: TransportFiles/Teams
+        public ActionResult Index(string message, string search)
         {
-            // 1. Kiểm tra xác thực người dùng
             if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
             {
                 ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction("Login", "Login", new { area = "" });
             }
-            IQueryable<GroupPermission> groupPermissions = db.GroupPermissions.Include(g => g.PermissionGroup).Include(g => g.Permission);
-
+            // Lấy thông tin tài khoản
+            var acc = db.Accounts
+                .Where(x => x.Id == userId)
+                .SingleOrDefault();
+            if (acc == null)
+            {
+                ViewBag.Message = "Tài khoản không tồn tại hoặc không liên kết với nhân viên.";
+                return RedirectToAction("Login", "Login", new { area = "" });
+            }
+            // Lấy danh sách đội theo đơn vị			
+            IQueryable<Team> teams = db.Teams.Include(s => s.Account).Include(s => s.Account1)
+                .Where(x => x.DonviId == acc.Employee.DM_PhongBans.donvi_Id);
             if (!string.IsNullOrEmpty(message))
             {
                 ViewBag.Message = message;
             }
             if (!string.IsNullOrEmpty(search))
             {
-                groupPermissions = groupPermissions.Where(c => c.PermissionGroup.GroupName.ToLower().Contains(search.Trim().ToLower()));
+                teams = teams
+                    .Where(x => x.TeamName.Contains(search) || x.NguoiDaiDien.Contains(search));
             }
-            groupPermissions = groupPermissions.OrderByDescending(c => c.CreatedDate);
-            //Paging		     
-            //int pageNumber = page ?? 1;
-            ViewBag.Title = "Menu phân quyền -";
-            ViewBag.search = search;
-            return View(await groupPermissions.ToListAsync());                 
+            ViewBag.Title = "Đội - ";
+            return View(teams.ToList());
         }
 
-        // GET: Admin/GroupPermissions/Details/5
+        // GET: TransportFiles/Teams/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            GroupPermission groupPermission = await db.GroupPermissions.FindAsync(id);
-            if (groupPermission == null)
+            Team team = await db.Teams.FindAsync(id);
+            if (team == null)
             {
                 return HttpNotFound();
             }
-            return View(groupPermission);
+            return View(team);
         }
 
-        // GET: Admin/GroupPermissions/Create
+        // GET: TransportFiles/Teams/Create
         public ActionResult Create()
         {
-            // 1. Kiểm tra xác thực người dùng
             if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
             {
                 ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction("Login", "Login", new { area = "" });
             }
-            ViewBag.GroupId = new SelectList(db.PermissionGroups, "Id", "GroupName");
-            ViewBag.PermissionId = new SelectList(db.Permissions, "Id", "PermissionName");
             return PartialView();
         }
 
-        // POST: Admin/GroupPermissions/Create
+        // POST: TransportFiles/Teams/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,GroupId,PermissionId,CreatedDate,CreatedBy")] GroupPermission groupPermission)
+        public async Task<ActionResult> Create([Bind(Include = "Id,TeamName,NguoiDaiDien,SoLuongNguoi,IsActive,DonviId,Note")] Team team)
         {
-            // 1. Kiểm tra xác thực người dùng
-            if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
-            {
-                ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
-                return RedirectToAction("Login", "Account");
-            }
             if (ModelState.IsValid)
             {
+                if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
+                {
+                    ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
+                    return RedirectToAction("Login", "Login", new { area = "" });
+                }
                 // Lấy thông tin tài khoản
                 var acc = db.Accounts
                     .Where(x => x.Id == userId)
@@ -96,18 +97,21 @@ namespace NamLao206.Areas.Admin.Controllers
                     ViewBag.Message = "Tài khoản không tồn tại hoặc không liên kết với nhân viên.";
                     return RedirectToAction("Login", "Login", new { area = "" });
                 }
-                groupPermission.CreatedDate = DateTime.Now;
-                groupPermission.CreatedBy = userId;
-                db.GroupPermissions.Add(groupPermission);
+                team.CreateUserId = userId;
+                team.CreateDate = DateTime.Now;
+                team.IsActive = true;
+                team.DonviId = acc.Employee.DM_PhongBans.donvi_Id;
+                db.Teams.Add(team);
                 await db.SaveChangesAsync();
                 ViewBag.Message = "Thêm mới thành công!";
                 return RedirectToAction("Index", new { message = ViewBag.Message });
             }
+
             ViewBag.Message = "Đã xảy ra lỗi nhập liệu!";
             return RedirectToAction("Index", new { message = ViewBag.Message });
         }
 
-        // GET: Admin/GroupPermissions/Edit/5
+        // GET: TransportFiles/Teams/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
@@ -119,30 +123,28 @@ namespace NamLao206.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            GroupPermission groupPermission = await db.GroupPermissions.FindAsync(id);
-            if (groupPermission == null)
+            Team team = await db.Teams.FindAsync(id);
+            if (team == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.GroupId = new SelectList(db.PermissionGroups, "Id", "GroupName", groupPermission.GroupId);
-            ViewBag.PermissionId = new SelectList(db.Permissions, "Id", "PermissionName", groupPermission.PermissionId);
-            return PartialView(groupPermission);
+            return PartialView(team);
         }
 
-        // POST: Admin/GroupPermissions/Edit/5
+        // POST: TransportFiles/Teams/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,GroupId,PermissionId,CreatedDate,CreatedBy")] GroupPermission groupPermission)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,TeamName,NguoiDaiDien,SoLuongNguoi,IsActive,DonviId,Note")] Team team)
         {
-            if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
-            {
-                ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
-                return RedirectToAction("Login", "Login", new { area = "" });
-            }
             if (ModelState.IsValid)
             {
+                if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
+                {
+                    ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
+                    return RedirectToAction("Login", "Login", new { area = "" });
+                }
                 // Lấy thông tin tài khoản
                 var acc = db.Accounts
                     .Where(x => x.Id == userId)
@@ -152,7 +154,9 @@ namespace NamLao206.Areas.Admin.Controllers
                     ViewBag.Message = "Tài khoản không tồn tại hoặc không liên kết với nhân viên.";
                     return RedirectToAction("Login", "Login", new { area = "" });
                 }
-                db.Entry(groupPermission).State = EntityState.Modified;
+                team.ModifiedUserId = userId;
+                team.ModifiedDate = DateTime.Now;
+                db.Entry(team).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 ViewBag.Message = "Sửa thành công!";
                 return RedirectToAction("Index", new { message = ViewBag.Message });
@@ -161,7 +165,7 @@ namespace NamLao206.Areas.Admin.Controllers
             return RedirectToAction("Index", new { message = ViewBag.Message });
         }
 
-        // GET: Admin/GroupPermissions/Delete/5
+        // GET: TransportFiles/Teams/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
@@ -173,15 +177,15 @@ namespace NamLao206.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            GroupPermission groupPermission = await db.GroupPermissions.FindAsync(id);
-            if (groupPermission == null)
+            Team team = await db.Teams.FindAsync(id);
+            if (team == null)
             {
                 return HttpNotFound();
             }
-            return PartialView(groupPermission);
+            return View(team);
         }
 
-        // POST: Admin/GroupPermissions/Delete/5
+        // POST: TransportFiles/Teams/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
@@ -191,8 +195,23 @@ namespace NamLao206.Areas.Admin.Controllers
                 ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
                 return RedirectToAction("Login", "Login", new { area = "" });
             }
-            GroupPermission groupPermission = await db.GroupPermissions.FindAsync(id);       
-            db.GroupPermissions.Remove(groupPermission);
+            Team team = await db.Teams.FindAsync(id);
+            // Lấy thông tin tài khoản
+            var acc = db.Accounts
+                .Where(x => x.Id == userId)
+                .SingleOrDefault();
+            if (acc == null)
+            {
+                ViewBag.Message = "Tài khoản không tồn tại hoặc không liên kết với nhân viên.";
+                return RedirectToAction("Login", "Login", new { area = "" });
+            }
+            else if (acc.Id != team.CreateUserId)
+            {
+                ViewBag.Message = "Bạn không có quyền xóa nhà cung cấp!";
+                return RedirectToAction("Index", new { message = ViewBag.Message });
+            }
+   
+            db.Teams.Remove(team);
             await db.SaveChangesAsync();
             ViewBag.Message = "Xóa thành công!";
             return RedirectToAction("Index", new { message = ViewBag.Message });

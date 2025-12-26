@@ -37,7 +37,7 @@ namespace NamLao206.Models
         public virtual DM_AddBangs DM_AddBangs { get; set; }
         public virtual DM_DonVis DM_DonVis { get; set; }
         public virtual DocumentType DocumentType { get; set; }
-        public virtual Project Project { get; set; }
         public virtual ThietBiXeMay ThietBiXeMay { get; set; }
+        public virtual Project Project { get; set; }
     }
 }

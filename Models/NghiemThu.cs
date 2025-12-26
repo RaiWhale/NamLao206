@@ -34,8 +34,8 @@ namespace NamLao206.Models
     
         public virtual Account Account { get; set; }
         public virtual Account Account1 { get; set; }
-        public virtual Project Project { get; set; }
         public virtual Phase Phase { get; set; }
         public virtual Unit Unit { get; set; }
+        public virtual Project Project { get; set; }
     }
 }

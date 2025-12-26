@@ -141,7 +141,7 @@
           <Property Name="ItemName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" />
           <Property Name="NhomItemId" Type="int" />
-          <Property Name="STT" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="STT" Type="decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="DM_Chucvus">
           <Key>
@@ -445,6 +445,7 @@
           <Property Name="DepartmentId" Type="int" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="PermissionID" Type="int" />
+          <Property Name="STT" Type="nchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="Nationalities">
           <Key>
@@ -603,7 +604,7 @@
           <Property Name="StartDate" Type="datetime" />
           <Property Name="EndDate" Type="datetime" />
           <Property Name="TinhTrangDuAn" Type="int" />
-          <Property Name="TinhTrangCongNo" Type="bit" Nullable="false" />
+          <Property Name="TinhTrangCongNo" Type="bit" />
           <Property Name="ContractId" Type="int" />
           <Property Name="CreateUserId" Type="int" />
           <Property Name="CreateDate" Type="datetime" />
@@ -1931,6 +1932,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_NhapBanMu_NguoiCan">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="0..1" />
+          <End Role="NhapBanMu" Type="Self.NhapBanMu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NhapBanMu">
+              <PropertyRef Name="NguoiCan_EMP_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_NhapBanMu_NguoiNhap">
           <End Role="Accounts" Type="Self.Accounts" Multiplicity="0..1" />
           <End Role="NhapBanMu" Type="Self.NhapBanMu" Multiplicity="*" />
@@ -2643,6 +2656,10 @@
             <End Role="Units" EntitySet="Units" />
             <End Role="NhapBanMu" EntitySet="NhapBanMu" />
           </AssociationSet>
+          <AssociationSet Name="FK_NhapBanMu_NguoiCan" Association="Self.FK_NhapBanMu_NguoiCan">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="NhapBanMu" EntitySet="NhapBanMu" />
+          </AssociationSet>
           <AssociationSet Name="FK_NhapBanMu_NguoiNhap" Association="Self.FK_NhapBanMu_NguoiNhap">
             <End Role="Accounts" EntitySet="Accounts" />
             <End Role="NhapBanMu" EntitySet="NhapBanMu" />
@@ -2787,7 +2804,6 @@
           <EntitySet Name="Permissions" EntityType="namlao206_websiteModel.Permission" />
           <EntitySet Name="Phases" EntityType="namlao206_websiteModel.Phase" />
           <EntitySet Name="Pictures" EntityType="namlao206_websiteModel.Picture" />
-          <EntitySet Name="Projects" EntityType="namlao206_websiteModel.Project" />
           <EntitySet Name="StatusProjects" EntityType="namlao206_websiteModel.StatusProject" />
           <EntitySet Name="StorageFiles" EntityType="namlao206_websiteModel.StorageFile" />
           <EntitySet Name="SubMenus" EntityType="namlao206_websiteModel.SubMenu" />
@@ -2860,14 +2876,6 @@
           <AssociationSet Name="FK__Phases__Modified__13F1F5EB" Association="namlao206_websiteModel.FK__Phases__Modified__13F1F5EB">
             <End Role="Account" EntitySet="Accounts" />
             <End Role="Phase" EntitySet="Phases" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Projects__Create__2F9A1060" Association="namlao206_websiteModel.FK__Projects__Create__2F9A1060">
-            <End Role="Account" EntitySet="Accounts" />
-            <End Role="Project" EntitySet="Projects" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Projects__Modifi__308E3499" Association="namlao206_websiteModel.FK__Projects__Modifi__308E3499">
-            <End Role="Account" EntitySet="Accounts" />
-            <End Role="Project" EntitySet="Projects" />
           </AssociationSet>
           <AssociationSet Name="FK__StatusPro__Creat__1C873BEC" Association="namlao206_websiteModel.FK__StatusPro__Creat__1C873BEC">
             <End Role="Account" EntitySet="Accounts" />
@@ -2985,10 +2993,6 @@
             <End Role="DM_DonVis" EntitySet="DM_DonVis" />
             <End Role="HoatDongNhanSu" EntitySet="HoatDongNhanSus" />
           </AssociationSet>
-          <AssociationSet Name="FK__Projects__DonViI__324172E1" Association="namlao206_websiteModel.FK__Projects__DonViI__324172E1">
-            <End Role="DM_DonVis" EntitySet="DM_DonVis" />
-            <End Role="Project" EntitySet="Projects" />
-          </AssociationSet>
           <AssociationSet Name="FK_DM_PhongBans_DM_Donvis" Association="namlao206_websiteModel.FK_DM_PhongBans_DM_Donvis">
             <End Role="DM_DonVis" EntitySet="DM_DonVis" />
             <End Role="DM_PhongBans" EntitySet="DM_PhongBans" />
@@ -3045,20 +3049,12 @@
             <End Role="DocumentType" EntitySet="DocumentTypes" />
             <End Role="ThiCong" EntitySet="ThiCongs" />
           </AssociationSet>
-          <AssociationSet Name="FK_DocumentTypes_Projects" Association="namlao206_websiteModel.FK_DocumentTypes_Projects">
-            <End Role="DocumentType" EntitySet="DocumentTypes" />
-            <End Role="Project" EntitySet="Projects" />
-          </AssociationSet>
           <AssociationSet Name="FK_NhapBanMu_LoaiHoSo" Association="namlao206_websiteModel.FK_NhapBanMu_LoaiHoSo">
             <End Role="DocumentType" EntitySet="DocumentTypes" />
             <End Role="NhapBanMu" EntitySet="NhapBanMus" />
           </AssociationSet>
           <AssociationSet Name="FK__GiamSatTh__DonVi__44952D46" Association="namlao206_websiteModel.FK__GiamSatTh__DonVi__44952D46">
             <End Role="Supplier" EntitySet="Suppliers" />
-            <End Role="GiamSatThiCong" EntitySet="GiamSatThiCongs" />
-          </AssociationSet>
-          <AssociationSet Name="FK__GiamSatTh__Proje__2022C2A6" Association="namlao206_websiteModel.FK__GiamSatTh__Proje__2022C2A6">
-            <End Role="Project" EntitySet="Projects" />
             <End Role="GiamSatThiCong" EntitySet="GiamSatThiCongs" />
           </AssociationSet>
           <AssociationSet Name="FK__GiamSatTh__TinhT__2116E6DF" Association="namlao206_websiteModel.FK__GiamSatTh__TinhT__2116E6DF">
@@ -3073,20 +3069,12 @@
             <End Role="Permission" EntitySet="Permissions" />
             <End Role="GroupPermission" EntitySet="GroupPermissions" />
           </AssociationSet>
-          <AssociationSet Name="FK__HoSoPhapL__Proje__345EC57D" Association="namlao206_websiteModel.FK__HoSoPhapL__Proje__345EC57D">
-            <End Role="Project" EntitySet="Projects" />
-            <End Role="HoSoPhapLy" EntitySet="HoSoPhapLys" />
-          </AssociationSet>
           <AssociationSet Name="FK_HoSoPhapLys_ThietBis" Association="namlao206_websiteModel.FK_HoSoPhapLys_ThietBis">
             <End Role="ThietBiXeMay" EntitySet="ThietBiXeMays" />
             <End Role="HoSoPhapLy" EntitySet="HoSoPhapLys" />
           </AssociationSet>
           <AssociationSet Name="FK__KhaoSats__DonViK__3A179ED3" Association="namlao206_websiteModel.FK__KhaoSats__DonViK__3A179ED3">
             <End Role="Supplier" EntitySet="Suppliers" />
-            <End Role="KhaoSat" EntitySet="KhaoSats" />
-          </AssociationSet>
-          <AssociationSet Name="FK__KhaoSats__Projec__29AC2CE0" Association="namlao206_websiteModel.FK__KhaoSats__Projec__29AC2CE0">
-            <End Role="Project" EntitySet="Projects" />
             <End Role="KhaoSat" EntitySet="KhaoSats" />
           </AssociationSet>
           <AssociationSet Name="FK__KhaoSats__TinhTr__2AA05119" Association="namlao206_websiteModel.FK__KhaoSats__TinhTr__2AA05119">
@@ -3125,10 +3113,6 @@
             <End Role="News" EntitySet="News" />
             <End Role="StorageFile" EntitySet="StorageFiles" />
           </AssociationSet>
-          <AssociationSet Name="FK__NghiemThu__Proje__2E70E1FD" Association="namlao206_websiteModel.FK__NghiemThu__Proje__2E70E1FD">
-            <End Role="Project" EntitySet="Projects" />
-            <End Role="NghiemThu" EntitySet="NghiemThus" />
-          </AssociationSet>
           <AssociationSet Name="FK_NghiemThus_Phases" Association="namlao206_websiteModel.FK_NghiemThus_Phases">
             <End Role="Phase" EntitySet="Phases" />
             <End Role="NghiemThu" EntitySet="NghiemThus" />
@@ -3164,18 +3148,6 @@
           <AssociationSet Name="FK_NhapBanMu_TinhTrang" Association="namlao206_websiteModel.FK_NhapBanMu_TinhTrang">
             <End Role="StatusProject" EntitySet="StatusProjects" />
             <End Role="NhapBanMu" EntitySet="NhapBanMus" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Projects__Invest__2AD55B43" Association="namlao206_websiteModel.FK__Projects__Invest__2AD55B43">
-            <End Role="Supplier" EntitySet="Suppliers" />
-            <End Role="Project" EntitySet="Projects" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Projects__TinhTr__351DDF8C" Association="namlao206_websiteModel.FK__Projects__TinhTr__351DDF8C">
-            <End Role="StatusProject" EntitySet="StatusProjects" />
-            <End Role="Project" EntitySet="Projects" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ThiCongs__Projec__76EBA2E9" Association="namlao206_websiteModel.FK__ThiCongs__Projec__76EBA2E9">
-            <End Role="Project" EntitySet="Projects" />
-            <End Role="ThiCong" EntitySet="ThiCongs" />
           </AssociationSet>
           <AssociationSet Name="FK__ThiCongs__TinhTr__77DFC722" Association="namlao206_websiteModel.FK__ThiCongs__TinhTr__77DFC722">
             <End Role="StatusProject" EntitySet="StatusProjects" />
@@ -3268,6 +3240,55 @@
             <End Role="Employee" EntitySet="Employees" />
             <End Role="ThietBiXeMay" EntitySet="ThietBiXeMays" />
           </AssociationSet>
+          <EntitySet Name="Projects" EntityType="namlao206_websiteModel.Project" />
+          <AssociationSet Name="FK__Projects__Create__2F9A1060" Association="namlao206_websiteModel.FK__Projects__Create__2F9A1060">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Project" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Projects__Modifi__308E3499" Association="namlao206_websiteModel.FK__Projects__Modifi__308E3499">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Project" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Projects__DonViI__324172E1" Association="namlao206_websiteModel.FK__Projects__DonViI__324172E1">
+            <End Role="DM_DonVis" EntitySet="DM_DonVis" />
+            <End Role="Project" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocumentTypes_Projects" Association="namlao206_websiteModel.FK_DocumentTypes_Projects">
+            <End Role="DocumentType" EntitySet="DocumentTypes" />
+            <End Role="Project" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GiamSatTh__Proje__2022C2A6" Association="namlao206_websiteModel.FK__GiamSatTh__Proje__2022C2A6">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="GiamSatThiCong" EntitySet="GiamSatThiCongs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HoSoPhapL__Proje__345EC57D" Association="namlao206_websiteModel.FK__HoSoPhapL__Proje__345EC57D">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="HoSoPhapLy" EntitySet="HoSoPhapLys" />
+          </AssociationSet>
+          <AssociationSet Name="FK__KhaoSats__Projec__29AC2CE0" Association="namlao206_websiteModel.FK__KhaoSats__Projec__29AC2CE0">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="KhaoSat" EntitySet="KhaoSats" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NghiemThu__Proje__2E70E1FD" Association="namlao206_websiteModel.FK__NghiemThu__Proje__2E70E1FD">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="NghiemThu" EntitySet="NghiemThus" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Projects__Invest__2AD55B43" Association="namlao206_websiteModel.FK__Projects__Invest__2AD55B43">
+            <End Role="Supplier" EntitySet="Suppliers" />
+            <End Role="Project" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Projects__TinhTr__351DDF8C" Association="namlao206_websiteModel.FK__Projects__TinhTr__351DDF8C">
+            <End Role="StatusProject" EntitySet="StatusProjects" />
+            <End Role="Project" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ThiCongs__Projec__76EBA2E9" Association="namlao206_websiteModel.FK__ThiCongs__Projec__76EBA2E9">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="ThiCong" EntitySet="ThiCongs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NhapBanMu_NguoiCan" Association="namlao206_websiteModel.FK_NhapBanMu_NguoiCan">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="NhapBanMu" EntitySet="NhapBanMus" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="sp_GetDataForDashBoard_Result">
           <Property Type="String" Name="Titles" Nullable="false" MaxLength="21" />
@@ -3317,8 +3338,6 @@
           <NavigationProperty Name="NghiemThus1" Relationship="namlao206_websiteModel.FK__NghiemThu__Modif__5006DFF2" FromRole="Account" ToRole="NghiemThu" />
           <NavigationProperty Name="Phases" Relationship="namlao206_websiteModel.FK__Phases__CreateUs__12FDD1B2" FromRole="Account" ToRole="Phase" />
           <NavigationProperty Name="Phases1" Relationship="namlao206_websiteModel.FK__Phases__Modified__13F1F5EB" FromRole="Account" ToRole="Phase" />
-          <NavigationProperty Name="Projects" Relationship="namlao206_websiteModel.FK__Projects__Create__2F9A1060" FromRole="Account" ToRole="Project" />
-          <NavigationProperty Name="Projects1" Relationship="namlao206_websiteModel.FK__Projects__Modifi__308E3499" FromRole="Account" ToRole="Project" />
           <NavigationProperty Name="StatusProjects" Relationship="namlao206_websiteModel.FK__StatusPro__Creat__1C873BEC" FromRole="Account" ToRole="StatusProject" />
           <NavigationProperty Name="StatusProjects1" Relationship="namlao206_websiteModel.FK__StatusPro__Modif__1D7B6025" FromRole="Account" ToRole="StatusProject" />
           <NavigationProperty Name="Suppliers" Relationship="namlao206_websiteModel.FK__Suppliers__Creat__0E391C95" FromRole="Account" ToRole="Supplier" />
@@ -3339,6 +3358,9 @@
           <NavigationProperty Name="TransportFiles1" Relationship="namlao206_websiteModel.FK_TransportFiles_AccountsCreate" FromRole="Account" ToRole="TransportFile" />
           <NavigationProperty Name="TransportFiles2" Relationship="namlao206_websiteModel.FK_TransportFiles_AccountsPheDuyet" FromRole="Account" ToRole="TransportFile" />
           <NavigationProperty Name="Employee" Relationship="namlao206_websiteModel.FK_Accounts_Employees" FromRole="Account" ToRole="Employee" />
+          <NavigationProperty Name="Projects" Relationship="namlao206_websiteModel.FK__Projects__Create__2F9A1060" FromRole="Account" ToRole="Project" />
+          <NavigationProperty Name="Projects1" Relationship="namlao206_websiteModel.FK__Projects__Modifi__308E3499" FromRole="Account" ToRole="Project" />
+          <NavigationProperty Name="NhapBanMus2" Relationship="namlao206_websiteModel.FK_NhapBanMu_NguoiCan" FromRole="Account" ToRole="NhapBanMu" />
         </EntityType>
         <EntityType Name="Administrator">
           <Key>
@@ -3502,7 +3524,6 @@
           <Property Name="EditBranch" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="DM_AddBangs" Relationship="namlao206_websiteModel.FK_DM_AddBangs_DonVis" FromRole="DM_DonVis" ToRole="DM_AddBangs" />
           <NavigationProperty Name="HoatDongNhanSus" Relationship="namlao206_websiteModel.FK__HoatDongN__DonVi__7BB05806" FromRole="DM_DonVis" ToRole="HoatDongNhanSu" />
-          <NavigationProperty Name="Projects" Relationship="namlao206_websiteModel.FK__Projects__DonViI__324172E1" FromRole="DM_DonVis" ToRole="Project" />
           <NavigationProperty Name="DM_PhongBans" Relationship="namlao206_websiteModel.FK_DM_PhongBans_DM_Donvis" FromRole="DM_DonVis" ToRole="DM_PhongBans" />
           <NavigationProperty Name="HoSoPhapLys" Relationship="namlao206_websiteModel.FK_HoSoPhapLys_DonVis" FromRole="DM_DonVis" ToRole="HoSoPhapLy" />
           <NavigationProperty Name="MenuItems" Relationship="namlao206_websiteModel.FK_MenuItems_Donvis" FromRole="DM_DonVis" ToRole="MenuItem" />
@@ -3511,6 +3532,7 @@
           <NavigationProperty Name="Teams" Relationship="namlao206_websiteModel.FK_Teams_Donvis" FromRole="DM_DonVis" ToRole="Team" />
           <NavigationProperty Name="ThietBiXeMays" Relationship="namlao206_websiteModel.FK_ThietBiXeMay_DonVi" FromRole="DM_DonVis" ToRole="ThietBiXeMay" />
           <NavigationProperty Name="PermissionGroups" Relationship="namlao206_websiteModel.FK_PermissionGroups_DM_DonVis" FromRole="DM_DonVis" ToRole="PermissionGroup" />
+          <NavigationProperty Name="Projects" Relationship="namlao206_websiteModel.FK__Projects__DonViI__324172E1" FromRole="DM_DonVis" ToRole="Project" />
         </EntityType>
         <EntityType Name="DM_hinhthuckinhdoanh">
           <Key>
@@ -3581,8 +3603,8 @@
           <NavigationProperty Name="HoSoPhapLys" Relationship="namlao206_websiteModel.FK__HoSoPhapL__Docum__3552E9B6" FromRole="DocumentType" ToRole="HoSoPhapLy" />
           <NavigationProperty Name="KhaoSats" Relationship="namlao206_websiteModel.FK__KhaoSats__DocumentType__25DB9BFC" FromRole="DocumentType" ToRole="KhaoSat" />
           <NavigationProperty Name="ThiCongs" Relationship="namlao206_websiteModel.FK__ThiCongs__Contr__1C5231C2" FromRole="DocumentType" ToRole="ThiCong" />
-          <NavigationProperty Name="Projects" Relationship="namlao206_websiteModel.FK_DocumentTypes_Projects" FromRole="DocumentType" ToRole="Project" />
           <NavigationProperty Name="NhapBanMus" Relationship="namlao206_websiteModel.FK_NhapBanMu_LoaiHoSo" FromRole="DocumentType" ToRole="NhapBanMu" />
+          <NavigationProperty Name="Projects" Relationship="namlao206_websiteModel.FK_DocumentTypes_Projects" FromRole="DocumentType" ToRole="Project" />
         </EntityType>
         <EntityType Name="Feedback">
           <Key>
@@ -3636,9 +3658,9 @@
           <NavigationProperty Name="Account1" Relationship="namlao206_websiteModel.FK__GiamSatTh__Modif__4B422AD5" FromRole="GiamSatThiCong" ToRole="Account" />
           <NavigationProperty Name="DocumentType" Relationship="namlao206_websiteModel.FK__GiamSatTh__Contr__1C5231C2" FromRole="GiamSatThiCong" ToRole="DocumentType" />
           <NavigationProperty Name="Supplier" Relationship="namlao206_websiteModel.FK__GiamSatTh__DonVi__44952D46" FromRole="GiamSatThiCong" ToRole="Supplier" />
-          <NavigationProperty Name="Project" Relationship="namlao206_websiteModel.FK__GiamSatTh__Proje__2022C2A6" FromRole="GiamSatThiCong" ToRole="Project" />
           <NavigationProperty Name="StatusProject" Relationship="namlao206_websiteModel.FK__GiamSatTh__TinhT__2116E6DF" FromRole="GiamSatThiCong" ToRole="StatusProject" />
           <NavigationProperty Name="Unit" Relationship="namlao206_websiteModel.FK_GiamSatThiCongs_Units" FromRole="GiamSatThiCong" ToRole="Unit" />
+          <NavigationProperty Name="Project" Relationship="namlao206_websiteModel.FK__GiamSatTh__Proje__2022C2A6" FromRole="GiamSatThiCong" ToRole="Project" />
         </EntityType>
         <EntityType Name="GroupPermission">
           <Key>
@@ -3701,8 +3723,8 @@
           <NavigationProperty Name="DM_AddBangs" Relationship="namlao206_websiteModel.FK_HoSoPhapLys_AddBangs" FromRole="HoSoPhapLy" ToRole="DM_AddBangs" />
           <NavigationProperty Name="DM_DonVis" Relationship="namlao206_websiteModel.FK_HoSoPhapLys_DonVis" FromRole="HoSoPhapLy" ToRole="DM_DonVis" />
           <NavigationProperty Name="DocumentType" Relationship="namlao206_websiteModel.FK__HoSoPhapL__Docum__3552E9B6" FromRole="HoSoPhapLy" ToRole="DocumentType" />
-          <NavigationProperty Name="Project" Relationship="namlao206_websiteModel.FK__HoSoPhapL__Proje__345EC57D" FromRole="HoSoPhapLy" ToRole="Project" />
           <NavigationProperty Name="ThietBiXeMay" Relationship="namlao206_websiteModel.FK_HoSoPhapLys_ThietBis" FromRole="HoSoPhapLy" ToRole="ThietBiXeMay" />
+          <NavigationProperty Name="Project" Relationship="namlao206_websiteModel.FK__HoSoPhapL__Proje__345EC57D" FromRole="HoSoPhapLy" ToRole="Project" />
         </EntityType>
         <EntityType Name="KhaoSat">
           <Key>
@@ -3742,9 +3764,9 @@
           <NavigationProperty Name="Account1" Relationship="namlao206_websiteModel.FK__KhaoSats__Modifi__41B8C09B" FromRole="KhaoSat" ToRole="Account" />
           <NavigationProperty Name="DocumentType" Relationship="namlao206_websiteModel.FK__KhaoSats__DocumentType__25DB9BFC" FromRole="KhaoSat" ToRole="DocumentType" />
           <NavigationProperty Name="Supplier" Relationship="namlao206_websiteModel.FK__KhaoSats__DonViK__3A179ED3" FromRole="KhaoSat" ToRole="Supplier" />
-          <NavigationProperty Name="Project" Relationship="namlao206_websiteModel.FK__KhaoSats__Projec__29AC2CE0" FromRole="KhaoSat" ToRole="Project" />
           <NavigationProperty Name="StatusProject" Relationship="namlao206_websiteModel.FK__KhaoSats__TinhTr__2AA05119" FromRole="KhaoSat" ToRole="StatusProject" />
           <NavigationProperty Name="Unit" Relationship="namlao206_websiteModel.FK__KhaoSats__UnitId__2B947552" FromRole="KhaoSat" ToRole="Unit" />
+          <NavigationProperty Name="Project" Relationship="namlao206_websiteModel.FK__KhaoSats__Projec__29AC2CE0" FromRole="KhaoSat" ToRole="Project" />
         </EntityType>
         <EntityType Name="LevelPermission">
           <Key>
@@ -3809,6 +3831,7 @@
           <NavigationProperty Name="MenuItems1" Relationship="namlao206_websiteModel.FK_MenuItem_Parent" FromRole="MenuItem" ToRole="MenuItem1" />
           <NavigationProperty Name="MenuItem1" Relationship="namlao206_websiteModel.FK_MenuItem_Parent" FromRole="MenuItem1" ToRole="MenuItem" />
           <NavigationProperty Name="Permission" Relationship="namlao206_websiteModel.FK_MenuItems_Permissions" FromRole="MenuItem" ToRole="Permission" />
+          <Property Name="STT" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="Nationality">
           <Key>
@@ -3877,9 +3900,9 @@
           <Property Name="CongNo" Type="Decimal" Precision="18" Scale="2" />
           <NavigationProperty Name="Account" Relationship="namlao206_websiteModel.FK__NghiemThu__Creat__4F12BBB9" FromRole="NghiemThu" ToRole="Account" />
           <NavigationProperty Name="Account1" Relationship="namlao206_websiteModel.FK__NghiemThu__Modif__5006DFF2" FromRole="NghiemThu" ToRole="Account" />
-          <NavigationProperty Name="Project" Relationship="namlao206_websiteModel.FK__NghiemThu__Proje__2E70E1FD" FromRole="NghiemThu" ToRole="Project" />
           <NavigationProperty Name="Phase" Relationship="namlao206_websiteModel.FK_NghiemThus_Phases" FromRole="NghiemThu" ToRole="Phase" />
           <NavigationProperty Name="Unit" Relationship="namlao206_websiteModel.FK_NghiemThus_Units" FromRole="NghiemThu" ToRole="Unit" />
+          <NavigationProperty Name="Project" Relationship="namlao206_websiteModel.FK__NghiemThu__Proje__2E70E1FD" FromRole="NghiemThu" ToRole="Project" />
         </EntityType>
         <EntityType Name="NhapBanMu">
           <Key>
@@ -3929,6 +3952,7 @@
           <NavigationProperty Name="Employee" Relationship="namlao206_websiteModel.FK_NhapBanMu_KeToan" FromRole="NhapBanMu" ToRole="Employee" />
           <NavigationProperty Name="Employee1" Relationship="namlao206_websiteModel.FK_NhapBanMu_NguoiPheDuyet" FromRole="NhapBanMu" ToRole="Employee" />
           <NavigationProperty Name="Employee2" Relationship="namlao206_websiteModel.FK_NhapBanMu_TroLyKeHoach" FromRole="NhapBanMu" ToRole="Employee" />
+          <NavigationProperty Name="Account2" Relationship="namlao206_websiteModel.FK_NhapBanMu_NguoiCan" FromRole="NhapBanMu" ToRole="Account" />
         </EntityType>
         <EntityType Name="Permission">
           <Key>
@@ -3971,47 +3995,6 @@
           <NavigationProperty Name="DM_PhongBans" Relationship="namlao206_websiteModel.FK_DM_PhongBans_ToPicture" FromRole="Picture" ToRole="DM_PhongBans" />
           <NavigationProperty Name="DM_PhongBans1" Relationship="namlao206_websiteModel.FK_Pictures_ToDM_PhongBans" FromRole="Picture" ToRole="DM_PhongBans" />
         </EntityType>
-        <EntityType Name="Project">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TenDuAn" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="MaDuAn" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DonViId" Type="Int32" />
-          <Property Name="XaId" Type="Int32" />
-          <Property Name="HuyenId" Type="Int32" />
-          <Property Name="TinhId" Type="Int32" />
-          <Property Name="InvestorId" Type="Int32" />
-          <Property Name="ProjectValue" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="GiamSat" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="StartDate" Type="DateTime" Precision="3" />
-          <Property Name="EndDate" Type="DateTime" Precision="3" />
-          <Property Name="TinhTrangDuAn" Type="Int32" />
-          <Property Name="TinhTrangCongNo" Type="Boolean" Nullable="false" />
-          <Property Name="ContractId" Type="Int32" />
-          <Property Name="CreateUserId" Type="Int32" />
-          <Property Name="CreateDate" Type="DateTime" Precision="3" />
-          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-          <Property Name="ModifiedUserId" Type="Int32" />
-          <Property Name="IsActive" Type="Boolean" />
-          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Longtitude" Type="Decimal" Precision="9" Scale="6" />
-          <Property Name="Latitude" Type="Decimal" Precision="9" Scale="6" />
-          <Property Name="DiaChi" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
-          <Property Name="CongNo" Type="Decimal" Precision="18" Scale="2" />
-          <NavigationProperty Name="Account" Relationship="namlao206_websiteModel.FK__Projects__Create__2F9A1060" FromRole="Project" ToRole="Account" />
-          <NavigationProperty Name="Account1" Relationship="namlao206_websiteModel.FK__Projects__Modifi__308E3499" FromRole="Project" ToRole="Account" />
-          <NavigationProperty Name="DM_DonVis" Relationship="namlao206_websiteModel.FK__Projects__DonViI__324172E1" FromRole="Project" ToRole="DM_DonVis" />
-          <NavigationProperty Name="DocumentType" Relationship="namlao206_websiteModel.FK_DocumentTypes_Projects" FromRole="Project" ToRole="DocumentType" />
-          <NavigationProperty Name="GiamSatThiCongs" Relationship="namlao206_websiteModel.FK__GiamSatTh__Proje__2022C2A6" FromRole="Project" ToRole="GiamSatThiCong" />
-          <NavigationProperty Name="HoSoPhapLys" Relationship="namlao206_websiteModel.FK__HoSoPhapL__Proje__345EC57D" FromRole="Project" ToRole="HoSoPhapLy" />
-          <NavigationProperty Name="KhaoSats" Relationship="namlao206_websiteModel.FK__KhaoSats__Projec__29AC2CE0" FromRole="Project" ToRole="KhaoSat" />
-          <NavigationProperty Name="NghiemThus" Relationship="namlao206_websiteModel.FK__NghiemThu__Proje__2E70E1FD" FromRole="Project" ToRole="NghiemThu" />
-          <NavigationProperty Name="Supplier" Relationship="namlao206_websiteModel.FK__Projects__Invest__2AD55B43" FromRole="Project" ToRole="Supplier" />
-          <NavigationProperty Name="StatusProject" Relationship="namlao206_websiteModel.FK__Projects__TinhTr__351DDF8C" FromRole="Project" ToRole="StatusProject" />
-          <NavigationProperty Name="ThiCongs" Relationship="namlao206_websiteModel.FK__ThiCongs__Projec__76EBA2E9" FromRole="Project" ToRole="ThiCong" />
-        </EntityType>
         <EntityType Name="StatusProject">
           <Key>
             <PropertyRef Name="Id" />
@@ -4031,8 +4014,8 @@
           <NavigationProperty Name="KhaoSats" Relationship="namlao206_websiteModel.FK__KhaoSats__TinhTr__2AA05119" FromRole="StatusProject" ToRole="KhaoSat" />
           <NavigationProperty Name="NhapBanMus" Relationship="namlao206_websiteModel.FK_NhapBanMu_CLMu" FromRole="StatusProject" ToRole="NhapBanMu" />
           <NavigationProperty Name="NhapBanMus1" Relationship="namlao206_websiteModel.FK_NhapBanMu_TinhTrang" FromRole="StatusProject" ToRole="NhapBanMu" />
-          <NavigationProperty Name="Projects" Relationship="namlao206_websiteModel.FK__Projects__TinhTr__351DDF8C" FromRole="StatusProject" ToRole="Project" />
           <NavigationProperty Name="ThiCongs" Relationship="namlao206_websiteModel.FK__ThiCongs__TinhTr__77DFC722" FromRole="StatusProject" ToRole="ThiCong" />
+          <NavigationProperty Name="Projects" Relationship="namlao206_websiteModel.FK__Projects__TinhTr__351DDF8C" FromRole="StatusProject" ToRole="Project" />
         </EntityType>
         <EntityType Name="StorageFile">
           <Key>
@@ -4084,8 +4067,8 @@
           <NavigationProperty Name="GiamSatThiCongs" Relationship="namlao206_websiteModel.FK__GiamSatTh__DonVi__44952D46" FromRole="Supplier" ToRole="GiamSatThiCong" />
           <NavigationProperty Name="KhaoSats" Relationship="namlao206_websiteModel.FK__KhaoSats__DonViK__3A179ED3" FromRole="Supplier" ToRole="KhaoSat" />
           <NavigationProperty Name="NhapBanMus" Relationship="namlao206_websiteModel.FK_NhapBanMu_Suppliers" FromRole="Supplier" ToRole="NhapBanMu" />
-          <NavigationProperty Name="Projects" Relationship="namlao206_websiteModel.FK__Projects__Invest__2AD55B43" FromRole="Supplier" ToRole="Project" />
           <NavigationProperty Name="ThiCongs" Relationship="namlao206_websiteModel.FK__ThiCongs__DonVi__44952D46" FromRole="Supplier" ToRole="ThiCong" />
+          <NavigationProperty Name="Projects" Relationship="namlao206_websiteModel.FK__Projects__Invest__2AD55B43" FromRole="Supplier" ToRole="Project" />
         </EntityType>
         <EntityType Name="Team">
           <Key>
@@ -4136,10 +4119,10 @@
           <NavigationProperty Name="Account" Relationship="namlao206_websiteModel.FK__ThiCongs__Creat__4A4E069C" FromRole="ThiCong" ToRole="Account" />
           <NavigationProperty Name="Account1" Relationship="namlao206_websiteModel.FK__ThiCongs__Modif__4B422AD5" FromRole="ThiCong" ToRole="Account" />
           <NavigationProperty Name="DocumentType" Relationship="namlao206_websiteModel.FK__ThiCongs__Contr__1C5231C2" FromRole="ThiCong" ToRole="DocumentType" />
-          <NavigationProperty Name="Project" Relationship="namlao206_websiteModel.FK__ThiCongs__Projec__76EBA2E9" FromRole="ThiCong" ToRole="Project" />
           <NavigationProperty Name="StatusProject" Relationship="namlao206_websiteModel.FK__ThiCongs__TinhTr__77DFC722" FromRole="ThiCong" ToRole="StatusProject" />
           <NavigationProperty Name="Supplier" Relationship="namlao206_websiteModel.FK__ThiCongs__DonVi__44952D46" FromRole="ThiCong" ToRole="Supplier" />
           <NavigationProperty Name="Unit" Relationship="namlao206_websiteModel.FK_ThiCongs_Units" FromRole="ThiCong" ToRole="Unit" />
+          <NavigationProperty Name="Project" Relationship="namlao206_websiteModel.FK__ThiCongs__Projec__76EBA2E9" FromRole="ThiCong" ToRole="Project" />
         </EntityType>
         <EntityType Name="ThietBiXeMay">
           <Key>
@@ -4440,30 +4423,6 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Phase">
-              <PropertyRef Name="ModifiedUserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Projects__Create__2F9A1060">
-          <End Type="namlao206_websiteModel.Account" Role="Account" Multiplicity="0..1" />
-          <End Type="namlao206_websiteModel.Project" Role="Project" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Account">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Project">
-              <PropertyRef Name="CreateUserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Projects__Modifi__308E3499">
-          <End Type="namlao206_websiteModel.Account" Role="Account" Multiplicity="0..1" />
-          <End Type="namlao206_websiteModel.Project" Role="Project" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Account">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Project">
               <PropertyRef Name="ModifiedUserId" />
             </Dependent>
           </ReferentialConstraint>
@@ -4816,18 +4775,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Projects__DonViI__324172E1">
-          <End Type="namlao206_websiteModel.DM_DonVis" Role="DM_DonVis" Multiplicity="0..1" />
-          <End Type="namlao206_websiteModel.Project" Role="Project" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DM_DonVis">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Project">
-              <PropertyRef Name="DonViId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_DM_PhongBans_DM_Donvis">
           <End Type="namlao206_websiteModel.DM_DonVis" Role="DM_DonVis" Multiplicity="0..1" />
           <End Type="namlao206_websiteModel.DM_PhongBans" Role="DM_PhongBans" Multiplicity="*" />
@@ -4996,18 +4943,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DocumentTypes_Projects">
-          <End Type="namlao206_websiteModel.DocumentType" Role="DocumentType" Multiplicity="0..1" />
-          <End Type="namlao206_websiteModel.Project" Role="Project" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DocumentType">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Project">
-              <PropertyRef Name="ContractId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_NhapBanMu_LoaiHoSo">
           <End Type="namlao206_websiteModel.DocumentType" Role="DocumentType" Multiplicity="0..1" />
           <End Type="namlao206_websiteModel.NhapBanMu" Role="NhapBanMu" Multiplicity="*" />
@@ -5029,18 +4964,6 @@
             </Principal>
             <Dependent Role="GiamSatThiCong">
               <PropertyRef Name="DonViGiamSatId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__GiamSatTh__Proje__2022C2A6">
-          <End Type="namlao206_websiteModel.Project" Role="Project" Multiplicity="0..1" />
-          <End Type="namlao206_websiteModel.GiamSatThiCong" Role="GiamSatThiCong" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Project">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="GiamSatThiCong">
-              <PropertyRef Name="ProjectID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5080,18 +5003,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__HoSoPhapL__Proje__345EC57D">
-          <End Type="namlao206_websiteModel.Project" Role="Project" Multiplicity="0..1" />
-          <End Type="namlao206_websiteModel.HoSoPhapLy" Role="HoSoPhapLy" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Project">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="HoSoPhapLy">
-              <PropertyRef Name="ProjectID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_HoSoPhapLys_ThietBis">
           <End Type="namlao206_websiteModel.ThietBiXeMay" Role="ThietBiXeMay" Multiplicity="0..1" />
           <End Type="namlao206_websiteModel.HoSoPhapLy" Role="HoSoPhapLy" Multiplicity="*" />
@@ -5113,18 +5024,6 @@
             </Principal>
             <Dependent Role="KhaoSat">
               <PropertyRef Name="DonViKhaoSatId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__KhaoSats__Projec__29AC2CE0">
-          <End Type="namlao206_websiteModel.Project" Role="Project" Multiplicity="0..1" />
-          <End Type="namlao206_websiteModel.KhaoSat" Role="KhaoSat" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Project">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="KhaoSat">
-              <PropertyRef Name="ProjectID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5236,18 +5135,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__NghiemThu__Proje__2E70E1FD">
-          <End Type="namlao206_websiteModel.Project" Role="Project" Multiplicity="0..1" />
-          <End Type="namlao206_websiteModel.NghiemThu" Role="NghiemThu" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Project">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="NghiemThu">
-              <PropertyRef Name="ProjectID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_NghiemThus_Phases">
           <End Type="namlao206_websiteModel.Phase" Role="Phase" Multiplicity="0..1" />
           <End Type="namlao206_websiteModel.NghiemThu" Role="NghiemThu" Multiplicity="*" />
@@ -5353,42 +5240,6 @@
             </Principal>
             <Dependent Role="NhapBanMu">
               <PropertyRef Name="TinhTrang" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Projects__Invest__2AD55B43">
-          <End Type="namlao206_websiteModel.Supplier" Role="Supplier" Multiplicity="0..1" />
-          <End Type="namlao206_websiteModel.Project" Role="Project" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Supplier">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Project">
-              <PropertyRef Name="InvestorId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Projects__TinhTr__351DDF8C">
-          <End Type="namlao206_websiteModel.StatusProject" Role="StatusProject" Multiplicity="0..1" />
-          <End Type="namlao206_websiteModel.Project" Role="Project" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="StatusProject">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Project">
-              <PropertyRef Name="TinhTrangDuAn" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ThiCongs__Projec__76EBA2E9">
-          <End Type="namlao206_websiteModel.Project" Role="Project" Multiplicity="0..1" />
-          <End Type="namlao206_websiteModel.ThiCong" Role="ThiCong" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Project">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ThiCong">
-              <PropertyRef Name="ProjectID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5718,6 +5569,191 @@
             </Principal>
             <Dependent Role="ThietBiXeMay">
               <PropertyRef Name="NguoiSuDung_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenDuAn" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MaDuAn" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DonViId" Type="Int32" />
+          <Property Name="XaId" Type="Int32" />
+          <Property Name="HuyenId" Type="Int32" />
+          <Property Name="TinhId" Type="Int32" />
+          <Property Name="InvestorId" Type="Int32" />
+          <Property Name="ProjectValue" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="GiamSat" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="TinhTrangDuAn" Type="Int32" />
+          <Property Name="TinhTrangCongNo" Type="Boolean" />
+          <Property Name="ContractId" Type="Int32" />
+          <Property Name="CreateUserId" Type="Int32" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedUserId" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Longtitude" Type="Decimal" Precision="9" Scale="6" />
+          <Property Name="Latitude" Type="Decimal" Precision="9" Scale="6" />
+          <Property Name="DiaChi" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="CongNo" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="Account" Relationship="namlao206_websiteModel.FK__Projects__Create__2F9A1060" FromRole="Project" ToRole="Account" />
+          <NavigationProperty Name="Account1" Relationship="namlao206_websiteModel.FK__Projects__Modifi__308E3499" FromRole="Project" ToRole="Account" />
+          <NavigationProperty Name="DM_DonVis" Relationship="namlao206_websiteModel.FK__Projects__DonViI__324172E1" FromRole="Project" ToRole="DM_DonVis" />
+          <NavigationProperty Name="DocumentType" Relationship="namlao206_websiteModel.FK_DocumentTypes_Projects" FromRole="Project" ToRole="DocumentType" />
+          <NavigationProperty Name="GiamSatThiCongs" Relationship="namlao206_websiteModel.FK__GiamSatTh__Proje__2022C2A6" FromRole="Project" ToRole="GiamSatThiCong" />
+          <NavigationProperty Name="HoSoPhapLys" Relationship="namlao206_websiteModel.FK__HoSoPhapL__Proje__345EC57D" FromRole="Project" ToRole="HoSoPhapLy" />
+          <NavigationProperty Name="KhaoSats" Relationship="namlao206_websiteModel.FK__KhaoSats__Projec__29AC2CE0" FromRole="Project" ToRole="KhaoSat" />
+          <NavigationProperty Name="NghiemThus" Relationship="namlao206_websiteModel.FK__NghiemThu__Proje__2E70E1FD" FromRole="Project" ToRole="NghiemThu" />
+          <NavigationProperty Name="Supplier" Relationship="namlao206_websiteModel.FK__Projects__Invest__2AD55B43" FromRole="Project" ToRole="Supplier" />
+          <NavigationProperty Name="StatusProject" Relationship="namlao206_websiteModel.FK__Projects__TinhTr__351DDF8C" FromRole="Project" ToRole="StatusProject" />
+          <NavigationProperty Name="ThiCongs" Relationship="namlao206_websiteModel.FK__ThiCongs__Projec__76EBA2E9" FromRole="Project" ToRole="ThiCong" />
+        </EntityType>
+        <Association Name="FK__Projects__Create__2F9A1060">
+          <End Type="namlao206_websiteModel.Account" Role="Account" Multiplicity="0..1" />
+          <End Type="namlao206_websiteModel.Project" Role="Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="CreateUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Projects__Modifi__308E3499">
+          <End Type="namlao206_websiteModel.Account" Role="Account" Multiplicity="0..1" />
+          <End Type="namlao206_websiteModel.Project" Role="Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="ModifiedUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Projects__DonViI__324172E1">
+          <End Type="namlao206_websiteModel.DM_DonVis" Role="DM_DonVis" Multiplicity="0..1" />
+          <End Type="namlao206_websiteModel.Project" Role="Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_DonVis">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="DonViId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocumentTypes_Projects">
+          <End Type="namlao206_websiteModel.DocumentType" Role="DocumentType" Multiplicity="0..1" />
+          <End Type="namlao206_websiteModel.Project" Role="Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DocumentType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="ContractId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GiamSatTh__Proje__2022C2A6">
+          <End Type="namlao206_websiteModel.Project" Role="Project" Multiplicity="0..1" />
+          <End Type="namlao206_websiteModel.GiamSatThiCong" Role="GiamSatThiCong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GiamSatThiCong">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HoSoPhapL__Proje__345EC57D">
+          <End Type="namlao206_websiteModel.Project" Role="Project" Multiplicity="0..1" />
+          <End Type="namlao206_websiteModel.HoSoPhapLy" Role="HoSoPhapLy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HoSoPhapLy">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__KhaoSats__Projec__29AC2CE0">
+          <End Type="namlao206_websiteModel.Project" Role="Project" Multiplicity="0..1" />
+          <End Type="namlao206_websiteModel.KhaoSat" Role="KhaoSat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="KhaoSat">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NghiemThu__Proje__2E70E1FD">
+          <End Type="namlao206_websiteModel.Project" Role="Project" Multiplicity="0..1" />
+          <End Type="namlao206_websiteModel.NghiemThu" Role="NghiemThu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NghiemThu">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Projects__Invest__2AD55B43">
+          <End Type="namlao206_websiteModel.Supplier" Role="Supplier" Multiplicity="0..1" />
+          <End Type="namlao206_websiteModel.Project" Role="Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="InvestorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Projects__TinhTr__351DDF8C">
+          <End Type="namlao206_websiteModel.StatusProject" Role="StatusProject" Multiplicity="0..1" />
+          <End Type="namlao206_websiteModel.Project" Role="Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusProject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="TinhTrangDuAn" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ThiCongs__Projec__76EBA2E9">
+          <End Type="namlao206_websiteModel.Project" Role="Project" Multiplicity="0..1" />
+          <End Type="namlao206_websiteModel.ThiCong" Role="ThiCong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ThiCong">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NhapBanMu_NguoiCan">
+          <End Type="namlao206_websiteModel.Account" Role="Account" Multiplicity="0..1" />
+          <End Type="namlao206_websiteModel.NhapBanMu" Role="NhapBanMu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NhapBanMu">
+              <PropertyRef Name="NguoiCan_EMP_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6170,6 +6206,7 @@
           <EntitySetMapping Name="MenuItems">
             <EntityTypeMapping TypeName="namlao206_websiteModel.MenuItem">
               <MappingFragment StoreEntitySet="MenuItems">
+                <ScalarProperty Name="STT" ColumnName="STT" />
                 <ScalarProperty Name="PermissionID" ColumnName="PermissionID" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
@@ -6316,37 +6353,6 @@
               <MappingFragment StoreEntitySet="Pictures">
                 <ScalarProperty Name="KhoaphongId" ColumnName="KhoaphongId" />
                 <ScalarProperty Name="Url" ColumnName="Url" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Projects">
-            <EntityTypeMapping TypeName="namlao206_websiteModel.Project">
-              <MappingFragment StoreEntitySet="Projects">
-                <ScalarProperty Name="CongNo" ColumnName="CongNo" />
-                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
-                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
-                <ScalarProperty Name="Longtitude" ColumnName="Longtitude" />
-                <ScalarProperty Name="Note" ColumnName="Note" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="ModifiedUserId" ColumnName="ModifiedUserId" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
-                <ScalarProperty Name="ContractId" ColumnName="ContractId" />
-                <ScalarProperty Name="TinhTrangCongNo" ColumnName="TinhTrangCongNo" />
-                <ScalarProperty Name="TinhTrangDuAn" ColumnName="TinhTrangDuAn" />
-                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="GiamSat" ColumnName="GiamSat" />
-                <ScalarProperty Name="ProjectValue" ColumnName="ProjectValue" />
-                <ScalarProperty Name="InvestorId" ColumnName="InvestorId" />
-                <ScalarProperty Name="TinhId" ColumnName="TinhId" />
-                <ScalarProperty Name="HuyenId" ColumnName="HuyenId" />
-                <ScalarProperty Name="XaId" ColumnName="XaId" />
-                <ScalarProperty Name="DonViId" ColumnName="DonViId" />
-                <ScalarProperty Name="MaDuAn" ColumnName="MaDuAn" />
-                <ScalarProperty Name="TenDuAn" ColumnName="TenDuAn" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -6611,6 +6617,37 @@
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="namlao206_websiteModel.Project">
+              <MappingFragment StoreEntitySet="Projects">
+                <ScalarProperty Name="CongNo" ColumnName="CongNo" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longtitude" ColumnName="Longtitude" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedUserId" ColumnName="ModifiedUserId" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+                <ScalarProperty Name="ContractId" ColumnName="ContractId" />
+                <ScalarProperty Name="TinhTrangCongNo" ColumnName="TinhTrangCongNo" />
+                <ScalarProperty Name="TinhTrangDuAn" ColumnName="TinhTrangDuAn" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="GiamSat" ColumnName="GiamSat" />
+                <ScalarProperty Name="ProjectValue" ColumnName="ProjectValue" />
+                <ScalarProperty Name="InvestorId" ColumnName="InvestorId" />
+                <ScalarProperty Name="TinhId" ColumnName="TinhId" />
+                <ScalarProperty Name="HuyenId" ColumnName="HuyenId" />
+                <ScalarProperty Name="XaId" ColumnName="XaId" />
+                <ScalarProperty Name="DonViId" ColumnName="DonViId" />
+                <ScalarProperty Name="MaDuAn" ColumnName="MaDuAn" />
+                <ScalarProperty Name="TenDuAn" ColumnName="TenDuAn" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

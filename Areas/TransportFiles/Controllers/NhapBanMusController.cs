@@ -133,6 +133,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
                 }
                 nhapBanMu.NguoiNhap_ACC_Id = acc.Id;
                 nhapBanMu.DonVi_Id = acc.Employee.DM_PhongBans.donvi_Id;
+                nhapBanMu.IsActive = true;
                 db.NhapBanMus.Add(nhapBanMu);                                     
                 await db.SaveChangesAsync();
                 ViewBag.Message = "Thêm mới thành công!";
@@ -178,6 +179,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
             ViewBag.LoaiTK = new SelectList(db.Units.Where(x => x.PhanLoai == "2"), "Id", "UnitName", nhapBanMu.LoaiTK);        
             ViewBag.DoiTac_Id = new SelectList(db.Suppliers.Where(x => x.DonviId == acc.Employee.DM_PhongBans.donvi_Id), "Id", "SupplierName", nhapBanMu.DoiTac_Id);
             ViewBag.Team_Id = new SelectList(db.Teams.Where(x => x.DonviId == acc.Employee.DM_PhongBans.donvi_Id), "Id", "TeamName", nhapBanMu.Team_Id);
+            ViewBag.NguoiCan_EMP_Id = new SelectList(db.Employees.Where(x => x.DM_PhongBans.donvi_Id == acc.Employee.DM_PhongBans.donvi_Id), "Id", "Name", nhapBanMu.NguoiCan_EMP_Id);
             return PartialView(nhapBanMu);
         }
 
@@ -230,6 +232,11 @@ namespace NamLao206.Areas.TransportFiles.Controllers
         // GET: TransportFiles/NhapBanMus/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
+            if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
+            {
+                ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
+                return RedirectToAction("Login", "Login", new { area = "" });
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -239,7 +246,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
             {
                 return HttpNotFound();
             }
-            return View(nhapBanMu);
+            return PartialView(nhapBanMu);
         }
 
         // POST: TransportFiles/NhapBanMus/Delete/5
@@ -247,10 +254,30 @@ namespace NamLao206.Areas.TransportFiles.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
+            if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
+            {
+                ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
+                return RedirectToAction("Login", "Login", new { area = "" });
+            }
             NhapBanMu nhapBanMu = await db.NhapBanMus.FindAsync(id);
-            db.NhapBanMus.Remove(nhapBanMu);
+            var acc = db.Accounts
+            .Where(x => x.Id == userId)
+            .SingleOrDefault();
+            if (acc == null)
+            {
+                ViewBag.Message = "Tài khoản không tồn tại hoặc không liên kết với nhân viên.";
+                return RedirectToAction("Login", "Login", new { area = "" });
+            }
+            else if (acc.Id != nhapBanMu.NguoiNhap_ACC_Id)
+            {
+                ViewBag.Message = "Bạn không có quyền xóa!";
+                return RedirectToAction("Index", new { message = ViewBag.Message });
+            }
+          //  db.NhapBanMus.Remove(nhapBanMu);
+          nhapBanMu.IsActive = false;
             await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            ViewBag.Message = "Xóa thành công!";
+            return RedirectToAction("Index", new { message = ViewBag.Message });
         }
         private void PopulateDropdowns(Account acc)
         {          
@@ -263,6 +290,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
             ViewBag.LoaiTK = new SelectList(db.Units.Where(x => x.PhanLoai == "2"), "Id", "UnitName");
             ViewBag.DoiTac_Id = new SelectList(db.Suppliers.Where(x => x.DonviId == acc.Employee.DM_PhongBans.donvi_Id), "Id", "SupplierName");
             ViewBag.Team_Id = new SelectList(db.Teams.Where(x => x.DonviId == acc.Employee.DM_PhongBans.donvi_Id), "Id", "TeamName");
+            ViewBag.NguoiCan_EMP_Id = new SelectList(db.Employees.Where(x => x.DM_PhongBans.donvi_Id == acc.Employee.DM_PhongBans.donvi_Id), "Id", "Name");
         }
         protected override void Dispose(bool disposing)
         {

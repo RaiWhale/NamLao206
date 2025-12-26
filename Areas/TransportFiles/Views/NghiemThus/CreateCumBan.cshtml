@@ -4,7 +4,7 @@
 
 }
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create", "NghiemThus", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -100,7 +100,7 @@
                     </div>
                 </div>
             </div>
-        </div> 
+        </div>
         <div class="form-group" style="float:right">
             <button type="submit" class="mt-2 btn btn-success">Lưu</button>
             <button type="button" class="mt-2 btn btn-light" data-dismiss="modal">Đóng</button>
