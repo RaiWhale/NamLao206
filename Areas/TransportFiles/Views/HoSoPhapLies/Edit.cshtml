@@ -73,17 +73,17 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.IsActive, "Trạng thái", htmlAttributes: new { @class = "control-label col-md-10" })
                         <div class="col-md-10">
-                            <div class="checkbox">
-                                @Html.EditorFor(model => model.IsActive)
+                            <div class="checkbox form-check-label">
+                                @Html.EditorFor(model => model.IsActive, "", new { @class = "form-check-label" })
                                 @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div style="float:right">
+            <div  >
                 <button type="submit" class="mt-2 btn btn-success">Lưu</button>
-                <button type="button" class="mt-2 btn btn-light" data-dismiss="modal">Đóng</button>
+                <button type="button" class="mt-2 btn btn-light" data-bs-dismiss="modal">Đóng</button>
             </div>
         </div>       
     </div>

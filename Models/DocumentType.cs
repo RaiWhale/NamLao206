@@ -21,8 +21,8 @@ namespace NamLao206.Models
             this.HoSoPhapLys = new HashSet<HoSoPhapLy>();
             this.KhaoSats = new HashSet<KhaoSat>();
             this.ThiCongs = new HashSet<ThiCong>();
-            this.NhapBanMus = new HashSet<NhapBanMu>();
             this.Projects = new HashSet<Project>();
+            this.NhapBanMus = new HashSet<NhapBanMu>();
         }
     
         public int Id { get; set; }
@@ -43,8 +43,8 @@ namespace NamLao206.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ThiCong> ThiCongs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<NhapBanMu> NhapBanMus { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Project> Projects { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NhapBanMu> NhapBanMus { get; set; }
     }
 }

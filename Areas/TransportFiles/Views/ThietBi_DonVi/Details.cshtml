@@ -1,0 +1,106 @@
+﻿@model NamLao206.Models.ThietBi_DonVi
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ThietBi_DonVi</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SoLuong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoLuong)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoLuong_ThucTe)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoLuong_ThucTe)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoLuong_Hong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoLuong_Hong)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayTao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayTao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayCapNhat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayCapNhat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsActive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Account.LoginName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Account.LoginName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Account1.LoginName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Account1.LoginName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DM_DonVis.TenDonVi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DM_DonVis.TenDonVi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DM_PhongBans.TenKhoa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DM_PhongBans.TenKhoa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DM_ThietBi.BienSo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DM_ThietBi.BienSo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Thietbi_Donvi_Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

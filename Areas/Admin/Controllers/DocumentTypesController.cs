@@ -64,7 +64,7 @@ namespace NamLao206.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,DocumentTypeName,Note")] DocumentType documentType)
+        public async Task<ActionResult> Create([Bind(Include = "Id,DocumentTypeName,Note,PhanLoai")] DocumentType documentType)
         {
             if (ModelState.IsValid)
             {
@@ -94,6 +94,11 @@ namespace NamLao206.Areas.Admin.Controllers
         // GET: Admin/DocumentTypes/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
+            if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
+            {
+                ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
+                return RedirectToAction("Login", "Login", new { area = "" });
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -111,7 +116,7 @@ namespace NamLao206.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,DocumentTypeName,IsActive,CreateUserId,CreateDate,Note")] DocumentType documentType)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,DocumentTypeName,IsActive,CreateUserId,CreateDate,Note,PhanLoai")] DocumentType documentType)
         {
             if (ModelState.IsValid)
             {
@@ -125,8 +130,7 @@ namespace NamLao206.Areas.Admin.Controllers
 					ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
 					return RedirectToAction("Login", "Login", new { area = "" });
 				}
-				// Set the ModifiedDate to the current date and time
-				documentType.CreateDate = DateTime.Now;
+				// Set the ModifiedDate to the current date and time			
 				db.Entry(documentType).State = EntityState.Modified;
                 await db.SaveChangesAsync();
 				ViewBag.Message = "Sửa thành công!";
@@ -140,6 +144,11 @@ namespace NamLao206.Areas.Admin.Controllers
         // GET: Admin/DocumentTypes/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
+            if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
+            {
+                ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
+                return RedirectToAction("Login", "Login", new { area = "" });
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -157,6 +166,11 @@ namespace NamLao206.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
+            if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
+            {
+                ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
+                return RedirectToAction("Login", "Login", new { area = "" });
+            }
             DocumentType documentType = await db.DocumentTypes.FindAsync(id);
             db.DocumentTypes.Remove(documentType);
             await db.SaveChangesAsync();

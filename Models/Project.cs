@@ -49,6 +49,7 @@ namespace NamLao206.Models
         public Nullable<decimal> Latitude { get; set; }
         public string DiaChi { get; set; }
         public Nullable<decimal> CongNo { get; set; }
+        public string LoaiDuAn { get; set; }
     
         public virtual Account Account { get; set; }
         public virtual Account Account1 { get; set; }

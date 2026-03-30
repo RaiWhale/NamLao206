@@ -371,14 +371,14 @@ async function drawChartTinhHinhBenhNhan(today, yesterday) {
                 <div class="col-lg-2 col-sm-2 col-xs-12">
                     <div class="p-3 ${backgroundColors[index] || 'bg-primary-300'} rounded overflow-hidden position-relative text-white mb-g">
                         <div>
-                            <h2 class="display-3 d-block l-h-n m-0 fw-500" style="font-size:240%">${item.Titles}</h2>
-                            <h2 class="m-0 l-h-n fw-500" style="color:blue;font-size:210%">${formattedCounts}</h2>
+                            <h2 class="display-3 d-block l-h-n m-0 fw-500" style="font-size:150%">${item.Titles}</h2>
+                            <h2 class="m-0 l-h-n fw-500" style="color:blue;font-size:180%">${formattedCounts}</h2>
                         </div>
                         <span class="count_bottom">        
                             <h4 style="color:black;font-size:15px">
-                            <i class="${color}" style="font-size: 24px">
+                            <i class="${color}" style="font-size: 20px">
                                 <i class="fa ${sortIcon}"></i> ${percent}%
-                            </i>So với năm ${item.LastNam} (${formattedLastCounts})</h4>
+                            </i>So với năm ${item.LastNam}<br> (${formattedLastCounts})</h4>
                         </span>
                         <i class="fal position-absolute pos-right pos-bottom opacity-15 ${icons[index] || 'mb-n1 fa-user mr-n1'}" style="font-size:6rem"></i>
                     </div>
@@ -448,7 +448,7 @@ async function drawChartGetSoLoiNhuan(today, yesterday) {
                 <div class="col-lg-2 col-sm-2 col-xs-12">
                     <div class="p-3 ${backgroundColors[index] || 'bg-primary-300'} rounded overflow-hidden position-relative text-white mb-g">
                         <div>
-                            <h2 class="display-3 d-block l-h-n m-0 fw-500" style="font-size:240%">${item.Titles}</h2>
+                            <h2 class="display-3 d-block l-h-n m-0 fw-500" style="font-size:50px">${item.Titles}</h2>
                             <h2 class="m-0 l-h-n fw-500" style="color:blue;font-size:210%">${item.Counts}</h2>
                         </div>
                         <span class="count_bottom">        

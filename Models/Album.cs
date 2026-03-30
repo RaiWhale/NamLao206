@@ -23,6 +23,8 @@ namespace NamLao206.Models
         public int Id { get; set; }
         public string AlbumName { get; set; }
         public Nullable<int> ParentId { get; set; }
+        public Nullable<int> TypeId { get; set; }
+        public Nullable<bool> IsActive { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AlbumPicture> AlbumPictures { get; set; }

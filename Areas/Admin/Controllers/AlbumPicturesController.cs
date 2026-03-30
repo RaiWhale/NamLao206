@@ -6,6 +6,7 @@ using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Windows.Documents;
@@ -18,7 +19,7 @@ namespace NamLao206.Areas.Admin.Controllers
         private namlao206_websiteEntities db = new namlao206_websiteEntities();
         private static string UploadPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Uploads", "Albums");
         // GET: Admin/AlbumPictures
-        public ActionResult Index(int? id)
+        public ActionResult Index(int? id, string message, string search)
         {
             ViewBag.Title = "Album -";
             //var AlbumPictures = db.AlbumPictures.Include(h => h.Album);
@@ -29,7 +30,10 @@ namespace NamLao206.Areas.Admin.Controllers
             ViewBag.album = db.Albums.OrderByDescending(x => x.Id).ToList();
             ViewBag.albumpicture = db.AlbumPictures.ToList();
             ViewBag.cat = id;
-
+            if (!string.IsNullOrEmpty(message))
+            {
+                ViewBag.Message = message;
+            }
             return View(album);
         }
 
@@ -61,7 +65,7 @@ namespace NamLao206.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Create([Bind(Include = "Id,PictureName,AlbumId")] AlbumPicture albumPicture)
+        public async Task<ActionResult> Create([Bind(Include = "Id,PictureName,AlbumId,ten,mota,IsActive,Url")] AlbumPicture albumPicture)
         {
            
             if (Request.Files.Count > 0)
@@ -69,7 +73,6 @@ namespace NamLao206.Areas.Admin.Controllers
                 int file_count = 0;
                 string dir = UploadPath + "\\" + albumPicture.AlbumId + "\\";
                 if (!System.IO.Directory.Exists(dir)) System.IO.Directory.CreateDirectory(dir);
-
                 for (int i = 0; i < Request.Files.Count; i++)
                 {
                     try
@@ -79,15 +82,17 @@ namespace NamLao206.Areas.Admin.Controllers
                         {
                             string filename = DateTime.Now.Ticks + "_" + file.FileName.Split('/').Last();
                             file.SaveAs(dir + filename);
+                            albumPicture.IsActive = true;
                             albumPicture.PictureName = filename;
                             db.AlbumPictures.Add(albumPicture);
-                            db.SaveChanges();
+                            await db.SaveChangesAsync();
                             file_count++;
                         }
                     }
                     catch { }
-                }    
-                return RedirectToAction("Index", "AlbumPictures");
+                }
+                ViewBag.Message = "Thêm mới thành công!";
+                return RedirectToAction("Index", "AlbumPictures", new { message = ViewBag.Message });
             }
             ViewBag.AlbumId = new SelectList(db.Albums, "Id", "AlbumName", albumPicture.AlbumId);
             return PartialView(albumPicture);
@@ -114,16 +119,41 @@ namespace NamLao206.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,PictureName,AlbumId")] AlbumPicture albumPicture)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,PictureName,AlbumId,ten,mota,IsActive,Url")] AlbumPicture albumPicture)
         {
             if (ModelState.IsValid)
             {
+                if (Request.Files.Count > 0)
+                {
+                    int file_count = 0;
+                    string dir = UploadPath + "\\" + albumPicture.AlbumId + "\\";
+                    if (System.IO.File.Exists(dir + albumPicture.PictureName)) System.IO.File.Delete(dir + albumPicture.PictureName);
+                    if (!System.IO.Directory.Exists(dir)) System.IO.Directory.CreateDirectory(dir);
+                    for (int i = 0; i < Request.Files.Count; i++)
+                    {
+                        try
+                        {
+                            HttpPostedFileBase file = Request.Files[i];
+                            if (!string.IsNullOrEmpty(file.FileName))
+                            {
+                                string filename = DateTime.Now.Ticks + "_" + file.FileName.Split('/').Last();
+                                file.SaveAs(dir + filename);
+                                albumPicture.PictureName = filename;
+
+                                file_count++;
+                            }
+                        }
+                        catch { }
+                    }
+                }
                 db.Entry(albumPicture).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                await db.SaveChangesAsync();
+                ViewBag.Message = "Sửa thành công!";
+
+                return RedirectToAction("Index", "AlbumPictures", new { message = ViewBag.Message, Id = albumPicture.AlbumId });
             }
-            ViewBag.AlbumId = new SelectList(db.Albums, "Id", "AlbumName", albumPicture.AlbumId);
-            return PartialView(albumPicture);
+            ViewBag.Message = "Đã xảy ra lỗi nhập liệu!";
+            return RedirectToAction("Index", new { message = ViewBag.Message });
         }
 
         // GET: Admin/AlbumPictures/Delete/5
@@ -144,17 +174,16 @@ namespace NamLao206.Areas.Admin.Controllers
         // POST: Admin/AlbumPictures/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public async Task<ActionResult> DeleteConfirmed(int id)
         {
             AlbumPicture albumPicture = db.AlbumPictures.Find(id);
+       
+            string path = UploadPath + "\\" + albumPicture.AlbumId + "\\" + albumPicture.PictureName;
+            if (System.IO.File.Exists(path)) System.IO.File.Delete(path);
             db.AlbumPictures.Remove(albumPicture);
-            string path = UploadPath + "\\" + albumPicture.AlbumId + "\\";
-            if (System.IO.File.Exists(path  + albumPicture.PictureName))
-            {
-                System.IO.File.Delete(path  + albumPicture.PictureName);
-            }
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            await db.SaveChangesAsync();
+            ViewBag.Message = "Xóa thành công!";
+            return RedirectToAction("Index","AlbumPictures", new { message = ViewBag.Message, Id = albumPicture.AlbumId });
         }
 
         protected override void Dispose(bool disposing)
@@ -176,7 +205,7 @@ namespace NamLao206.Areas.Admin.Controllers
                 AlbumPicture pic = db.AlbumPictures.Find(id);
                 db.AlbumPictures.Remove(pic);
                 db.SaveChanges();
-                string file = UploadPath + "\\" + pic.Id + "\\" + pic.PictureName;
+                string file = UploadPath + "\\" + pic.AlbumId + "\\" + pic.PictureName;
                 if (System.IO.File.Exists(file)) System.IO.File.Delete(file);
                 return Content("Ok");
             }

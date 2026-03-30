@@ -14,6 +14,12 @@ namespace NamLao206.Models
     
     public partial class NhapBanMu
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public NhapBanMu()
+        {
+            this.HoSoPhapLys = new HashSet<HoSoPhapLy>();
+        }
+    
         public int Id { get; set; }
         public Nullable<int> DonVi_Id { get; set; }
         public string MaPhieu { get; set; }
@@ -43,22 +49,23 @@ namespace NamLao206.Models
         public Nullable<int> ModifiedAccount_Id { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public Nullable<int> TinhTrang { get; set; }
+        public Nullable<decimal> DonGiaBan { get; set; }
     
         public virtual Account Account { get; set; }
         public virtual Account Account1 { get; set; }
+        public virtual Account Account2 { get; set; }
         public virtual DM_DonVis DM_DonVis { get; set; }
         public virtual DocumentType DocumentType { get; set; }
-        public virtual StatusProject StatusProject { get; set; }
-        public virtual Unit Unit { get; set; }
-        public virtual Unit Unit1 { get; set; }
-        public virtual NhapBanMu NhapBanMu1 { get; set; }
-        public virtual NhapBanMu NhapBanMu2 { get; set; }
-        public virtual Supplier Supplier { get; set; }
-        public virtual Team Team { get; set; }
-        public virtual StatusProject StatusProject1 { get; set; }
         public virtual Employee Employee { get; set; }
         public virtual Employee Employee1 { get; set; }
         public virtual Employee Employee2 { get; set; }
-        public virtual Account Account2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HoSoPhapLy> HoSoPhapLys { get; set; }
+        public virtual StatusProject StatusProject { get; set; }
+        public virtual Unit Unit { get; set; }
+        public virtual Unit Unit1 { get; set; }
+        public virtual Supplier Supplier { get; set; }
+        public virtual Team Team { get; set; }
+        public virtual StatusProject StatusProject1 { get; set; }
     }
 }

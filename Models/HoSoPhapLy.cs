@@ -14,6 +14,12 @@ namespace NamLao206.Models
     
     public partial class HoSoPhapLy
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public HoSoPhapLy()
+        {
+            this.DM_ThietBi = new HashSet<DM_ThietBi>();
+        }
+    
         public int Id { get; set; }
         public string STT { get; set; }
         public Nullable<int> ProjectID { get; set; }
@@ -37,7 +43,10 @@ namespace NamLao206.Models
         public virtual DM_AddBangs DM_AddBangs { get; set; }
         public virtual DM_DonVis DM_DonVis { get; set; }
         public virtual DocumentType DocumentType { get; set; }
-        public virtual ThietBiXeMay ThietBiXeMay { get; set; }
         public virtual Project Project { get; set; }
+        public virtual NhapBanMu NhapBanMu { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DM_ThietBi> DM_ThietBi { get; set; }
+        public virtual DM_ThietBi DM_ThietBi1 { get; set; }
     }
 }

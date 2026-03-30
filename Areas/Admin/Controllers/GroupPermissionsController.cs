@@ -87,6 +87,7 @@ namespace NamLao206.Areas.Admin.Controllers
             }
             if (ModelState.IsValid)
             {
+         
                 // Lấy thông tin tài khoản
                 var acc = db.Accounts
                     .Where(x => x.Id == userId)
@@ -95,6 +96,12 @@ namespace NamLao206.Areas.Admin.Controllers
                 {
                     ViewBag.Message = "Tài khoản không tồn tại hoặc không liên kết với nhân viên.";
                     return RedirectToAction("Login", "Login", new { area = "" });
+                }
+                var checkExists = db.GroupPermissions.Where(x => x.PermissionId == groupPermission.PermissionId && x.GroupId == groupPermission.GroupId).SingleOrDefault();
+                if (checkExists != null)
+                {
+                    ViewBag.Message = "Đã tồn tại quyền!";
+                    return RedirectToAction("Index", new { message = ViewBag.Message });
                 }
                 groupPermission.CreatedDate = DateTime.Now;
                 groupPermission.CreatedBy = userId;
@@ -151,6 +158,12 @@ namespace NamLao206.Areas.Admin.Controllers
                 {
                     ViewBag.Message = "Tài khoản không tồn tại hoặc không liên kết với nhân viên.";
                     return RedirectToAction("Login", "Login", new { area = "" });
+                }
+                var checkExists = db.GroupPermissions.Where(x => x.PermissionId == groupPermission.PermissionId && x.GroupId == groupPermission.GroupId).SingleOrDefault();
+                if (checkExists != null)
+                {
+                    ViewBag.Message = "Đã tồn tại quyền!";
+                    return RedirectToAction("Index", new { message = ViewBag.Message });
                 }
                 db.Entry(groupPermission).State = EntityState.Modified;
                 await db.SaveChangesAsync();

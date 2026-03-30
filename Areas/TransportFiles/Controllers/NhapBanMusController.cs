@@ -60,6 +60,12 @@ namespace NamLao206.Areas.TransportFiles.Controllers
         // GET: TransportFiles/NhapBanMus/Details/5
         public async Task<ActionResult> Details(int? id)
         {
+            // 1. Kiểm tra xác thực người dùng
+            if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
+            {
+                ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
+                return RedirectToAction("Login", "Login", new { area = "" });
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

@@ -110,6 +110,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
                 return RedirectToAction("Login", "Login", new { area = "" });
             }
             PopulateDropdowns(acc);
+            ViewBag.DonVi = acc.Employee.DM_PhongBans.DM_DonVis;
             return PartialView();
         }
         // GET: TransportFiles/Projects/CreateBomMin
@@ -165,7 +166,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
 		[ValidateInput(false)]
 		public async Task<ActionResult> Create([Bind(Include = "Id,TenDuAn,MaDuAn,DonViId,XaId,HuyenId" +
 			",TinhId,InvestorId,ProjectValue,GiamSat,StartDate,EndDate,TinhTrangDuAn,TinhTrangCongNo" +
-			",ContractId,Note,Longtitude,Latitude,CongNo,DiaChi")] Project project)
+			",ContractId,Note,Longtitude,Latitude,CongNo,DiaChi,LoaiDuAn")] Project project)
         {
             if (ModelState.IsValid)
 			{ 
@@ -193,6 +194,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
                     ViewBag.Message = "Mã dự án đã tồn tại trong đơn vị này!";
                     return RedirectToAction("Index", new { message = ViewBag.Message });
                 }
+                project.LoaiDuAn = acc.Employee.DM_PhongBans.DM_DonVis.CreateBranch;
                 project.CreateUserId = userId;
                 project.CreateDate = DateTime.Now;
                 project.IsActive = true;
@@ -234,6 +236,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
             ViewBag.InvestorId = new SelectList(db.Suppliers, "Id", "SupplierName", project.InvestorId);
             ViewBag.TinhTrangDuAn = new SelectList(db.StatusProjects, "Id", "StatusName", project.TinhTrangDuAn);
             ViewBag.ContractId = new SelectList(db.DocumentTypes, "Id", "DocumentTypeName", project.ContractId);
+            ViewBag.DonVi = acc.Employee.DM_PhongBans.DM_DonVis;
             return PartialView(project);
         }
         // GET: TransportFiles/Projects/Edit/5
@@ -308,7 +311,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
         [ValidateAntiForgeryToken]
 		public async Task<ActionResult> Edit([Bind(Include = "Id,TenDuAn,MaDuAn,DonViId,XaId,HuyenId" +
 			",TinhId,InvestorId,ProjectValue,GiamSat,StartDate,EndDate,TinhTrangDuAn,TinhTrangCongNo" +
-            ",ContractId,CreateUserId,CreateDate,ModifiedDate,ModifiedUserId,IsActive,Note,Longtitude,Latitude,CongNo,DiaChi")] Project project)
+            ",ContractId,CreateUserId,CreateDate,ModifiedDate,ModifiedUserId,IsActive,Note,Longtitude,Latitude,CongNo,DiaChi,LoaiDuAn")] Project project)
         {
             if (ModelState.IsValid)
             {

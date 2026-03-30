@@ -22,10 +22,15 @@ namespace NamLao206.Models
     
         public int Id { get; set; }
         public string Url { get; set; }
-        public int KhoaphongId { get; set; }
+        public Nullable<int> KhoaphongId { get; set; }
+        public Nullable<int> ThietBi_ChiTiet_Id { get; set; }
+        public Nullable<bool> IsActive { get; set; }
+        public Nullable<System.DateTime> CreateDate { get; set; }
+        public Nullable<int> ThietBi_Id { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DM_PhongBans> DM_PhongBans { get; set; }
         public virtual DM_PhongBans DM_PhongBans1 { get; set; }
+        public virtual DM_ThietBi DM_ThietBi { get; set; }
     }
 }

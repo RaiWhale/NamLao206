@@ -20,6 +20,26 @@ namespace NamLao206.Areas.TransportFiles.Controllers
         public static string denNgay = DateTime.Now.ToString("dd/MM/yyyy");
         public static DateTime currentDay = DateTime.Now;
         public static string currentDayString = DateTime.Now.ToString("yyyy-MM-dd");
+        public ActionResult StartView()
+        {
+            // 1. Kiểm tra xác thực người dùng
+            if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
+            {
+                ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
+                return RedirectToAction("Login", "Login", new { area = "" });
+            }
+            // 2. Lấy thông tin tài khoản
+            var acc = db.Accounts
+                .Where(x => x.Id == userId)
+                .SingleOrDefault();
+            if (acc == null)
+            {
+                ViewBag.Message = "Tài khoản không tồn tại hoặc không liên kết với nhân viên.";
+                return RedirectToAction("Login", "Login", new { area = "" });
+            }
+        
+            return View();
+        }
         // GET: TransportFiles/Dashboard
         public ActionResult Index()
         {
@@ -49,7 +69,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
 
 
             ViewBag.Title = "Dự án - ";
-
+            ViewBag.DonVi = acc.Employee.DM_PhongBans.DM_DonVis;
             return View();
         }
 

@@ -1,0 +1,182 @@
+﻿@using NamLao206.Models
+@using NamLao206.Services
+@{
+    Layout = null;
+    namlao206_websiteEntities db = new namlao206_websiteEntities();
+    Account acc = null;
+    List<Transport> ThuChuaXem = null;
+    List<MenuItem> userMenu = null;
+    string userDepartmentName = "";
+    int userDepartmentId = 0;
+    if (User.Identity.IsAuthenticated)
+    {
+        acc = db.Accounts.Where(x => x.Id.ToString().Equals(User.Identity.Name)).SingleOrDefault();
+        if (acc != null && acc.LevelId != 3)
+        {
+            ThuChuaXem = db.Transports.Where(x => x.ReceiverUserId == acc.EmployeeId && x.DaXem == false)
+                .OrderByDescending(x => x.TransportDate).ToList();
+            // Load menu động THEO ĐƠN VỊ của user
+            var permissionService = new PermissionService(db);
+
+            userDepartmentId = permissionService.GetUserDepartment(acc.Id);
+            userDepartmentName = permissionService.GetUserFullDepartmentInfo(acc.Id);
+            userMenu = permissionService.GetUserMenuByUserDepartment(acc.Id);
+
+            // Lưu thông tin department vào ViewBag để sử dụng trong view
+            ViewBag.UserDepartmentId = userDepartmentId;
+            ViewBag.UserDepartmentName = userDepartmentName;
+        }
+        else
+        {
+            // Gọi hàm Logout()
+            Response.Redirect(Url.Action("Logout", "Login", new { area = "" }));
+        }
+    }
+}
+<!--Layout load tất cả thư viện rồi gọi qua RouteConfig-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>
+        @ViewBag.Title CÔNG TY TNHH MTV HỮU NGHỊ NAM LÀO
+        @if (User.Identity.IsAuthenticated)
+        {
+            <text>[@userDepartmentName - @(ThuChuaXem?.Count() ?? 0)]</text>
+        }
+    </title>
+    <meta name="description" content="Marketing Dashboard">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, minimal-ui">
+    <!-- Call App Mode on ios devices -->
+    <meta name="apple-mobile-web-app-title" content="Marketing Dashboard">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <!-- Mobile proof your site -->
+    <link rel="manifest" href="~/Content/smartadmin/media/data/manifest.json">
+    <!-- Remove phone, date, address and email as default links -->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="date=no">
+    <meta name="format-detection" content="address=no">
+    <meta name="format-detection" content="email=no">
+    <meta name="theme-color" content="#37393e">
+    <link href="~/Content/smartadminNew/plugins/waves/waves.min.css" rel="stylesheet" />
+    <link href="~/Content/smartadminNew/css/smartapp.min.css" rel="stylesheet" />
+    <link href="~/Content/smartadminNew/webfonts/smartadmin/sa-icons.css" rel="stylesheet" />
+    <link href="~/Content/smartadminNew/webfonts/fontawesome/fontawesome.css" rel="stylesheet" />
+    <!-- Remove Tap Highlight on Windows Phone IE -->
+    <meta name="msapplication-tap-highlight" content="no">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="~/Content/EponaTheme/assets/images/logo/logo512x512.png" />
+    <script src="~/Content/smartadminNew/scripts/core/saveloadscript.js"></script>
+
+</head>
+<!-- BEGIN Body -->
+<body class="app-landing">
+
+    <!-- BEGIN Page Wrapper -->
+    <!--<nav class="navbar navbar-expand-lg navbar-dark position-fixed w-100 py-3" style="z-index: 1000;">
+        <div class="container">-->
+    @*<a class="navbar-brand" href="index.html">
+            <img src="~/Content/AdminBinhLT/assets/images/login/LOGOCONGTY.png" alt="logo" style="width: 80px; ">
+        </a>
+        <div class="ms-auto d-flex gap-2">
+            <a href="auth-login.html" class="btn btn-link text-white border-0 text-decoration-none">Login</a>
+            <a href="auth-register.html" class="btn btn-link text-white border-0 text-decoration-none">Register</a>
+        </div>*@
+    <!--</div>
+    </nav>-->
+    <!-- 1. Hero Section -->
+    <section class="hero-section position-relative overflow-hidden">
+        <div class="container" style="position: relative; z-index: 1;">
+            <div class="row ">
+                <div class="row align-items-center">
+                    <div class="col-sm-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
+                        @*<h2 class="text-center mb-4">  <img src="~/Content/AdminBinhLT/assets/images/login/LOGOCONGTY.png" style="width: 150px; height: 150px; "></h2>*@
+                        <h1 class="eye-catcher-text display-2 fw-700 mb-5 text-gradient text-center text-md-start" data-text="HỆ THỐNG QUẢN LÝ & ĐIỀU HÀNH NỘI BỘ">
+                            HỆ THỐNG QUẢN LÝ & ĐIỀU HÀNH NỘI BỘ
+                        </h1>
+                        <p class="lead fw-bold mb-5 text-center text-md-start color-black">
+                            <span id="typewriter-text"></span>
+                        </p>
+                        <div class="d-flex gap-3 justify-content-center justify-content-md-start">
+                            <a href="~/Home/TrangChu" class="btn btn-primary btn-lg px-8 py-2">Cổng thông tin điện tử</a>
+                            <a href="~/TransportFiles/TransportFiles/HopThu" class="btn btn-success btn-lg px-8 py-2">Văn phòng điện tử</a>
+                            <a href="~/TransportFiles/Dashboard/Index" class="btn btn-success btn-lg px-8 py-2">Quản lý doanh nghiệp</a>
+                        </div>
+                    </div>
+                    @*<div class="col-4 col-md-8 col-lg-6 col-xl-4 offset-2 float-right">
+                        <div id="regular-login" class="login-card p-4 p-md-6 bg-light bg-opacity-50 translucent-light rounded-4">
+                            <h2 class="text-center mb-4">  <img src="~/Content/AdminBinhLT/assets/images/login/LOGOCONGTY.png" style="width: 150px; height: 150px; "></h2>
+                            <p class="text-center text-red opacity-50 mb-4" style="font-weight:bold; font-size: 50px; color:red">HỆ THỐNG</p>
+                            <h2 class="text-center" style="font-size: 25px; font-weight: bold; color: #155a3a;"> <span>QUẢN LÝ & ĐIỀU HÀNH</span></h2>
+                            <p style="text-decoration: underline; color: black">Quản lý và điều hành nội bộ</p>
+                            <p style="text-decoration: underline; color: black ">Hỗ trợ: 0339939579 - Phòng Tham Mưu - Kế Hoạch</p>
+                            <p style="text-decoration: underline; color: black ">© 2024 NamLao206. Phòng Tham Mưu - Kế Hoạch</p>
+                        </div>
+
+                    </div>*@
+                </div>
+
+            </div>
+        </div>
+        <div id="net"></div>
+    </section>
+    <!-- 2. Features Section -->
+    @*<section id="features" class="features-section" style="background-image: url(/Content/AdminBinhLT/assets/images/login/bannernoibo.png)">*@
+    <section id="features" class="features-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="text-center mb-4">  <img src="~/Content/AdminBinhLT/assets/images/login/LOGOCONGTY.png" style="width: 150px; height: 150px; "></h2>
+                <h2 class="display-6 fw-700 mb-3">TỔNG QUAN HỆ THỐNG QUẢN LÝ & ĐIỀU HÀNH</h2>
+                @* <p class="lead text-muted">Everything you need to manage your business efficiently</p>*@
+            </div>
+            <div class="row g-4">
+                @Html.Partial("_IntroduceModule", new namlao206_websiteEntities().AlbumPictures.Where(x => x.Album.TypeId == 3).ToList())
+            </div>
+        </div>
+    </section>
+
+    <div class="hidden" data-title="@HttpUtility.HtmlAttributeEncode(ViewBag.Title ?? "")">
+    </div>
+    <div id="myModal" class="modal bd-example-modal-lg " tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title h2">
+                        Quản lý <span class="fw-300"><i></i></span>
+                    </h2>
+                    <div class="panel-toolbar">
+                        <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                        <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                        <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close" data-dismiss="modal"></button>
+                    </div>
+                </div>
+                <div class="border rounded-bottom border-top-0 modal-body">
+                    <div class="p-3">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script src="~/Content/smartadminNew/plugins/three/three.min.js"></script>
+    <script src="~/Content/smartadminNew/plugins/vanta/vanta.halo.min.js"></script>
+    <script src="~/Content/smartadminNew/plugins/vanta/vanta.net.min.js"></script>
+    <script src="~/Content/smartadminNew/scripts/pages/landing.js"></script>
+    <!-- The order of scripts is irrelevant. Please check out the plugin pages for more details about these plugins below: -->
+    <!---------------------------->
+
+</body>
+<!-- END Body -->
+</html>
+
+
+
+

@@ -44,15 +44,25 @@ namespace NamLao206.Models
             this.Units1 = new HashSet<Unit>();
             this.UserPermissionGroups = new HashSet<UserPermissionGroup>();
             this.News = new HashSet<News>();
-            this.NhapBanMus = new HashSet<NhapBanMu>();
-            this.NhapBanMus1 = new HashSet<NhapBanMu>();
             this.StorageFiles = new HashSet<StorageFile>();
             this.TransportFiles = new HashSet<TransportFile>();
             this.TransportFiles1 = new HashSet<TransportFile>();
             this.TransportFiles2 = new HashSet<TransportFile>();
             this.Projects = new HashSet<Project>();
             this.Projects1 = new HashSet<Project>();
+            this.NhapBanMus = new HashSet<NhapBanMu>();
+            this.NhapBanMus1 = new HashSet<NhapBanMu>();
             this.NhapBanMus2 = new HashSet<NhapBanMu>();
+            this.ThietBi_DonVi = new HashSet<ThietBi_DonVi>();
+            this.ThietBi_DonVi1 = new HashSet<ThietBi_DonVi>();
+            this.ThietBi_LichSu = new HashSet<ThietBi_LichSu>();
+            this.ThietBi_LichSu1 = new HashSet<ThietBi_LichSu>();
+            this.ThietBi_LichSu2 = new HashSet<ThietBi_LichSu>();
+            this.DM_ThietBi = new HashSet<DM_ThietBi>();
+            this.DM_ThietBi1 = new HashSet<DM_ThietBi>();
+            this.ThietBi_ChiTiet = new HashSet<ThietBi_ChiTiet>();
+            this.ThietBi_ChiTiet1 = new HashSet<ThietBi_ChiTiet>();
+            this.DM_ThietBi2 = new HashSet<DM_ThietBi>();
         }
     
         public int Id { get; set; }
@@ -123,10 +133,6 @@ namespace NamLao206.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<News> News { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<NhapBanMu> NhapBanMus { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<NhapBanMu> NhapBanMus1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StorageFile> StorageFiles { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TransportFile> TransportFiles { get; set; }
@@ -140,6 +146,30 @@ namespace NamLao206.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Project> Projects1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NhapBanMu> NhapBanMus { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NhapBanMu> NhapBanMus1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NhapBanMu> NhapBanMus2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ThietBi_DonVi> ThietBi_DonVi { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ThietBi_DonVi> ThietBi_DonVi1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ThietBi_LichSu> ThietBi_LichSu { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ThietBi_LichSu> ThietBi_LichSu1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ThietBi_LichSu> ThietBi_LichSu2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DM_ThietBi> DM_ThietBi { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DM_ThietBi> DM_ThietBi1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ThietBi_ChiTiet> ThietBi_ChiTiet { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ThietBi_ChiTiet> ThietBi_ChiTiet1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DM_ThietBi> DM_ThietBi2 { get; set; }
     }
 }

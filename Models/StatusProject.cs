@@ -19,10 +19,12 @@ namespace NamLao206.Models
         {
             this.GiamSatThiCongs = new HashSet<GiamSatThiCong>();
             this.KhaoSats = new HashSet<KhaoSat>();
-            this.NhapBanMus = new HashSet<NhapBanMu>();
-            this.NhapBanMus1 = new HashSet<NhapBanMu>();
             this.ThiCongs = new HashSet<ThiCong>();
             this.Projects = new HashSet<Project>();
+            this.NhapBanMus = new HashSet<NhapBanMu>();
+            this.NhapBanMus1 = new HashSet<NhapBanMu>();
+            this.DM_ThietBi = new HashSet<DM_ThietBi>();
+            this.ThietBi_ChiTiet = new HashSet<ThietBi_ChiTiet>();
         }
     
         public int Id { get; set; }
@@ -42,12 +44,16 @@ namespace NamLao206.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<KhaoSat> KhaoSats { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ThiCong> ThiCongs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Project> Projects { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NhapBanMu> NhapBanMus { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NhapBanMu> NhapBanMus1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ThiCong> ThiCongs { get; set; }
+        public virtual ICollection<DM_ThietBi> DM_ThietBi { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Project> Projects { get; set; }
+        public virtual ICollection<ThietBi_ChiTiet> ThietBi_ChiTiet { get; set; }
     }
 }

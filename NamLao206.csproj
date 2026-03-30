@@ -237,6 +237,7 @@
     <Compile Include="Areas\Admin\Controllers\DM_DonVisController.cs" />
     <Compile Include="Areas\Admin\Controllers\DM_hinhthuckinhdoanhController.cs" />
     <Compile Include="Areas\Admin\Controllers\DM_HocvisController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DM_LoaiThietBiController.cs" />
     <Compile Include="Areas\Admin\Controllers\DM_NhomPhongBansController.cs" />
     <Compile Include="Areas\Admin\Controllers\DM_PhongBansController.cs" />
     <Compile Include="Areas\Admin\Controllers\DocumentTypesController.cs" />
@@ -253,6 +254,7 @@
     <Compile Include="Areas\Admin\Controllers\StatusProjectsController.cs" />
     <Compile Include="Areas\Admin\Controllers\SubMenusController.cs" />
     <Compile Include="Areas\Admin\Controllers\TopicsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TransportFilesController.cs" />
     <Compile Include="Areas\Admin\Controllers\UnitsController.cs" />
     <Compile Include="Areas\Admin\Controllers\MenuItemsController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserPermissionGroupsController.cs" />
@@ -284,7 +286,9 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Areas\TransportFiles\Bussiness\EmailBussiness.cs" />
     <Compile Include="Areas\TransportFiles\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\TransportFiles\Controllers\DM_ThietBiController.cs" />
     <Compile Include="Areas\TransportFiles\Controllers\EmployeesController.cs" />
     <Compile Include="Areas\TransportFiles\Controllers\GiamSatThiCongsController.cs" />
     <Compile Include="Areas\TransportFiles\Controllers\HoatDongNhanSusController.cs" />
@@ -296,8 +300,9 @@
     <Compile Include="Areas\TransportFiles\Controllers\SuppliersController.cs" />
     <Compile Include="Areas\TransportFiles\Controllers\TeamsController.cs" />
     <Compile Include="Areas\TransportFiles\Controllers\ThiCongsController.cs" />
-    <Compile Include="Areas\TransportFiles\Controllers\ThietBiXeMaysController.cs" />
+    <Compile Include="Areas\TransportFiles\Controllers\ThietBi_DonViController.cs" />
     <Compile Include="Areas\TransportFiles\Controllers\TransportFilesController.cs" />
+    <Compile Include="Areas\TransportFiles\Controllers\ThietBi_ChiTietController.cs" />
     <Compile Include="Areas\TransportFiles\TransportFilesAreaRegistration.cs" />
     <Compile Include="Controllers\API\ApiController.cs" />
     <Compile Include="Controllers\CascadingDropdownController.cs" />
@@ -363,6 +368,9 @@
     <Compile Include="Models\DM_Hocvis.cs">
       <DependentUpon>namlao206DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DM_LoaiThietBi.cs">
+      <DependentUpon>namlao206DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DM_Nghenghieps.cs">
       <DependentUpon>namlao206DB.tt</DependentUpon>
     </Compile>
@@ -370,6 +378,9 @@
       <DependentUpon>namlao206DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DM_PhongBans.cs">
+      <DependentUpon>namlao206DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DM_ThietBi.cs">
       <DependentUpon>namlao206DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DocumentType.cs">
@@ -480,7 +491,16 @@
     <Compile Include="Models\ThiCong.cs">
       <DependentUpon>namlao206DB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ThietBiXeMay.cs">
+    <Compile Include="Models\ThietBi_ChiTiet.cs">
+      <DependentUpon>namlao206DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ThietBi_DonVi.cs">
+      <DependentUpon>namlao206DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ThietBi_LichSu.cs">
+      <DependentUpon>namlao206DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TonKho.cs">
       <DependentUpon>namlao206DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Topic.cs">
@@ -1975,6 +1995,164 @@
     <Content Include="Content\EponaTheme\cdn-cgi\scripts\5c5dd728\cloudflare-static\email-decode.min.js" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\smartadminNew\css\smartapp.min.css" />
+    <Content Include="Content\smartadminNew\icons\sprite.svg" />
+    <Content Include="Content\smartadminNew\img\app-logo.svg" />
+    <Content Include="Content\smartadminNew\img\apple-touch-icon.png" />
+    <Content Include="Content\smartadminNew\img\backgrounds\bg-1.html" />
+    <Content Include="Content\smartadminNew\img\backgrounds\bg-4.html" />
+    <Content Include="Content\smartadminNew\img\cardcovers\cover-1-lg.png" />
+    <Content Include="Content\smartadminNew\img\demo\avatars\avatar-a.png" />
+    <Content Include="Content\smartadminNew\img\demo\avatars\avatar-admin-xl.png" />
+    <Content Include="Content\smartadminNew\img\demo\avatars\avatar-admin.png" />
+    <Content Include="Content\smartadminNew\img\demo\avatars\avatar-b.png" />
+    <Content Include="Content\smartadminNew\img\demo\avatars\avatar-c.png" />
+    <Content Include="Content\smartadminNew\img\demo\avatars\avatar-d.png" />
+    <Content Include="Content\smartadminNew\img\demo\avatars\avatar-e.png" />
+    <Content Include="Content\smartadminNew\img\demo\avatars\avatar-f.png" />
+    <Content Include="Content\smartadminNew\img\demo\avatars\avatar-g.png" />
+    <Content Include="Content\smartadminNew\img\demo\avatars\avatar-h.png" />
+    <Content Include="Content\smartadminNew\img\demo\avatars\avatar-i.png" />
+    <Content Include="Content\smartadminNew\img\demo\avatars\avatar-j.png" />
+    <Content Include="Content\smartadminNew\img\demo\avatars\avatar-k.png" />
+    <Content Include="Content\smartadminNew\img\demo\avatars\avatar-m.png" />
+    <Content Include="Content\smartadminNew\img\demo\avatars\ng.jpg" />
+    <Content Include="Content\smartadminNew\img\demo\pages\email-order.html" />
+    <Content Include="Content\smartadminNew\img\demo\pages\new-device.html" />
+    <Content Include="Content\smartadminNew\img\demo\pages\password-request.html" />
+    <Content Include="Content\smartadminNew\img\demo\pages\password-reset.html" />
+    <Content Include="Content\smartadminNew\img\demo\pages\side-panel-demo.gif" />
+    <Content Include="Content\smartadminNew\img\demo\pages\verify-email.html" />
+    <Content Include="Content\smartadminNew\img\demo\peace-full.jpg" />
+    <Content Include="Content\smartadminNew\img\demo\position-absolute.gif" />
+    <Content Include="Content\smartadminNew\img\demo\position-fixed.gif" />
+    <Content Include="Content\smartadminNew\img\demo\position-sticky.gif" />
+    <Content Include="Content\smartadminNew\img\demo\relax-full.jpg" />
+    <Content Include="Content\smartadminNew\img\demo\sea-full.jpg" />
+    <Content Include="Content\smartadminNew\img\favicon-16x16.png" />
+    <Content Include="Content\smartadminNew\img\favicon-192x192.png" />
+    <Content Include="Content\smartadminNew\img\favicon-32x32.png" />
+    <Content Include="Content\smartadminNew\img\landing\1.png" />
+    <Content Include="Content\smartadminNew\img\landing\2.png" />
+    <Content Include="Content\smartadminNew\img\landing\3.png" />
+    <Content Include="Content\smartadminNew\img\landing\4.png" />
+    <Content Include="Content\smartadminNew\img\landing\5.png" />
+    <Content Include="Content\smartadminNew\img\logo-light.svg" />
+    <Content Include="Content\smartadminNew\img\logo.png" />
+    <Content Include="Content\smartadminNew\img\logo.svg" />
+    <Content Include="Content\smartadminNew\img\profile\project-1.png" />
+    <Content Include="Content\smartadminNew\img\profile\project-3.png" />
+    <Content Include="Content\smartadminNew\img\profile\project-4.png" />
+    <Content Include="Content\smartadminNew\img\search\1.html" />
+    <Content Include="Content\smartadminNew\img\search\10.html" />
+    <Content Include="Content\smartadminNew\img\search\11.html" />
+    <Content Include="Content\smartadminNew\img\search\12.html" />
+    <Content Include="Content\smartadminNew\img\search\13.html" />
+    <Content Include="Content\smartadminNew\img\search\14.html" />
+    <Content Include="Content\smartadminNew\img\search\15.html" />
+    <Content Include="Content\smartadminNew\img\search\16.html" />
+    <Content Include="Content\smartadminNew\img\search\17.html" />
+    <Content Include="Content\smartadminNew\img\search\18.html" />
+    <Content Include="Content\smartadminNew\img\search\2.html" />
+    <Content Include="Content\smartadminNew\img\search\3.html" />
+    <Content Include="Content\smartadminNew\img\search\4.html" />
+    <Content Include="Content\smartadminNew\img\search\5.html" />
+    <Content Include="Content\smartadminNew\img\search\6.html" />
+    <Content Include="Content\smartadminNew\img\search\7.html" />
+    <Content Include="Content\smartadminNew\img\search\8.html" />
+    <Content Include="Content\smartadminNew\img\search\9.html" />
+    <Content Include="Content\smartadminNew\img\sprite.svg" />
+    <Content Include="Content\smartadminNew\img\thumbs\pic-11.png" />
+    <Content Include="Content\smartadminNew\img\thumbs\pic-12.png" />
+    <Content Include="Content\smartadminNew\img\thumbs\pic-4.png" />
+    <Content Include="Content\smartadminNew\img\thumbs\pic-7.png" />
+    <Content Include="Content\smartadminNew\img\thumbs\pic-8.png" />
+    <Content Include="Content\smartadminNew\plugins\bootstrap\bootstrap.bundle.min.js" />
+    <Content Include="Content\smartadminNew\plugins\easypiechart\easypiechart.min.js" />
+    <Content Include="Content\smartadminNew\plugins\fullcalendar\index.global.min.js" />
+    <Content Include="Content\smartadminNew\plugins\highlightjs\go.min.js" />
+    <Content Include="Content\smartadminNew\plugins\highlightjs\highlight.min.js" />
+    <Content Include="Content\smartadminNew\plugins\highlightjs\night-owl.css" />
+    <Content Include="Content\smartadminNew\plugins\jsvectormap\jsvectormap.min.css" />
+    <Content Include="Content\smartadminNew\plugins\jsvectormap\jsvectormap.min.js" />
+    <Content Include="Content\smartadminNew\plugins\jsvectormap\world-merc.js" />
+    <Content Include="Content\smartadminNew\plugins\masonry\masonry.pkgd.min.js" />
+    <Content Include="Content\smartadminNew\plugins\sortablejs\Sortable.min.js" />
+    <Content Include="Content\smartadminNew\plugins\three\three.min.js" />
+    <Content Include="Content\smartadminNew\plugins\vanta\vanta.halo.min.js" />
+    <Content Include="Content\smartadminNew\plugins\vanta\vanta.net.min.js" />
+    <Content Include="Content\smartadminNew\plugins\waves\waves.min.css" />
+    <Content Include="Content\smartadminNew\plugins\waves\waves.min.js" />
+    <Content Include="Content\smartadminNew\scripts\core\saveloadscript.js" />
+    <Content Include="Content\smartadminNew\scripts\core\smartApp.js" />
+    <Content Include="Content\smartadminNew\scripts\core\smartFilter.js" />
+    <Content Include="Content\smartadminNew\scripts\core\smartNavigation.js" />
+    <Content Include="Content\smartadminNew\scripts\core\smartSlimscroll.js" />
+    <Content Include="Content\smartadminNew\scripts\optional\smartnotes.js" />
+    <Content Include="Content\smartadminNew\scripts\optional\smartTables\smartTables.bundle.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\apexareachart.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\apexbarchart.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\apexboxwhiskerchart.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\apexbubblechart.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\apexcandlestickchart.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\apexcolumnchart.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\apexfunnelchart.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\apexheatmapchart.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\apexlinechart.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\apexmixedcombochart.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\apexpiedonut.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\apexpolarareachart.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\apexradarchart.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\apexradialbarscirclechart.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\apexrangeareachart.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\apexscatterchart.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\apexslopechart.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\apexsparkline.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\apextimelinechart.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\apextreemapchart.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\auth-animation.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\auth-login.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\blank.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\checkboxandradio.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\code-highlight.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\controlcenterdashboard.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\easypiechart.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\fullcalendar.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\iconography.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\landing.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\listfilter.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\marketingdashboard.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\messenger.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\peitycharts.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\position.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\profile.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\projectmanagementdashboard.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\refresh-panel.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\search.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\smarttableminimal.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\smarttableresponsive.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\smarttablesfuzzymatching.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\smarttablesimportexportdata.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\smarttablesjsonsource.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\smarttablesmanagerecords.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\smarttablesserverside.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\stackgenerator.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\stacklibrary.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\streamline.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\subscriptiondashboard.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\systemmail.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\tablesstylegenerator.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\treedemo.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\usercontact.js" />
+    <Content Include="Content\smartadminNew\scripts\pages\visibilitygenerator.js" />
+    <Content Include="Content\smartadminNew\webfonts\fontawesome\fontawesome.css" />
+    <Content Include="Content\smartadminNew\webfonts\fontawesome\fonts\fa-brands-400.svg" />
+    <Content Include="Content\smartadminNew\webfonts\fontawesome\fonts\fa-duotone-900.svg" />
+    <Content Include="Content\smartadminNew\webfonts\fontawesome\fonts\fa-light-300.svg" />
+    <Content Include="Content\smartadminNew\webfonts\fontawesome\fonts\fa-regular-400.svg" />
+    <Content Include="Content\smartadminNew\webfonts\fontawesome\fonts\fa-solid-900.svg" />
+    <Content Include="Content\smartadminNew\webfonts\smartadmin\fonts\smartadmin-icons.svg" />
+    <Content Include="Content\smartadminNew\webfonts\smartadmin\sa-icons.css" />
     <Content Include="Content\smartadmin\css\app.bundle.css" />
     <Content Include="Content\smartadmin\css\datagrid\datatables\datatables.bundle.css" />
     <Content Include="Content\smartadmin\css\fa-brands.css" />
@@ -2048,6 +2226,7 @@
       <DependentUpon>namlao206DB.edmx</DependentUpon>
       <LastGenOutput>namlao206DB.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\bcommandBak.js" />
     <Content Include="Scripts\bcommand.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -2179,16 +2358,16 @@
     <Content Include="Areas\Admin\Views\DM_NhomPhongBans\Index.cshtml" />
     <Content Include="Areas\TransportFiles\Views\web.config" />
     <Content Include="Areas\TransportFiles\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\TransportFiles\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\TransportFiles\Views\TransportFiles\Create.cshtml" />
-    <Content Include="Areas\TransportFiles\Views\TransportFiles\Delete.cshtml" />
-    <Content Include="Areas\TransportFiles\Views\TransportFiles\Details.cshtml" />
-    <Content Include="Areas\TransportFiles\Views\TransportFiles\Edit.cshtml" />
-    <Content Include="Areas\TransportFiles\Views\TransportFiles\HopThuDen.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\Shared\_Layoutbak.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\TransportFiles_bak\Create.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\TransportFiles_bak\Delete.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\TransportFiles_bak\Details.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\TransportFiles_bak\Edit.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\TransportFiles_bak\HopThuDen.cshtml" />
     <Content Include="Areas\TransportFiles\Views\Dashboard\Index.cshtml" />
-    <Content Include="Areas\TransportFiles\Views\TransportFiles\HopThuDi.cshtml" />
-    <Content Include="Areas\TransportFiles\Views\TransportFiles\CongVanKhan.cshtml" />
-    <Content Include="Areas\TransportFiles\Views\TransportFiles\ChuyenTiep.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\TransportFiles_bak\HopThuDi.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\TransportFiles_bak\CongVanKhan.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\TransportFiles_bak\ChuyenTiep.cshtml" />
     <Content Include="Content\ckeditor\CHANGES.md" />
     <Content Include="Content\ckeditor\LICENSE.md" />
     <Content Include="Content\ckeditor\plugins\exportpdf\CHANGELOG.md" />
@@ -2257,12 +2436,34 @@
     <Content Include="Areas\TransportFiles\Views\NghiemThus\EditCumBan.cshtml" />
     <Content Include="Areas\Admin\Views\MenuItems\CopyQuyen.cshtml" />
     <Content Include="Areas\TransportFiles\Views\Projects\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\TransportFiles\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\TransportFiles\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\TransportFiles\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\TransportFiles\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\TransportFiles\Index.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\Dashboard\StartView.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\GiamSatThiCongs\Create.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\GiamSatThiCongs\Edit.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\KhaoSats\Create.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\KhaoSats\Edit.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\NghiemThus\Create.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\NghiemThus\Edit.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\DM_ThietBi\Create.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\DM_ThietBi\Delete.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\DM_ThietBi\Details.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\DM_ThietBi\Edit.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\DM_ThietBi\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\DM_LoaiThietBi\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\DM_LoaiThietBi\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\DM_LoaiThietBi\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\DM_LoaiThietBi\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\DM_LoaiThietBi\Index.cshtml" />
     <None Include="Areas\TransportFiles\Views\Projects\CreateBomMin.cshtml" />
     <Content Include="Areas\TransportFiles\Views\Projects\Delete.cshtml" />
     <Content Include="Areas\TransportFiles\Views\Projects\Details.cshtml" />
     <Content Include="Areas\TransportFiles\Views\Projects\EditBomMin.cshtml" />
     <Content Include="Areas\TransportFiles\Views\Projects\Index.cshtml" />
-    <Content Include="Areas\TransportFiles\Views\TransportFiles\ThungRac.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\TransportFiles_bak\ThungRac.cshtml" />
     <Content Include="Areas\Admin\Views\DM_Donvihanhchinhs\Create.cshtml" />
     <Content Include="Areas\Admin\Views\DM_Donvihanhchinhs\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\DM_Donvihanhchinhs\Details.cshtml" />
@@ -2361,11 +2562,6 @@
     <Content Include="Areas\Admin\Views\Permissions\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Permissions\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Permissions\Index.cshtml" />
-    <Content Include="Areas\TransportFiles\Views\ThietBiXeMays\Create.cshtml" />
-    <Content Include="Areas\TransportFiles\Views\ThietBiXeMays\Delete.cshtml" />
-    <Content Include="Areas\TransportFiles\Views\ThietBiXeMays\Details.cshtml" />
-    <Content Include="Areas\TransportFiles\Views\ThietBiXeMays\Edit.cshtml" />
-    <Content Include="Areas\TransportFiles\Views\ThietBiXeMays\Index.cshtml" />
     <Content Include="Areas\Admin\Views\MenuItems\Create.cshtml" />
     <Content Include="Areas\Admin\Views\MenuItems\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\MenuItems\Details.cshtml" />
@@ -2396,6 +2592,60 @@
     <Content Include="Areas\TransportFiles\Views\Teams\Details.cshtml" />
     <Content Include="Areas\TransportFiles\Views\Teams\Edit.cshtml" />
     <Content Include="Areas\TransportFiles\Views\Teams\Index.cshtml" />
+    <Content Include="Content\smartadminNew\json\MOCK_DATA.json" />
+    <Content Include="Content\smartadminNew\webfonts\fontawesome\fonts\fa-brands-400.eot" />
+    <Content Include="Content\smartadminNew\webfonts\fontawesome\fonts\fa-brands-400.ttf" />
+    <Content Include="Content\smartadminNew\webfonts\fontawesome\fonts\fa-brands-400.woff" />
+    <Content Include="Content\smartadminNew\webfonts\fontawesome\fonts\fa-brands-400.woff2" />
+    <Content Include="Content\smartadminNew\webfonts\fontawesome\fonts\fa-brands-400d41d.eot" />
+    <Content Include="Content\smartadminNew\webfonts\fontawesome\fonts\fa-duotone-900.eot" />
+    <Content Include="Content\smartadminNew\webfonts\fontawesome\fonts\fa-duotone-900.ttf" />
+    <Content Include="Content\smartadminNew\webfonts\fontawesome\fonts\fa-duotone-900.woff" />
+    <Content Include="Content\smartadminNew\webfonts\fontawesome\fonts\fa-duotone-900.woff2" />
+    <Content Include="Content\smartadminNew\webfonts\fontawesome\fonts\fa-duotone-900d41d.eot" />
+    <Content Include="Content\smartadminNew\webfonts\fontawesome\fonts\fa-light-300.eot" />
+    <Content Include="Content\smartadminNew\webfonts\fontawesome\fonts\fa-light-300.ttf" />
+    <Content Include="Content\smartadminNew\webfonts\fontawesome\fonts\fa-light-300.woff" />
+    <Content Include="Content\smartadminNew\webfonts\fontawesome\fonts\fa-light-300.woff2" />
+    <Content Include="Content\smartadminNew\webfonts\fontawesome\fonts\fa-light-300d41d.eot" />
+    <Content Include="Content\smartadminNew\webfonts\fontawesome\fonts\fa-regular-400.eot" />
+    <Content Include="Content\smartadminNew\webfonts\fontawesome\fonts\fa-regular-400.ttf" />
+    <Content Include="Content\smartadminNew\webfonts\fontawesome\fonts\fa-regular-400.woff" />
+    <Content Include="Content\smartadminNew\webfonts\fontawesome\fonts\fa-regular-400.woff2" />
+    <Content Include="Content\smartadminNew\webfonts\fontawesome\fonts\fa-regular-400d41d.eot" />
+    <Content Include="Content\smartadminNew\webfonts\fontawesome\fonts\fa-solid-900.eot" />
+    <Content Include="Content\smartadminNew\webfonts\fontawesome\fonts\fa-solid-900.ttf" />
+    <Content Include="Content\smartadminNew\webfonts\fontawesome\fonts\fa-solid-900.woff" />
+    <Content Include="Content\smartadminNew\webfonts\fontawesome\fonts\fa-solid-900.woff2" />
+    <Content Include="Content\smartadminNew\webfonts\fontawesome\fonts\fa-solid-900d41d.eot" />
+    <Content Include="Content\smartadminNew\webfonts\smartadmin\fonts\smartadmin-icons.eot" />
+    <Content Include="Content\smartadminNew\webfonts\smartadmin\fonts\smartadmin-icons.ttf" />
+    <Content Include="Content\smartadminNew\webfonts\smartadmin\fonts\smartadmin-icons.woff" />
+    <Content Include="Content\smartadminNew\webfonts\smartadmin\fonts\smartadmin-icons.woff2" />
+    <Content Include="Content\smartadminNew\webfonts\smartadmin\fonts\smartadmin-iconsd41d.eot" />
+    <Content Include="Areas\TransportFiles\Views\ThietBi_DonVi\Create.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\ThietBi_DonVi\Delete.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\ThietBi_DonVi\Details.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\ThietBi_DonVi\Edit.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\ThietBi_DonVi\Index.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\TransportFiles\ChuyenTiep.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\TransportFiles\CongVanKhan.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\TransportFiles\Create.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\TransportFiles\Delete.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\TransportFiles\Details.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\TransportFiles\Edit.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\TransportFiles\HopThuDen.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\TransportFiles\HopThuDi.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\TransportFiles\ThungRac.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\TransportFiles\HopThu.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\ThiCongs\Create.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\ThiCongs\Edit.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\ThietBi_ChiTiet\Create.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\ThietBi_ChiTiet\Delete.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\ThietBi_ChiTiet\Details.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\ThietBi_ChiTiet\Edit.cshtml" />
+    <Content Include="Areas\TransportFiles\Views\ThietBi_ChiTiet\Index.cshtml" />
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.1.js" />
     <Content Include="Scripts\jquery-3.7.1.min.js" />
@@ -2439,6 +2689,7 @@
     <Content Include="Views\News\Details.cshtml" />
     <Content Include="Views\News\Edit.cshtml" />
     <Content Include="Views\News\Index.cshtml" />
+    <Content Include="Views\Shared\_IntroduceModule.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

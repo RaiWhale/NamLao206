@@ -1,210 +1,232 @@
 ﻿@model NamLao206.Models.NhapBanMu
-
+@using NamLao206.Models;
 @{
-    ViewBag.Title = "Details";
+
 }
 
-<h2>Details</h2>
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id)
 
-<div>
-    <h4>NhapBanMu</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.LoaiMu)
-        </dt>
+    <!-- Hiển thị thông báo (nếu có) -->
+    <div id="alert-container" data-message="@Html.Raw(HttpUtility.HtmlEncode(ViewBag.Message))"></div>
 
-        <dd>
-            @Html.DisplayFor(model => model.LoaiMu)
-        </dd>
+    <div class="row">
+        <div class="container-fluid" style="margin-top:5px">
+            <div class="col-lg-12 col-sm-12 col-xs-12">
+                <div id="panel-2" class="panel panel-collapsed">
+                    <div class="panel-hdr">
+                        <h2 style="font-size: 15px">
+                            Tạo mới <span class="fw-300"><i><b class="color-success-900">và tìm kiếm dự án</b></i></span>
+                        </h2>
+                    </div>
+                    <div class="panel-container show">
+                        <div class="panel-content">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <a href="@Url.Action("Create","HoSoPhapLies",new {NhapBanMu_Id = Model.Id})" class="bcommand btn btn-md btn-primary waves-effect waves-themed">
+                                        <span class="fal fa-folder mr-1"></span>Hồ sơ pháp lý
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.NgayNhap)
-        </dt>
+    <div class="row">
+        <div class="container-fluid" style="margin-top:5px">
+            <div class="col-lg-12 col-sm-12 col-xs-12">
+                <div id="panel-1" class="panel">
+                    <div class="panel-hdr">
+                        <h2>
+                            Chi tiết <span class="fw-300"><i>thông tin dự án</i></span>
+                        </h2>
+                    </div>
+                    <div class="panel-container show">
+                        <div class="panel-content">
+                            <div class="form-horizontal">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <dd>
-            @Html.DisplayFor(model => model.NgayNhap)
-        </dd>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover table-striped w-100" style="font-size: 14px">
+                                        <thead class="bg-primary-200 text-center">
+                                            <tr>
+                                                <th colspan="4" class="text-uppercase">Thông tin chung</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- Hàng 1 -->
+                                            <tr>
+                                                <td class="bg-light" style="width: 25%"><strong>Loại mũ</strong></td>
+                                                <td style="width: 25%">@Html.DisplayFor(model => model.LoaiMu)</td>
+                                                <td class="bg-light" style="width: 25%"><strong>Ngày nhập</strong></td>
+                                                <td style="width: 25%">@Html.DisplayFor(model => model.NgayNhap)</td>
+                                            </tr>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.KhoiLuongThuVao)
-        </dt>
+                                            <!-- Hàng 2 -->
+                                            <tr>
+                                                <td class="bg-light"><strong>Khối lượng thu vào</strong></td>
+                                                <td>@Html.DisplayFor(model => model.KhoiLuongThuVao)</td>
+                                                <td class="bg-light"><strong>Khối lượng TTTC</strong></td>
+                                                <td>@Html.DisplayFor(model => model.KhoiLuongTTTC)</td>
+                                            </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.KhoiLuongThuVao)
-        </dd>
+                                            <!-- Hàng 3 -->
+                                            <tr>
+                                                <td class="bg-light"><strong>Khối lượng thu vào cuối</strong></td>
+                                                <td>@Html.DisplayFor(model => model.KhoiLuongThuVaoLast)</td>
+                                                <td class="bg-light"><strong>Khối lượng TTTC cuối</strong></td>
+                                                <td>@Html.DisplayFor(model => model.KhoiLuongTTTCLast)</td>
+                                            </tr>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.KhoiLuongTTTC)
-        </dt>
+                                            <!-- Hàng 4 -->
+                                            <tr>
+                                                <td class="bg-light"><strong>Đơn giá</strong></td>
+                                                <td>
+                                                    @String.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:#,##0} VNĐ", Model.DonGia)                                                                                
+                                                </td>
+                                                <td class="bg-light"><strong>Khối lượng TTL</strong></td>
+                                                <td>@Html.DisplayFor(model => model.KhoiLuongTTL)</td>
+                                            </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.KhoiLuongTTTC)
-        </dd>
+                                            <!-- Hàng 5 -->
+                                            <tr>
+                                                <td class="bg-light"><strong>Số điện thoại</strong></td>
+                                                <td>@Html.DisplayFor(model => model.SoDienThoai)</td>
+                                                <td class="bg-light"><strong>Người cân</strong></td>
+                                                <td>@Html.DisplayFor(model => model.Account2.Employee.Name)</td>
+                                            </tr>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.KhoiLuongThuVaoLast)
-        </dt>
+                                            <!-- Hàng 6 -->
+                                            <tr>
+                                                <td class="bg-light"><strong>Ghi chú</strong></td>
+                                                <td colspan="3">@Html.DisplayFor(model => model.Note)</td>
+                                            </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.KhoiLuongThuVaoLast)
-        </dd>
+                                            <tr class="bg-info-100">
+                                                <th colspan="4" class="text-center text-uppercase">Thông tin liên quan</th>
+                                            </tr>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.KhoiLuongTTTCLast)
-        </dt>
+                                            <!-- Hàng 7 -->
+                                            <tr>
+                                                <td class="bg-light"><strong>Người nhập</strong></td>
+                                                <td>@Html.DisplayFor(model => model.Account.Employee.Name)</td>
+                                                <td class="bg-light"><strong>Đơn vị</strong></td>
+                                                <td>@Html.DisplayFor(model => model.DM_DonVis.TenDonVi)</td>
+                                            </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.KhoiLuongTTTCLast)
-        </dd>
+                                            <!-- Hàng 8 -->
+                                            <tr>
+                                                <td class="bg-light"><strong>Loại tài liệu</strong></td>
+                                                <td>@Html.DisplayFor(model => model.DocumentType.DocumentTypeName)</td>
+                                                <td class="bg-light"><strong>Kế toán</strong></td>
+                                                <td>@Html.DisplayFor(model => model.Employee.Name)</td>
+                                            </tr>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DonGia)
-        </dt>
+                                            <!-- Hàng 9 -->
+                                            <tr>
+                                                <td class="bg-light"><strong>Người phê duyệt</strong></td>
+                                                <td>@Html.DisplayFor(model => model.Employee1.Name)</td>
+                                                <td class="bg-light"><strong>Trợ lý kế hoạch</strong></td>
+                                                <td>@Html.DisplayFor(model => model.Employee2.Name)</td>
+                                            </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.DonGia)
-        </dd>
+                                            <!-- Hàng 10 -->
+                                            <tr>
+                                                <td class="bg-light"><strong>Trạng thái dự án</strong></td>
+                                                <td>@Html.DisplayFor(model => model.StatusProject.StatusName)</td>
+                                                <td class="bg-light"><strong>Đơn vị tiền tệ</strong></td>
+                                                <td>@Html.DisplayFor(model => model.Unit.UnitName)</td>
+                                            </tr>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Note)
-        </dt>
+                                            <!-- Hàng 11 -->
+                                            <tr>
+                                                <td class="bg-light"><strong>Loại thống kê</strong></td>
+                                                <td>@Html.DisplayFor(model => model.Unit1.UnitName)</td>
+                                                <td class="bg-light"><strong>Nhà cung cấp</strong></td>
+                                                <td>@Html.DisplayFor(model => model.Supplier.SupplierName)</td>
+                                            </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.Note)
-        </dd>
+                                            <!-- Hàng 12 -->
+                                            <tr>
+                                                <td class="bg-light"><strong>Nhóm</strong></td>
+                                                <td>@Html.DisplayFor(model => model.Team.TeamName)</td>
+                                          
+                                            </tr>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.SoDienThoai)
-        </dt>
+                                            <!-- Hàng 13 -->
+                                        
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.SoDienThoai)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.KhoiLuongTTL)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.KhoiLuongTTL)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NguoiCan_EMP_Id)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NguoiCan_EMP_Id)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Account.LoginName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Account.LoginName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DM_DonVis.TenDonVi)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DM_DonVis.TenDonVi)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DocumentType.DocumentTypeName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DocumentType.DocumentTypeName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Employee.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Employee.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Employee1.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Employee1.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Employee2.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Employee2.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.StatusProject.StatusName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.StatusProject.StatusName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Unit.UnitName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Unit.UnitName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Unit1.UnitName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Unit1.UnitName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NhapBanMu1.LoaiMu)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NhapBanMu1.LoaiMu)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NhapBanMu2.LoaiMu)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NhapBanMu2.LoaiMu)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Supplier.SupplierName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Supplier.SupplierName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Team.TeamName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Team.TeamName)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+    <!-- Phần hồ sơ pháp lý (giữ nguyên) -->
+    if (Model.HoSoPhapLys != null && Model.HoSoPhapLys.Any())
+    {
+        <div class="row mt-3">
+            <div class="container-fluid">
+                <div class="col-lg-12 col-sm-12 col-xs-12">
+                    <div id="panel-3" class="panel">
+                        <div class="panel-hdr">
+                            <h2>
+                                Danh sách <span class="fw-300"><i>hồ sơ pháp lý</i></span>
+                            </h2>
+                        </div>
+                        <div class="panel-container show">
+                            <div class="panel-content">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover table-striped w-100 dt-basic-example" style="font-size: 15px">
+                                        <thead class="bg-warning-200 text-center">
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Tên hồ sơ</th>
+                                                <th>Loại hồ sơ</th>
+                                                <th>Nhóm hồ sơ</th>
+                                                <th>Thao tác</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model.HoSoPhapLys)
+                                            {
+                                                <tr>
+                                                    <td>@Html.DisplayFor(modelItem => item.STT)</td>
+                                                    <td>@Html.DisplayFor(modelItem => item.TenHoSo)</td>
+                                                    <td>@Html.DisplayFor(modelItem => item.DocumentType.DocumentTypeName)</td>
+                                                    <td>@Html.DisplayFor(modelItem => item.DM_AddBangs.TenBang)</td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center list-action">
+                                                            <a class="badge bg-white mr-2" data-toggle="tooltip" data-placement="top" title="Tải" href="../../Uploads/@item.ProjectID/@item.AddBangId/@item.Url">
+                                                                <i class="fal fa-cloud-download fa-2x"></i>
+                                                            </a>
+                                                            <a class="badge bg-success mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="Sửa" href="@Url.Action("Edit","HoSoPhapLies", new { id = item.Id })">
+                                                                <i class="ni ni-wrench fa-2x"></i>
+                                                            </a>
+                                                            <a class="badge bg-warning mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="Xóa" href="@Url.Action("Delete","HoSoPhapLies", new { id = item.Id })">
+                                                                <i class="ni ni-trash fa-2x"></i>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}

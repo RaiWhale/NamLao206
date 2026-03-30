@@ -1,0 +1,112 @@
+﻿@model IEnumerable<NamLao206.Models.ThietBi_ChiTiet>
+
+@{
+    // Khai báo mảng màu và icon (dùng C#)
+    string[] backgroundColors = { "bg-primary-300", "bg-warning-400", "bg-success-200", "bg-info-200", "bg-danger-200", "bg-fusion-200" };
+    string[] icons = { "mb-n1 fa-user mr-n1", "mb-n1 fa-gem mr-n4", "mb-n5 fa-lightbulb mr-n6", "mb-n1 fa-globe mr-n4" };
+
+
+    // Nhóm dữ liệu theo TrangThai, đồng thời lưu lại index để lấy màu/icon
+    var groupedData = Model
+         .GroupBy(t => t.TinhTrang) // Nhóm theo trạng thái (int? cần xử lý null nếu có)
+         .Select((g, index) => new
+         {
+             StatusId = g.Key,
+             StatusName = g.FirstOrDefault()?.StatusProject?.StatusName ?? "Không xác định",
+             Count = g.Count(),
+             Index = index
+         })
+         .ToList();
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <!-- Hiển thị thông báo (nếu có) -->
+    <div id="alert-container" data-message="@Html.Raw(HttpUtility.HtmlEncode(ViewBag.Message))"></div>
+    <div class="row">
+        <div class="col-lg-12 col-sm-12 col-xs-12">
+            <div id="panel-1" class="panel panel-icon">
+                <div class="panel-hdr">
+                    <h2 style="font-size: 15px">
+                        Quản lý <span class="fw-300"><i><b class="color-success-900">thiết bị</b></i></span>
+                    </h2>
+                    <div class="panel-toolbar">
+                        <button type="button" class="btn btn-panel" data-action="panel-collapse" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-offset="0,10" data-bs-original-title="Toggle">
+                            <svg class="sa-icon">
+                                <use class="panel-collapsed-icon" href="~/Content/smartadminNew/img/sprite.svg#minus-circle"></use>
+                                <use class="panel-expand-icon" href="~/Content/smartadminNew/img/sprite.svg#plus-circle"></use>
+                            </svg>
+                        </button>
+                        <button type="button" class="btn btn-panel" data-action="panel-fullscreen" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-offset="0,10" data-bs-original-title="Fullscreen">
+                            <svg class="sa-icon">
+                                <use href="~/Content/smartadminNew/icons/sprite.svg#stop-circle"></use>
+                            </svg>
+                        </button>
+                        <button type="button" class="btn btn-panel" data-action="panel-close" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-offset="0,10" data-bs-original-title="Close">
+                            <svg class="sa-icon">
+                                <use href="~/Content/smartadminNew/icons/sprite.svg#x-circle"></use>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="panel-container show">
+                    <div class="panel-content">
+                        @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            <div class="frame-wrap">
+                                <div class="demo">
+                                    <a href="@Url.Action("Create")" class="bcommand btn btn-md btn-success waves-effect waves-themed">
+                                        <span class="fal fa-download mr-1"></span>Tạo mới
+                                    </a>
+                                    <input type="text" name="search" class="search form-control" placeholder="Tìm kiếm" value="@ViewBag.search">
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3 col-sm-6 col-xs-12">
+            @foreach (var group in groupedData)
+            {
+                // Lấy màu và icon theo index, nếu hết thì lặp lại bằng %
+                var bgColor = backgroundColors[group.Index % backgroundColors.Length];
+                var icon = icons[group.Index % icons.Length];
+
+                <div class="col-lg-2 col-sm-2 col-xs-12">
+                    <div class="p-3 @bgColor rounded overflow-hidden position-relative text-white mb-g">
+                        <div>
+                            <!-- Số lượng thiết bị (dùng group.Count) -->
+                            <h2 class="display-3 d-block l-h-n m-0 fw-500" style="font-size:150%">@group.Count</h2>
+                            <!-- Nếu muốn hiển thị số có dấu phân cách -->
+                            <h2 class="m-0 l-h-n fw-500" style="color:blue;font-size:180%">@group.Count.ToString("N0")</h2>
+                        </div>
+                        <span class="count_bottom">
+                            <h4 style="color:black;font-size:15px">
+                                <i class=""></i> @group.StatusName
+                            </h4>
+                        </span>
+                        <!-- Icon lấy từ mảng icons -->
+                        <i class="fal position-absolute pos-right pos-bottom opacity-15 @icon" style="font-size:6rem"></i>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="col-lg-3 col-sm-6 col-xs-12">
+
+        </div>
+        <div class="col-lg-3 col-sm-6 col-xs-12">
+
+        </div>
+        <div class="col-lg-3 col-sm-6 col-xs-12">
+
+        </div>
+    </div>
+    <div class="row">
+
+    </div>
+
+
+}

@@ -18,8 +18,11 @@ namespace NamLao206.Models
         public DM_PhongBans()
         {
             this.Administrators = new HashSet<Administrator>();
-            this.Pictures = new HashSet<Picture>();
             this.Employees = new HashSet<Employee>();
+            this.Pictures = new HashSet<Picture>();
+            this.ThietBi_DonVi = new HashSet<ThietBi_DonVi>();
+            this.DM_ThietBi = new HashSet<DM_ThietBi>();
+            this.ThietBi_ChiTiet = new HashSet<ThietBi_ChiTiet>();
         }
     
         public int Id { get; set; }
@@ -35,10 +38,16 @@ namespace NamLao206.Models
         public virtual ICollection<Administrator> Administrators { get; set; }
         public virtual DM_DonVis DM_DonVis { get; set; }
         public virtual DM_NhomPhongBans DM_NhomPhongBans { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Employee> Employees { get; set; }
         public virtual Picture Picture { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Picture> Pictures { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Employee> Employees { get; set; }
+        public virtual ICollection<ThietBi_DonVi> ThietBi_DonVi { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DM_ThietBi> DM_ThietBi { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ThietBi_ChiTiet> ThietBi_ChiTiet { get; set; }
     }
 }

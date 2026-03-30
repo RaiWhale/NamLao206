@@ -1,0 +1,93 @@
+﻿@model IEnumerable<NamLao206.Models.ThietBi_DonVi>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SoLuong)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SoLuong_ThucTe)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SoLuong_Hong)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayTao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayCapNhat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Account.LoginName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Account1.LoginName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DM_DonVis.TenDonVi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DM_PhongBans.TenKhoa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DM_ThietBi.BienSo)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SoLuong)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SoLuong_ThucTe)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SoLuong_Hong)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgayTao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgayCapNhat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsActive)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Account.LoginName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Account1.LoginName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DM_DonVis.TenDonVi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DM_PhongBans.TenKhoa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DM_ThietBi.BienSo)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Thietbi_Donvi_Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Thietbi_Donvi_Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Thietbi_Donvi_Id })
+        </td>
+    </tr>
+}
+
+</table>

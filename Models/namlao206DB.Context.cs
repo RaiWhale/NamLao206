@@ -63,17 +63,14 @@ namespace NamLao206.Models
         public virtual DbSet<News> News { get; set; }
         public virtual DbSet<NewsPicture> NewsPictures { get; set; }
         public virtual DbSet<NghiemThu> NghiemThus { get; set; }
-        public virtual DbSet<NhapBanMu> NhapBanMus { get; set; }
         public virtual DbSet<Permission> Permissions { get; set; }
         public virtual DbSet<Phase> Phases { get; set; }
-        public virtual DbSet<Picture> Pictures { get; set; }
         public virtual DbSet<StatusProject> StatusProjects { get; set; }
         public virtual DbSet<StorageFile> StorageFiles { get; set; }
         public virtual DbSet<SubMenu> SubMenus { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
         public virtual DbSet<Team> Teams { get; set; }
         public virtual DbSet<ThiCong> ThiCongs { get; set; }
-        public virtual DbSet<ThietBiXeMay> ThietBiXeMays { get; set; }
         public virtual DbSet<Topic> Topics { get; set; }
         public virtual DbSet<TransportFile> TransportFiles { get; set; }
         public virtual DbSet<TransportFileUrl> TransportFileUrls { get; set; }
@@ -84,6 +81,14 @@ namespace NamLao206.Models
         public virtual DbSet<DM_AdminListUpItem> DM_AdminListUpItem { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<Project> Projects { get; set; }
+        public virtual DbSet<NhapBanMu> NhapBanMus { get; set; }
+        public virtual DbSet<TonKho> TonKhoes { get; set; }
+        public virtual DbSet<DM_LoaiThietBi> DM_LoaiThietBi { get; set; }
+        public virtual DbSet<Picture> Pictures { get; set; }
+        public virtual DbSet<ThietBi_DonVi> ThietBi_DonVi { get; set; }
+        public virtual DbSet<ThietBi_LichSu> ThietBi_LichSu { get; set; }
+        public virtual DbSet<DM_ThietBi> DM_ThietBi { get; set; }
+        public virtual DbSet<ThietBi_ChiTiet> ThietBi_ChiTiet { get; set; }
     
         public virtual ObjectResult<sp_GetDataForDashBoard_Result> sp_GetDataForDashBoard(string action, string fromDate, string toDate, Nullable<int> donvi_id)
         {
@@ -104,6 +109,47 @@ namespace NamLao206.Models
                 new ObjectParameter("Donvi_id", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetDataForDashBoard_Result>("sp_GetDataForDashBoard", actionParameter, fromDateParameter, toDateParameter, donvi_idParameter);
+        }
+    
+        public virtual int sp_CapNhatSoLuongThietBi(Nullable<int> thietbi_id, Nullable<int> donvi_id, Nullable<int> phongban_id, Nullable<decimal> so_luong_moi, string loai_thay_doi, Nullable<int> nguoi_thay_doi, string ly_do, Nullable<int> nguoiTao_Id, Nullable<int> nguoiCapNhat_Id)
+        {
+            var thietbi_idParameter = thietbi_id.HasValue ?
+                new ObjectParameter("thietbi_id", thietbi_id) :
+                new ObjectParameter("thietbi_id", typeof(int));
+    
+            var donvi_idParameter = donvi_id.HasValue ?
+                new ObjectParameter("donvi_id", donvi_id) :
+                new ObjectParameter("donvi_id", typeof(int));
+    
+            var phongban_idParameter = phongban_id.HasValue ?
+                new ObjectParameter("phongban_id", phongban_id) :
+                new ObjectParameter("phongban_id", typeof(int));
+    
+            var so_luong_moiParameter = so_luong_moi.HasValue ?
+                new ObjectParameter("so_luong_moi", so_luong_moi) :
+                new ObjectParameter("so_luong_moi", typeof(decimal));
+    
+            var loai_thay_doiParameter = loai_thay_doi != null ?
+                new ObjectParameter("loai_thay_doi", loai_thay_doi) :
+                new ObjectParameter("loai_thay_doi", typeof(string));
+    
+            var nguoi_thay_doiParameter = nguoi_thay_doi.HasValue ?
+                new ObjectParameter("nguoi_thay_doi", nguoi_thay_doi) :
+                new ObjectParameter("nguoi_thay_doi", typeof(int));
+    
+            var ly_doParameter = ly_do != null ?
+                new ObjectParameter("ly_do", ly_do) :
+                new ObjectParameter("ly_do", typeof(string));
+    
+            var nguoiTao_IdParameter = nguoiTao_Id.HasValue ?
+                new ObjectParameter("NguoiTao_Id", nguoiTao_Id) :
+                new ObjectParameter("NguoiTao_Id", typeof(int));
+    
+            var nguoiCapNhat_IdParameter = nguoiCapNhat_Id.HasValue ?
+                new ObjectParameter("NguoiCapNhat_Id", nguoiCapNhat_Id) :
+                new ObjectParameter("NguoiCapNhat_Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_CapNhatSoLuongThietBi", thietbi_idParameter, donvi_idParameter, phongban_idParameter, so_luong_moiParameter, loai_thay_doiParameter, nguoi_thay_doiParameter, ly_doParameter, nguoiTao_IdParameter, nguoiCapNhat_IdParameter);
         }
     }
 }

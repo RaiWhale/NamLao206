@@ -1,12 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
-This file is used by the publish/package process of your Web project. You can customize the behavior of this process
-by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
--->
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- https://go.microsoft.com/fwlink/?LinkID=208121. -->
 <Project>
   <PropertyGroup>
-    <_PublishTargetUrl>\\192.168.5.15\Publish</_PublishTargetUrl>
-    <History>True|2025-11-07T09:53:13.9614116Z||;True|2025-11-07T16:41:36.5647425+07:00||;True|2025-11-07T14:57:09.1735070+07:00||;True|2025-07-13T12:31:58.8237829+07:00||;True|2025-04-29T13:12:21.9910802+07:00||;True|2025-04-25T14:58:04.0837449+07:00||;</History>
+    <_PublishTargetUrl>\\192.168.5.16\Publish\</_PublishTargetUrl>
+    <History>True|2026-03-09T09:30:39.2060406Z||;False|2026-03-09T16:29:06.9254156+07:00||;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -35,7 +32,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/26/2025 12:10:31</publishTime>
     </File>
     <File Include="Areas/Admin/Views/AlbumPictures/Create.cshtml">
-      <publishTime>09/26/2025 12:10:31</publishTime>
+      <publishTime>02/26/2026 14:14:56</publishTime>
     </File>
     <File Include="Areas/Admin/Views/AlbumPictures/Delete.cshtml">
       <publishTime>09/26/2025 12:10:31</publishTime>
@@ -44,13 +41,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/26/2025 12:10:31</publishTime>
     </File>
     <File Include="Areas/Admin/Views/AlbumPictures/Edit.cshtml">
-      <publishTime>09/26/2025 12:10:31</publishTime>
+      <publishTime>02/26/2026 14:15:50</publishTime>
     </File>
     <File Include="Areas/Admin/Views/AlbumPictures/Index.cshtml">
-      <publishTime>09/26/2025 12:10:31</publishTime>
+      <publishTime>02/26/2026 08:43:27</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Albums/Create.cshtml">
-      <publishTime>09/26/2025 12:10:31</publishTime>
+      <publishTime>02/26/2026 08:38:43</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Albums/Delete.cshtml">
       <publishTime>09/26/2025 12:10:31</publishTime>
@@ -59,7 +56,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/26/2025 12:10:31</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Albums/Edit.cshtml">
-      <publishTime>09/26/2025 12:10:31</publishTime>
+      <publishTime>02/26/2026 10:01:17</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Albums/Index.cshtml">
       <publishTime>09/26/2025 12:10:31</publishTime>
@@ -248,7 +245,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/26/2025 12:10:31</publishTime>
     </File>
     <File Include="Areas/Admin/Views/DocumentTypes/Create.cshtml">
-      <publishTime>09/26/2025 12:10:31</publishTime>
+      <publishTime>12/29/2025 10:05:17</publishTime>
     </File>
     <File Include="Areas/Admin/Views/DocumentTypes/Delete.cshtml">
       <publishTime>09/26/2025 12:10:31</publishTime>
@@ -257,7 +254,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/26/2025 12:10:31</publishTime>
     </File>
     <File Include="Areas/Admin/Views/DocumentTypes/Edit.cshtml">
-      <publishTime>09/26/2025 12:10:31</publishTime>
+      <publishTime>12/29/2025 10:06:20</publishTime>
     </File>
     <File Include="Areas/Admin/Views/DocumentTypes/Index.cshtml">
       <publishTime>09/26/2025 12:10:31</publishTime>
@@ -287,7 +284,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/23/2025 09:28:03</publishTime>
     </File>
     <File Include="Areas/Admin/Views/GroupPermissions/Edit.cshtml">
-      <publishTime>11/04/2025 15:28:46</publishTime>
+      <publishTime>12/22/2025 10:12:37</publishTime>
     </File>
     <File Include="Areas/Admin/Views/GroupPermissions/Index.cshtml">
       <publishTime>11/04/2025 16:47:17</publishTime>
@@ -307,8 +304,11 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Areas/Admin/Views/Levels/Index.cshtml">
       <publishTime>09/26/2025 12:10:31</publishTime>
     </File>
+    <File Include="Areas/Admin/Views/MenuItems/CopyQuyen.cshtml">
+      <publishTime>11/26/2025 07:43:47</publishTime>
+    </File>
     <File Include="Areas/Admin/Views/MenuItems/Create.cshtml">
-      <publishTime>10/26/2025 10:51:43</publishTime>
+      <publishTime>11/25/2025 11:48:34</publishTime>
     </File>
     <File Include="Areas/Admin/Views/MenuItems/Delete.cshtml">
       <publishTime>10/26/2025 10:51:43</publishTime>
@@ -317,13 +317,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/26/2025 10:51:43</publishTime>
     </File>
     <File Include="Areas/Admin/Views/MenuItems/Edit.cshtml">
-      <publishTime>10/26/2025 10:51:43</publishTime>
+      <publishTime>11/24/2025 16:48:13</publishTime>
     </File>
     <File Include="Areas/Admin/Views/MenuItems/Index.cshtml">
-      <publishTime>10/26/2025 10:51:43</publishTime>
+      <publishTime>11/26/2025 08:59:07</publishTime>
     </File>
     <File Include="Areas/Admin/Views/News/Create.cshtml">
-      <publishTime>09/26/2025 12:10:31</publishTime>
+      <publishTime>12/11/2025 13:47:07</publishTime>
     </File>
     <File Include="Areas/Admin/Views/News/Create2.cshtml">
       <publishTime>09/26/2025 12:10:31</publishTime>
@@ -335,13 +335,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/26/2025 12:10:31</publishTime>
     </File>
     <File Include="Areas/Admin/Views/News/Edit.cshtml">
-      <publishTime>09/26/2025 12:10:31</publishTime>
+      <publishTime>12/11/2025 13:49:19</publishTime>
     </File>
     <File Include="Areas/Admin/Views/News/Index.cshtml">
-      <publishTime>09/26/2025 12:10:31</publishTime>
+      <publishTime>12/25/2025 08:58:12</publishTime>
     </File>
     <File Include="Areas/Admin/Views/PermissionGroups/Create.cshtml">
-      <publishTime>11/04/2025 14:14:20</publishTime>
+      <publishTime>11/24/2025 11:20:08</publishTime>
     </File>
     <File Include="Areas/Admin/Views/PermissionGroups/Delete.cshtml">
       <publishTime>11/04/2025 15:28:06</publishTime>
@@ -350,7 +350,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/23/2025 09:28:03</publishTime>
     </File>
     <File Include="Areas/Admin/Views/PermissionGroups/Edit.cshtml">
-      <publishTime>11/04/2025 14:18:41</publishTime>
+      <publishTime>11/24/2025 11:21:21</publishTime>
     </File>
     <File Include="Areas/Admin/Views/PermissionGroups/Index.cshtml">
       <publishTime>11/04/2025 16:47:44</publishTime>
@@ -404,7 +404,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/26/2025 12:10:31</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Shared/_Layout.cshtml">
-      <publishTime>10/26/2025 10:51:43</publishTime>
+      <publishTime>12/15/2025 00:00:26</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Shared/_LayoutBackup.cshtml">
       <publishTime>09/26/2025 12:10:31</publishTime>
@@ -457,6 +457,21 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Areas/Admin/Views/Topics/Index.cshtml">
       <publishTime>09/26/2025 12:10:31</publishTime>
     </File>
+    <File Include="Areas/Admin/Views/TransportFiles/Create.cshtml">
+      <publishTime>01/06/2026 09:22:08</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/TransportFiles/Delete.cshtml">
+      <publishTime>01/06/2026 09:47:14</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/TransportFiles/Details.cshtml">
+      <publishTime>01/06/2026 09:22:12</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/TransportFiles/Edit.cshtml">
+      <publishTime>01/06/2026 09:22:13</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/TransportFiles/Index.cshtml">
+      <publishTime>01/06/2026 09:37:54</publishTime>
+    </File>
     <File Include="Areas/Admin/Views/Units/Create.cshtml">
       <publishTime>09/26/2025 12:10:31</publishTime>
     </File>
@@ -471,6 +486,21 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Areas/Admin/Views/Units/Index.cshtml">
       <publishTime>09/26/2025 12:10:31</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/UserPermissionGroups/Create.cshtml">
+      <publishTime>11/18/2025 10:20:49</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/UserPermissionGroups/Delete.cshtml">
+      <publishTime>11/18/2025 10:13:26</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/UserPermissionGroups/Details.cshtml">
+      <publishTime>11/18/2025 09:43:48</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/UserPermissionGroups/Edit.cshtml">
+      <publishTime>11/18/2025 13:41:20</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/UserPermissionGroups/Index.cshtml">
+      <publishTime>11/18/2025 10:15:24</publishTime>
     </File>
     <File Include="Areas/Admin/Views/web.config">
       <publishTime>09/26/2025 12:10:31</publishTime>
@@ -541,11 +571,11 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Areas/HelpPage/Views/_ViewStart.cshtml">
       <publishTime>09/26/2025 12:10:31</publishTime>
     </File>
-    <File Include="Areas/TransportFiles/Controllers/NghiemThusController.cs">
-      <publishTime>11/24/2025 15:49:39</publishTime>
-    </File>
     <File Include="Areas/TransportFiles/Views/Dashboard/Index.cshtml">
-      <publishTime>09/26/2025 12:10:31</publishTime>
+      <publishTime>11/26/2025 11:53:57</publishTime>
+    </File>
+    <File Include="Areas/TransportFiles/Views/Dashboard/StartView.cshtml">
+      <publishTime>02/26/2026 15:27:25</publishTime>
     </File>
     <File Include="Areas/TransportFiles/Views/Employees/Create.cshtml">
       <publishTime>09/26/2025 12:10:31</publishTime>
@@ -562,8 +592,11 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Areas/TransportFiles/Views/Employees/Index.cshtml">
       <publishTime>09/26/2025 12:10:31</publishTime>
     </File>
-    <File Include="Areas/TransportFiles/Views/GiamSatThiCongs/Create.cshtml">
-      <publishTime>09/26/2025 12:10:31</publishTime>
+    <File Include="Areas/TransportFiles/Views/GiamSatThiCongs/CreateBomMin.cshtml">
+      <publishTime>12/25/2025 10:10:45</publishTime>
+    </File>
+    <File Include="Areas/TransportFiles/Views/GiamSatThiCongs/CreateCumBan.cshtml">
+      <publishTime>12/25/2025 10:10:50</publishTime>
     </File>
     <File Include="Areas/TransportFiles/Views/GiamSatThiCongs/Delete.cshtml">
       <publishTime>09/26/2025 12:10:31</publishTime>
@@ -571,8 +604,11 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Areas/TransportFiles/Views/GiamSatThiCongs/Details.cshtml">
       <publishTime>09/26/2025 12:10:31</publishTime>
     </File>
-    <File Include="Areas/TransportFiles/Views/GiamSatThiCongs/Edit.cshtml">
-      <publishTime>09/26/2025 12:10:31</publishTime>
+    <File Include="Areas/TransportFiles/Views/GiamSatThiCongs/EditBomMin.cshtml">
+      <publishTime>12/25/2025 10:11:01</publishTime>
+    </File>
+    <File Include="Areas/TransportFiles/Views/GiamSatThiCongs/EditCumBan.cshtml">
+      <publishTime>12/25/2025 10:11:08</publishTime>
     </File>
     <File Include="Areas/TransportFiles/Views/GiamSatThiCongs/Index.cshtml">
       <publishTime>09/26/2025 12:10:31</publishTime>
@@ -593,7 +629,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/26/2025 12:10:31</publishTime>
     </File>
     <File Include="Areas/TransportFiles/Views/HoSoPhapLies/Create.cshtml">
-      <publishTime>09/26/2025 12:10:31</publishTime>
+      <publishTime>12/08/2025 16:37:02</publishTime>
     </File>
     <File Include="Areas/TransportFiles/Views/HoSoPhapLies/Delete.cshtml">
       <publishTime>09/26/2025 12:10:31</publishTime>
@@ -607,8 +643,11 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Areas/TransportFiles/Views/HoSoPhapLies/Index.cshtml">
       <publishTime>09/26/2025 12:10:31</publishTime>
     </File>
-    <File Include="Areas/TransportFiles/Views/KhaoSats/Create.cshtml">
-      <publishTime>09/26/2025 12:10:31</publishTime>
+    <File Include="Areas/TransportFiles/Views/KhaoSats/CreateBomMin.cshtml">
+      <publishTime>12/25/2025 10:11:50</publishTime>
+    </File>
+    <File Include="Areas/TransportFiles/Views/KhaoSats/CreateCumBan.cshtml">
+      <publishTime>12/25/2025 10:11:53</publishTime>
     </File>
     <File Include="Areas/TransportFiles/Views/KhaoSats/Delete.cshtml">
       <publishTime>09/26/2025 12:10:31</publishTime>
@@ -616,14 +655,20 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Areas/TransportFiles/Views/KhaoSats/Details.cshtml">
       <publishTime>09/26/2025 12:10:31</publishTime>
     </File>
-    <File Include="Areas/TransportFiles/Views/KhaoSats/Edit.cshtml">
-      <publishTime>09/26/2025 12:10:31</publishTime>
+    <File Include="Areas/TransportFiles/Views/KhaoSats/EditBomMin.cshtml">
+      <publishTime>12/25/2025 10:13:27</publishTime>
+    </File>
+    <File Include="Areas/TransportFiles/Views/KhaoSats/EditCumBan.cshtml">
+      <publishTime>12/25/2025 10:12:06</publishTime>
     </File>
     <File Include="Areas/TransportFiles/Views/KhaoSats/Index.cshtml">
       <publishTime>09/26/2025 12:10:31</publishTime>
     </File>
-    <File Include="Areas/TransportFiles/Views/NghiemThus/Create.cshtml">
-      <publishTime>09/26/2025 12:10:31</publishTime>
+    <File Include="Areas/TransportFiles/Views/NghiemThus/CreateBomMin.cshtml">
+      <publishTime>12/25/2025 10:12:24</publishTime>
+    </File>
+    <File Include="Areas/TransportFiles/Views/NghiemThus/CreateCumBan.cshtml">
+      <publishTime>12/25/2025 10:12:27</publishTime>
     </File>
     <File Include="Areas/TransportFiles/Views/NghiemThus/Delete.cshtml">
       <publishTime>09/26/2025 12:10:31</publishTime>
@@ -631,29 +676,32 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Areas/TransportFiles/Views/NghiemThus/Details.cshtml">
       <publishTime>09/26/2025 12:10:31</publishTime>
     </File>
-    <File Include="Areas/TransportFiles/Views/NghiemThus/Edit.cshtml">
-      <publishTime>09/26/2025 12:10:31</publishTime>
+    <File Include="Areas/TransportFiles/Views/NghiemThus/EditBomMin.cshtml">
+      <publishTime>12/25/2025 10:12:39</publishTime>
+    </File>
+    <File Include="Areas/TransportFiles/Views/NghiemThus/EditCumBan.cshtml">
+      <publishTime>12/25/2025 10:12:43</publishTime>
     </File>
     <File Include="Areas/TransportFiles/Views/NghiemThus/Index.cshtml">
       <publishTime>09/26/2025 12:10:31</publishTime>
     </File>
     <File Include="Areas/TransportFiles/Views/NhapBanMus/Create.cshtml">
-      <publishTime>09/26/2025 18:41:14</publishTime>
+      <publishTime>12/27/2025 09:37:42</publishTime>
     </File>
     <File Include="Areas/TransportFiles/Views/NhapBanMus/Delete.cshtml">
-      <publishTime>09/26/2025 14:10:06</publishTime>
+      <publishTime>12/25/2025 17:32:41</publishTime>
     </File>
     <File Include="Areas/TransportFiles/Views/NhapBanMus/Details.cshtml">
-      <publishTime>09/26/2025 12:10:31</publishTime>
+      <publishTime>12/29/2025 08:41:24</publishTime>
     </File>
     <File Include="Areas/TransportFiles/Views/NhapBanMus/Edit.cshtml">
-      <publishTime>09/26/2025 12:10:31</publishTime>
+      <publishTime>12/29/2025 08:09:32</publishTime>
     </File>
     <File Include="Areas/TransportFiles/Views/NhapBanMus/Index.cshtml">
-      <publishTime>09/26/2025 13:15:46</publishTime>
+      <publishTime>11/18/2025 12:59:19</publishTime>
     </File>
     <File Include="Areas/TransportFiles/Views/Projects/Create.cshtml">
-      <publishTime>09/26/2025 18:39:10</publishTime>
+      <publishTime>11/26/2025 11:40:43</publishTime>
     </File>
     <File Include="Areas/TransportFiles/Views/Projects/CreateCumBan.cshtml">
       <publishTime>09/26/2025 12:10:31</publishTime>
@@ -665,19 +713,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/26/2025 12:10:31</publishTime>
     </File>
     <File Include="Areas/TransportFiles/Views/Projects/Edit.cshtml">
-      <publishTime>09/26/2025 12:10:31</publishTime>
+      <publishTime>11/26/2025 14:34:48</publishTime>
+    </File>
+    <File Include="Areas/TransportFiles/Views/Projects/EditBomMin.cshtml">
+      <publishTime>12/23/2025 13:41:46</publishTime>
     </File>
     <File Include="Areas/TransportFiles/Views/Projects/EditCumBan.cshtml">
-      <publishTime>09/26/2025 12:10:31</publishTime>
+      <publishTime>12/23/2025 13:41:54</publishTime>
     </File>
     <File Include="Areas/TransportFiles/Views/Projects/Index.cshtml">
-      <publishTime>09/26/2025 12:10:31</publishTime>
+      <publishTime>11/26/2025 11:22:12</publishTime>
     </File>
     <File Include="Areas/TransportFiles/Views/Projects/InformationProject.cshtml">
-      <publishTime>09/26/2025 12:10:31</publishTime>
+      <publishTime>11/24/2025 15:40:23</publishTime>
     </File>
     <File Include="Areas/TransportFiles/Views/Shared/_Layout.cshtml">
-      <publishTime>10/22/2025 13:41:42</publishTime>
+      <publishTime>11/26/2025 12:14:26</publishTime>
     </File>
     <File Include="Areas/TransportFiles/Views/Suppliers/Create.cshtml">
       <publishTime>09/26/2025 12:10:31</publishTime>
@@ -694,8 +745,26 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Areas/TransportFiles/Views/Suppliers/Index.cshtml">
       <publishTime>09/26/2025 12:10:31</publishTime>
     </File>
-    <File Include="Areas/TransportFiles/Views/ThiCongs/Create.cshtml">
-      <publishTime>09/26/2025 12:10:31</publishTime>
+    <File Include="Areas/TransportFiles/Views/Teams/Create.cshtml">
+      <publishTime>12/25/2025 15:22:43</publishTime>
+    </File>
+    <File Include="Areas/TransportFiles/Views/Teams/Delete.cshtml">
+      <publishTime>12/25/2025 15:25:19</publishTime>
+    </File>
+    <File Include="Areas/TransportFiles/Views/Teams/Details.cshtml">
+      <publishTime>12/25/2025 15:17:44</publishTime>
+    </File>
+    <File Include="Areas/TransportFiles/Views/Teams/Edit.cshtml">
+      <publishTime>12/25/2025 15:32:57</publishTime>
+    </File>
+    <File Include="Areas/TransportFiles/Views/Teams/Index.cshtml">
+      <publishTime>12/25/2025 15:24:06</publishTime>
+    </File>
+    <File Include="Areas/TransportFiles/Views/ThiCongs/CreateBomMin.cshtml">
+      <publishTime>12/25/2025 10:12:59</publishTime>
+    </File>
+    <File Include="Areas/TransportFiles/Views/ThiCongs/CreateCumBan.cshtml">
+      <publishTime>12/25/2025 10:13:02</publishTime>
     </File>
     <File Include="Areas/TransportFiles/Views/ThiCongs/Delete.cshtml">
       <publishTime>09/26/2025 12:10:31</publishTime>
@@ -703,8 +772,11 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Areas/TransportFiles/Views/ThiCongs/Details.cshtml">
       <publishTime>09/26/2025 12:10:31</publishTime>
     </File>
-    <File Include="Areas/TransportFiles/Views/ThiCongs/Edit.cshtml">
-      <publishTime>09/26/2025 12:10:31</publishTime>
+    <File Include="Areas/TransportFiles/Views/ThiCongs/EditBomMin.cshtml">
+      <publishTime>12/25/2025 10:13:12</publishTime>
+    </File>
+    <File Include="Areas/TransportFiles/Views/ThiCongs/EditCumBan.cshtml">
+      <publishTime>12/25/2025 10:13:15</publishTime>
     </File>
     <File Include="Areas/TransportFiles/Views/ThiCongs/Index.cshtml">
       <publishTime>09/26/2025 12:10:31</publishTime>
@@ -737,7 +809,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/26/2025 12:10:31</publishTime>
     </File>
     <File Include="Areas/TransportFiles/Views/TransportFiles/Details.cshtml">
-      <publishTime>09/26/2025 12:10:31</publishTime>
+      <publishTime>12/18/2025 08:30:03</publishTime>
     </File>
     <File Include="Areas/TransportFiles/Views/TransportFiles/Edit.cshtml">
       <publishTime>09/26/2025 12:10:31</publishTime>
@@ -781,6 +853,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/CKFinder.pdb">
       <publishTime>09/26/2025 12:10:40</publishTime>
     </File>
+    <File Include="bin/DocumentFormat.OpenXml.dll">
+      <publishTime>03/06/2025 04:55:00</publishTime>
+    </File>
+    <File Include="bin/DocumentFormat.OpenXml.Framework.dll">
+      <publishTime>03/06/2025 04:55:00</publishTime>
+    </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>09/26/2025 12:10:41</publishTime>
     </File>
@@ -821,10 +899,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/26/2025 12:10:42</publishTime>
     </File>
     <File Include="bin/NamLao206.dll">
-      <publishTime>11/07/2025 16:38:53</publishTime>
+      <publishTime>02/26/2026 15:21:40</publishTime>
     </File>
     <File Include="bin/NamLao206.pdb">
-      <publishTime>11/07/2025 16:38:53</publishTime>
+      <publishTime>02/26/2026 15:21:40</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.Bson.dll">
       <publishTime>09/26/2025 12:10:42</publishTime>
@@ -1060,20 +1138,11 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Content/AdminBinhLT/assets/images/login/banner_darkboad2.png">
       <publishTime>09/26/2025 12:10:31</publishTime>
     </File>
-    <File Include="Content/AdminBinhLT/assets/images/login/Login_main.gif">
-      <publishTime>04/29/2025 15:21:14</publishTime>
-    </File>
     <File Include="Content/AdminBinhLT/assets/images/login/LOGOCONGTY.png">
       <publishTime>09/26/2025 12:10:31</publishTime>
     </File>
     <File Include="Content/AdminBinhLT/assets/images/login/logongangcongty.png">
       <publishTime>09/26/2025 12:10:31</publishTime>
-    </File>
-    <File Include="Content/AdminBinhLT/assets/images/login/nenlogin_Admin.gif">
-      <publishTime>04/29/2025 15:37:53</publishTime>
-    </File>
-    <File Include="Content/AdminBinhLT/assets/images/login/Nentrong_sibar.gif">
-      <publishTime>04/29/2025 15:29:22</publishTime>
     </File>
     <File Include="Content/AdminBinhLT/assets/images/logo.png">
       <publishTime>09/26/2025 12:10:32</publishTime>
@@ -1517,7 +1586,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/26/2025 12:10:40</publishTime>
     </File>
     <File Include="Content/ckeditor/ckfinder/config.ascx">
-      <publishTime>09/26/2025 12:10:40</publishTime>
+      <publishTime>12/11/2025 13:23:37</publishTime>
     </File>
     <File Include="Content/ckeditor/ckfinder/config.js">
       <publishTime>09/26/2025 12:10:40</publishTime>
@@ -5618,7 +5687,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/26/2025 12:10:41</publishTime>
     </File>
     <File Include="Content/smartadmin/js/chartCustomized.js">
-      <publishTime>09/26/2025 12:10:41</publishTime>
+      <publishTime>02/26/2026 15:26:02</publishTime>
     </File>
     <File Include="Content/smartadmin/js/datagrid/datatables/datatables.bundle.js">
       <publishTime>09/26/2025 12:10:41</publishTime>
@@ -5660,7 +5729,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/26/2025 12:10:41</publishTime>
     </File>
     <File Include="Content/smartadmin/js/vendors.bundle.js">
-      <publishTime>09/26/2025 12:10:41</publishTime>
+      <publishTime>11/26/2025 12:14:39</publishTime>
     </File>
     <File Include="Content/smartadmin/media/data/manifest.json">
       <publishTime>09/26/2025 12:10:41</publishTime>
@@ -5722,1589 +5791,569 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Content/smartadmin/webfonts/summernote.woff2">
       <publishTime>09/26/2025 12:10:41</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638629683029497833_namlao-lanhdao-1637898876.jpg">
-      <publishTime>09/26/2025 12:10:32</publishTime>
+    <File Include="Content/smartadminNew/css/smartapp.min.css">
+      <publishTime>02/25/2026 16:06:03</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638629683031463876_namlao-lanhdao-1637898895.jpg">
-      <publishTime>09/26/2025 12:10:32</publishTime>
+    <File Include="Content/smartadminNew/icons/sprite.svg">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638629683031518797_namlao-lanhdao-1637898912.jpg">
-      <publishTime>09/26/2025 12:10:32</publishTime>
+    <File Include="Content/smartadminNew/img/app-logo.svg">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638629683031544499_namlao-lanhdao-1637898918.png">
-      <publishTime>09/26/2025 12:10:32</publishTime>
+    <File Include="Content/smartadminNew/img/apple-touch-icon.png">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638629808952706237_unnamed %283%29.png">
-      <publishTime>09/26/2025 12:10:32</publishTime>
+    <File Include="Content/smartadminNew/img/backgrounds/bg-1.html">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638629809025640409_namlao-lanhdao-1637898918.png">
-      <publishTime>09/26/2025 12:10:32</publishTime>
+    <File Include="Content/smartadminNew/img/backgrounds/bg-4.html">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638629809229405525_unnamed.png">
-      <publishTime>09/26/2025 12:10:32</publishTime>
+    <File Include="Content/smartadminNew/img/cardcovers/cover-1-lg.png">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638629809324519887_unnamed %282%29.png">
-      <publishTime>09/26/2025 12:10:32</publishTime>
+    <File Include="Content/smartadminNew/img/demo/avatars/avatar-a.png">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638629809374338336_unnamed %281%29.png">
-      <publishTime>09/26/2025 12:10:32</publishTime>
+    <File Include="Content/smartadminNew/img/demo/avatars/avatar-admin-xl.png">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638629810526210019_unnamed %283%29.png">
-      <publishTime>09/26/2025 12:10:32</publishTime>
+    <File Include="Content/smartadminNew/img/demo/avatars/avatar-admin.png">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638629810824132561_unnamed.png">
-      <publishTime>09/26/2025 12:10:32</publishTime>
+    <File Include="Content/smartadminNew/img/demo/avatars/avatar-b.png">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638629811511814622_unnamed %281%29.png">
-      <publishTime>09/26/2025 12:10:32</publishTime>
+    <File Include="Content/smartadminNew/img/demo/avatars/avatar-c.png">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638629811596277193_unnamed %282%29.png">
-      <publishTime>09/26/2025 12:10:32</publishTime>
+    <File Include="Content/smartadminNew/img/demo/avatars/avatar-d.png">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638629811652357249_unnamed.png">
-      <publishTime>09/26/2025 12:10:32</publishTime>
+    <File Include="Content/smartadminNew/img/demo/avatars/avatar-e.png">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638629811718456147_unnamed %283%29.png">
-      <publishTime>09/26/2025 12:10:32</publishTime>
+    <File Include="Content/smartadminNew/img/demo/avatars/avatar-f.png">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638630198432534983_IMGP1273.JPG">
-      <publishTime>09/26/2025 12:10:32</publishTime>
+    <File Include="Content/smartadminNew/img/demo/avatars/avatar-g.png">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638630198432634711_IMGP1273.png">
-      <publishTime>09/26/2025 12:10:32</publishTime>
+    <File Include="Content/smartadminNew/img/demo/avatars/avatar-h.png">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638630198433813567_IMGP1274.JPG">
-      <publishTime>09/26/2025 12:10:32</publishTime>
+    <File Include="Content/smartadminNew/img/demo/avatars/avatar-i.png">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638630198433933266_IMGP1275.JPG">
-      <publishTime>09/26/2025 12:10:32</publishTime>
+    <File Include="Content/smartadminNew/img/demo/avatars/avatar-j.png">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638630198455154813_IMGP1273.JPG">
-      <publishTime>09/26/2025 12:10:32</publishTime>
+    <File Include="Content/smartadminNew/img/demo/avatars/avatar-k.png">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638630198455244563_IMGP1273.png">
-      <publishTime>09/26/2025 12:10:32</publishTime>
+    <File Include="Content/smartadminNew/img/demo/avatars/avatar-m.png">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638630198455424198_IMGP1274.JPG">
-      <publishTime>09/26/2025 12:10:32</publishTime>
+    <File Include="Content/smartadminNew/img/demo/avatars/ng.jpg">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638630198455513841_IMGP1275.JPG">
-      <publishTime>09/26/2025 12:10:32</publishTime>
+    <File Include="Content/smartadminNew/img/demo/pages/email-order.html">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638630198455603605_IMGP1275.png">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/demo/pages/new-device.html">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638630198455935312_IMGP1280.JPG">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/demo/pages/password-request.html">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638630198456145081_IMGP1280.png">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/demo/pages/password-reset.html">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638630199891777692_5bdcf7e910aed3f08abf.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/demo/pages/side-panel-demo.gif">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638630199891807309_8a959f1e7859bb07e248.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/demo/pages/verify-email.html">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638630199892013677_4836c0bf27f8e4a6bde9.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/demo/peace-full.jpg">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638630199892033652_d2b3be0459439a1dc352.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/demo/position-absolute.gif">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638630199892043622_dacb1245f502365c6f13.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/demo/position-fixed.gif">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638630199892063571_Gặt lúa.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/demo/position-sticky.gif">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638630199892233945_HỌI CHỢ.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/demo/relax-full.jpg">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638630199892253905_image%282%29.png">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/demo/sea-full.jpg">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638630199892273840_IMGP7245.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/favicon-16x16.png">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638630199892303760_IMGP7334.JPG">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/favicon-192x192.png">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638630199892373575_IMGP7337.JPG">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/favicon-32x32.png">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638630199892453359_lao2.png">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/landing/1.png">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638630199892473307_lao3.png">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/landing/2.png">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638630199892493253_lao4.png">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/landing/3.png">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638630199892503227_lao5.png">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/landing/4.png">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638630199892573047_lao6.png">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/landing/5.png">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638630199892602962_lao8.png">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/logo-light.svg">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638630199892632914_liên tịch công ty.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/logo.png">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638630199892652885_LT Cty - f5.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/logo.svg">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638630199892732944_namlao-1659941236.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/profile/project-1.png">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638630199892762809_namlao-1672020837.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/profile/project-3.png">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638630199892782763_namlao-slide-1607301930.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/profile/project-4.png">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638630199892822646_namlao-slide-1608080458.jpeg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/search/1.html">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638630199892922395_QK5 LT - f5.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/search/10.html">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638630199892982403_Quý - cà phê f5.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/search/11.html">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638630199893142058_Sanamxay.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/search/12.html">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638630199893581736_Tặng KT f5.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/search/13.html">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638630199893671495_TĐ LMCĐ.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/search/14.html">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638630199893741320_Thăm Ngày QĐVN.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/search/15.html">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638630199893901082_TMTQK -f5.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/search/16.html">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638630199894040841_XNTT.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/search/17.html">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/1/638630199894090774_z3495339068151_ea3cec22c56e584eded2904c48ab0cba.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/search/18.html">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/2/638630197666495037_kd1.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/search/2.html">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/2/638630197666654476_kd2.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/search/3.html">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/2/638630197666704349_kd3.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/search/4.html">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/2/638630197666947277_kd4.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/search/5.html">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/2/638630197666977195_kd5.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/search/6.html">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/2/638630197666987162_kd6.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/search/7.html">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/2/638630197667007109_kd7.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/search/8.html">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/2/638630197667027082_kd8.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/search/9.html">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/2/638630197667047012_kd9.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/sprite.svg">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/2/638630197667056979_kd10.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/thumbs/pic-11.png">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/2/638630197667076924_kd11.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/thumbs/pic-12.png">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/2/638630197667086897_kd12.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/thumbs/pic-4.png">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/2/638630197667106846_kd13.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/thumbs/pic-7.png">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/2/638630197667116824_kd14.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/img/thumbs/pic-8.png">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/2/638630197667236952_kd15.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/json/MOCK_DATA.json">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/2/638630197667256900_kd16.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/plugins/bootstrap/bootstrap.bundle.min.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/2/638630197667266882_kd17.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/plugins/easypiechart/easypiechart.min.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/2/638630197667286821_kd18.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/plugins/fullcalendar/index.global.min.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/2/638630197667306771_kd19.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/plugins/highlightjs/go.min.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/2/638630197667316739_kd20.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/plugins/highlightjs/highlight.min.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630198156620809_280894616_995471631153308_6504980110499691465_n.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/plugins/highlightjs/night-owl.css">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630198156800327_281212002_995471644486640_3112957364592774888_n.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/plugins/jsvectormap/jsvectormap.min.css">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630198156820276_nl1.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/plugins/jsvectormap/jsvectormap.min.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630198156830255_nl2.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/plugins/jsvectormap/world-merc.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630198156880191_nl3.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/plugins/masonry/masonry.pkgd.min.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630198156900073_nl4.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/plugins/sortablejs/Sortable.min.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630198156920008_nl5.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/plugins/three/three.min.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630198156929986_tl1.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/plugins/vanta/vanta.halo.min.js">
+      <publishTime>02/25/2026 16:09:37</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630198156949945_tl2.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/plugins/vanta/vanta.net.min.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630198156959908_tl4.jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/plugins/waves/waves.min.css">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630198317425958_140015602_716215819078892_7899199315056871737_n.jpeg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/plugins/waves/waves.min.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630198317445906_140058830_716215779078896_7929551434924202648_n.jpeg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/scripts/core/saveloadscript.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630198317465852_140308400_716215789078895_7194844312767739546_n.jpeg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/scripts/core/smartApp.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630198317546337_175614164_767057667328040_1867347768068249238_n.jpeg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/scripts/core/smartFilter.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630198317566292_175853316_767057537328053_797444508902232577_n.jpeg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/scripts/core/smartNavigation.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630198317586237_176055189_767057593994714_1982015034835359759_n.jpeg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/scripts/core/smartSlimscroll.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630198317596203_190102657_791147464919060_8022004916330951825_n.jpeg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/scripts/optional/smartnotes.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630198317616156_191746783_819927735374366_1540680385676325094_n.jpeg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/apexareachart.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630198317626130_193124249_791147491585724_551692408605640385_n.jpeg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/apexbarchart.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630198317646077_194267861_791147438252396_5364466198484137946_n.jpeg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/apexboxwhiskerchart.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630198317656045_214572273_809407216426418_4363196803770867300_n.jpeg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/apexbubblechart.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630198317685971_216078943_809407246426415_7827114490053163609_n.jpeg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/apexcandlestickchart.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630198317695944_220298517_819927875374352_7595297102093973735_n.jpeg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/apexcolumnchart.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630198317715892_Bộ-Tư-lệnh-Quân-khu-tổ-chức-bàn-giao-trang-thiết-bị-vật-tư-y-tế-phòng-chống-dịch-Covid-19.jpeg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/apexfunnelchart.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630198317735872_Các-LL-phối-hợp-kiểm-soát-người-qua-lại-biên-giới-trên-địa-bàn-huyện-Tây-Giang-Quảng-Nam..jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/apexheatmapchart.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630198317755846_cb1-2048x1286.jpeg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/apexlinechart.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630198317765817_cb2-2048x1278.jpeg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/apexmixedcombochart.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630198317785767_Những-chuyến-hàng-thắm-tình-hữu-nghị..jpg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/apexpiedonut.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630198317795743_QK1-2-2048x1365.jpeg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/apexpolarareachart.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630198317815687_QK2-2-2048x1365.jpeg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/apexradarchart.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630198317835636_tg1-Small.jpeg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/apexradialbarscirclechart.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630198317855582_tg2-Small.jpeg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/apexrangeareachart.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630198317865559_Trung-tướng-Thái-Đại-Ngọc-TL-Quân-khu-kiểm-tra-chốt-phòng-chống-đich-huyện-Ngọc-Hồi-Kon-Tum.jpeg">
-      <publishTime>09/26/2025 12:10:33</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/apexscatterchart.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630199228765349_IMGP1273.JPG">
-      <publishTime>09/26/2025 12:10:34</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/apexslopechart.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630199229075494_IMGP1273.png">
-      <publishTime>09/26/2025 12:10:34</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/apexsparkline.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630199229274960_IMGP1274.JPG">
-      <publishTime>09/26/2025 12:10:34</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/apextimelinechart.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630199229364716_IMGP1275.JPG">
-      <publishTime>09/26/2025 12:10:34</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/apextreemapchart.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630199229494574_IMGP1275.png">
-      <publishTime>09/26/2025 12:10:34</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/auth-animation.js">
+      <publishTime>02/25/2026 15:56:16</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630199229694333_IMGP1280.JPG">
-      <publishTime>09/26/2025 12:10:34</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/auth-login.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630199229774147_IMGP1280.png">
-      <publishTime>09/26/2025 12:10:34</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/blank.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630199406989715_ảnh 1 CTTTDG.jpg">
-      <publishTime>09/26/2025 12:10:34</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/checkboxandradio.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630199407019637_ảnh 2 CTTTGD.JPG">
-      <publishTime>09/26/2025 12:10:34</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/code-highlight.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630199407229601_ảnh 3 hoạt động xung kích.jpg">
-      <publishTime>09/26/2025 12:10:34</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/controlcenterdashboard.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630199407259543_ảnh 4 hoạt động xung kích.jpg">
-      <publishTime>09/26/2025 12:10:34</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/easypiechart.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630199407289445_ảnh 5 công tác xây dựng đoàn.jpg">
-      <publishTime>09/26/2025 12:10:34</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/fullcalendar.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630199407299412_ảnh 6 công tác xây dựng đoàn.jpg">
-      <publishTime>09/26/2025 12:10:34</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/iconography.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630199407329337_ảnh 7 công tác phối hợp kết nghĩa.jpg">
-      <publishTime>09/26/2025 12:10:34</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/landing.js">
+      <publishTime>02/26/2026 08:48:26</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630199407339310_ảnh 8 công tác phối hợp kết nghĩa.jpg">
-      <publishTime>09/26/2025 12:10:34</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/listfilter.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201232061218_5bdcf7e910aed3f08abf.jpg">
-      <publishTime>09/26/2025 12:10:34</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/marketingdashboard.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201232160992_8a959f1e7859bb07e248.jpg">
-      <publishTime>09/26/2025 12:10:34</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/messenger.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201232390382_123.PNG">
-      <publishTime>09/26/2025 12:10:34</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/peitycharts.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201232450237_4836c0bf27f8e4a6bde9.jpg">
-      <publishTime>09/26/2025 12:10:34</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/position.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201232480141_d2b3be0459439a1dc352.jpg">
-      <publishTime>09/26/2025 12:10:34</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/profile.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201232500093_dacb1245f502365c6f13.jpg">
-      <publishTime>09/26/2025 12:10:34</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/projectmanagementdashboard.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201232510063_ĐK khởi công.jpg">
-      <publishTime>09/26/2025 12:10:34</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/refresh-panel.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201232599859_f4.jpg">
-      <publishTime>09/26/2025 12:10:34</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/search.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201232749788_Gặt lúa.jpg">
-      <publishTime>09/26/2025 12:10:34</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/smarttableminimal.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201232829487_HỌI CHỢ.jpg">
-      <publishTime>09/26/2025 12:10:34</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/smarttableresponsive.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201232849421_image%282%29.png">
-      <publishTime>09/26/2025 12:10:34</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/smarttablesfuzzymatching.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201232869390_IMGP7245.jpg">
-      <publishTime>09/26/2025 12:10:34</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/smarttablesimportexportdata.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201232929226_IMGP7327.JPG">
-      <publishTime>09/26/2025 12:10:34</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/smarttablesjsonsource.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201232999040_IMGP7334.JPG">
-      <publishTime>09/26/2025 12:10:34</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/smarttablesmanagerecords.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201233179091_IMGP7337.JPG">
-      <publishTime>09/26/2025 12:10:34</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/smarttablesserverside.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201233258882_lao2.png">
-      <publishTime>09/26/2025 12:10:34</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/stackgenerator.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201233490189_lao3.png">
-      <publishTime>09/26/2025 12:10:34</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/stacklibrary.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201233530186_lao4.png">
-      <publishTime>09/26/2025 12:10:34</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/streamline.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201234156620_lao5.png">
-      <publishTime>09/26/2025 12:10:34</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/subscriptiondashboard.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201234296298_lao6.png">
-      <publishTime>09/26/2025 12:10:34</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/systemmail.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201234326220_lao8.png">
-      <publishTime>09/26/2025 12:10:34</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/tablesstylegenerator.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201234366255_liên tịch công ty.jpg">
-      <publishTime>09/26/2025 12:10:34</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/treedemo.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201238614372_LT Cty - f5.jpg">
-      <publishTime>09/26/2025 12:10:34</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/usercontact.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201238664234_namlao-1659941236.jpg">
-      <publishTime>09/26/2025 12:10:34</publishTime>
+    <File Include="Content/smartadminNew/scripts/pages/visibilitygenerator.js">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201238674212_namlao-1672020837.jpg">
-      <publishTime>09/26/2025 12:10:34</publishTime>
+    <File Include="Content/smartadminNew/webfonts/fontawesome/fontawesome.css">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201238694159_namlao-slide-1607301930.jpg">
-      <publishTime>09/26/2025 12:10:34</publishTime>
+    <File Include="Content/smartadminNew/webfonts/fontawesome/fonts/fa-brands-400.eot">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201238724085_namlao-slide-1608080458.jpeg">
-      <publishTime>09/26/2025 12:10:35</publishTime>
+    <File Include="Content/smartadminNew/webfonts/fontawesome/fonts/fa-brands-400.svg">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201238793896_QK5 LT - f5.jpg">
-      <publishTime>09/26/2025 12:10:35</publishTime>
+    <File Include="Content/smartadminNew/webfonts/fontawesome/fonts/fa-brands-400.ttf">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201238853745_Quý - cà phê f5.jpg">
-      <publishTime>09/26/2025 12:10:35</publishTime>
+    <File Include="Content/smartadminNew/webfonts/fontawesome/fonts/fa-brands-400.woff">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201239115094_Sanamxay.jpg">
-      <publishTime>09/26/2025 12:10:35</publishTime>
+    <File Include="Content/smartadminNew/webfonts/fontawesome/fonts/fa-brands-400.woff2">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201239184916_Tặng KT f5.jpg">
-      <publishTime>09/26/2025 12:10:35</publishTime>
+    <File Include="Content/smartadminNew/webfonts/fontawesome/fonts/fa-brands-400d41d.eot">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201239254729_TĐ LMCĐ.jpg">
-      <publishTime>09/26/2025 12:10:35</publishTime>
+    <File Include="Content/smartadminNew/webfonts/fontawesome/fonts/fa-duotone-900.eot">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201239324536_Thăm Ngày QĐVN.jpg">
-      <publishTime>09/26/2025 12:10:35</publishTime>
+    <File Include="Content/smartadminNew/webfonts/fontawesome/fonts/fa-duotone-900.svg">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201239384372_TMTQK -f5.jpg">
-      <publishTime>09/26/2025 12:10:35</publishTime>
+    <File Include="Content/smartadminNew/webfonts/fontawesome/fonts/fa-duotone-900.ttf">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201239464233_Xayxompun.jpg">
-      <publishTime>09/26/2025 12:10:35</publishTime>
+    <File Include="Content/smartadminNew/webfonts/fontawesome/fonts/fa-duotone-900.woff">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201239494084_XNTT.jpg">
-      <publishTime>09/26/2025 12:10:35</publishTime>
+    <File Include="Content/smartadminNew/webfonts/fontawesome/fonts/fa-duotone-900.woff2">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201239524004_z3495339068151_ea3cec22c56e584eded2904c48ab0cba.jpg">
-      <publishTime>09/26/2025 12:10:35</publishTime>
+    <File Include="Content/smartadminNew/webfonts/fontawesome/fonts/fa-duotone-900d41d.eot">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201735661858_20201126_102815.jpg">
-      <publishTime>09/26/2025 12:10:35</publishTime>
+    <File Include="Content/smartadminNew/webfonts/fontawesome/fonts/fa-light-300.eot">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201735832876_20220727_073840.jpg">
-      <publishTime>09/26/2025 12:10:35</publishTime>
+    <File Include="Content/smartadminNew/webfonts/fontawesome/fonts/fa-light-300.svg">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201735842859_20220812_090522.jpg">
-      <publishTime>09/26/2025 12:10:35</publishTime>
+    <File Include="Content/smartadminNew/webfonts/fontawesome/fonts/fa-light-300.ttf">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201735862806_20220815_151130.jpg">
-      <publishTime>09/26/2025 12:10:35</publishTime>
+    <File Include="Content/smartadminNew/webfonts/fontawesome/fonts/fa-light-300.woff">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201735872768_20220819_083823 %282%29.jpg">
-      <publishTime>09/26/2025 12:10:35</publishTime>
+    <File Include="Content/smartadminNew/webfonts/fontawesome/fonts/fa-light-300.woff2">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201735902695_20221021_151153.jpg">
-      <publishTime>09/26/2025 12:10:35</publishTime>
+    <File Include="Content/smartadminNew/webfonts/fontawesome/fonts/fa-light-300d41d.eot">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201735922654_Cán bộ kỹ thuật Hướng dẫn  khai thác mủ cao su cho công nhân %282%29.jpg">
-      <publishTime>09/26/2025 12:10:35</publishTime>
+    <File Include="Content/smartadminNew/webfonts/fontawesome/fonts/fa-regular-400.eot">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201735952564_Chúc Tết tỉnh đội Chăm Pa Sắc.jpg">
-      <publishTime>09/26/2025 12:10:35</publishTime>
+    <File Include="Content/smartadminNew/webfonts/fontawesome/fonts/fa-regular-400.svg">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201736022375_Diễn tập với Quảng Nam và Attapu.jpg">
-      <publishTime>09/26/2025 12:10:35</publishTime>
+    <File Include="Content/smartadminNew/webfonts/fontawesome/fonts/fa-regular-400.ttf">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201736142056_ONCNGT~1.JPG">
-      <publishTime>09/26/2025 12:10:35</publishTime>
+    <File Include="Content/smartadminNew/webfonts/fontawesome/fonts/fa-regular-400.woff">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201736181947_INGYBC~1.JPG">
-      <publishTime>09/26/2025 12:10:35</publishTime>
+    <File Include="Content/smartadminNew/webfonts/fontawesome/fonts/fa-regular-400.woff2">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201736221840_DSC00249.JPG">
-      <publishTime>09/26/2025 12:10:35</publishTime>
+    <File Include="Content/smartadminNew/webfonts/fontawesome/fonts/fa-regular-400d41d.eot">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201736251767_Huấn luyện cứu hộ.jpg">
-      <publishTime>09/26/2025 12:10:35</publishTime>
+    <File Include="Content/smartadminNew/webfonts/fontawesome/fonts/fa-solid-900.eot">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201736503792_IMG_0153.JPG">
-      <publishTime>09/26/2025 12:10:35</publishTime>
+    <File Include="Content/smartadminNew/webfonts/fontawesome/fonts/fa-solid-900.svg">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201736553656_IMGP0217 %282%29.JPG">
-      <publishTime>09/26/2025 12:10:35</publishTime>
+    <File Include="Content/smartadminNew/webfonts/fontawesome/fonts/fa-solid-900.ttf">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201736573601_IMGP0233 %282%29.JPG">
-      <publishTime>09/26/2025 12:10:35</publishTime>
+    <File Include="Content/smartadminNew/webfonts/fontawesome/fonts/fa-solid-900.woff">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201736613495_IMGP0601 %282%29.JPG">
-      <publishTime>09/26/2025 12:10:35</publishTime>
+    <File Include="Content/smartadminNew/webfonts/fontawesome/fonts/fa-solid-900.woff2">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201736643414_IMGP0986.JPG">
-      <publishTime>09/26/2025 12:10:35</publishTime>
+    <File Include="Content/smartadminNew/webfonts/fontawesome/fonts/fa-solid-900d41d.eot">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201736713218_IMGP1001.JPG">
-      <publishTime>09/26/2025 12:10:35</publishTime>
+    <File Include="Content/smartadminNew/webfonts/smartadmin/fonts/smartadmin-icons.eot">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201736783032_IMGP1107.JPG">
-      <publishTime>09/26/2025 12:10:36</publishTime>
+    <File Include="Content/smartadminNew/webfonts/smartadmin/fonts/smartadmin-icons.svg">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201736862826_IMGP1115.JPG">
-      <publishTime>09/26/2025 12:10:36</publishTime>
+    <File Include="Content/smartadminNew/webfonts/smartadmin/fonts/smartadmin-icons.ttf">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201737122937_IMGP1350.JPG">
-      <publishTime>09/26/2025 12:10:36</publishTime>
+    <File Include="Content/smartadminNew/webfonts/smartadmin/fonts/smartadmin-icons.woff">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201737162720_IMGP1404 - Copy.JPG">
-      <publishTime>09/26/2025 12:10:36</publishTime>
+    <File Include="Content/smartadminNew/webfonts/smartadmin/fonts/smartadmin-icons.woff2">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201737192637_IMGP1443.JPG">
-      <publishTime>09/26/2025 12:10:36</publishTime>
+    <File Include="Content/smartadminNew/webfonts/smartadmin/fonts/smartadmin-iconsd41d.eot">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
-    <File Include="Content/Uploads/Albums/3/638630201737232528_IMGP1621.png">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/3/638630201737522249_IMGP7219.JPG">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/3/638630201737642049_IMGP7234.JPG">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/3/638630201737671970_IMGP7366 %282%29.JPG">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/3/638630201737701888_IMGP7705 %282%29.JPG">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/3/638630201737731806_IMGP7717 %282%29.JPG">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/3/638630201737771705_IMGP7785 %282%29.JPG">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/3/638630201737821571_IMGP8124 %282%29.JPG">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/3/638630201737851495_IMGP8160 %283%29.JPG">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/3/638630201737871432_Tham gia diễn tập.jpg">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/3/638630201739170827_Tiến hành khám, cấp phát thuốc cho cán bộ, chiến sĩ và gia đình quân nhân BCHQS tỉnh Attapư %283%29.jpg">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/3/638630201739290520_Untitled-1.jpg">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/3/638630201739611083_z3180684432700_6af6f6951f2be9d04e5bcdafa68a2eaa.jpg">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/3/638630201739621050_z3180684480376_273fc1822bd5037d8bea08f215b6ca51 %282%29.jpg">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/3/638630201739641002_z3251790529267_596e62d087cfec98ab00f2c67dcd2fca %282%29.jpg">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/3/638630201739660950_z3381464128856_6a5b4186e4aa792ac1cd508fd95ae3ed %282%29.jpg">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/3/638630201740419863_z3598484724252_f034fa8bd7fd01d2ad8a2804b9ca7101 %281%29.jpg">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/3/638630201740439793_z3824449041958_61f488ac7e630a428e939e33ecd72925.jpg">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/4/638630197874975189_4.jpg">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/4/638630197875144446_16.jpg">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/4/638630197875184339_Capture.JPG">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/4/638630197875204267_n %281%29.jpg">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/4/638630197875214245_n2.jpg">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/4/638630197875244162_n3.jpg">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/4/638630197875264103_ǹ5.jpg">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/4/638630197875264103_ǹ5.jpg">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/4/638630197875284050_n6.jpg">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/4/638630197875303998_n7.jpg">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/4/638630197875323944_ñ7.jpg">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/4/638630197875323944_ñ7.jpg">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/4/638630197875373917_̣n9.JPG">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/4/638630197875403837_n10.JPG">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/4/638630197875413806_n11.jpg">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/4/638630197875433760_n12.JPG">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/4/638630197875453700_n13.JPG">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/4/638630197875463675_N14.JPG">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/4/638630197875483620_n15.jpg">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/4/638630197875503577_n16.jpg">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/4/638630197875523525_n17.jpg">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/4/638630197875543466_n18.jpg">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/4/638630197875563430_n19.jpg">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/4/638630197875583361_N20.JPG">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/4/638630197875603310_n21.JPG">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/4/638630197875613279_n22.JPG">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/4/638630197875623255_n23.JPG">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/4/638630197875643196_N24.JPG">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/4/638630197875663140_n25.JPG">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/4/638630197875673119_n26.JPG">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/4/638630197875693070_n27.JPG">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/4/638630197875703031_n29.jpg">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/4/638630197875722990_n30.jpg">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/4/638630197875742930_n49.jpg">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/4/638630197875762875_nâ28.JPG">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/4/638630197875782824_Ngày 08 tháng 9.jpg">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/4/638630197875842670_z5786782448984_d549cb98e0e26969659117ee306dc03f.jpg">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/4/638632899189709082_bn1.png">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/4/638632899189965610_bn2.png">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/4/638632899190015492_bn3.png">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/4/638632899190035423_bn4.png">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/4/638651779717115527_bn1.png">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/4/638651779717932964_bn2.png">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/4/638651779717982630_bn3.png">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/4/638651779718019323_bn4.png">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/6/638632873705809354_cttdbqp.png">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/6/638632874075957054_260.png">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/6/638632874076208370_261.png">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/6/638632874076301235_bm.png">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/6/638632874076324356_bnwer.png">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/6/638632874076334352_bx206.png">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/6/638632874076359090_ct206.png">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/6/638632874076369082_ksđhs.png">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Albums/6/638632874076389036_nk.png">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Banners/10/638633039397264193_260.png">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Banners/11/638633039513542721_cs.png">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Banners/13/638633039693887256_nk.png">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Banners/14/638633039829526662_261.png">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Banners/15/638633040040786280_bx206.png">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Banners/16/638633040143971690_bnwer.png">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Banners/17/638633040241555577_ct206.png">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Banners/7/638633039017138709_cttdbqp.png">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Banners/8/638633039100618598_ct206.png">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Banners/9/638633039258799103_bm.png">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/Excel/Danhsach.xlsx">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/1/638659827088451460_Adobe Scan 31 Oct 2024.pdf">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/10/638666724712254413_CV đóng dấu gia hạn giấy ra vào.pdf">
-      <publishTime>09/26/2025 12:10:36</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/1027/638660726408342464_Thong bao thuc hien che do mua lanh k24.pdf">
-      <publishTime>09/26/2025 12:10:37</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/1028/638688105849809072_back">
-      <publishTime>09/26/2025 12:10:37</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/1029/638695986136033225_DanhSach.xlsx">
-      <publishTime>09/26/2025 12:10:37</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/1030/638695995462687760_DanhSach.xlsx">
-      <publishTime>09/26/2025 12:10:37</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/1031/638696005777077394_DanhSach.xlsx">
-      <publishTime>09/26/2025 12:10:37</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/11/638668248797621357_Lich Cong Tac Tuan-11102024072937.pdf">
-      <publishTime>09/26/2025 12:10:37</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/12/638669048190031104_TUAN 46.pdf">
-      <publishTime>09/26/2025 12:10:37</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/13/638669072631985143_VB kiem tra-11112024062454.pdf">
-      <publishTime>09/26/2025 12:10:37</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/14/638669428945659613_HD 5169 mang mac Le phuc K24.pdf">
-      <publishTime>09/26/2025 12:10:37</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/15/638670017797081127_HD 5169 mang mac Le phuc K24.pdf">
-      <publishTime>09/26/2025 12:10:37</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/16/638670874755770945_11.112024 _ien ung pho bao YINXING.pdf">
-      <publishTime>09/26/2025 12:10:37</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/17/638671945781259898_HD cấp thẻ BHYT năm 2025.pdf">
-      <publishTime>09/26/2025 12:10:38</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/18/638672612927597923_CV hướng dẫn thực hiện TT92.pdf">
-      <publishTime>09/26/2025 12:10:38</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/18/638672612927887934_vb295007.pdf">
-      <publishTime>09/26/2025 12:10:38</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/19/638672614323451836_CV hướng dẫn thực hiện TT92.pdf">
-      <publishTime>09/26/2025 12:10:38</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/19/638672614323531841_HD cấp thẻ BHYT năm 2025.pdf">
-      <publishTime>09/26/2025 12:10:38</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/19/638672614323571776_vb295007.pdf">
-      <publishTime>09/26/2025 12:10:38</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/2/638659827889489041_25.10.24 .Lich tuan tu ngay 28.10-31.pdf">
-      <publishTime>09/26/2025 12:10:38</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/20/638673535177541733_15.11 Lich tuan tu ngay 16.11.pdf">
-      <publishTime>09/26/2025 12:10:38</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/21/638673543241151475_Cv ve quan triet Thong tu 92 - Le phuc 16.11.pdf">
-      <publishTime>09/26/2025 12:10:38</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/22/638673570845739892_vb29500716.11.pdf">
-      <publishTime>09/26/2025 12:10:38</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/23/638675236771290049_000. Cong van thong bao tuyen sinh dao tao S_H tai HVHC nam 2025.pdf">
-      <publishTime>09/26/2025 12:10:38</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/24/638675977192187722_2.PLuc khai thang hanh dong vi B_Gva phong chong BLGD 2024Cty%2919.11.pdf">
-      <publishTime>09/26/2025 12:10:38</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/25/638675983829169369_1.KH Thang hanh dong VBDG.. voi bao luc tren co so gioi trong CTY.2024.pdf">
-      <publishTime>09/26/2025 12:10:38</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/26/638676310868178434_HUONG DAN XET KHEN THUONG SK2025.pdf">
-      <publishTime>09/26/2025 12:10:38</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/27/638676315043390635_19.11 Cv huong dan khen thuong sang kien.pdf">
-      <publishTime>09/26/2025 12:10:38</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/28/638677164954690709_Adobe Scan 20 Nov 2024.pdf">
-      <publishTime>09/26/2025 12:10:38</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/29/638677748176546048_Cong van don doc hoat dong chinh sach dip 22.12.2024.pdf">
-      <publishTime>09/26/2025 12:10:38</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/3/638660445188268622_Thong bao thuc hien che do mua lanh k24.pdf">
-      <publishTime>09/26/2025 12:10:38</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/30/638677756004028320_HD THI T̀M HI_U.pdf">
-      <publishTime>09/26/2025 12:10:38</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/31/638679561768101059_23.11 in ky Lich tuan tu ngay 25.11-01.12.pdf">
-      <publishTime>09/26/2025 12:10:38</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/32/638681510637076999_LT dieu chinh -Dai. 23.11 Lich tuan tu ngay 25.11-01.12.pdf">
-      <publishTime>09/26/2025 12:10:38</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/33/638681606855586173_tmkh218.pdf">
-      <publishTime>09/26/2025 12:10:38</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/34/638682068276926665_Kh chuc mung quoc khanh lao.pdf">
-      <publishTime>09/26/2025 12:10:38</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/35/638682342435426373_CV - thong bao lich phat song phim truyen hinh nhieu tap tren VTV1.pdf">
-      <publishTime>09/26/2025 12:10:38</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/36/638684920405544201_Cong van phong chong dich ta lon Chau Phi 11.2024.pdf">
-      <publishTime>09/26/2025 12:10:38</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/37/638687210246686429_11.29.24 .Lich tuan tu ngay 2.12.24.pdf">
-      <publishTime>09/26/2025 12:10:38</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/38/638688106082473391_CV dao tao VHNT bao chi va thong tin.pdf">
-      <publishTime>09/26/2025 12:10:38</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/39/638690038248842270_Quy Dinh 0512-12052024124023.pdf">
-      <publishTime>09/26/2025 12:10:38</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/4/638660681188019866_Thong bao thuc hien che do mua lanh k24.pdf">
-      <publishTime>09/26/2025 12:10:38</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/40/638690975163189260_Cong van dang ki co so dong phuc BHLD nam 2025.pdf">
-      <publishTime>09/26/2025 12:10:38</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/41/638690978114973013_CV HD PC cum A 06.12.24.pdf">
-      <publishTime>09/26/2025 12:10:38</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/42/638693488687040995_12.7.24 .Lich tuan tu ngay 9.12-15.12.pdf">
-      <publishTime>09/26/2025 12:10:38</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/43/638693513434299606_Quan triet chan chinh an toan giao thong 2024.pdf">
-      <publishTime>09/26/2025 12:10:38</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/44/638693531626513010_KH to chuc thang hanh dong phong chong HIV.AIDS.pdf">
-      <publishTime>09/26/2025 12:10:38</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/45/638694131948722441_230KHTM.pdf">
-      <publishTime>09/26/2025 12:10:38</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/46/638694135168660542_227BCCT.pdf">
-      <publishTime>09/26/2025 12:10:38</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/47/638695874121148536_Cv vv đề nghị đề bạt quân hàm, nâng lương năm 2025.pdf">
-      <publishTime>09/26/2025 12:10:38</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/48/638695940235636294_CV XEM L_ 22.12.pdf">
-      <publishTime>09/26/2025 12:10:38</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/5/638660693500628380_25.10.24 .Lich tuan tu ngay 28.10-31.pdf">
-      <publishTime>09/26/2025 12:10:38</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/6/638660769574725510_Các trường hợp ko có kết quả khám SKĐK 2024.pdf">
-      <publishTime>09/26/2025 12:10:38</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/68/638696088917625690_z5581447394961_a86693e2a4f1cdd1fc98518315e6a546.jpg">
-      <publishTime>09/26/2025 12:10:38</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/7/638660786989325092_Lich tuan tu ngay 4.11-10.11 đ.pdf">
-      <publishTime>09/26/2025 12:10:38</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/70/638696095762125586_z5581447394961_a86693e2a4f1cdd1fc98518315e6a546.jpg">
-      <publishTime>09/26/2025 12:10:38</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/8/638663016175772873_TUAN 45 %282%29.pdf">
-      <publishTime>09/26/2025 12:10:38</publishTime>
-    </File>
-    <File Include="Content/Uploads/HopThu/9/638664832031491957_Ket Luan 06-11062024083009.pdf">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/1%281%29.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/1.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/12.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/13.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/14.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/175614164_767057667328040_1867347768068249238_n%281%29.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/175614164_767057667328040_1867347768068249238_n.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/175853316_767057537328053_797444508902232577_n.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/179332845_773602576673549_8388778945642928041_n.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/180417163_773602616673545_6984471167835829225_n.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/181106454_773602610006879_689758007483382743_n.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/191746783_819927735374366_1540680385676325094_n%281%29.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/191746783_819927735374366_1540680385676325094_n.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/193124249_791147491585724_551692408605640385_n.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/194267861_791147438252396_5364466198484137946_n.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/2%281%29.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/2%282%29.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/2.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/21.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/214572273_809407216426418_4363196803770867300_n.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/216078943_809407246426415_7827114490053163609_n.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/22.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/220298517_819927875374352_7595297102093973735_n.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/3%281%29.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/3.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/31.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/32.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/33.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/4.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/41.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/42.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/43.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/44.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/5.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/51.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/52.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/53.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/6.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/61.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/62%281%29.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/62.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/63.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/64.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/71.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/72.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/73.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/74.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/Bộ-Tư-lệnh-Quân-khu-tổ-chức-bàn-giao-trang-thiết-bị-vật-tư-y-tế-phòng-chống-dịch-Covid-19%281%29.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/Bộ-Tư-lệnh-Quân-khu-tổ-chức-bàn-giao-trang-thiết-bị-vật-tư-y-tế-phòng-chống-dịch-Covid-19.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/Các-LL-phối-hợp-kiểm-soát-người-qua-lại-biên-giới-trên-địa-bàn-huyện-Tây-Giang-Quảng-Nam_.jpg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/cb1-2048x1286.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/cb2-2048x1278.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/DN1%281%29.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/DN1.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/DN2.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/H1.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/H2.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/H3.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/Hô-trợ-vật-tư-y-tê-cho-Lao.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/IMGP6819-2048x1365.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/IMGP6903-2048x1365.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/Những-chuyến-hàng-thắm-tình-hữu-nghị_.jpg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/QK1-2-2048x1365.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/QK2-2-2048x1365.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/tg1-Small.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/tg2-Small.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/Trung-tướng-Thái-Đại-Ngọc-TL-Quân-khu-kiểm-tra-chốt-phòng-chống-đich-huyện-Ngọc-Hồi-Kon-Tum.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/TT-Nguyen-Xuan-Phuc-jfif-5960-1607065850%281%29.jpg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/TT-Nguyen-Xuan-Phuc-jfif-5960-1607065850%282%29.jpg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/TT-Nguyen-Xuan-Phuc-jfif-5960-1607065850.jpg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/z2671450280110_28541f0b00e9ea2e0cfdd41aa10be695%281%29.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/images/z2671450280110_28541f0b00e9ea2e0cfdd41aa10be695.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627122653665016_doiso2.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627122887965379_doiso1.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627123369776227_doiso3.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627134335006626_Bộ-Tư-lệnh-Quân-khu-tổ-chức-bàn-giao-trang-thiết-bị-vật-tư-y-tế-phòng-chống-dịch-Covid-19.jpeg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627134734989102_Những-chuyến-hàng-thắm-tình-hữu-nghị..jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627135339361301_Chúc Tết tỉnh đội Chăm Pa Sắc.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627135864962134_Tiến hành khám, cấp phát thuốc cho cán bộ, chiến sĩ và gia đình quân nhân BCHQS tỉnh Attapư %283%29.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627137089397319_z3180684432700_6af6f6951f2be9d04e5bcdafa68a2eaa.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627137408879904_20220815_151130.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627138157470993_z3180684480376_273fc1822bd5037d8bea08f215b6ca51 %282%29.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627138375555145_z3251790529267_596e62d087cfec98ab00f2c67dcd2fca %282%29.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627138663248832_498024104pm.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627138918994127_316673622_571053651691540_1146877059417374164_n.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627139321631715_Đảng ủy-BGĐ Công ty trao tặng 2 Nhà tình nghĩa cho Cán bộ hưu trí thuộc Sư đoàn BB5 - QĐND Lào.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627139473709224_IMGP3637.JPG">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627139624658619_Tiến hành Công tác Dân vận tại Đắc Chưng - Sê Kong - Lào.JPG">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627139761248470_z2960495983974_1692754b903bf86791e490dc7195ac7c.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627140045458343_Hội nghị liên tịch giữa Công ty  Hữu Nghị Nam Lào và Sư đoàn BB5-QĐND Lào.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627140289101506_hoi nghi.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627140570221209_20230425_133717.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627140914279728_nl3.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627141021155126_176055189_767057593994714_1982015034835359759_n.jpeg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627141308158242_20210319_111704.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627141725308265_IMGP0128.JPG">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627141878358770_IMGP2063.JPG">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627142192456376_20230830_183444.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627142358881128_20230830_200025.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627142504171395_Bệnh xá Công ty Hữu nghị 206 Khám, chữa bệnh cấp phát thuốc miễn phí cho nhân dân 4 tỉnh Nam Lào.JPG">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627142653632242_Mùa hè tình nguyện.JPG">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627143124044706_316673622_571053651691540_1146877059417374164_n.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627143419259381_tuyendung.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627143663597112_Các-LL-phối-hợp-kiểm-soát-người-qua-lại-biên-giới-trên-địa-bàn-huyện-Tây-Giang-Quảng-Nam..jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627143765462789_Bộ-Tư-lệnh-Quân-khu-tổ-chức-bàn-giao-trang-thiết-bị-vật-tư-y-tế-phòng-chống-dịch-Covid-19.jpeg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627143893681941_Những-chuyến-hàng-thắm-tình-hữu-nghị..jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627144435242375_20231020_164410.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627144539181646_20231127_150540.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627144653355117_Capture.PNG">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627144820043860_Phú giải giao trên nông trường cao su.JPG">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627144993967218_20230830_183444.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627145087560733_Hoạt động TDTT của CB, NV, NLĐ Công ty.JPG">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627145174071644_Cán bộ nhân viên Công ty giao lưu TDTT với Sư đoàn BB5 - QĐND Lào nhân kỷ niệm năm Hữu nghị Việt Nam Lào 2022.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627145315354845_IMGP0740.JPG">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627145416256644_Hỗ trợ các gia đình bị lốc xoáy tại Cụm bản Đăc Muôn - Sê Kong - Lào.JPG">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627145609509023_IMGP8489.JPG">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627145731204894_IMGP0217 %282%29.JPG">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627145828416891_20210319_111704.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627145940654962_Tặng học bổng cho sinh viên tại Đăc Chưng chuẩn .JPG">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627146057058307_BGĐ Công ty tặng thiết bị y tế - thuốc điều trị Covid-19 cho trường HSQ số 2 Viêng Xay - QĐND Lào.JPG">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627146355306768_mơi2.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627146463558331_498024104pm.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627146661637347_Công ty Hữu Nghị Nam Lào phối hợp với Bộ Quốc phòng Lào bàn giao công trình sửa chữa 2 cụm bản tại Lào.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627146765721157_20231220_091541.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627146929011891_20210319_111704.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627147110077064_Phong trào nuôi heo đất của Hội PNCS Công ty.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627147211217457_z3838474610753_53d9217e3b198061fe67fd53c404adfb.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627147303480904_20220517_101522.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627147437958233_Đc Trung tướng Thái Đại Ngọc - PBTĐU-Tư lệnh QK thăm và kiểm tra Công ty.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627147629099117_IMGP3091.JPG">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627148241654203_IMGP0300.JPG">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627148375399884_mơi2.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627148509408739_moi3.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627601760130393_namlao-1718326554 %281%29.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627602411911335_namlao-1717484447.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627602694228597_namlao-1717484351.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627602923356161_namlao-1717484918.png">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627603472511596_namlao-1717485310.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627603574740347_namlao-1717485435.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627603962389844_namlao-1717485556.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627604355425210_namlao-1717485674.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627604979323718_namlao-1717485753.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627605083892494_mơi2.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627605332414682_12ddd.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627605569672621_namlao-1715415239.jpg">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627606570953930_ONCNGT~1.JPG">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627608409133221_IMGP3091.JPG">
-      <publishTime>09/26/2025 12:10:39</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627608996406484_Đc Trung tướng Thái Đại Ngọc - PBTĐU-Tư lệnh QK thăm và kiểm tra Công ty.jpg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627609246937138_IMGP2351.JPG">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627609630818396_IMGP7245.jpg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627611304951898_175614164_767057667328040_1867347768068249238_n.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627612288097130_z3180684480376_273fc1822bd5037d8bea08f215b6ca51 %282%29.jpg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638627613101161197_316673622_571053651691540_1146877059417374164_n.jpg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638628031617861053_viendaotao5.png">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638628031735452445_viendaotao5.png">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638628033052501205_viendaotao5.png">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638628033554019987_viendaotao5.png">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638628033817208765_viendaotao5.png">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638628034012814532_viendaotao5.png">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638631512866929582_z3381464128856_6a5b4186e4aa792ac1cd508fd95ae3ed %282%29.jpg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638631513493208713_12ddd.jpg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638631514308854552_18.JPG">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638631514496867647_20231220_095934 %281%29.jpg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638631514699082992_20221121_161939.jpg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638631515982454671_IMGP3091.JPG">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638631516098646372_20201014_073338.jpg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638631516573988563_IMGP3091.JPG">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638631516693905284_20210714_073408.jpg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638631517154047431_INGYBC~1.JPG">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638631517323431747_IMGP7234.JPG">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638631517656418168_mơi1.jpg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638631517832918601_175614164_767057667328040_1867347768068249238_n.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638631517956378510_140058830_716215779078896_7929551434924202648_n.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638631519099023834_z4044688690450_5297b03d5395be41953ecf980b116e2f.jpg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638631519251251044_140015602_716215819078892_7899199315056871737_n.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638631519342304974_193124249_791147491585724_551692408605640385_n.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638631519686585384_20230830_183444.jpg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638631519891070022_20210319_111704.jpg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638631520641575599_IMGP0128.JPG">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638631520976845369_IMGP3637.JPG">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638631521227102203_tg1-Small.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638631521342234270_214572273_809407216426418_4363196803770867300_n.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638631521735849947_175853316_767057537328053_797444508902232577_n.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638631521892832831_Những-chuyến-hàng-thắm-tình-hữu-nghị..jpg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638631522019744842_140308400_716215789078895_7194844312767739546_n.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638631522123821430_220298517_819927875374352_7595297102093973735_n.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638631522387860980_Những-chuyến-hàng-thắm-tình-hữu-nghị..jpg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638631522609211806_688787gggg.jpg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638631522715249910_194267861_791147438252396_5364466198484137946_n.jpeg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638631522965002059_Phong trào nuôi heo đất của Hội PNCS Công ty.jpg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638631523197442893_Phong trào nuôi heo đất của Hội PNCS Công ty.jpg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638631523338310116_445ffff.jpg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638631523588466010_IMGP0300.JPG">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638631523966870046_IMGP1713.JPG">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638631524200067615_IMGP1741.JPG">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638631524413119049_Tổ chức Tết thiếu nhi cho các cháu tại Lào.JPG">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638631524737565870_5gđf.JPG">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638631525110405249_20231220_095934 %281%29.jpg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638631526051968743_20231220_091541.jpg">
-      <publishTime>09/26/2025 12:10:40</publishTime>
-    </File>
-    <File Include="Content/Uploads/News/638638960282681956_bannerAdmin.png">
-      <publishTime>09/26/2025 12:10:40</publishTime>
+    <File Include="Content/smartadminNew/webfonts/smartadmin/sa-icons.css">
+      <publishTime>02/25/2026 15:18:25</publishTime>
     </File>
     <File Include="favicon.ico">
       <publishTime>09/26/2025 12:10:41</publishTime>
@@ -7316,7 +6365,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/26/2025 12:10:41</publishTime>
     </File>
     <File Include="Models/namlao206DB.edmx.diagram">
-      <publishTime>10/26/2025 10:51:43</publishTime>
+      <publishTime>02/26/2026 08:37:29</publishTime>
     </File>
     <File Include="Models/namlao206DB.edmx.sql">
       <publishTime>11/06/2025 16:41:21</publishTime>
@@ -7385,10 +6434,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/26/2025 12:10:41</publishTime>
     </File>
     <File Include="Views/Home/DetailGioiThieu.cshtml">
-      <publishTime>09/26/2025 12:10:41</publishTime>
+      <publishTime>12/07/2025 13:20:41</publishTime>
     </File>
     <File Include="Views/Home/ErrorCustome.cshtml">
-      <publishTime>09/26/2025 12:10:41</publishTime>
+      <publishTime>12/07/2025 13:23:17</publishTime>
     </File>
     <File Include="Views/Home/Lienhe.cshtml">
       <publishTime>09/26/2025 12:10:41</publishTime>
@@ -7403,13 +6452,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/26/2025 12:10:41</publishTime>
     </File>
     <File Include="Views/Home/Trangchu.cshtml">
-      <publishTime>09/26/2025 12:10:41</publishTime>
+      <publishTime>12/07/2025 13:23:58</publishTime>
     </File>
     <File Include="Views/Login/Login.cshtml">
       <publishTime>09/26/2025 12:10:41</publishTime>
     </File>
     <File Include="Views/Login/UpdateProfile.cshtml">
-      <publishTime>09/26/2025 12:10:41</publishTime>
+      <publishTime>12/07/2025 13:25:14</publishTime>
     </File>
     <File Include="Views/News/Create.cshtml">
       <publishTime>09/26/2025 12:10:41</publishTime>
@@ -7427,31 +6476,34 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/26/2025 12:10:41</publishTime>
     </File>
     <File Include="Views/News/Index.cshtml">
-      <publishTime>09/26/2025 12:10:41</publishTime>
+      <publishTime>12/07/2025 13:25:31</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>09/26/2025 12:10:41</publishTime>
     </File>
     <File Include="Views/Shared/_banner.cshtml">
-      <publishTime>09/26/2025 12:10:41</publishTime>
+      <publishTime>12/07/2025 13:25:38</publishTime>
     </File>
     <File Include="Views/Shared/_bannerMiddle.cshtml">
-      <publishTime>09/26/2025 12:10:41</publishTime>
+      <publishTime>12/07/2025 13:25:51</publishTime>
     </File>
     <File Include="Views/Shared/_CalrouselPicture.cshtml">
-      <publishTime>09/26/2025 12:10:41</publishTime>
+      <publishTime>12/07/2025 13:25:57</publishTime>
     </File>
     <File Include="Views/Shared/_carouselNews.cshtml">
-      <publishTime>09/26/2025 12:10:41</publishTime>
+      <publishTime>12/07/2025 13:26:01</publishTime>
     </File>
     <File Include="Views/Shared/_hinhThucKinhDoanh.cshtml">
       <publishTime>09/26/2025 12:10:41</publishTime>
+    </File>
+    <File Include="Views/Shared/_IntroduceModule.cshtml">
+      <publishTime>02/26/2026 14:38:56</publishTime>
     </File>
     <File Include="Views/Shared/_itemGioiThieu.cshtml">
       <publishTime>09/26/2025 12:10:41</publishTime>
     </File>
     <File Include="Views/Shared/_itemNews.cshtml">
-      <publishTime>09/26/2025 12:10:41</publishTime>
+      <publishTime>12/07/2025 13:26:21</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
       <publishTime>09/26/2025 12:10:41</publishTime>
@@ -7460,22 +6512,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/26/2025 12:10:41</publishTime>
     </File>
     <File Include="Views/Shared/_News.cshtml">
-      <publishTime>09/26/2025 12:10:41</publishTime>
+      <publishTime>12/07/2025 13:27:02</publishTime>
     </File>
     <File Include="Views/Shared/_recentNews.cshtml">
-      <publishTime>09/26/2025 12:10:41</publishTime>
+      <publishTime>12/07/2025 13:27:07</publishTime>
     </File>
     <File Include="Views/Shared/_RightSide.cshtml">
-      <publishTime>09/26/2025 12:10:41</publishTime>
+      <publishTime>12/07/2025 13:27:16</publishTime>
     </File>
     <File Include="Views/Shared/_RightSideMainPage.cshtml">
-      <publishTime>09/26/2025 12:10:41</publishTime>
+      <publishTime>12/07/2025 13:27:27</publishTime>
     </File>
     <File Include="Views/Shared/_RightSidePhongBan.cshtml">
       <publishTime>09/26/2025 12:10:41</publishTime>
     </File>
     <File Include="Views/Shared/_testimonialNews.cshtml">
-      <publishTime>09/26/2025 12:10:41</publishTime>
+      <publishTime>12/07/2025 13:27:36</publishTime>
     </File>
     <File Include="Views/Shared/_topicsGioiThieu.cshtml">
       <publishTime>09/26/2025 12:10:41</publishTime>
@@ -7490,7 +6542,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/26/2025 12:10:41</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>11/07/2025 16:38:45</publishTime>
+      <publishTime>12/15/2025 10:36:35</publishTime>
     </File>
   </ItemGroup>
 </Project>

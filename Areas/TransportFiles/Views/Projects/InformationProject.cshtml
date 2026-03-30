@@ -11,71 +11,98 @@
     <!-- Hiển thị thông báo (nếu có) -->
     <div id="alert-container" data-message="@Html.Raw(HttpUtility.HtmlEncode(ViewBag.Message))"></div>
     <div class="row">
-        <div class="container-fluid" style="margin-top:5px">
-            <div class="col-lg-12 col-sm-12 col-xs-12">
-                <div id="panel-2" class="panel panel-collapsed">
-                    <div class="panel-hdr">
-                        <h2 style="font-size: 15px">
-                            Tạo mới <span class="fw-300"><i><b class="color-success-900">và tìm kiếm dự án</b></i></span>
-                        </h2>
+        <div class="col-lg-12 col-sm-12 col-xs-12">
+            <div id="panel-1" class="panel panel-icon">
+                <div class="panel-hdr">
+                    <h2 style="font-size: 15px">
+                        Tạo mới <span class="fw-300"><i><b class="color-success-900">và tìm kiếm dự án</b></i></span>
+                    </h2>
+                    <div class="panel-toolbar">
+                        <button type="button" class="btn btn-panel" data-action="panel-collapse" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-offset="0,10" data-bs-original-title="Toggle">
+                            <svg class="sa-icon">
+                                <use class="panel-collapsed-icon" href="~/Content/smartadminNew/img/sprite.svg#minus-circle"></use>
+                                <use class="panel-expand-icon" href="~/Content/smartadminNew/img/sprite.svg#plus-circle"></use>
+                            </svg>
+                        </button>
+                        <button type="button" class="btn btn-panel" data-action="panel-fullscreen" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-offset="0,10" data-bs-original-title="Fullscreen">
+                            <svg class="sa-icon">
+                                <use href="~/Content/smartadminNew/icons/sprite.svg#stop-circle"></use>
+                            </svg>
+                        </button>
+                        <button type="button" class="btn btn-panel" data-action="panel-close" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-offset="0,10" data-bs-original-title="Close">
+                            <svg class="sa-icon">
+                                <use href="~/Content/smartadminNew/icons/sprite.svg#x-circle"></use>
+                            </svg>
+                        </button>
                     </div>
-                    <div class="panel-container show">
-                        <div class="panel-content">
-                            @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
-                            {
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <a href="@Url.Action(Model.DM_DonVis?.CreateBranch ?? "Create","Khaosats", new {projectID = Model.Id})" class="bcommand btn btn-md btn-success waves-effect waves-themed">
-                                            <span class="fal fa-download mr-1"></span>Khảo sát
-                                        </a>
-                                    </div>
-                                    <div class="input-group-prepend">
-                                        <a href="@Url.Action(Model.DM_DonVis?.CreateBranch ?? "Create","GiamSatThiCongs",new {projectID = Model.Id})" class="bcommand btn btn-md btn-success waves-effect waves-themed">
-                                            <span class="fal fa-download mr-1"></span>Giám sát
-                                        </a>
-                                    </div>
-                                    <div class="input-group-prepend">
-                                        <a href="@Url.Action(Model.DM_DonVis?.CreateBranch ?? "Create","ThiCongs",new {projectID = Model.Id})" class="bcommand btn btn-md btn-success waves-effect waves-themed">
-                                            <span class="fal fa-download mr-1"></span>Thi công
-                                        </a>
-                                    </div>
-                                    <div class="input-group-prepend">
-                                        <a href="@Url.Action(Model.DM_DonVis?.CreateBranch ?? "Create","NghiemThus", new {projectID = Model.Id})" class="bcommand btn btn-md btn-success waves-effect waves-themed">
-                                            <span class="fal fa-vote-yea mr-1"></span>Nghiệm thu
-                                        </a>
-                                    </div>
-                                    <div class="input-group-prepend">
-                                        <a href="@Url.Action("Create","HoSoPhapLies",new {projectID = Model.Id})" class="bcommand btn btn-md btn-primary waves-effect waves-themed">
-                                            <span class="fal fa-folder mr-1"></span>Hồ sơ pháp lý
-                                        </a>
-                                    </div>
+                </div>
+                <div class="panel-container show">
+                    <div class="panel-content">
+                        @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            <div class="frame-wrap">
+                                <div class="demo">
+                                    <a href="@Url.Action("Create","Khaosats", new {projectID = Model.Id})" class="bcommand btn btn-md btn-success waves-effect waves-themed">
+                                        <span class="fal fa-download mr-1"></span>Khảo sát
+                                    </a>
+                                    <a href="@Url.Action("Create","GiamSatThiCongs",new {projectID = Model.Id})" class="bcommand btn btn-md btn-success waves-effect waves-themed">
+                                        <span class="fal fa-download mr-1"></span>Giám sát
+                                    </a>
+                                    <a href="@Url.Action("Create","ThiCongs",new {projectID = Model.Id})" class="bcommand btn btn-md btn-success waves-effect waves-themed">
+                                        <span class="fal fa-download mr-1"></span>Thi công
+                                    </a>
+                                    <a href="@Url.Action("Create","NghiemThus", new {projectID = Model.Id})" class="bcommand btn btn-md btn-success waves-effect waves-themed">
+                                        <span class="fal fa-vote-yea mr-1"></span>Nghiệm thu
+                                    </a>
+                                    <a href="@Url.Action("Create","HoSoPhapLies",new {projectID = Model.Id})" class="bcommand btn btn-md btn-primary waves-effect waves-themed">
+                                        <span class="fal fa-folder mr-1"></span>Hồ sơ pháp lý
+                                    </a>
                                 </div>
-                            }
-                        </div>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="container-fluid" style="margin-top:5px">
+
             @if (Model.KhaoSats != null && Model.KhaoSats.Any())
             {
                 <div class="col-lg-12 col-sm-12 col-xs-12 ">
-                    <div id="panel-1" class="panel">
+                    <div id="panel-1" class="panel panel-icon">
                         <div class="panel-hdr">
                             <h2>
                                 Quản lý <span class="fw-300"><i>khảo sát</i></span>
                             </h2>
+                            <div class="panel-toolbar">
+                                <button type="button" class="btn btn-panel" data-action="panel-collapse" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-offset="0,10" data-bs-original-title="Toggle">
+                                    <svg class="sa-icon">
+                                        <use class="panel-collapsed-icon" href="~/Content/smartadminNew/img/sprite.svg#minus-circle"></use>
+                                        <use class="panel-expand-icon" href="~/Content/smartadminNew/img/sprite.svg#plus-circle"></use>
+                                    </svg>
+                                </button>
+                                <button type="button" class="btn btn-panel" data-action="panel-fullscreen" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-offset="0,10" data-bs-original-title="Fullscreen">
+                                    <svg class="sa-icon">
+                                        <use href="~/Content/smartadminNew/icons/sprite.svg#stop-circle"></use>
+                                    </svg>
+                                </button>
+                                <button type="button" class="btn btn-panel" data-action="panel-close" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-offset="0,10" data-bs-original-title="Close">
+                                    <svg class="sa-icon">
+                                        <use href="~/Content/smartadminNew/icons/sprite.svg#x-circle"></use>
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
                         <div class="panel-container show">
                             <div class="panel-content">
                                 <div class="form-horizontal">
                                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                     <div class="table-responsive">
-                                        <table class="table table-bordered table-hover table-striped w-100 dt-basic-example" style="font-size: 15px">
+                                        <table class="table table-bordered table-hover table-striped w-100 dt-basic-example">
                                             <thead class="bg-warning-200 text-center">
                                                 <tr>
+                                                    <th></th>
                                                     @if (Model.KhaoSats.Any(k => k.GiaTriHopDong != null))
                                                     {
                                                         <th>Giá trị hợp đồng</th>
@@ -141,7 +168,7 @@
 
                                                     @if (Model.KhaoSats.Any(k => k.Note != null))
                                                     {
-                                                        <th>Note</th>
+                                                        <th>Ghi chú</th>
                                                     }
                                                     @if (Model.KhaoSats.Any(k => k.DocumentType != null))
                                                     {
@@ -155,147 +182,148 @@
                                                     {
                                                         <th>Trạng thái</th>
                                                     }
-                                                    <th></th>
+
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 @foreach (var item in Model.KhaoSats)
                                                 {
                                                     if (item.IsActive == true)
-                                                    {
-                                                        <tr>
-                                                            @if (Model.KhaoSats.Any(k => k.GiaTriHopDong != null))
-                                                            {
-                                                                <td>
-                                                                    @String.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:#,##0} VNĐ", item.GiaTriHopDong)
-                                                                </td>
-                                                            }
-                                                            @if (Model.KhaoSats.Any(k => k.GiaTriPLHopDong != null))
-                                                            {
-                                                                <td>
-                                                                    @String.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:#,##0} VNĐ", item.GiaTriPLHopDong)
-                                                                </td>
-                                                            }
-                                                            @if (Model.KhaoSats.Any(k => k.GiaTriDuToan != null))
-                                                            {
-                                                                <td>
-                                                                    @String.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:#,##0} VNĐ", item.GiaTriDuToan)
-                                                                </td>
-                                                            }
-                                                            @if (Model.KhaoSats.Any(k => k.GiaTriKhaoSat != null))
-                                                            {
-                                                                <td>
-                                                                    @String.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:#,##0} VNĐ", item.GiaTriKhaoSat)
-                                                                </td>
-                                                            }
-                                                            @if (Model.KhaoSats.Any(k => k.GiaTriThamDinh != null))
-                                                            {
-                                                                <td>
-                                                                    @String.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:#,##0} VNĐ", item.GiaTriThamDinh)
-                                                                </td>
-                                                            }
-                                                            @if (Model.KhaoSats.Any(k => k.GiaTriDuToanPheDuyet != null))
-                                                            {
-                                                                <td>
-                                                                    @String.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:#,##0} VNĐ", item.GiaTriDuToanPheDuyet)
-                                                                </td>
-                                                            }
-                                                            @if (Model.KhaoSats.Any(k => k.GiaTriKhaoSatPheDuyet != null))
-                                                            {
-                                                                <td>
-                                                                    @String.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:#,##0} VNĐ", item.GiaTriKhaoSatPheDuyet)
-                                                                </td>
-                                                            }
-                                                            @if (Model.KhaoSats.Any(k => k.GiaTriThamDinhPheDuyet != null))
-                                                            {
-                                                                <td>
-                                                                    @String.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:#,##0} VNĐ", item.GiaTriThamDinhPheDuyet)
-                                                                </td>
-                                                            }
-                                                            @if (Model.KhaoSats.Any(k => k.KetQuaKhaoSat != null))
-                                                            {
-                                                                <td>
-                                                                    @item.KetQuaKhaoSat
-                                                                </td>
-                                                            }
-                                                            @if (Model.KhaoSats.Any(k => k.ChiPhiGiamSat != null))
-                                                            {
-                                                                <td>
-                                                                    @String.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:#,##0} VNĐ", item.ChiPhiGiamSat)
-                                                                </td>
-                                                            }
-                                                            @if (Model.KhaoSats.Any(k => k.LandArea != null))
-                                                            {
-                                                                <td>
-                                                                    @item.LandArea @item.Unit.UnitName
-                                                                </td>
-                                                            }
-                                                            @if (Model.KhaoSats.Any(k => k.WaterArea != null))
-                                                            {
-                                                                <td>
-                                                                    @item.WaterArea @item.Unit.UnitName
-                                                                </td>
-                                                            }
-                                                            @if (Model.KhaoSats.Any(k => k.LandAreaKhaoSat != null))
-                                                            {
-                                                                <td>
-                                                                    @item.LandAreaKhaoSat @item.Unit.UnitName
-                                                                </td>
-                                                            }
-                                                            @if (Model.KhaoSats.Any(k => k.WaterAreaKhaoSat != null))
-                                                            {
-                                                                <td>
-                                                                    @item.WaterAreaKhaoSat @item.Unit.UnitName
-                                                                </td>
-                                                            }
-                                                            @if (Model.KhaoSats.Any(k => k.NguoiGiamSat != null))
-                                                            {
-                                                                <td>
-                                                                    @item.NguoiGiamSat
-                                                                </td>
-                                                            }
-
+                                                    {                                                  
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex align-items-center list-action">
+                                                                <a class="btn btn-info waves-effect waves-themed bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sửa"
+                                                                   href="@Url.Action("Edit", "Khaosats", new { id = item.Id, projectID = Model.Id })"><i class="sa sa-wrench"></i></a>
+                                                                <a class="btn btn-danger  bg-warning mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xóa"
+                                                                   href="@Url.Action("Delete", "Khaosats", new { id = item.Id, projectID = Model.Id })"><i class="sa sa-trash"></i></a>
+                                                            </div>
+                                                        </td>
+                                                        @if (Model.KhaoSats.Any(k => k.GiaTriHopDong != null))
+                                                        {
                                                             <td>
-                                                                @(item.TinhTrangCongNo ? "Có" : "Không")
+                                                                @String.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:#,##0} VNĐ", item.GiaTriHopDong)
                                                             </td>
-
-                                                            @if (Model.KhaoSats.Any(k => k.Note != null))
-                                                            {
-                                                                <td>
-                                                                    @item.Note
-                                                                </td>
-                                                            }
-                                                            @if (Model.KhaoSats.Any(k => k.DocumentType != null))
-                                                            {
-                                                                <td>
-                                                                    @item.DocumentType.DocumentTypeName
-                                                                </td>
-                                                            }
-                                                            @if (Model.KhaoSats.Any(k => k.Supplier != null))
-                                                            {
-                                                                <td>
-                                                                    @item.Supplier.SupplierName
-                                                                </td>
-                                                            }
-                                                            @if (Model.KhaoSats.Any(k => k.StatusProject != null))
-                                                            {
-                                                                <td>
-                                                                    @item.StatusProject.StatusName
-                                                                </td>
-                                                            }
+                                                        }
+                                                        @if (Model.KhaoSats.Any(k => k.GiaTriPLHopDong != null))
+                                                        {
                                                             <td>
-                                                                <div class="d-flex align-items-center list-action">
-                                                                    <a class="badge bg-success mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sửa"
-                                                                       href="@Url.Action(Model.DM_DonVis?.EditBranch ?? "Edit", "Khaosats", new { id = item.Id, projectID = Model.Id })"><i class="ni ni-wrench fa-2x"></i></a>
-                                                                    <a class="badge bg-warning mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xóa"
-                                                                       href="@Url.Action("Delete", "Khaosats", new { id = item.Id, projectID = Model.Id })"><i class="ni ni-trash fa-2x"></i></a>
-                                                                </div>
+                                                                @String.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:#,##0} VNĐ", item.GiaTriPLHopDong)
                                                             </td>
-                                                        </tr>
-                                                    }
+                                                        }
+                                                        @if (Model.KhaoSats.Any(k => k.GiaTriDuToan != null))
+                                                        {
+                                                            <td>
+                                                                @String.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:#,##0} VNĐ", item.GiaTriDuToan)
+                                                            </td>
+                                                        }
+                                                        @if (Model.KhaoSats.Any(k => k.GiaTriKhaoSat != null))
+                                                        {
+                                                            <td>
+                                                                @String.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:#,##0} VNĐ", item.GiaTriKhaoSat)
+                                                            </td>
+                                                        }
+                                                        @if (Model.KhaoSats.Any(k => k.GiaTriThamDinh != null))
+                                                        {
+                                                            <td>
+                                                                @String.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:#,##0} VNĐ", item.GiaTriThamDinh)
+                                                            </td>
+                                                        }
+                                                        @if (Model.KhaoSats.Any(k => k.GiaTriDuToanPheDuyet != null))
+                                                        {
+                                                            <td>
+                                                                @String.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:#,##0} VNĐ", item.GiaTriDuToanPheDuyet)
+                                                            </td>
+                                                        }
+                                                        @if (Model.KhaoSats.Any(k => k.GiaTriKhaoSatPheDuyet != null))
+                                                        {
+                                                            <td>
+                                                                @String.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:#,##0} VNĐ", item.GiaTriKhaoSatPheDuyet)
+                                                            </td>
+                                                        }
+                                                        @if (Model.KhaoSats.Any(k => k.GiaTriThamDinhPheDuyet != null))
+                                                        {
+                                                            <td>
+                                                                @String.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:#,##0} VNĐ", item.GiaTriThamDinhPheDuyet)
+                                                            </td>
+                                                        }
+                                                        @if (Model.KhaoSats.Any(k => k.KetQuaKhaoSat != null))
+                                                        {
+                                                            <td>
+                                                                @item.KetQuaKhaoSat
+                                                            </td>
+                                                        }
+                                                        @if (Model.KhaoSats.Any(k => k.ChiPhiGiamSat != null))
+                                                        {
+                                                            <td>
+                                                                @String.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:#,##0} VNĐ", item.ChiPhiGiamSat)
+                                                            </td>
+                                                        }
+                                                        @if (Model.KhaoSats.Any(k => k.LandArea != null))
+                                                        {
+                                                            <td>
+                                                                @item.LandArea @item.Unit.UnitName
+                                                            </td>
+                                                        }
+                                                        @if (Model.KhaoSats.Any(k => k.WaterArea != null))
+                                                        {
+                                                            <td>
+                                                                @item.WaterArea @item.Unit.UnitName
+                                                            </td>
+                                                        }
+                                                        @if (Model.KhaoSats.Any(k => k.LandAreaKhaoSat != null))
+                                                        {
+                                                            <td>
+                                                                @item.LandAreaKhaoSat @item.Unit.UnitName
+                                                            </td>
+                                                        }
+                                                        @if (Model.KhaoSats.Any(k => k.WaterAreaKhaoSat != null))
+                                                        {
+                                                            <td>
+                                                                @item.WaterAreaKhaoSat @item.Unit.UnitName
+                                                            </td>
+                                                        }
+                                                        @if (Model.KhaoSats.Any(k => k.NguoiGiamSat != null))
+                                                        {
+                                                            <td>
+                                                                @item.NguoiGiamSat
+                                                            </td>
+                                                        }
+
+                                                        <td>
+                                                            @(item.TinhTrangCongNo ? "Có" : "Không")
+                                                        </td>
+
+                                                        @if (Model.KhaoSats.Any(k => k.Note != null))
+                                                        {
+                                                            <td>
+                                                                @item.Note
+                                                            </td>
+                                                        }
+                                                        @if (Model.KhaoSats.Any(k => k.DocumentType != null))
+                                                        {
+                                                            <td>
+                                                                @item.DocumentType.DocumentTypeName
+                                                            </td>
+                                                        }
+                                                        @if (Model.KhaoSats.Any(k => k.Supplier != null))
+                                                        {
+                                                            <td>
+                                                                @item.Supplier.SupplierName
+                                                            </td>
+                                                        }
+                                                        @if (Model.KhaoSats.Any(k => k.StatusProject != null))
+                                                        {
+                                                            <td>
+                                                                @item.StatusProject.StatusName
+                                                            </td>
+                                                        }
+
+                                                    </tr>
                                                 }
-                                            </tbody>
-                                        </table>
+                                            }
+                                                </tbody>
+                                            </table>
                                     </div>
                                 </div>
                             </div>
@@ -306,20 +334,39 @@
             @if (Model.GiamSatThiCongs != null && Model.GiamSatThiCongs.Any())
             {
                 <div class="col-lg-12 col-sm-12 col-xs-12 ">
-                    <div id="panel-1" class="panel">
+                    <div id="panel-1" class="panel panel-icon">
                         <div class="panel-hdr">
                             <h2>
                                 Quản lý <span class="fw-300"><i>giám sát</i></span>
                             </h2>
+                            <div class="panel-toolbar">
+                                <button type="button" class="btn btn-panel" data-action="panel-collapse" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-offset="0,10" data-bs-original-title="Toggle">
+                                    <svg class="sa-icon">
+                                        <use class="panel-collapsed-icon" href="~/Content/smartadminNew/img/sprite.svg#minus-circle"></use>
+                                        <use class="panel-expand-icon" href="~/Content/smartadminNew/img/sprite.svg#plus-circle"></use>
+                                    </svg>
+                                </button>
+                                <button type="button" class="btn btn-panel" data-action="panel-fullscreen" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-offset="0,10" data-bs-original-title="Fullscreen">
+                                    <svg class="sa-icon">
+                                        <use href="~/Content/smartadminNew/icons/sprite.svg#stop-circle"></use>
+                                    </svg>
+                                </button>
+                                <button type="button" class="btn btn-panel" data-action="panel-close" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-offset="0,10" data-bs-original-title="Close">
+                                    <svg class="sa-icon">
+                                        <use href="~/Content/smartadminNew/icons/sprite.svg#x-circle"></use>
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
                         <div class="panel-container show">
                             <div class="panel-content">
                                 <div class="form-horizontal">
                                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                     <div class="table-responsive">
-                                        <table class="table table-bordered table-hover table-striped w-100 dt-basic-example" style="font-size: 15px">
+                                        <table class="table table-bordered table-hover table-striped w-100 dt-basic-example">
                                             <thead class="bg-warning-200 text-center">
                                                 <tr>
+                                                    <th></th>
                                                     @if (Model.GiamSatThiCongs.Any(g => g.GiaTriHopDong != null))
                                                     {
                                                         <th>Giá trị hợp đồng</th>
@@ -364,7 +411,7 @@
                                                     {
                                                         <th>Ghi chú</th>
                                                     }
-                                                    <th></th>
+
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -373,6 +420,15 @@
                                                     if (item.IsActive == true)
                                                     {
                                                         <tr>
+                                                            <td>
+                                                                <div class="d-flex align-items-center list-action">
+
+                                                                    <a class="btn btn-info waves-effect waves-themed bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sửa"
+                                                                       href="@Url.Action("Edit", "GiamSatThiCongs", new { id = item.Id, projectID = Model.Id })"><i class="sa sa-wrench"></i></a>
+                                                                    <a class="btn btn-danger  bg-warning mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xóa"
+                                                                       href="@Url.Action("Delete", "GiamSatThiCongs", new { id = item.Id, projectID = Model.Id })"><i class="sa sa-trash"></i></a>
+                                                                </div>
+                                                            </td>
                                                             @if (Model.GiamSatThiCongs.Any(g => g.GiaTriHopDong != null))
                                                             {
                                                                 <td>
@@ -439,14 +495,7 @@
                                                                     @item.Note
                                                                 </td>
                                                             }
-                                                            <td>
-                                                                <div class="d-flex align-items-center list-action">
-                                                                    <a class="badge bg-success mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sửa"
-                                                                       href="@Url.Action(Model.DM_DonVis?.EditBranch ?? "Edit", "GiamSatThiCongs", new { id = item.Id, projectID = Model.Id })"><i class="ni ni-wrench fa-2x"></i></a>
-                                                                    <a class="badge bg-warning mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xóa"
-                                                                       href="@Url.Action("Delete", "GiamSatThiCongs", new { id = item.Id, projectID = Model.Id })"><i class="ni ni-trash fa-2x"></i></a>
-                                                                </div>
-                                                            </td>
+
                                                         </tr>
                                                     }
                                                 }
@@ -462,20 +511,39 @@
             @if (Model.ThiCongs != null && Model.ThiCongs.Any())
             {
                 <div class="col-lg-12 col-sm-12 col-xs-12 ">
-                    <div id="panel-1" class="panel">
+                    <div id="panel-1" class="panel panel-icon">
                         <div class="panel-hdr">
                             <h2>
                                 Quản lý <span class="fw-300"><i>thi công</i></span>
                             </h2>
+                            <div class="panel-toolbar">
+                                <button type="button" class="btn btn-panel" data-action="panel-collapse" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-offset="0,10" data-bs-original-title="Toggle">
+                                    <svg class="sa-icon">
+                                        <use class="panel-collapsed-icon" href="~/Content/smartadminNew/img/sprite.svg#minus-circle"></use>
+                                        <use class="panel-expand-icon" href="~/Content/smartadminNew/img/sprite.svg#plus-circle"></use>
+                                    </svg>
+                                </button>
+                                <button type="button" class="btn btn-panel" data-action="panel-fullscreen" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-offset="0,10" data-bs-original-title="Fullscreen">
+                                    <svg class="sa-icon">
+                                        <use href="~/Content/smartadminNew/icons/sprite.svg#stop-circle"></use>
+                                    </svg>
+                                </button>
+                                <button type="button" class="btn btn-panel" data-action="panel-close" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-offset="0,10" data-bs-original-title="Close">
+                                    <svg class="sa-icon">
+                                        <use href="~/Content/smartadminNew/icons/sprite.svg#x-circle"></use>
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
                         <div class="panel-container show">
                             <div class="panel-content">
                                 <div class="form-horizontal">
                                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                     <div class="table-responsive">
-                                        <table class="table table-bordered table-hover table-striped w-100 dt-basic-example" style="font-size: 15px">
+                                        <table class="table table-bordered table-hover table-striped w-100 dt-basic-example">
                                             <thead class="bg-warning-200 text-center">
                                                 <tr>
+                                                    <th></th>
                                                     @if (Model.GiamSatThiCongs.Any(g => g.GiaTriHopDong != null))
                                                     {
                                                         <th>Giá trị hợp đồng</th>
@@ -520,7 +588,7 @@
                                                     {
                                                         <th>Ghi chú</th>
                                                     }
-                                                    <th></th>
+
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -529,6 +597,15 @@
                                                     if (item.IsActive == true)
                                                     {
                                                         <tr>
+                                                            <td>
+                                                                <div class="d-flex align-items-center list-action">
+                                                                    <a class="btn btn-info waves-effect waves-themed bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sửa"
+                                                                       href="@Url.Action("Edit", "ThiCongs", new { id = item.Id, projectID = Model.Id })"><i class="sa sa-wrench"></i></a>
+                                                                    <a class="btn btn-danger  bg-warning mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xóa"
+                                                                       href="@Url.Action("Delete", "ThiCongs", new { id = item.Id, projectID = Model.Id })"><i class="sa sa-trash"></i></a>
+
+                                                                </div>
+                                                            </td>
                                                             @if (Model.GiamSatThiCongs.Any(g => g.GiaTriHopDong != null))
                                                             {
                                                                 <td>
@@ -595,14 +672,7 @@
                                                                     @item.Note
                                                                 </td>
                                                             }
-                                                            <td>
-                                                                <div class="d-flex align-items-center list-action">
-                                                                    <a class="badge bg-success mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sửa"
-                                                                       href="@Url.Action(Model.DM_DonVis?.EditBranch ?? "Edit", "ThiCongs", new { id = item.Id, projectID = Model.Id })"><i class="ni ni-wrench fa-2x"></i></a>
-                                                                    <a class="badge bg-warning mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xóa"
-                                                                       href="@Url.Action("Delete", "ThiCongs", new { id = item.Id, projectID = Model.Id })"><i class="ni ni-trash fa-2x"></i></a>
-                                                                </div>
-                                                            </td>
+
                                                         </tr>
                                                     }
                                                 }
@@ -618,20 +688,39 @@
             @if (Model.NghiemThus != null && Model.NghiemThus.Any())
             {
                 <div class="col-lg-12 col-sm-12 col-xs-12 ">
-                    <div id="panel-1" class="panel">
+                    <div id="panel-1" class="panel panel-icon">
                         <div class="panel-hdr">
                             <h2>
                                 Quản lý <span class="fw-300"><i>nghiệm thu</i></span>
                             </h2>
+                            <div class="panel-toolbar">
+                                <button type="button" class="btn btn-panel" data-action="panel-collapse" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-offset="0,10" data-bs-original-title="Toggle">
+                                    <svg class="sa-icon">
+                                        <use class="panel-collapsed-icon" href="~/Content/smartadminNew/img/sprite.svg#minus-circle"></use>
+                                        <use class="panel-expand-icon" href="~/Content/smartadminNew/img/sprite.svg#plus-circle"></use>
+                                    </svg>
+                                </button>
+                                <button type="button" class="btn btn-panel" data-action="panel-fullscreen" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-offset="0,10" data-bs-original-title="Fullscreen">
+                                    <svg class="sa-icon">
+                                        <use href="~/Content/smartadminNew/icons/sprite.svg#stop-circle"></use>
+                                    </svg>
+                                </button>
+                                <button type="button" class="btn btn-panel" data-action="panel-close" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-offset="0,10" data-bs-original-title="Close">
+                                    <svg class="sa-icon">
+                                        <use href="~/Content/smartadminNew/icons/sprite.svg#x-circle"></use>
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
                         <div class="panel-container show">
                             <div class="panel-content">
                                 <div class="form-horizontal">
                                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                     <div class="table-responsive">
-                                        <table class="table table-bordered table-hover table-striped w-100 dt-basic-example" style="font-size: 15px">
+                                        <table class="table table-bordered table-hover table-striped w-100 dt-basic-example">
                                             <thead class="bg-warning-200 text-center">
                                                 <tr>
+                                                    <th></th>
                                                     @if (Model.NghiemThus.Any(n => n.Phase != null))
                                                     {
                                                         <th>Đợt nghiệm thu</th>
@@ -656,13 +745,22 @@
                                                     {
                                                         <th>Công nợ</th>
                                                     }
-                                                    <th></th>
+
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 @foreach (var item in Model.NghiemThus)
                                                 {
                                                     <tr>
+                                                        <td>
+                                                            <div class="d-flex align-items-center list-action">
+                                                                <a class="btn btn-info waves-effect waves-themed bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sửa"
+                                                                   href="@Url.Action("Edit", "NghiemThus", new { id = item.Id, projectID = Model.Id })"><i class="sa sa-wrench"></i></a>
+                                                                <a class="btn btn-danger  bg-warning mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xóa"
+                                                                   href="@Url.Action("Delete", "NghiemThus", new { id = item.Id, projectID = Model.Id })"><i class="sa sa-trash"></i></a>
+
+                                                            </div>
+                                                        </td>
                                                         @if (Model.NghiemThus.Any(n => n.Phase != null))
                                                         {
                                                             <td>
@@ -699,14 +797,7 @@
                                                                 @String.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:#,##0} VNĐ", item.NoConLai)
                                                             </td>
                                                         }
-                                                        <td>
-                                                            <div class="d-flex align-items-center list-action">
-                                                                <a class="badge bg-success mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sửa"
-                                                                   href="@Url.Action(Model.DM_DonVis?.EditBranch ?? "Edit", "NghiemThus", new { id = item.Id, projectID = Model.Id })"><i class="ni ni-wrench fa-2x"></i></a>
-                                                                <a class="badge bg-warning mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xóa"
-                                                                   href="@Url.Action("Delete", "NghiemThus", new { id = item.Id, projectID = Model.Id })"><i class="ni ni-trash fa-2x"></i></a>
-                                                            </div>
-                                                        </td>
+
                                                     </tr>
                                                 }
                                             </tbody>
@@ -721,31 +812,60 @@
             @if (Model.HoSoPhapLys != null && Model.HoSoPhapLys.Any())
             {
                 <div class="col-lg-12 col-sm-12 col-xs-12 ">
-                    <div id="panel-1" class="panel">
+                    <div id="panel-1" class="panel panel-icon">
                         <div class="panel-hdr">
                             <h2>
                                 Quản lý <span class="fw-300"><i>hồ sơ</i></span>
                             </h2>
+                            <div class="panel-toolbar">
+                                <button type="button" class="btn btn-panel" data-action="panel-collapse" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-offset="0,10" data-bs-original-title="Toggle">
+                                    <svg class="sa-icon">
+                                        <use class="panel-collapsed-icon" href="~/Content/smartadminNew/img/sprite.svg#minus-circle"></use>
+                                        <use class="panel-expand-icon" href="~/Content/smartadminNew/img/sprite.svg#plus-circle"></use>
+                                    </svg>
+                                </button>
+                                <button type="button" class="btn btn-panel" data-action="panel-fullscreen" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-offset="0,10" data-bs-original-title="Fullscreen">
+                                    <svg class="sa-icon">
+                                        <use href="~/Content/smartadminNew/icons/sprite.svg#stop-circle"></use>
+                                    </svg>
+                                </button>
+                                <button type="button" class="btn btn-panel" data-action="panel-close" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-offset="0,10" data-bs-original-title="Close">
+                                    <svg class="sa-icon">
+                                        <use href="~/Content/smartadminNew/icons/sprite.svg#x-circle"></use>
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
                         <div class="panel-container show">
                             <div class="panel-content">
                                 <div class="form-horizontal">
                                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                     <div class="table-responsive">
-                                        <table class="table table-bordered table-hover table-striped w-100 dt-basic-example" style="font-size: 15px">
+                                        <table class="table table-bordered table-hover table-striped w-100 dt-basic-example">
                                             <thead class="bg-warning-200 text-center">
                                                 <tr>
+                                                    <th></th>
                                                     <th>#</th>
                                                     <th>Tên hồ sơ</th>
                                                     <th>Loại hồ sơ</th>
                                                     <th>Nhóm hồ sơ</th>
-                                                    <th></th>
+
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 @foreach (var item in Model.HoSoPhapLys)
                                                 {
                                                     <tr>
+                                                        <td>
+                                                            <div class="d-flex align-items-center list-action">
+                                                                <a class="badge bg-white mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Tải"
+                                                                   href="../../Uploads/@item.ProjectID/@item.AddBangId/@item.Url"><i class="fal fa-cloud-download fa-2x"></i></a>
+                                                                <a class="btn btn-info waves-effect waves-themed bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sửa"
+                                                                   href="@Url.Action("Edit", "HoSoPhapLies", new { id = item.Id, projectID = Model.Id })"><i class="sa sa-wrench"></i></a>
+                                                                <a class="btn btn-danger  bg-warning mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xóa"
+                                                                   href="@Url.Action("Delete", "HoSoPhapLies", new { id = item.Id, projectID = Model.Id })"><i class="sa sa-trash"></i></a>
+                                                            </div>
+                                                        </td>
                                                         <td>
                                                             @Html.DisplayFor(modelItem => item.STT)
                                                         </td>
@@ -758,16 +878,7 @@
                                                         <td>
                                                             @Html.DisplayFor(modelItem => item.DM_AddBangs.TenBang)
                                                         </td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center list-action">
-                                                                <a class="badge bg-white mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Tải"
-                                                                   href="../../Uploads/@item.ProjectID/@item.AddBangId/@item.Url"><i class="fal fa-cloud-download fa-2x"></i></a>
-                                                                <a class="badge bg-success mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sửa"
-                                                                   href="@Url.Action("Edit","HoSoPhapLies", new { id = item.Id })"><i class="ni ni-wrench fa-2x"></i></a>
-                                                                <a class="badge bg-warning mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xóa"
-                                                                   href="@Url.Action("Delete","HoSoPhapLies", new { id = item.Id })"><i class="ni ni-trash fa-2x"></i></a>
-                                                            </div>
-                                                        </td>
+
                                                     </tr>
                                                 }
                                             </tbody>
@@ -779,8 +890,7 @@
                     </div>
                 </div>
             }
-
-        </div>
+    
     </div>
 
 

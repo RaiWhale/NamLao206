@@ -76,7 +76,7 @@ namespace NamLao206.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, ValidateInput(false)]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,TenKhoa,ChucNang,NhomKhoaId,PictureId,Description,donvi_Id")] DM_PhongBans dM_Khoaphongs, int? page)
+        public async Task<ActionResult> Create([Bind(Include = "Id,TenKhoa,ChucNang,NhomKhoaId,PictureId,Description,CreateDate,donvi_Id")] DM_PhongBans dM_Khoaphongs, int? page)
         {
 			// 1. Kiểm tra xác thực người dùng
 			if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
@@ -93,6 +93,7 @@ namespace NamLao206.Areas.Admin.Controllers
 					var existingKhoa = db.DM_PhongBans.FirstOrDefault(k => k.TenKhoa.Trim().ToLower() == dM_Khoaphongs.TenKhoa.Trim().ToLower());
 					if (existingKhoa == null)
 					{
+						dM_Khoaphongs.CreateDate = DateTime.Now;
 						// 3. Nếu chưa tồn tại, thêm mới khoa
 						db.DM_PhongBans.Add(dM_Khoaphongs);
 						await db.SaveChangesAsync();

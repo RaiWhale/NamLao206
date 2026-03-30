@@ -44,6 +44,29 @@ namespace NamLao206.Areas.TransportFiles.Controllers
             return View(nghiemThu);
         }
 
+        public ActionResult Create(int? projectID)
+        {
+            if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
+            {
+                ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
+                return RedirectToAction("Login", "Login", new { area = "" });
+            }
+            // Lấy thông tin tài khoản
+            var acc = db.Accounts
+                .Where(x => x.Id == userId)
+                .SingleOrDefault();
+            if (acc == null)
+            {
+                ViewBag.Message = "Tài khoản không tồn tại hoặc không liên kết với nhân viên.";
+                return RedirectToAction("Login", "Login", new { area = "" });
+            }
+            ViewBag.ProjectID = new SelectList(db.Projects.Where(x => x.Id == projectID), "Id", "TenDuAn");
+            ViewBag.PhaseId = new SelectList(db.Phases, "Id", "PhaseName");
+            ViewBag.UnitId = new SelectList(db.Units.Where(x => x.PhanLoai == "1"), "Id", "UnitName");
+            ViewBag.DonVi = acc.Employee.DM_PhongBans.DM_DonVis;
+            return PartialView();
+        }
+
         // GET: TransportFiles/NghiemThus/Create
         public ActionResult CreateBomMin(int? projectID)
         {
@@ -110,6 +133,37 @@ namespace NamLao206.Areas.TransportFiles.Controllers
                 , new { projectID = nghiemThu.ProjectID, message = ViewBag.Message });
         }
 
+        public async Task<ActionResult> Edit(int? id)
+        {
+            if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
+            {
+                ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
+                return RedirectToAction("Login", "Login", new { area = "" });
+            }
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            // Lấy thông tin tài khoản
+            var acc = db.Accounts
+                .Where(x => x.Id == userId)
+                .SingleOrDefault();
+            if (acc == null)
+            {
+                ViewBag.Message = "Tài khoản không tồn tại hoặc không liên kết với nhân viên.";
+                return RedirectToAction("Login", "Login", new { area = "" });
+            }
+            NghiemThu nghiemThu = await db.NghiemThus.FindAsync(id);
+            if (nghiemThu == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.ProjectID = new SelectList(db.Projects, "Id", "TenDuAn", nghiemThu.ProjectID);
+            ViewBag.PhaseId = new SelectList(db.Phases, "Id", "PhaseName", nghiemThu.PhaseId);
+            ViewBag.UnitId = new SelectList(db.Units.Where(x => x.PhanLoai == "1"), "Id", "UnitName", nghiemThu.UnitId);
+            ViewBag.DonVi = acc.Employee.DM_PhongBans.DM_DonVis;
+            return PartialView(nghiemThu);
+        }
         // GET: TransportFiles/NghiemThus/Edit/5
         public async Task<ActionResult> EditBomMin(int? id)
         {

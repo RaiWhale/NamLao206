@@ -8,6 +8,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using NamLao206.Areas.TransportFiles.Bussiness;
 using NamLao206.Models;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
@@ -21,8 +22,116 @@ namespace NamLao206.Areas.TransportFiles.Controllers
     {
         private namlao206_websiteEntities db = new namlao206_websiteEntities();
 		int pageSize = 50;
-		// GET: TransportFiles/TransportFiles
-		public ActionResult HopThuDen(int? page, string search, string message)
+        // GET: TransportFiles/TransportFiles
+        public ActionResult HopThu(int? page, string search, string message, string loai)
+        {
+			if (string.IsNullOrWhiteSpace(loai))  loai = "van-ban-den"; 
+            try
+            {
+                // Kiểm tra và lấy thông tin người dùng
+                if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
+                {
+                    ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
+                    return RedirectToAction("Login", "Login", new { area = "" });
+                }
+
+                // Lấy thông tin tài khoản
+                var acc = db.Accounts
+                    .Where(x => x.Id == userId)
+                    .SingleOrDefault();
+
+                if (acc == null)
+                {
+                    ViewBag.Message = "Tài khoản không tồn tại hoặc không liên kết với nhân viên.";
+                    return RedirectToAction("Login", "Login", new { area = "" });
+                }
+                IQueryable<TransportFile> transportFiles = db.TransportFiles
+						.Where(x => x.Transports.Any(t => t.ReceiverUserId == acc.EmployeeId));
+       
+                 // Xử lý theo loại
+                switch (loai)
+                {
+                    case "van-ban-den":
+                    case "1":
+                        ViewBag.TieuDe = "Văn Bản Đến";
+                        // Văn bản đến: người dùng là người nhận
+                        transportFiles = transportFiles.Where(x => 
+									x.Transports.Any(t => t.ReceiverUserId == acc.EmployeeId) 
+									&& x.IsActive == true);
+                        break;
+
+                    case "van-ban-di":
+                    case "2":
+                        ViewBag.TieuDe = "Văn Bản Đi";
+                        // Văn bản đi: người dùng là người tạo
+                        transportFiles = transportFiles.Where(x => 
+									x.CreateUserId == userId && x.IsActive == true);
+                        break;
+
+                    case "cong-van-khan":
+                    case "3":
+                        ViewBag.TieuDe = "Công văn khẩn";
+                        // Công văn khẩn: người nhận và có flag khẩn cấp
+                        transportFiles = transportFiles.Where(x => 
+									x.Transports.Any(t => t.ReceiverUserId == acc.EmployeeId)
+									&& x.KhanCap == true
+									&& x.IsActive == true);
+                        break;
+
+                    case "thung-rac":
+                    case "4":
+                        ViewBag.TieuDe = "Thùng rác";
+                        // Thùng rác: các bản ghi đã xóa (IsActive = false)
+                        transportFiles = transportFiles.Where(x =>
+                                    x.Transports.Any(t => t.ReceiverUserId == acc.EmployeeId)
+                                    && x.IsActive == false);
+                        break;
+
+                    default:
+                        ViewBag.TieuDe = "Tất cả văn bản";
+                        // Mặc định: lấy tất cả văn bản đến
+                        transportFiles = transportFiles.Where(x =>
+                                     x.Transports.Any(t => t.ReceiverUserId == acc.EmployeeId)
+                                     && x.IsActive == true);
+                        break;
+                }
+                // Áp dụng tìm kiếm nếu có
+                if (!string.IsNullOrWhiteSpace(search))
+                {
+                    string searchLower = search.Trim().ToLower();
+                    transportFiles = transportFiles.Where(x => x.Mota.ToLower().Contains(searchLower));
+                }
+
+                // Sắp xếp và lấy danh sách
+                transportFiles = transportFiles.OrderByDescending(x => x.CreateDate);
+
+                // Gán thông báo (nếu có)
+                ViewBag.ThuChuaXem = db.Transports
+					.Where(x => x.ReceiverUserId == acc.EmployeeId 
+										&& x.DaXem == false)
+					.OrderByDescending(x => x.TransportDate).ToList().Count();
+                ViewBag.ThuChuaXemKhan = db.Transports
+                    .Where(x => x.ReceiverUserId == acc.EmployeeId
+                                      && x.TransportFile.KhanCap == true
+                                      && x.IsActive == true
+									  && x.DaXem == false)
+                    .OrderByDescending(x => x.TransportDate).ToList().Count();
+                ViewBag.LoaiHienTai = loai;
+                ViewBag.Search = search;
+                ViewBag.Message = message;
+                int pageNumber = page ?? 1;
+                return View(transportFiles.ToPagedList(pageNumber, pageSize));
+            }
+            catch (Exception ex)
+            {
+                // Ghi log lỗi (nên sử dụng logging framework như Serilog)
+                System.Diagnostics.Debug.WriteLine($"Lỗi khi lấy danh sách Transport: {ex.Message}");
+                ViewBag.Message = "Đã xảy ra lỗi khi lấy danh sách. Vui lòng thử lại.";
+                return View(new List<Transport>());
+            }
+        }
+
+        public ActionResult HopThuDen(int? page, string search, string message)
         {
 			try
 			{
@@ -251,7 +360,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
 			}
 		}
 		// GET: TransportFiles/TransportFiles/Details/5
-		public async Task<ActionResult> Details(int? id, string flag)
+		public async Task<ActionResult> Details(int? id, string flag, string loai)
 		{
 			// Kiểm tra id hợp lệ
 			if (id == null)
@@ -272,7 +381,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
 			try
 			{
 				// Cập nhật trạng thái DaXem nếu flag chứa "HopThuDen"
-				if (!string.IsNullOrEmpty(flag) && flag.Contains("HopThuDen"))
+				if ((!string.IsNullOrWhiteSpace(flag) && flag.Contains("HopThuDen")) || (!string.IsNullOrWhiteSpace(loai) && loai.Contains("van-ban-den")))
 				{
 					// Kiểm tra và lấy thông tin người dùng
 					if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
@@ -380,7 +489,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
 					}
 				}
 
-				return RedirectToAction("HopThuDen", new { message = ViewBag.Message });
+				return RedirectToAction("HopThu", new { message = ViewBag.Message });
 			}
 
 			catch (Exception ex)
@@ -464,7 +573,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
 				}
 			}
 
-			return RedirectToAction("HopThuDen", new { message = ViewBag.Message });
+			return RedirectToAction("HopThu", new { message = ViewBag.Message });
         }
         // GET: TransportFiles/TransportFiles/Create
         public ActionResult Create()
@@ -563,7 +672,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
 					}
 				}
 				ViewBag.Message = "Thêm mới thành công!";
-				return RedirectToAction("HopThuDen", new { message = ViewBag.Message });			
+				return RedirectToAction("HopThu", new { message = ViewBag.Message });			
 			}
 
 			catch (Exception ex)
@@ -650,7 +759,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
 					if (transportFile != null)
 					{
                         // Kiểm tra điều kiện xóa
-                        if (acc.LevelId != 1)
+                        if (acc.LevelId != 3)
                         {
                             // Tính thời gian tạo file
                             var timeElapsed = DateTime.Now - transportFile.CreateDate;
@@ -686,7 +795,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
 					throw;
 				}
 			}
-			return RedirectToAction("HopThuDi", new { message = ViewBag.Message });
+			return RedirectToAction("HopThu", new { message = ViewBag.Message, loai = "van-ban-di" });
 		}
 		// Phương thức để lưu file đính kèm
 		private async Task SaveAttachedFiles(TransportFile transportFile)
@@ -1141,6 +1250,85 @@ namespace NamLao206.Areas.TransportFiles.Controllers
                 return Json(new { success = false, message = "Unexpected error: " + ex.Message });
             }
         }
+
+        public JsonResult DeleteJqueryHopThu(List<int> id, string loai)
+        {
+            try
+            {
+                // Validate input
+                if (id == null || !id.Any())
+                {
+                    return Json(new { success = false, message = "Không tìm thấy thư." });
+                }
+
+                // Get user ID from authenticated user
+                if (!int.TryParse(User.Identity.Name, out int userId))
+                {
+                    return Json(new { success = false, message = "Không thể xác định người dùng. Vui lòng đăng nhập lại." });
+                }
+
+                var acc = db.Accounts.FirstOrDefault(x => x.Id == userId);
+                if (acc == null)
+                {
+                    return Json(new { success = false, message = "Tài khoản không tồn tại hoặc không liên kết với nhân viên." });
+                }
+
+                using (var transaction = db.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        bool success = false;
+                        string message = "";
+
+                        switch (loai)
+                        {
+                            case "van-ban-den":
+                            case "1":
+                                success = EmailBussiness.DeleteVanBanDen(id, out message);
+                                break;
+                            case "van-ban-di":
+                            case "2":
+                                success = EmailBussiness.DeleteVanBanDi(id, out message);
+                                break;
+                            case "cong-van-khan":
+                            case "3":
+                                success = EmailBussiness.DeleteCongVanKhan(id, out message);
+                                break;
+                            case "thung-rac":
+                            case "4":
+                                success = EmailBussiness.DeleteFromThungRac(id, out message);
+                                break;
+                            default:
+                                return Json(new { success = false, message = "Loại văn bản không hợp lệ." });
+                        }
+
+                        if (!success)
+                        {
+                            transaction.Rollback();
+                            return Json(new { success = false, message = message });
+                        }
+
+                  
+                        transaction.Commit();
+
+                        return Json(new { success = true, message = "Xóa thành công." });
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        System.Diagnostics.Debug.WriteLine($"Error in DeleteJqueryHopThu: {ex.Message}");
+                        return Json(new { success = false, message = "Lỗi trong quá trình xử lý: " + ex.Message });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error in DeleteJqueryHopThu: {ex.Message}");
+                return Json(new { success = false, message = "Lỗi không xác định: " + ex.Message });
+            }
+        }
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

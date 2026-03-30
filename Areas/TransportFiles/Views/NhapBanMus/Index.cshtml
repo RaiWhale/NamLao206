@@ -14,27 +14,42 @@
     <!-- Hiển thị thông báo (nếu có) -->
     <div id="alert-container" data-message="@Html.Raw(HttpUtility.HtmlEncode(ViewBag.Message))"></div>
     <div class="row">
-        <div class="container-fluid" style="margin-top:10px">
             <div class="col-lg-4 col-sm-8 col-xs-12">
-                <div id="panel-2" class="panel panel-collapsed">
+                <div id="panel-1" class="panel panel-icon">
                     <div class="panel-hdr">
                         <h2 style="font-size: 150%">
                             Tạo mới <span class="fw-300"><i><b class="color-success-900">và tìm kiếm</b></i></span>
                         </h2>
+                        <div class="panel-toolbar">
+                            <button type="button" class="btn btn-panel" data-action="panel-collapse" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-offset="0,10" data-bs-original-title="Toggle">
+                                <svg class="sa-icon">
+                                    <use class="panel-collapsed-icon" href="~/Content/smartadminNew/img/sprite.svg#minus-circle"></use>
+                                    <use class="panel-expand-icon" href="~/Content/smartadminNew/img/sprite.svg#plus-circle"></use>
+                                </svg>
+                            </button>
+                            <button type="button" class="btn btn-panel" data-action="panel-fullscreen" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-offset="0,10" data-bs-original-title="Fullscreen">
+                                <svg class="sa-icon">
+                                    <use href="~/Content/smartadminNew/icons/sprite.svg#stop-circle"></use>
+                                </svg>
+                            </button>
+                            <button type="button" class="btn btn-panel" data-action="panel-close" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-offset="0,10" data-bs-original-title="Close">
+                                <svg class="sa-icon">
+                                    <use href="~/Content/smartadminNew/icons/sprite.svg#x-circle"></use>
+                                </svg>
+                            </button>
+                        </div>
                     </div>
                     <div class="panel-container show">
                         <div class="panel-content">
                             @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
                             {
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
+                                <div class="frame-wrap">
+                                    <div class="demo">
                                         <a href="@Url.Action("Create")" class="bcommand btn btn-md btn-success waves-effect waves-themed">
                                             <span class="fal fa-download mr-1"></span>Tạo mới
                                         </a>
-                                    </div>
-                                    <div class="d-flex position-relative ml-auto" style="max-width: 23rem;">
-                                        <i class="fas fa-search position-absolute pos-left fs-lg px-3 py-2 mt-1"></i>
-                                        <input type="text" name="search" class="search form-control bg-subtlelight pl-6" placeholder="Tìm kiếm">
+                                        <input type="text" name="search" class="search form-control" placeholder="Tìm kiếm" value="@ViewBag.search">
+
                                     </div>
                                 </div>
                             }
@@ -42,16 +57,32 @@
                     </div>
                 </div>
             </div>
-        </div>
     </div>
     <div class="row">
-        <div class="container-fluid" style="margin-top:10px">
             <div class="col-lg-12 col-sm-12 col-xs-12 ">
-                <div id="panel-1" class="panel">
+                <div id="panel-1" class="panel panel-icon">
                     <div class="panel-hdr">
                         <h2>
                             Dự<span class="fw-300"><i>Án</i></span>
                         </h2>
+                        <div class="panel-toolbar">
+                            <button type="button" class="btn btn-panel" data-action="panel-collapse" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-offset="0,10" data-bs-original-title="Toggle">
+                                <svg class="sa-icon">
+                                    <use class="panel-collapsed-icon" href="~/Content/smartadminNew/img/sprite.svg#minus-circle"></use>
+                                    <use class="panel-expand-icon" href="~/Content/smartadminNew/img/sprite.svg#plus-circle"></use>
+                                </svg>
+                            </button>
+                            <button type="button" class="btn btn-panel" data-action="panel-fullscreen" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-offset="0,10" data-bs-original-title="Fullscreen">
+                                <svg class="sa-icon">
+                                    <use href="~/Content/smartadminNew/icons/sprite.svg#stop-circle"></use>
+                                </svg>
+                            </button>
+                            <button type="button" class="btn btn-panel" data-action="panel-close" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-offset="0,10" data-bs-original-title="Close">
+                                <svg class="sa-icon">
+                                    <use href="~/Content/smartadminNew/icons/sprite.svg#x-circle"></use>
+                                </svg>
+                            </button>
+                        </div>
                     </div>
                     <div class="panel-container show">
                         <div class="panel-content">
@@ -72,7 +103,7 @@
                                                 </th>
                                                 <th>
                                                     Ngày nhập
-                                                </th>                                            
+                                                </th>
                                                 <th>
                                                     Tình trạng
                                                 </th>
@@ -101,19 +132,19 @@
                                                     </td>
                                                     <td>
                                                         @Html.DisplayFor(modelItem => item.TinhTrang)
-                                                    </td>                                                
+                                                    </td>
                                                     <td>
                                                         @*<a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" data-title="Chi tiết" data-original-title="Chi tiết"
-        href="@Url.Action("InformationProject", new { projectID = item.Id })"><i class="ni ni-wrench fa-2x"></i></a>*@
+                                                href="@Url.Action("InformationProject", new { projectID = item.Id })"><i class="ni ni-wrench fa-2x"></i></a>*@
                                                         <a class="badge bg-info mr-2 bcommand" data-toggle="tooltip" data-placement="top" data-title="Sửa" data-original-title="Sửa"
                                                            href="@Url.Action("Edit", new { id = item.Id })"><i class="fal fa-edit fa-2x"></i></a>
                                                         <a class="badge bg-warning mr-2 bcommand" data-toggle="tooltip" data-placement="top" data-title="Xóa" data-original-title="Xóa"
                                                            href="@Url.Action("Delete", new { id = item.Id })"><i class="ni ni-trash fa-2x"></i></a>
-                                                      
-                                                            <a href="@Url.Action("Create","HoSoPhapLies",new {NhapBanMu_Id = item.Id})" class="bcommand btn btn-md btn-primary waves-effect waves-themed">
-                                                                <span class="fal fa-folder mr-1"></span>Hồ sơ pháp lý
-                                                            </a>
-                                                        
+
+                                                        <a href="@Url.Action("Create","HoSoPhapLies",new {NhapBanMu_Id = item.Id})" class="bcommand btn btn-md btn-primary waves-effect waves-themed">
+                                                            <span class="fal fa-folder mr-1"></span>Hồ sơ pháp lý
+                                                        </a>
+
                                                     </td>
                                                 </tr>
                                             }
@@ -125,7 +156,6 @@
                     </div>
                 </div>
             </div>
-        </div>
     </div>
 
 }

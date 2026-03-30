@@ -201,7 +201,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.TinhTrangCongNo, "Trạng thái công nợ", htmlAttributes: new { @class = "control-label col-md-9" })
                     <div class="col-md-10">
-                        <input class="form-control" type="checkbox" name="TinhTrangCongNo" id="TinhTrangCongNo" value="@Model.TinhTrangCongNo" />
+                        <input class="form-check-label" type="checkbox" name="TinhTrangCongNo" id="TinhTrangCongNo" value="@Model.TinhTrangCongNo" />
                     </div>
                 </div>
             </div>
@@ -217,7 +217,7 @@
         </div>
         <div class="form-group" style="float:right">
             <button type="submit" class="mt-2 btn btn-success">Lưu</button>
-            <button type="button" class="mt-2 btn btn-light" data-dismiss="modal">Đóng</button>
+            <button type="button" class="mt-2 btn btn-light" data-bs-dismiss="modal">Đóng</button>
         </div>
     </div>
 }

@@ -20,6 +20,8 @@ namespace NamLao206.Models
         public string ten { get; set; }
         public string mota { get; set; }
         public Nullable<int> chucvuId { get; set; }
+        public Nullable<bool> IsActive { get; set; }
+        public string Url { get; set; }
     
         public virtual Album Album { get; set; }
         public virtual DM_Chucvus DM_Chucvus { get; set; }

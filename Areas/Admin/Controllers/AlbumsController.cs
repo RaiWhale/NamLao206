@@ -52,10 +52,11 @@ namespace NamLao206.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Create([Bind(Include = "Id,AlbumName,ParentId")] Album album)
+        public ActionResult Create([Bind(Include = "Id,AlbumName,ParentId,TypeID,IsActive")] Album album)
         {
             if (ModelState.IsValid)
             {
+                album.IsActive = true;
                 db.Albums.Add(album);
                 db.SaveChanges();              
                 
@@ -84,7 +85,7 @@ namespace NamLao206.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,AlbumName,ParentId")] Album album)
+        public ActionResult Edit([Bind(Include = "Id,AlbumName,ParentId,TypeID,IsActive")] Album album)
         {
             if (ModelState.IsValid)
             {

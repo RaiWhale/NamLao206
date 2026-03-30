@@ -186,7 +186,9 @@ namespace NamLao206.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,Phone,Email,Address,LevelId,IsActive,KhoaphongId,NghenghiepId,ChucvuId,HocviId,CreatedDate,CityId,DistrictId,WardId,Avatar,Gender,Birthday")] Employee employee, HttpPostedFileBase pic)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,Phone,Email,Address,LevelId,IsActive,KhoaphongId,NghenghiepId,ChucvuId,HocviId,CreatedDate,CityId,DistrictId,WardId,Avatar,GenderId,Birthday")] Employee employee
+            ,RegisterVM data
+            , HttpPostedFileBase pic)
         {
 			// 1. Kiểm tra xác thực người dùng
 			if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
@@ -220,7 +222,14 @@ namespace NamLao206.Areas.Admin.Controllers
 						employee.Avatar = filename;
 					}
 					db.Entry(employee).State = EntityState.Modified;
-					await db.SaveChangesAsync();
+					var acc = db.Accounts.SingleOrDefault(x => x.EmployeeId == employee.Id);
+					if (acc != null)
+					{
+						acc.LevelId = data.LevelId;
+						acc.LoginName = data.LoginName;						
+						db.Entry(acc).State = EntityState.Modified;
+                    }	
+                        await db.SaveChangesAsync();
 					ViewBag.Message = "Cập nhật thành công!";
 					return RedirectToAction("Index", new { message = ViewBag.Message });
 				}

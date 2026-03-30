@@ -38,6 +38,37 @@ namespace NamLao206.Areas.TransportFiles.Controllers
             return PartialView(khaoSat);
         }
 
+        public ActionResult Create(int? projectID)
+        {
+            // 1. Kiểm tra xác thực người dùng
+            if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
+            {
+                ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
+                return RedirectToAction("Login", "Login", new { area = "" });
+            }
+            else if (projectID == null)
+            {
+                ViewBag.Message = "Không tìm thấy dự án ID!";
+                return RedirectToAction("Index", new { message = ViewBag.Message });
+            }
+            // Lấy thông tin tài khoản
+            var acc = db.Accounts
+                .Where(x => x.Id == userId)
+                .SingleOrDefault();
+            if (acc == null)
+            {
+                ViewBag.Message = "Tài khoản không tồn tại hoặc không liên kết với nhân viên.";
+                return RedirectToAction("Login", "Login", new { area = "" });
+            }
+            var project = db.Projects.Find(projectID);
+            ViewBag.ProjectID = new SelectList(db.Projects.Where(x => x.Id == projectID), "Id", "TenDuAn");
+            ViewBag.ContractID = new SelectList(db.DocumentTypes, "Id", "DocumentTypeName");
+            ViewBag.DonViKhaoSatId = new SelectList(db.Suppliers.Where(x => x.DonviId == project.DonViId), "Id", "SupplierName");
+            ViewBag.UnitId = new SelectList(db.Units, "Id", "UnitName");
+            ViewBag.TinhTrangDuAn = new SelectList(db.StatusProjects, "Id", "StatusName");
+            ViewBag.DonVi = acc.Employee.DM_PhongBans.DM_DonVis;
+            return PartialView();
+        }
         // GET: TransportFiles/KhaoSats/Create
         public ActionResult CreateBomMin(int? projectID)
         {
@@ -125,6 +156,41 @@ namespace NamLao206.Areas.TransportFiles.Controllers
             return RedirectToAction("InformationProject", "Projects", new { projectID = khaoSat.ProjectID, message = ViewBag.Message });
         }
 
+        public async Task<ActionResult> Edit(int? id)
+        {
+            // 1. Kiểm tra xác thực người dùng
+            if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
+            {
+                ViewBag.Message = "Không thể xác định người dùng. Vui lòng đăng nhập lại.";
+                return RedirectToAction("Login", "Login", new { area = "" });
+            }
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            // Lấy thông tin tài khoản
+            var acc = db.Accounts
+                .Where(x => x.Id == userId)
+                .SingleOrDefault();
+            if (acc == null)
+            {
+                ViewBag.Message = "Tài khoản không tồn tại hoặc không liên kết với nhân viên.";
+                return RedirectToAction("Login", "Login", new { area = "" });
+            }
+            KhaoSat khaoSat = await db.KhaoSats.FindAsync(id);
+            if (khaoSat == null)
+            {
+                return HttpNotFound();
+            }
+
+            ViewBag.DonViKhaoSatId = new SelectList(db.Suppliers.Where(x => x.DonviId == khaoSat.Project.DonViId), "Id", "SupplierName", khaoSat.DonViKhaoSatId);
+            ViewBag.ProjectID = new SelectList(db.Projects.Where(x => x.Id == khaoSat.ProjectID), "Id", "TenDuAn", khaoSat.ProjectID);
+            ViewBag.ContractID = new SelectList(db.DocumentTypes, "Id", "DocumentTypeName", khaoSat.ContractID);
+            ViewBag.UnitId = new SelectList(db.Units, "Id", "UnitName", khaoSat.UnitId);
+            ViewBag.TinhTrangDuAn = new SelectList(db.StatusProjects, "Id", "StatusName", khaoSat.TinhTrangDuAn);
+            ViewBag.DonVi = acc.Employee.DM_PhongBans.DM_DonVis;
+            return PartialView(khaoSat);
+        }
         // GET: TransportFiles/KhaoSats/Edit/5
         public async Task<ActionResult> EditBomMin(int? id)
         {

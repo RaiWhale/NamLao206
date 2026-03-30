@@ -13,102 +13,133 @@
     <!-- Hiển thị thông báo (nếu có) -->
     <div id="alert-container" data-message="@Html.Raw(HttpUtility.HtmlEncode(ViewBag.Message))"></div>
     <div class="row">
-        <div class="container-fluid" style="margin-top:10px">
-            <div class="col-lg-4 col-sm-8 col-xs-12">
-                <div id="panel-2" class="panel panel-collapsed">
-                    <div class="panel-hdr">
-                        <h2 style="font-size: 150%">
-                            Tạo mới <span class="fw-300"><i><b class="color-success-900">và tìm kiếm</b></i></span>
-                        </h2>
+        <div class="col-lg-4 col-sm-8 col-xs-12">
+            <div id="panel-1" class="panel panel-icon">
+                <div class="panel-hdr">
+                    <h2 style="font-size: 150%">
+                        Tạo mới <span class="fw-300"><i><b class="color-success-900">và tìm kiếm</b></i></span>
+                    </h2>
+                    <div class="panel-toolbar">
+                        <button type="button" class="btn btn-panel" data-action="panel-collapse" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-offset="0,10" data-bs-original-title="Toggle">
+                            <svg class="sa-icon">
+                                <use class="panel-collapsed-icon" href="~/Content/smartadminNew/img/sprite.svg#minus-circle"></use>
+                                <use class="panel-expand-icon" href="~/Content/smartadminNew/img/sprite.svg#plus-circle"></use>
+                            </svg>
+                        </button>
+                        <button type="button" class="btn btn-panel" data-action="panel-fullscreen" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-offset="0,10" data-bs-original-title="Fullscreen">
+                            <svg class="sa-icon">
+                                <use href="~/Content/smartadminNew/icons/sprite.svg#stop-circle"></use>
+                            </svg>
+                        </button>
+                        <button type="button" class="btn btn-panel" data-action="panel-close" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-offset="0,10" data-bs-original-title="Close">
+                            <svg class="sa-icon">
+                                <use href="~/Content/smartadminNew/icons/sprite.svg#x-circle"></use>
+                            </svg>
+                        </button>
                     </div>
-                    <div class="panel-container show">
-                        <div class="panel-content">
-                            @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
-                            {
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <a href="@Url.Action("Create")" class="bcommand btn btn-md btn-success waves-effect waves-themed">
-                                            <span class="fal fa-download mr-1"></span>Tạo mới
-                                        </a>
-                                    </div>
-                                    <div class="d-flex position-relative ml-auto" style="max-width: 23rem;">
-                                        <i class="fas fa-search position-absolute pos-left fs-lg px-3 py-2 mt-1"></i>
-                                        <input type="text" name="search" class="search form-control bg-subtlelight pl-6" placeholder="Tìm kiếm" value="@ViewBag.search">
-                                    </div>
+                </div>
+                <div class="panel-container show">
+                    <div class="panel-content">
+                        @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <a href="@Url.Action("Create")" class="bcommand btn btn-md btn-success waves-effect waves-themed">
+                                        <span class="fal fa-download mr-1"></span>Tạo mới
+                                    </a>
                                 </div>
-                            }
-                        </div>
+                                <div class="d-flex position-relative ml-auto" style="max-width: 23rem;">
+                                    <input type="text" name="search" class="search form-control" placeholder="Tìm kiếm" value="@ViewBag.search">
+                                </div>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="container-fluid" style="margin-top:10px">
-            <div class="col-lg-12 col-sm-12 col-xs-12 ">
-                <div id="panel-1" class="panel">
-                    <div class="panel-hdr">
-                        <h2>
-                            Quản lý <span class="fw-300"><i>@ViewBag.Title</i></span>
-                        </h2>
+        <div class="col-lg-12 col-sm-12 col-xs-12 ">
+            <div id="panel-1" class="panel panel-icon">
+                <div class="panel-hdr">
+                    <h2>
+                        Quản lý <span class="fw-300"><i>@ViewBag.Title</i></span>
+                    </h2>
+                    <div class="panel-toolbar">
+                        <button type="button" class="btn btn-panel" data-action="panel-collapse" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-offset="0,10" data-bs-original-title="Toggle">
+                            <svg class="sa-icon">
+                                <use class="panel-collapsed-icon" href="~/Content/smartadminNew/img/sprite.svg#minus-circle"></use>
+                                <use class="panel-expand-icon" href="~/Content/smartadminNew/img/sprite.svg#plus-circle"></use>
+                            </svg>
+                        </button>
+                        <button type="button" class="btn btn-panel" data-action="panel-fullscreen" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-offset="0,10" data-bs-original-title="Fullscreen">
+                            <svg class="sa-icon">
+                                <use href="~/Content/smartadminNew/icons/sprite.svg#stop-circle"></use>
+                            </svg>
+                        </button>
+                        <button type="button" class="btn btn-panel" data-action="panel-close" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-offset="0,10" data-bs-original-title="Close">
+                            <svg class="sa-icon">
+                                <use href="~/Content/smartadminNew/icons/sprite.svg#x-circle"></use>
+                            </svg>
+                        </button>
                     </div>
-                    <div class="panel-container show">
-                        <div class="panel-content">
-                            <div class="form-horizontal">
-                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                <div class="table-responsive">
-                                    <table class="table table-bordered table-hover table-striped w-100 dt-basic-example" style="font-size: 15px ">
-                                        <thead class="bg-warning-200 text-center">
+                </div>
+                <div class="panel-container show">
+                    <div class="panel-content">
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover table-striped w-100 dt-basic-example" style="font-size: 15px ">
+                                    <thead class="bg-warning-200 text-center">
+                                        <tr>
+                                            <th>Tổng nhân sự</th>
+                                            <th>Đi công tác</th>
+                                            <th>Nghỉ phép </th>
+                                            <th>Đi học</th>
+                                            <th>Lý do khác</th>
+                                            <th>Ghi chú</th>
+                                            <th>Ngày</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-center">
+                                        @foreach (var item in Model)
+                                        {
                                             <tr>
-                                                <th>Tổng nhân sự</th>
-                                                <th>Đi công tác</th>
-                                                <th>Nghỉ phép </th>
-                                                <th>Đi học</th>
-                                                <th>Lý do khác</th>
-                                                <th>Ghi chú</th>
-                                                <th>Ngày</th>
-                                                <th></th>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.TongNhanSu)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.CongTac)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.NghiPhep)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.DiHoc)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.LyDoKhac)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Note)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.CreateDate)
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex align-items-center list-action">
+                                                        <a class="badge bg-success mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sửa"
+                                                           href="@Url.Action("Edit", new { id = item.Id })"><i class="ni ni-wrench fa-2x"></i></a>
+                                                        <a class="badge bg-warning mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xóa"
+                                                           href="@Url.Action("Delete", new { id = item.Id })"><i class="ni ni-trash fa-2x"></i></a>
+                                                    </div>
+                                                </td>
                                             </tr>
-                                        </thead>
-                                        <tbody  class="text-center">
-                                            @foreach (var item in Model)
-                                            {
-                                                <tr>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.TongNhanSu)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.CongTac)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.NghiPhep)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.DiHoc)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.LyDoKhac)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.Note)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.CreateDate)
-                                                    </td>
-                                                    <td>
-                                                        <div class="d-flex align-items-center list-action">
-                                                            <a class="badge bg-success mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sửa"
-                                                               href="@Url.Action("Edit", new { id = item.Id })"><i class="ni ni-wrench fa-2x"></i></a>
-                                                            <a class="badge bg-warning mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xóa"
-                                                               href="@Url.Action("Delete", new { id = item.Id })"><i class="ni ni-trash fa-2x"></i></a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            }
-                                        </tbody>
-                                    </table>
-                                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, search = ViewBag.search }))
-                                </div>
+                                        }
+                                    </tbody>
+                                </table>
+                                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, search = ViewBag.search }))
                             </div>
                         </div>
                     </div>

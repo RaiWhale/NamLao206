@@ -1,6 +1,42 @@
-﻿//Summernote JS SmartAdmin 
-function initializeSummernote(selector,config = {}) {
-    // Cấu hình mặc định cho Summernote
+﻿// ============================================================================
+// Utilities & Helpers
+// ============================================================================
+
+function escapeHtml(unsafe) {
+    return unsafe
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+function displayAlert(message) {
+    if (!message) return;
+
+    const isSuccess = message.includes("thành công");
+    const alertClass = isSuccess ? "alert-success" : "alert-danger";
+    const alertTitle = isSuccess ? "Thành công!" : "Oh snap!";
+    const alertHtml = `
+        <div class="alert ${alertClass} alert-dismissible custom-alert alert-show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true"><i class="fal fa-trash-alt"></i></span>
+            </button>
+            <strong>${alertTitle}</strong> ${message}
+        </div>`;
+
+    const $container = $("#alert-container").html(alertHtml);
+    const $alert = $container.find(".alert");
+
+    setTimeout(() => $alert.fadeOut(300, () => $alert.remove()), 5000);
+    $alert.find(".close").on("click", () => $alert.fadeOut(300, () => $alert.remove()));
+}
+
+// ============================================================================
+// Summernote
+// ============================================================================
+
+function initializeSummernote(selector = '.Note', config = {}) {
     const defaultConfig = {
         height: 200,
         tabsize: 2,
@@ -18,498 +54,204 @@ function initializeSummernote(selector,config = {}) {
             ['table', ['table']],
             ['insert', ['link', 'picture', 'video']],
             ['view', ['fullscreen', 'codeview', 'help']]
-        ]      
+        ]
     };
-    // Kết hợp cấu hình mặc định với cấu hình tùy chỉnh
-    const summernoteConfig = { ...defaultConfig, ...config };
-    $(selector).summernote(summernoteConfig);
+
+    $(selector).summernote({ ...defaultConfig, ...config });
 }
 
-// Optional: Auto-initialize if needed
-// $(document).ready(() => initializeSummernote());
-//End Summernote JS SmartAdmin 
-function displayAlert(message) {
-    if (!message) return;
-    const alertClass = message.includes("thành công") ? "alert-success" : "alert-danger";
-    const alertTitle = message.includes("thành công") ? "Thành công!" : "Oh snap!";
-    const alertHtml = `
-        <div class="alert ${alertClass} alert-dismissible custom-alert alert-show" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true"><i class="fal fa-trash-alt"></i></span>
-            </button>
-            <strong>${alertTitle}</strong> ${message}
-        </div>
-    `;
-    const $container = $("#alert-container");
-    const $alert = $(alertHtml);
-    $container.html($alert);
+// ============================================================================
+// NhapBanMu Sections
+// ============================================================================
+
+function updateNhapBanMuSections() {
+    const loaiHs = $('#LoaiHs').val() || '';
+    const loaiTK = $('#LoaiTK').val() || '';
+
+    // Ẩn tất cả bằng class Bootstrap
+    $('#loaitk-section, #mua-ngay-section, #mua-thang-section, #ban-section')
+        .addClass('d-none');
+
+    if (loaiHs === '3') {
+        $('#loaitk-section').removeClass('d-none');
+
+        if (loaiTK === '2') {
+            $('#mua-ngay-section').removeClass('d-none');
+        } else if (loaiTK === '3') {
+            $('#mua-thang-section').removeClass('d-none');
+        }
+    } else if (loaiHs === '4') {
+        $('#ban-section').removeClass('d-none');
+    }
+
+    // Force reflow để Bootstrap recalculate grid (rất hiệu quả)
     setTimeout(() => {
-        $alert.removeClass("alert-show").addClass("alert-hide").fadeOut(300, () => {
-            $alert.remove();
-        });
-    }, 5000);
-    $alert.find(".close").on("click", () => {
-        $alert.removeClass("alert-show").addClass("alert-hide").fadeOut(300, () => {
-            $alert.remove();
-        });
+        $('.row').css('display', ''); // trigger reflow
+    }, 0);
+}
+
+function attachNhapBanMuEvents() {
+    $('#LoaiHs, #LoaiTK')
+        .off('.nbm')
+        .on('change.nbm select2:select.nbm select2:unselect.nbm', updateNhapBanMuSections);
+}
+
+function cleanupNhapBanMuEvents() {
+    $('#LoaiHs, #LoaiTK').off('.nbm');
+}
+
+// ============================================================================
+// Modal & Select2
+// ============================================================================
+
+const MODAL_SELECTOR = '#myModal';
+
+function initSelect2IfNeeded() {
+    const $selects = $('.select2, .js-states, .js-select2-icons, .select2-placeholder, .js-hide-search, .js-max-length, .select2-placeholder-multiple, .js-data-example-ajax');
+
+    if (!$selects.length) return;
+
+    $selects.each(function () {
+        const $el = $(this);
+        if ($el.data('select2')) return;
+
+        let config = { placeholder: 'Chọn...', allowClear: true };
+
+        if ($el.hasClass('js-hide-search')) config.minimumResultsForSearch = Infinity;
+        if ($el.hasClass('js-max-length')) config.maximumSelectionLength = 2;
+        if ($el.hasClass('select2-placeholder-multiple')) config.placeholder = 'Chọn nhiều...';
+        if ($el.hasClass('js-select2-icons')) {
+            config.templateResult = formatIcon;
+            config.templateSelection = formatIcon;
+            config.escapeMarkup = elm => elm;
+            config.minimumResultsForSearch = Infinity;
+        }
+        // Nếu có class ajax → thêm config (hiện tại giữ comment vì chưa dùng thực tế)
+        // if ($el.hasClass('js-data-example-ajax')) { config.ajax = { ... } }
+
+        $el.select2(config);
     });
 }
-// Function to initialize and manage news ticker
-function initializeNewsTicker(config) {
-    // Initialize news ticker with provided settings
-    $('.newstape').newstape(config.newstapeSettings);
 
-    // Manage auto-scroll interval
-    let intervalTime = config.defaultInterval;
-    let autoScrollInterval;
-
-    function startSetInterval(time) {
-        clearInterval(autoScrollInterval); // Prevent duplicate intervals
-        autoScrollInterval = setInterval(() => {
-            // Assuming newstape plugin handles scrolling internally
-            // Add custom scroll logic here if needed
-        }, time);
-    }
-
-    // Hover event for canvas cover
-    $('.canvasCover').hover(
-        () => {
-            intervalTime = config.hoverInterval;
-            startSetInterval(intervalTime);
-            // $('.canvasCover').css('overflow-y', 'hidden'); // Uncomment if needed
-        },
-        () => {
-            intervalTime = config.defaultInterval;
-            startSetInterval(intervalTime);
-            // $('.canvasCover').css('overflow-y', 'scroll'); // Uncomment if needed
-        }
-    );
-
-    // Start the initial interval
-    startSetInterval(intervalTime);
+// Format cho icons (từ code cũ)
+function formatIcon(elm) {
+    if (!elm.id) return elm.text;
+    return `<i class='${$(elm.element).data('icon') || 'fal fa-question'} mr-2'></i>${elm.text}`;
 }
 
-// Configuration object for reusability
-const tickerConfig = {
-    defaultInterval: 50,
-    hoverInterval: 50000,
-    newstapeSettings: {
-        period: 50,
-        offset: 1,
-        mousewheel: true,
-        mousewheelRate: 30,
-        dragable: false
+function initModal(element, event) {
+    event.preventDefault();
+    const $trigger = $(element);
+    const $modal = $(MODAL_SELECTOR);
+
+    if (!$modal.length) return console.error('Modal not found:', MODAL_SELECTOR);
+
+    try {
+        const dialogWidth = $trigger.attr('dialogwidth') || '800';
+        const triggerText = $trigger.text().trim();
+        const href = $trigger.attr('href') || '#';
+        const cardTitle = $('.card-header').data('title') || '';
+        const headerText = $('.card-header h4').text().trim();
+
+        $modal.find('.modal-dialog, .modal-content').css('width', `${dialogWidth}px`);
+        $modal.find('.modal-title').html(`
+            <h2 class="modal-title h2">
+                ${escapeHtml(triggerText)} ${escapeHtml(headerText)}
+                <span class="fw-300"><i>${escapeHtml(cardTitle)}</i></span>
+            </h2>
+        `);
+
+        $modal.find('.modal-body').empty().load(href, (response, status) => {
+            if (status !== "success") return console.error('Load partial failed:', href);
+
+            const scripts = [
+                '../../Content/smartadmin/js/formplugins/select2/select2.bundle.js',
+                '../../Scripts/CascadingDropdownAjax.js'
+            ];
+
+            let loaded = 0;
+            const total = scripts.length;
+
+            const onAllReady = () => {
+                initSelect2IfNeeded();
+                if ($('#LoaiHs').length) {
+                    setTimeout(() => {
+                        updateNhapBanMuSections();
+                        attachNhapBanMuEvents();
+                    }, 150);
+                }
+            };
+
+            const check = () => { loaded++; if (loaded === total) onAllReady(); };
+
+            scripts.forEach(src => $.getScript(src).done(check).fail(() => { console.warn(`Script fail: ${src}`); check(); }));
+        });
+
+        new bootstrap.Modal($modal[0], { backdrop: 'static', keyboard: true }).show();
+        $modal.one('hidden.bs.modal', cleanupNhapBanMuEvents);
+    } catch (err) {
+        console.error('initModal error:', err);
     }
-};
+}
 
-// Function to initialize email management functionality SmartAdmin
-function initializeEmailManager() {
-    // Push settings with "false" save to local
-    //initApp.pushSettings("nav-function-minify layout-composed", false);
-    initApp.pushSettings("layout-composed", false); // loại bỏ thu tự động
-    // Store original title
-    var title = document.title;
+// ============================================================================
+// DataTables
+// ============================================================================
+function initializeDataTables() {
+    $('.dt-basic-example').each(function (index) {
+        const $table = $(this);
 
-    // Update unread email count and document title
-    var newEmailDisplayTab = function () {
-        var count = $('.email-list .unread').length;
-        var newTitle = title + ' (' + count + ')';
-        document.title = newTitle;
-        $(".js-unread-emails-count").text(' (' + count + ')');
-    };
-
-    // Delete email with animation and AJAX call
-    var deleteEmail = function ($elements) {
-        if (!$elements.length) {
-            alert("Please select at least one email to delete.");
+        if ($.fn.DataTable.isDataTable(this)) {
             return;
         }
-
-        // Extract threadIDs from the checkbox IDs (e.g., "msg-{id}" -> extract {id})
-        const threadIDs = $elements
-            .find('.custom-control-input:checked')
-            .map((index, element) => $(element).attr('id').replace('msg-', ''))
-            .get()
-            .map(id => parseInt(id)); // Convert to integer
-
-        // Determine the context (HopThuDen or HopThuDi)
-        const context = $('#mail-context').val(); // Get value from hidden input
-        let url = '';   
-       if (context === 'HopThuDi') {
-            url = '/TransportFiles/TransportFiles/DeleteJqueryHopThuDi';
-        } else {           
-            url = '/TransportFiles/TransportFiles/DeleteJqueryHopThuDen'; // Default to HopThuDen
-        }
-        // Send AJAX request to delete emails
-        $.ajax({
-            url: url,
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify(threadIDs),
-            success: function (response) {
-                if (response.success) {
-                    displayAlert(response.message);
-                } else {
-                    console.error("Error processing emails: " + response.message);
-                    location.reload(); // Reload on error to restore state
-                }
-            },
-            error: function (xhr, status, error) {
-                console.error("AJAX error: " + error);
-                location.reload(); // Reload on error to restore state
-            }
-        });
-        // Animate removal of selected email items
-        $elements.animate(
-            {
-                height: 'toggle',
-                opacity: 'toggle'
-            },
-            200,
-            'easeOutExpo',
-            function () {
-                $(this).remove();
-                newEmailDisplayTab();
-            }
-        );
-      
-
-        // Remove any tooltips to avoid Bootstrap bug
-        $('.tooltip').tooltip('dispose');
-
-        // Uncheck master select all if checked
-        if ($("#js-msg-select-all").is(":checked")) {
-            $("#js-msg-select-all").prop('checked', false).prop('indeterminate', false);
-        }
-        return this;
-    };
-
-    // Select all checkbox functionality with event delegation
-    $(document).on("change", "#js-msg-select-all", function (e) {
-        const isChecked = this.checked;
-        $('.email-list .custom-control-input')
-            .prop("checked", isChecked)
-            .closest("li")
-            .toggleClass("state-selected", isChecked);
-        $(this).prop('indeterminate', false); // Reset indeterminate state
-    });
-
-    // Individual checkbox change handling with event delegation
-    $(document).on("change", '.email-list .custom-control-input', function () {
-        const $checkboxes = $('.email-list .custom-control-input');
-        const checkedCount = $checkboxes.filter(':checked').length;
-        const totalCount = $checkboxes.length;
-
-        if (checkedCount === 0) {
-            $("#js-msg-select-all").prop('checked', false).prop('indeterminate', false);
-        } else if (checkedCount === totalCount) {
-            $("#js-msg-select-all").prop('checked', true).prop('indeterminate', false);
-        } else {
-            $("#js-msg-select-all").prop('checked', false).prop('indeterminate', true);
-        }
-
-        $(this).closest("li").toggleClass("state-selected", this.checked);
-    });
-
-    // Delete button triggers with event delegation
-    $(document).on('click', '.js-delete-email', function () {
-        deleteEmail($(this).closest("li"));
-    });
-
-    $("#js-delete-selected").on('click', function () {
-        deleteEmail($('.email-list .custom-control-input:checked').closest("li"));
-    });
-
-    // Show unread email count (once)
-    newEmailDisplayTab();
-}
-//Modal and select2 SmartAdmin 
-function initializeModalAndAlert() {
-    // Constants
-    const MODAL_SELECTOR = '#myModal';
-    const ALERT_CONTAINER = '#alert-container';
-    const ALERT_TIMEOUT = 5000;
-    const SELECT2_CONFIGS = {
-        placeholderMultiple: { placeholder: 'Select State' },
-        hideSearch: { minimumResultsForSearch: Infinity },
-        maxLength: { maximumSelectionLength: 2, placeholder: 'Select maximum 2 items' },
-        placeholder: { placeholder: 'Select a state', allowClear: true },
-        icons: {
-            minimumResultsForSearch: Infinity,
-            templateResult: formatIcon,
-            templateSelection: formatIcon,
-            escapeMarkup: elm => elm
-        },
-        ajax: {
-            ajax: {
-                url: 'https://api.github.com/search/repositories',
-                dataType: 'json',
-                delay: 250,
-                data: params => ({
-                    q: params.term,
-                    page: params.page
-                }),
-                processResults: (data, params) => {
-                    params.page = params.page || 1;
-                    return {
-                        results: data.items,
-                        pagination: { more: (params.page * 30) < data.total_count }
-                    };
-                },
-                cache: true
-            },
-            placeholder: 'Search for a repository',
-            escapeMarkup: markup => markup,
-            minimumInputLength: 1,
-            templateResult: formatRepo,
-            templateSelection: formatRepoSelection
-        }
-    };
-
-    // Format icon for select2
-    function formatIcon(elm) {
-        if (!elm.id) return elm.text;
-        return `<i class='${$(elm.element).data('icon')} mr-2'></i>${elm.text}`;
-    }
-
-    // Format repository for select2
-    function formatRepo(repo) {
-        if (repo.loading) return repo.text;
-        return `
-            <div class='select2-result-repository clearfix d-flex'>
-                <div class='select2-result-repository__avatar mr-2'>
-                    <img src='${repo.owner.avatar_url}' class='width-2 height-2 mt-1 rounded' />
-                </div>
-                <div class='select2-result-repository__meta'>
-                    <div class='select2-result-repository__title fs-lg fw-500'>${repo.full_name}</div>
-                    ${repo.description ? `<div class='select2-result-repository__description fs-xs opacity-80 mb-1'>${repo.description}</div>` : ''}
-                    <div class='select2-result-repository__statistics d-flex fs-sm'>
-                        <div class='select2-result-repository__forks mr-2'><i class='fal fa-lightbulb'></i> ${repo.forks_count} Forks</div>
-                        <div class='select2-result-repository__stargazers mr-2'><i class='fal fa-star'></i> ${repo.stargazers_count} Stars</div>
-                        <div class='select2-result-repository__watchers mr-2'><i class='fal fa-eye'></i> ${repo.watchers_count} Watchers</div>
-                    </div>
-                </div>
-            </div>`;
-    }
-
-    // Format repository selection
-    function formatRepoSelection(repo) {
-        return repo.full_name || repo.text;
-    }
-
-    // Hàm mã hóa HTML để tránh XSS
-    function escapeHtml(unsafe) {
-        return unsafe
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;")
-            .replace(/'/g, "&#039;");
-    }
-    // Initialize modal
-    function initModal(element, event) {
-        event.preventDefault();
-        const $this = $(element);
-        const $modal = $(MODAL_SELECTOR);
-        // Truyền ViewBag.Title vào JavaScript       
-        try {
-            const width = $this.attr('dialogwidth');
-            const text = $this.text();
-            const href = $this.attr('href');
-            const modalTitleText = $('.card-header').data('title') || ''; // Lấy ViewBag.Title từ data-title
-            $modal.find('.modal-dialog, .modal-content').width(`${width}px`);
-            $modal.find('.modal-title').html(`
-                        <h2 class="modal-title h2">
-                            ${escapeHtml(text)} ${escapeHtml($('.card-header h4').text())} <span class="fw-300"><i>${escapeHtml(modalTitleText)}</i></span>
-                        </h2>
-                    `);
-            $modal.find('.modal-body').empty().load(href, () => {
-                $.getScript('../../Content/smartadmin/js/formplugins/select2/select2.bundle.js')
-                    .done(() => initializeSelect2())
-                    .fail(() => console.error('Failed to load app.js'));
-                $.getScript('../../Scripts/CascadingDropdownAjax.js');
-
-            });
-
-            $modal.modal({ backdrop: 'static', keyboard: true });
-        } catch (error) {
-            console.error('Modal initialization failed:', error);
-        }
-    }
-
-    // Initialize Select2 components 
-    function initializeSelect2() {
-        try {
-            $('.select2').select2();
-            $('.select2-placeholder-multiple').select2(SELECT2_CONFIGS.placeholderMultiple);
-            $('.js-hide-search').select2(SELECT2_CONFIGS.hideSearch);
-            $('.js-max-length').select2(SELECT2_CONFIGS.maxLength);
-            $('.select2-placeholder').select2(SELECT2_CONFIGS.placeholder);
-            $('.js-select2-icons').select2(SELECT2_CONFIGS.icons);
-            $('.js-data-example-ajax').select2(SELECT2_CONFIGS.ajax);
-        } catch (error) {
-            console.error('Select2 initialization failed:', error);
-        }
-    }
-
-    // Show alert
-    function showAlert() {
-        const message = window.alertMessage || $(ALERT_CONTAINER).data('message');
-        if (!message) return;
-
-        const isSuccess = message.includes('thành công');
-        const alertClass = isSuccess ? 'alert-success' : 'alert-danger';
-        const alertTitle = isSuccess ? 'Thành công!' : 'Oh snap!';
-
-        const alertHtml = `
-            <div class="alert ${alertClass} alert-dismissible custom-alert alert-show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true"><i class="fal fa-trash-alt"></i></span>
-                </button>
-                <strong>${alertTitle}</strong> ${message}
-            </div>`;
-
-        const $container = $(ALERT_CONTAINER).html(alertHtml);
-
-        // Auto-hide alert
-        setTimeout(() => {
-            const $alert = $container.find('.alert');
-            if ($alert.length) {
-                $alert.removeClass('alert-show')
-                    .addClass('alert-hide')
-                    .fadeOut(300, () => $alert.remove());
-            }
-        }, ALERT_TIMEOUT);
-
-        // Manual close handler
-        $container.find('.close').on('click', () => {
-            const $alert = $container.find('.alert');
-            $alert.removeClass('alert-show')
-                .addClass('alert-hide')
-                .fadeOut(300, () => $alert.remove());
-        });
-    }
-
-    // Event bindings
-    $('.bcommand').on('click', event => initModal(event.currentTarget, event));
-
-    // Initialize alert
-    showAlert();
-}
-// Function init để xử lý update sections và attach events
-function initUpdateSections() {
-    // Hàm để cập nhật hiển thị dựa trên lựa chọn
-    function updateSections() {
-        var loaiHs = $('#LoaiHs').val();
-        var loaiTK = $('#LoaiTK').val();
-
-        // Ẩn tất cả các phần đặc thù
-        $('#loaitk-section').hide();
-        $('#mua-ngay-section').hide();
-        $('#mua-thang-section').hide();
-        $('#ban-section').hide();
-
-        if (loaiHs == '3') { // Mua - Id=3
-            $('#loaitk-section').show();
-
-            if (loaiTK == '2') { // Ngày - Id=2
-                $('#mua-ngay-section').show();
-            } else if (loaiTK == '3') { // Tháng - Id=3
-                $('#mua-thang-section').show();
-            }
-        } else if (loaiHs == '4') { // Bán - Id=4
-            $('#ban-section').show();
-        }
-    }
-
-    // Attach events chỉ khi modal được shown (để tránh attach nhiều lần)
-    $('#myModal').on('shown.bs.modal', function () {
-        // Kiểm tra xem view hiện tại có chứa các element cần thiết không (để chỉ apply cho view NhapBanMu)
-        if ($('#LoaiHs').length > 0) {
-            // Lắng nghe sự kiện thay đổi trên LoaiHs
-            $('#LoaiHs').off('change.updateSections').on('change.updateSections', function () {
-                updateSections();
-            });
-
-            // Lắng nghe sự kiện thay đổi trên LoaiTK
-            $('#LoaiTK').off('change.updateSections').on('change.updateSections', function () {
-                updateSections();
-            });
-
-            // Gọi lần đầu để thiết lập dựa trên giá trị mặc định
-            updateSections();
-        }
-    });
-
-    // Optional: Clean up events khi modal ẩn, để tránh leak nếu modal dùng nhiều lần
-    $('#myModal').on('hidden.bs.modal', function () {
-        if ($('#LoaiHs').length > 0) {
-            $('#LoaiHs').off('change.updateSections');
-            $('#LoaiTK').off('change.updateSections');
-        }
-    });
-}
-
-
-// Hàm khởi tạo DataTables
-function initializeDataTables() {
-    // Kiểm tra xem phần tử .dt-basic-example có tồn tại không
-    if ($('.dt-basic-example').length) {
-        $('.dt-basic-example').dataTable({
+        $table.DataTable({
             responsive: true,
+            destroy: true,
+            retrieve: true,
             dom: "<'row mb-3'<'col-sm-12 col-md-6 d-flex align-items-center justify-content-start'f><'col-sm-12 col-md-6 d-flex align-items-center justify-content-end'B>>" +
                 "<'row'<'col-sm-12'tr>>" +
                 "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
             buttons: [
-                {
-                    extend: 'csvHtml5',
-                    text: 'CSV',
-                    titleAttr: 'Generate CSV',
-                    className: 'btn-outline-default'
-                },
-                {
-                    extend: 'copyHtml5',
-                    text: 'Copy',
-                    titleAttr: 'Copy to clipboard',
-                    className: 'btn-outline-default'
-                },
-                {
-                    extend: 'print',
-                    text: '<i class="fal fa-print"></i>',
-                    titleAttr: 'Print Table',
-                    className: 'btn-outline-default'
-                }
+                { extend: 'csvHtml5', text: 'CSV', className: 'btn-outline-default' },
+                { extend: 'copyHtml5', text: 'Copy', className: 'btn-outline-default' },
+                { extend: 'print', text: '<i class="fal fa-print"></i>', className: 'btn-outline-default' }
             ],
-            responsive: true,    // Bảng co giãn theo kích thước màn hình
-            fixedHeader: true,   // Tiêu đề cố định khi cuộn
-            colReorder: true     // Cho phép kéo thả cột
+            fixedHeader: true,
+            colReorder: true,
+            pageLength: 25,
+
+            // ←←← THÊM PHẦN NÀY ĐỂ SỬA LỖI initApp
+            initComplete: function (settings, json) {
+              
+                // Nếu bạn cần chạy thêm code sau khi table init xong thì viết ở đây
+            }
         });
-    } 
+    });
 }
+// ============================================================================
+// Document Ready
+// ============================================================================
 
 jQuery(function ($) {
-    // Start initial interval
-    initializeModalAndAlert();
+    // Bind modal trigger
+    $('.bcommand').on('click', function (e) {
+        initModal(this, e);
+    });
+
     initializeDataTables();
-    initUpdateSections();// xử lý nút màn hình create và edit NhapBanMu
-    //initializeEmailManager();
-    //initializeNewsTicker(tickerConfig);
     initializeSummernote('.Note');
+
     const message = window.alertMessage || $("#alert-container").data("message");
     if (message) displayAlert(message);
 
     $('.is-invalid-cus').each(function () {
-        if ($(this).val() == '') {
-            $(this).addClass('is-invalid');
-        }
-        $(this).on('input', function () {
-            if ($(this).val() != '') {
-                $(this).removeClass('is-invalid');
-            } else {
-                $(this).addClass('is-invalid');
-            }
-        });
+        const $el = $(this);
+        const check = () => $el.toggleClass('is-invalid', !$el.val().trim());
+        check();
+        $el.on('input', check);
     });
 
-
+    // Uncomment nếu cần
+    // initializeEmailManager();
+    // initializeNewsTicker(tickerConfig);
 });
