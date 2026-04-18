@@ -36,6 +36,14 @@ namespace NamLao206.Models
         public Nullable<int> UnitId { get; set; }
         public Nullable<decimal> CongNo { get; set; }
         public string SoPLHD { get; set; }
+        public Nullable<decimal> GiaTriThanhToan { get; set; }
+        public Nullable<decimal> GiaTriQuyetToan { get; set; }
+        public Nullable<decimal> GiaTriThamDinh { get; set; }
+        public Nullable<decimal> GiaTriThamDinhPheDuyet { get; set; }
+        public Nullable<decimal> GiaTriDuToan { get; set; }
+        public Nullable<decimal> GiaTriDuToanPheDuyet { get; set; }
+        public Nullable<decimal> ChiPhiGiamSat { get; set; }
+        public Nullable<decimal> GiaTriNghiemThu { get; set; }
     
         public virtual Account Account { get; set; }
         public virtual Account Account1 { get; set; }

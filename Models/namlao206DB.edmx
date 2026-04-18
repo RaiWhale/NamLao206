@@ -354,6 +354,13 @@
           <Property Name="UnitId" Type="int" />
           <Property Name="CongNo" Type="decimal" Precision="18" Scale="2" />
           <Property Name="SoPLHD" Type="nvarchar" MaxLength="2000" />
+          <Property Name="GiaTriThanhToan" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="GiaTriQuyetToan" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="GiaTriThamDinh" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="GiaTriThamDinhPheDuyet" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="GiaTriDuToan" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="GiaTriDuToanPheDuyet" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ChiPhiGiamSat" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="GroupPermissions">
           <Key>
@@ -440,6 +447,8 @@
           <Property Name="Note" Type="nvarchar(max)" />
           <Property Name="SoPLHD" Type="nvarchar" MaxLength="2000" />
           <Property Name="CongNo" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="GiaTriThanhToan" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="GiaTriQuyetToan" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="LevelPermissions">
           <Key>
@@ -557,6 +566,8 @@
           <Property Name="Note" Type="nvarchar(max)" />
           <Property Name="UnitId" Type="int" />
           <Property Name="CongNo" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="GiaTriThanhToan" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="GiaTriQuyetToan" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="NhapBanMu">
           <Key>
@@ -771,6 +782,14 @@
           <Property Name="UnitId" Type="int" />
           <Property Name="CongNo" Type="decimal" Precision="18" Scale="2" />
           <Property Name="SoPLHD" Type="nvarchar" MaxLength="2000" />
+          <Property Name="GiaTriThanhToan" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="GiaTriQuyetToan" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="GiaTriThamDinh" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="GiaTriThamDinhPheDuyet" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="GiaTriDuToan" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="GiaTriDuToanPheDuyet" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ChiPhiGiamSat" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="GiaTriNghiemThu" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="ThietBi_ChiTiet">
           <Key>
@@ -4285,6 +4304,13 @@
           <NavigationProperty Name="StatusProject" Relationship="namlao206_websiteModel.FK__GiamSatTh__TinhT__2116E6DF" FromRole="GiamSatThiCong" ToRole="StatusProject" />
           <NavigationProperty Name="Unit" Relationship="namlao206_websiteModel.FK_GiamSatThiCongs_Units" FromRole="GiamSatThiCong" ToRole="Unit" />
           <NavigationProperty Name="Project" Relationship="namlao206_websiteModel.FK__GiamSatTh__Proje__2022C2A6" FromRole="GiamSatThiCong" ToRole="Project" />
+          <Property Name="GiaTriThanhToan" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="GiaTriQuyetToan" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="GiaTriThamDinh" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="GiaTriThamDinhPheDuyet" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="GiaTriDuToan" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="GiaTriDuToanPheDuyet" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ChiPhiGiamSat" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="GroupPermission">
           <Key>
@@ -4393,6 +4419,8 @@
           <NavigationProperty Name="StatusProject" Relationship="namlao206_websiteModel.FK__KhaoSats__TinhTr__2AA05119" FromRole="KhaoSat" ToRole="StatusProject" />
           <NavigationProperty Name="Unit" Relationship="namlao206_websiteModel.FK__KhaoSats__UnitId__2B947552" FromRole="KhaoSat" ToRole="Unit" />
           <NavigationProperty Name="Project" Relationship="namlao206_websiteModel.FK__KhaoSats__Projec__29AC2CE0" FromRole="KhaoSat" ToRole="Project" />
+          <Property Name="GiaTriThanhToan" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="GiaTriQuyetToan" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="LevelPermission">
           <Key>
@@ -4529,6 +4557,8 @@
           <NavigationProperty Name="Phase" Relationship="namlao206_websiteModel.FK_NghiemThus_Phases" FromRole="NghiemThu" ToRole="Phase" />
           <NavigationProperty Name="Unit" Relationship="namlao206_websiteModel.FK_NghiemThus_Units" FromRole="NghiemThu" ToRole="Unit" />
           <NavigationProperty Name="Project" Relationship="namlao206_websiteModel.FK__NghiemThu__Proje__2E70E1FD" FromRole="NghiemThu" ToRole="Project" />
+          <Property Name="GiaTriThanhToan" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="GiaTriQuyetToan" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="Permission">
           <Key>
@@ -4691,6 +4721,14 @@
           <NavigationProperty Name="Supplier" Relationship="namlao206_websiteModel.FK__ThiCongs__DonVi__44952D46" FromRole="ThiCong" ToRole="Supplier" />
           <NavigationProperty Name="Unit" Relationship="namlao206_websiteModel.FK_ThiCongs_Units" FromRole="ThiCong" ToRole="Unit" />
           <NavigationProperty Name="Project" Relationship="namlao206_websiteModel.FK__ThiCongs__Projec__76EBA2E9" FromRole="ThiCong" ToRole="Project" />
+          <Property Name="GiaTriThanhToan" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="GiaTriQuyetToan" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="GiaTriThamDinh" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="GiaTriThamDinhPheDuyet" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="GiaTriDuToan" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="GiaTriDuToanPheDuyet" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ChiPhiGiamSat" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="GiaTriNghiemThu" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="Topic">
           <Key>
@@ -7086,6 +7124,13 @@
           <EntitySetMapping Name="GiamSatThiCongs">
             <EntityTypeMapping TypeName="namlao206_websiteModel.GiamSatThiCong">
               <MappingFragment StoreEntitySet="GiamSatThiCongs">
+                <ScalarProperty Name="ChiPhiGiamSat" ColumnName="ChiPhiGiamSat" />
+                <ScalarProperty Name="GiaTriDuToanPheDuyet" ColumnName="GiaTriDuToanPheDuyet" />
+                <ScalarProperty Name="GiaTriDuToan" ColumnName="GiaTriDuToan" />
+                <ScalarProperty Name="GiaTriThamDinhPheDuyet" ColumnName="GiaTriThamDinhPheDuyet" />
+                <ScalarProperty Name="GiaTriThamDinh" ColumnName="GiaTriThamDinh" />
+                <ScalarProperty Name="GiaTriQuyetToan" ColumnName="GiaTriQuyetToan" />
+                <ScalarProperty Name="GiaTriThanhToan" ColumnName="GiaTriThanhToan" />
                 <ScalarProperty Name="SoPLHD" ColumnName="SoPLHD" />
                 <ScalarProperty Name="CongNo" ColumnName="CongNo" />
                 <ScalarProperty Name="UnitId" ColumnName="UnitId" />
@@ -7168,6 +7213,8 @@
           <EntitySetMapping Name="KhaoSats">
             <EntityTypeMapping TypeName="namlao206_websiteModel.KhaoSat">
               <MappingFragment StoreEntitySet="KhaoSats">
+                <ScalarProperty Name="GiaTriQuyetToan" ColumnName="GiaTriQuyetToan" />
+                <ScalarProperty Name="GiaTriThanhToan" ColumnName="GiaTriThanhToan" />
                 <ScalarProperty Name="CongNo" ColumnName="CongNo" />
                 <ScalarProperty Name="SoPLHD" ColumnName="SoPLHD" />
                 <ScalarProperty Name="Note" ColumnName="Note" />
@@ -7307,6 +7354,8 @@
           <EntitySetMapping Name="NghiemThus">
             <EntityTypeMapping TypeName="namlao206_websiteModel.NghiemThu">
               <MappingFragment StoreEntitySet="NghiemThus">
+                <ScalarProperty Name="GiaTriQuyetToan" ColumnName="GiaTriQuyetToan" />
+                <ScalarProperty Name="GiaTriThanhToan" ColumnName="GiaTriThanhToan" />
                 <ScalarProperty Name="CongNo" ColumnName="CongNo" />
                 <ScalarProperty Name="UnitId" ColumnName="UnitId" />
                 <ScalarProperty Name="Note" ColumnName="Note" />
@@ -7434,6 +7483,14 @@
           <EntitySetMapping Name="ThiCongs">
             <EntityTypeMapping TypeName="namlao206_websiteModel.ThiCong">
               <MappingFragment StoreEntitySet="ThiCongs">
+                <ScalarProperty Name="GiaTriNghiemThu" ColumnName="GiaTriNghiemThu" />
+                <ScalarProperty Name="ChiPhiGiamSat" ColumnName="ChiPhiGiamSat" />
+                <ScalarProperty Name="GiaTriDuToanPheDuyet" ColumnName="GiaTriDuToanPheDuyet" />
+                <ScalarProperty Name="GiaTriDuToan" ColumnName="GiaTriDuToan" />
+                <ScalarProperty Name="GiaTriThamDinhPheDuyet" ColumnName="GiaTriThamDinhPheDuyet" />
+                <ScalarProperty Name="GiaTriThamDinh" ColumnName="GiaTriThamDinh" />
+                <ScalarProperty Name="GiaTriQuyetToan" ColumnName="GiaTriQuyetToan" />
+                <ScalarProperty Name="GiaTriThanhToan" ColumnName="GiaTriThanhToan" />
                 <ScalarProperty Name="SoPLHD" ColumnName="SoPLHD" />
                 <ScalarProperty Name="CongNo" ColumnName="CongNo" />
                 <ScalarProperty Name="UnitId" ColumnName="UnitId" />

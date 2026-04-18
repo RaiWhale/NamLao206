@@ -44,6 +44,8 @@ namespace NamLao206.Models
         public string Note { get; set; }
         public string SoPLHD { get; set; }
         public Nullable<decimal> CongNo { get; set; }
+        public Nullable<decimal> GiaTriThanhToan { get; set; }
+        public Nullable<decimal> GiaTriQuyetToan { get; set; }
     
         public virtual Account Account { get; set; }
         public virtual Account Account1 { get; set; }

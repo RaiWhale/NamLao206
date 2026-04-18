@@ -592,7 +592,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach (var item in Model.GiamSatThiCongs)
+                                                @foreach (var item in Model.ThiCongs)
                                                 {
                                                     if (item.IsActive == true)
                                                     {
@@ -859,7 +859,7 @@
                                                         <td>
                                                             <div class="d-flex align-items-center list-action">
                                                                 <a class="badge bg-white mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Tải"
-                                                                   href="../../Uploads/@item.ProjectID/@item.AddBangId/@item.Url"><i class="fal fa-cloud-download fa-2x"></i></a>
+                                                                   href="../../Uploads/HoSoPhapLy/Projects/@item.ProjectID/@item.AddBangId/@item.Url"><i class="fal fa-cloud-download fa-2x"></i></a>
                                                                 <a class="btn btn-info waves-effect waves-themed bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sửa"
                                                                    href="@Url.Action("Edit", "HoSoPhapLies", new { id = item.Id, projectID = Model.Id })"><i class="sa sa-wrench"></i></a>
                                                                 <a class="btn btn-danger  bg-warning mr-2 bcommand" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xóa"

@@ -64,7 +64,70 @@
             </div>
             <div class="col-lg-6 col-sm-9 col-xs-12">
                 <div class="form-group">
-                    @Html.LabelFor(model => model.LandVolumeContract, "Giá trị mặt đất theo hợp đồng", htmlAttributes: new { @class = "control-label col-md-10" })
+                    @Html.LabelFor(model => model.GiaTriThamDinh, "Giá trị thẩm định", htmlAttributes: new { @class = "control-label col-md-12" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.GiaTriThamDinh, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "0", @value = "0" } })
+                        @Html.ValidationMessageFor(model => model.GiaTriThamDinh, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-9 col-xs-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.GiaTriThamDinhPheDuyet, "Giá trị thẩm định phê duyệt", htmlAttributes: new { @class = "control-label col-md-12" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.GiaTriThamDinhPheDuyet, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "0", @value = "0" } })
+                        @Html.ValidationMessageFor(model => model.GiaTriThamDinhPheDuyet, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-9 col-xs-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.GiaTriDuToan, "Giá trị dự toán", htmlAttributes: new { @class = "control-label col-md-12" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.GiaTriDuToan, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "0", @value = "0" } })
+                        @Html.ValidationMessageFor(model => model.GiaTriDuToan, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-9 col-xs-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.GiaTriDuToanPheDuyet, "Giá trị dự toán phê duyệt", htmlAttributes: new { @class = "control-label col-md-12" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.GiaTriDuToanPheDuyet, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.GiaTriDuToanPheDuyet, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-9 col-xs-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.GiaTriThanhToan, "Giá trị thanh toán", htmlAttributes: new { @class = "control-label col-md-12" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.GiaTriThanhToan, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "0", @value = "0" } })
+                        @Html.ValidationMessageFor(model => model.GiaTriThanhToan, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-9 col-xs-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.GiaTriQuyetToan, "Giá trị quyết toán", htmlAttributes: new { @class = "control-label col-md-9" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.GiaTriQuyetToan, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.GiaTriQuyetToan, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-9 col-xs-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.GiaTriNghiemThu, "Giá trị nghiệm thu", htmlAttributes: new { @class = "control-label col-md-9" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.GiaTriNghiemThu, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.GiaTriNghiemThu, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-9 col-xs-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LandVolumeContract, "Khối lượng trên cạn", htmlAttributes: new { @class = "control-label col-md-10" })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.LandVolumeContract, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "0", @value = "0" } })
                         @Html.ValidationMessageFor(model => model.LandVolumeContract, "", new { @class = "text-danger" })
@@ -73,14 +136,14 @@
             </div>
             <div class="col-lg-6 col-sm-9 col-xs-12">
                 <div class="form-group">
-                    @Html.LabelFor(model => model.WaterVolumeContract, "Giá trị dưới nước theo hợp đồng", htmlAttributes: new { @class = "control-label col-md-10" })
+                    @Html.LabelFor(model => model.WaterVolumeContract, "Khối lượng dưới nước", htmlAttributes: new { @class = "control-label col-md-10" })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.WaterVolumeContract, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "0", @value = "0" } })
                         @Html.ValidationMessageFor(model => model.WaterVolumeContract, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 col-sm-9 col-xs-12">
+            @*<div class="col-lg-6 col-sm-9 col-xs-12">
                 <div class="form-group">
                     @Html.LabelFor(model => model.LandVolumeNghiemThu, "Giá trị mặt đất nghiệm thu", htmlAttributes: new { @class = "control-label col-md-6" })
                     <div class="col-md-10">
@@ -97,7 +160,7 @@
                         @Html.ValidationMessageFor(model => model.WaterVolumeNghiemThu, "", new { @class = "text-danger" })
                     </div>
                 </div>
-            </div>
+            </div>*@
             <div class="col-lg-6 col-sm-9 col-xs-12">
                 <div class="form-group">
                     @Html.LabelFor(model => model.UnitId, "Đơn vị", htmlAttributes: new { @class = "control-label col-md-6" })
@@ -119,7 +182,7 @@
             </div>
             <div class="col-lg-6 col-sm-9 col-xs-12">
                 <div class="form-group">
-                    @Html.LabelFor(model => model.GiamSat, "Giám sát", htmlAttributes: new { @class = "control-label col-md-6" })
+                    @Html.LabelFor(model => model.GiamSat, "Chỉ huy thi công", htmlAttributes: new { @class = "control-label col-md-6" })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.GiamSat, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.GiamSat, "", new { @class = "text-danger" })

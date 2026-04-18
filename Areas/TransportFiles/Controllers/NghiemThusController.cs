@@ -101,7 +101,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "Id,ProjectID,PhaseId" +
             ",PhaseValue,PhaseLand,PhaseWater,DoanhThu,DaThanhToan,NoConLai" +
-            ",IsActive,CreateUserId,CreateDate,ModifiedDate,ModifiedUserId,Note,UnitId")] NghiemThu nghiemThu)
+            ",IsActive,CreateUserId,CreateDate,ModifiedDate,ModifiedUserId,Note,UnitId,GiaTriThanhToan,GiaTriQuyetToan")] NghiemThu nghiemThu)
         {
 			if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
 			{
@@ -214,7 +214,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "Id,ProjectID,PhaseId,PhaseValue" +
             ",PhaseLand,PhaseWater,DoanhThu,DaThanhToan,NoConLai,IsActive,CreateUserId,CreateDate" +
-            ",ModifiedDate,ModifiedUserId,Note,UnitId")] NghiemThu nghiemThu)
+            ",ModifiedDate,ModifiedUserId,Note,UnitId,GiaTriThanhToan,GiaTriQuyetToan")] NghiemThu nghiemThu)
         {
 			if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
 			{

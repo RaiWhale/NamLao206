@@ -12,5 +12,27 @@ namespace NamLao206.Models.ViewModels
         public string FileName { get; set; }
         public string FullPath { get; set; }
         public string RelativePath { get; set; }
+
+        // Helper methods
+        public static UploadResult Failed(string message)
+        {
+            return new UploadResult
+            {
+                Success = false,
+                Message = message
+            };
+        }
+
+        public static UploadResult SuccessResult(string fileName, string fullPath, string relativePath)
+        {
+            return new UploadResult
+            {
+                Success = true,
+                FileName = fileName,
+                FullPath = fullPath,
+                RelativePath = relativePath,
+                Message = "Upload file thành công"
+            };
+        }
     }
 }

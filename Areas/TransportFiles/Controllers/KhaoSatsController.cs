@@ -123,7 +123,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
             ",GiaTriHopDong,GiaTriPLHopDong,LandArea,WaterArea,LandAreaKhaoSat,WaterAreaKhaoSat" +
             ",UnitId,GiaTriThamDinh,GiaTriDuToan,GiaTriKhaoSat,GiaTriDuToanPheDuyet" +
             ",GiaTriKhaoSatPheDuyet,GiaTriThamDinhPheDuyet,KetQuaKhaoSat,ChiPhiGiamSat" +
-            ",NguoiGiamSat,TinhTrangDuAn,TinhTrangCongNo,IsActive,Note")] KhaoSat khaoSat)
+            ",NguoiGiamSat,TinhTrangDuAn,TinhTrangCongNo,IsActive,Note,GiaTriThanhToan,GiaTriQuyetToan")] KhaoSat khaoSat)
         {
 
             // 1. Kiểm tra xác thực người dùng
@@ -250,7 +250,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
         public async Task<ActionResult> Edit([Bind(Include = "Id,DonViKhaoSatId,ProjectID,ContractID,GiaTriHopDong,GiaTriPLHopDong,LandArea,WaterArea,LandAreaKhaoSat,WaterAreaKhaoSat,UnitId,GiaTriThamDinh,GiaTriDuToan" +
             ",GiaTriKhaoSat,GiaTriDuToanPheDuyet,GiaTriKhaoSatPheDuyet" +
             ",GiaTriThamDinhPheDuyet,KetQuaKhaoSat,ChiPhiGiamSat" +
-            ",NguoiGiamSat,TinhTrangDuAn,TinhTrangCongNo,IsActive,Note,CreateUserId,CreateDate")] KhaoSat khaoSat)
+            ",NguoiGiamSat,TinhTrangDuAn,TinhTrangCongNo,IsActive,Note,CreateUserId,CreateDate,GiaTriThanhToan,GiaTriQuyetToan")] KhaoSat khaoSat)
         {
             // 1. Kiểm tra xác thực người dùng
             if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))

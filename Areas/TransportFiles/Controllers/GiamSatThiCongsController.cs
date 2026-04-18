@@ -125,7 +125,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
         public async Task<ActionResult> Create([Bind(Include = "Id,DonViGiamSatId,ProjectID" +
             ",ContractID,GiaTriHopDong,GiaTriPLHopDong,LandVolumeContract,WaterVolumeContract" +
             ",LandVolumeNghiemThu,WaterVolumeNghiemThu,GiamSat,TinhTrangDuAn,TinhTrangCongNo,IsActive" +
-            ",CreateUserId,CreateDate,Note,UnitId")] GiamSatThiCong giamSatThiCong)
+            ",CreateUserId,CreateDate,Note,UnitId,GiaTriThamDinh,GiaTriDuToan,GiaTriThamDinhPheDuyet,GiaTriDuToanPheDuyet,ChiPhiGiamSat,GiaTriThanhToan,GiaTriQuyetToan")] GiamSatThiCong giamSatThiCong)
         {
             // 1. Kiểm tra xác thực người dùng
             if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))
@@ -249,7 +249,7 @@ namespace NamLao206.Areas.TransportFiles.Controllers
         public async Task<ActionResult> Edit([Bind(Include = "Id,DonViGiamSatId,ProjectID,ContractID" +
             ",GiaTriHopDong,GiaTriPLHopDong,LandVolumeContract,WaterVolumeContract,LandVolumeNghiemThu" +
             ",WaterVolumeNghiemThu,GiamSat,TinhTrangDuAn,TinhTrangCongNo,IsActive,CreateUserId,CreateDate" +
-            ",ModifiedDate,ModifiedUserId,Note,UnitId")] GiamSatThiCong giamSatThiCong)
+            ",ModifiedDate,ModifiedUserId,Note,UnitId,GiaTriThamDinh,GiaTriDuToan,GiaTriThamDinhPheDuyet,GiaTriDuToanPheDuyet,ChiPhiGiamSat,GiaTriThanhToan,GiaTriQuyetToan")] GiamSatThiCong giamSatThiCong)
         {
             // 1. Kiểm tra xác thực người dùng
             if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userId))

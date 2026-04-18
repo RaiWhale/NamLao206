@@ -2428,12 +2428,6 @@
     <Content Include="Content\chart\Libraries\css\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\chart\Libraries\css\fonts\fontawesome-webfont.woff2" />
     <Content Include="Content\chart\Libraries\css\fonts\FontAwesome.otf" />
-    <Content Include="Areas\TransportFiles\Views\KhaoSats\CreateCumBan.cshtml" />
-    <Content Include="Areas\TransportFiles\Views\KhaoSats\EditCumBan.cshtml" />
-    <Content Include="Areas\TransportFiles\Views\GiamSatThiCongs\CreateCumBan.cshtml" />
-    <Content Include="Areas\TransportFiles\Views\GiamSatThiCongs\EditCumBan.cshtml" />
-    <Content Include="Areas\TransportFiles\Views\NghiemThus\CreateCumBan.cshtml" />
-    <Content Include="Areas\TransportFiles\Views\NghiemThus\EditCumBan.cshtml" />
     <Content Include="Areas\Admin\Views\MenuItems\CopyQuyen.cshtml" />
     <Content Include="Areas\TransportFiles\Views\Projects\Create.cshtml" />
     <Content Include="Areas\Admin\Views\TransportFiles\Create.cshtml" />
@@ -2458,10 +2452,8 @@
     <Content Include="Areas\Admin\Views\DM_LoaiThietBi\Details.cshtml" />
     <Content Include="Areas\Admin\Views\DM_LoaiThietBi\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\DM_LoaiThietBi\Index.cshtml" />
-    <None Include="Areas\TransportFiles\Views\Projects\CreateBomMin.cshtml" />
     <Content Include="Areas\TransportFiles\Views\Projects\Delete.cshtml" />
     <Content Include="Areas\TransportFiles\Views\Projects\Details.cshtml" />
-    <Content Include="Areas\TransportFiles\Views\Projects\EditBomMin.cshtml" />
     <Content Include="Areas\TransportFiles\Views\Projects\Index.cshtml" />
     <Content Include="Areas\TransportFiles\Views\TransportFiles_bak\ThungRac.cshtml" />
     <Content Include="Areas\Admin\Views\DM_Donvihanhchinhs\Create.cshtml" />
@@ -2489,15 +2481,11 @@
     <Content Include="Areas\Admin\Views\DocumentTypes\Details.cshtml" />
     <Content Include="Areas\Admin\Views\DocumentTypes\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\DocumentTypes\Index.cshtml" />
-    <Content Include="Areas\TransportFiles\Views\GiamSatThiCongs\CreateBomMin.cshtml" />
     <Content Include="Areas\TransportFiles\Views\GiamSatThiCongs\Delete.cshtml" />
     <Content Include="Areas\TransportFiles\Views\GiamSatThiCongs\Details.cshtml" />
-    <Content Include="Areas\TransportFiles\Views\GiamSatThiCongs\EditBomMin.cshtml" />
     <Content Include="Areas\TransportFiles\Views\GiamSatThiCongs\Index.cshtml" />
-    <Content Include="Areas\TransportFiles\Views\NghiemThus\CreateBomMin.cshtml" />
     <Content Include="Areas\TransportFiles\Views\NghiemThus\Delete.cshtml" />
     <Content Include="Areas\TransportFiles\Views\NghiemThus\Details.cshtml" />
-    <Content Include="Areas\TransportFiles\Views\NghiemThus\EditBomMin.cshtml" />
     <Content Include="Areas\TransportFiles\Views\NghiemThus\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Units\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Units\Delete.cshtml" />
@@ -2520,15 +2508,11 @@
     <Content Include="Areas\TransportFiles\Views\HoSoPhapLies\Edit.cshtml" />
     <Content Include="Areas\TransportFiles\Views\HoSoPhapLies\Index.cshtml" />
     <Content Include="Areas\TransportFiles\Views\Projects\InformationProject.cshtml" />
-    <Content Include="Areas\TransportFiles\Views\KhaoSats\CreateBomMin.cshtml" />
     <Content Include="Areas\TransportFiles\Views\KhaoSats\Delete.cshtml" />
     <Content Include="Areas\TransportFiles\Views\KhaoSats\Details.cshtml" />
-    <Content Include="Areas\TransportFiles\Views\KhaoSats\EditBomMin.cshtml" />
     <Content Include="Areas\TransportFiles\Views\KhaoSats\Index.cshtml" />
-    <Content Include="Areas\TransportFiles\Views\ThiCongs\CreateBomMin.cshtml" />
     <Content Include="Areas\TransportFiles\Views\ThiCongs\Delete.cshtml" />
     <Content Include="Areas\TransportFiles\Views\ThiCongs\Details.cshtml" />
-    <Content Include="Areas\TransportFiles\Views\ThiCongs\EditBomMin.cshtml" />
     <Content Include="Areas\TransportFiles\Views\ThiCongs\Index.cshtml" />
     <Content Include="Areas\TransportFiles\Views\Employees\Create.cshtml" />
     <Content Include="Areas\TransportFiles\Views\Employees\Delete.cshtml" />
@@ -2540,8 +2524,6 @@
     <Content Include="Areas\TransportFiles\Views\HoatDongNhanSus\Details.cshtml" />
     <Content Include="Areas\TransportFiles\Views\HoatDongNhanSus\Edit.cshtml" />
     <Content Include="Areas\TransportFiles\Views\HoatDongNhanSus\Index.cshtml" />
-    <Content Include="Areas\TransportFiles\Views\Projects\CreateCumBan.cshtml" />
-    <Content Include="Areas\TransportFiles\Views\Projects\EditCumBan.cshtml" />
     <Content Include="Areas\TransportFiles\Views\NhapBanMus\Create.cshtml" />
     <Content Include="Areas\TransportFiles\Views\NhapBanMus\Delete.cshtml" />
     <Content Include="Areas\TransportFiles\Views\NhapBanMus\Details.cshtml" />
@@ -2584,8 +2566,6 @@
     <Content Include="Models\namlao206DB.edmx.diagram">
       <DependentUpon>namlao206DB.edmx</DependentUpon>
     </Content>
-    <Content Include="Areas\TransportFiles\Views\ThiCongs\CreateCumBan.cshtml" />
-    <Content Include="Areas\TransportFiles\Views\ThiCongs\EditCumBan.cshtml" />
     <Content Include="Areas\TransportFiles\Views\Projects\Edit.cshtml" />
     <Content Include="Areas\TransportFiles\Views\Teams\Create.cshtml" />
     <Content Include="Areas\TransportFiles\Views\Teams\Delete.cshtml" />
