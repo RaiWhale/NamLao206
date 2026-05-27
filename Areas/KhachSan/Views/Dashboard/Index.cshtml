@@ -1,0 +1,137 @@
+@model IEnumerable<NamLao206.Models.KhachSan_Phong>
+@using NamLao206.Models
+    @{
+        ViewBag.Title = "Sơ đồ phòng";
+        var datPhongs = ViewBag.DatPhongs as Dictionary<int, KhachSan_DatPhong> ?? new Dictionary<int, KhachSan_DatPhong>();
+
+        string[] trangThaiNhan = { "Trống", "Đã đặt", "Đang ở", "Chờ dọn", "Đang dọn", "Sẵn sàng", "Bảo trì", "Khóa phòng" };
+        string[] trangThaiIcon = { "fa-door-open", "fa-calendar-check", "fa-user", "fa-broom", "fa-broom", "fa-check-circle", "fa-tools", "fa-lock" };
+
+        var tangGroups = Model.GroupBy(p => p.Tang ?? 0).OrderBy(g => g.Key);
+    }
+
+    <div class="subheader">
+        <h1 class="subheader-title">
+            <i class="fal fa-th-large mr-2"></i> Sơ đồ phòng
+        </h1>
+        <div class="subheader-block">
+            <a href="@Url.Action("Index", "CheckIn", new { area = "KhachSan" })" class="btn btn-sm btn-success mr-1">
+                <i class="fal fa-sign-in-alt mr-1"></i> Check-In
+            </a>
+            <a href="@Url.Action("Index", "Phong", new { area = "KhachSan" })" class="btn btn-sm btn-outline-secondary">
+                <i class="fal fa-cog mr-1"></i> Quản lý phòng
+            </a>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="card p-2">
+                <div class="d-flex flex-wrap gap-2 align-items-center">
+                    @for (int i = 0; i < trangThaiNhan.Length; i++)
+                    {
+                        <span class="badge ks-room-@i px-2 py-1" style="font-size:.8rem;">
+                            <i class="fal @trangThaiIcon[i] mr-1"></i>@trangThaiNhan[i]
+                        </span>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">Chưa có phòng nào được thiết lập. <a href="@Url.Action("Create", "Phong", new { area = "KhachSan" })">Thêm phòng mới</a></div>
+    }
+
+    @foreach (var tang in tangGroups)
+    {
+        <div class="card mb-3">
+            <div class="card-header py-2">
+                <h5 class="card-title mb-0">
+                    <i class="fal fa-layer-group mr-1"></i>
+                    @(tang.Key == 0 ? "Tầng trệt" : $"Tầng {tang.Key}")
+                    <small class="text-muted ml-2">(@tang.Count() phòng)</small>
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    @foreach (var phong in tang)
+                    {
+                        datPhongs.TryGetValue(phong.Id, out var dp);
+                        var statusClass = $"ks-room-{phong.TrangThai}";
+                        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
+                            <div class="ks-room-card @statusClass"
+                                 data-phong-id="@phong.Id"
+                                 data-trang-thai="@phong.TrangThai"
+                                 data-dat-phong-id="@(dp?.Id ?? 0)"
+                                 onclick="onPhongClick(this)">
+                                <div class="room-no">@phong.SoPhong</div>
+                                <div class="room-type">@(phong.KhachSan_LoaiPhong != null ? phong.KhachSan_LoaiPhong.TenLoai : "")</div>
+                                <div class="room-price">
+                                    @if (phong.KhachSan_LoaiPhong != null)
+                                    {
+                                        <span>@phong.KhachSan_LoaiPhong.GiaGioNgan.ToString("N0")đ/giờ</span>
+                                    }
+                                </div>
+                                @if (dp != null)
+                                {
+                                    <div class="room-guest mt-1">
+                                        <i class="fal fa-user mr-1"></i>@(dp.KhachSan_KhachHang != null ? dp.KhachSan_KhachHang.HoTen : "")
+                                    </div>
+                                    <div class="room-guest" style="font-size:.72rem;">
+                                        CI: @dp.ThoiGianCheckIn.ToString("HH:mm dd/MM")
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="modal fade" id="modalPhong" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalPhongTitle">Chi tiết phòng</h5>
+                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                </div>
+                <div class="modal-body" id="modalPhongBody"></div>
+                <div class="modal-footer" id="modalPhongFooter"></div>
+            </div>
+        </div>
+    </div>
+
+    @section Scripts {
+        <script>
+            function onPhongClick(el) {
+                var phongId = el.dataset.phongId;
+                var trangThai = parseInt(el.dataset.trangThai);
+                var datPhongId = parseInt(el.dataset.datPhongId);
+
+                $('#modalPhong').modal('show');
+                $('#modalPhongTitle').text('Phòng ' + el.querySelector('.room-no').textContent);
+
+                var trangThaiNhan = ['Trống', 'Đã đặt', 'Đang ở', 'Chờ dọn', 'Đang dọn', 'Sẵn sàng', 'Bảo trì', 'Khóa phòng'];
+                var body = '<p><strong>Trạng thái:</strong> ' + trangThaiNhan[trangThai] + '</p>';
+                var footer = '';
+
+                if (trangThai === 0) {
+                    footer = '<a href="/KhachSan/CheckIn/Index?phongId=' + phongId + '" class="btn btn-success"><i class="fal fa-sign-in-alt mr-1"></i>Check-In</a>';
+                } else if (trangThai === 1) {
+                    footer = '<a href="/KhachSan/CheckIn/XacNhan/' + datPhongId + '" class="btn btn-primary"><i class="fal fa-check mr-1"></i>Xác nhận nhận phòng</a>';
+                } else if (trangThai === 2) {
+                    body += '<p><em>Đang có khách</em></p>';
+                    footer = '<a href="/KhachSan/CheckOut/Index/' + datPhongId + '" class="btn btn-warning mr-1"><i class="fal fa-sign-out-alt mr-1"></i>Check-Out</a>'
+                        + '<a href="/KhachSan/DichVu/Index/' + datPhongId + '" class="btn btn-info"><i class="fal fa-concierge-bell mr-1"></i>Dịch vụ</a>';
+                } else if (trangThai >= 3 && trangThai <= 5) {
+                    footer = '<a href="/KhachSan/Phong/DoiTrangThai/' + phongId + '" class="btn btn-secondary"><i class="fal fa-sync mr-1"></i>Cập nhật trạng thái</a>';
+                }
+
+                $('#modalPhongBody').html(body);
+                $('#modalPhongFooter').html(footer + '<button type="button" class="btn btn-secondary ml-1" data-dismiss="modal">Đóng</button>');
+            }
+        </script>
+    }

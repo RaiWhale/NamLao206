@@ -1,0 +1,95 @@
+@using NamLao206.Models
+@model KhachSan_KhachHang
+
+@{
+    ViewBag.Title = $"Khách hàng - {Model.HoTen}";
+    var lichSu = ViewBag.LichSu as List<KhachSan_DatPhong> ?? new List<KhachSan_DatPhong>();
+}
+
+<div class="subheader">
+    <h1 class="subheader-title"><i class="fal fa-user"></i> @Model.HoTen</h1>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index","KhachHang",new{area="KhachSan"})">Khách hàng</a></li>
+            <li class="breadcrumb-item active">@Model.HoTen</li>
+        </ol>
+    </nav>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card mb-3">
+            <div class="card-header"><h5 class="card-title mb-0">Thông tin cá nhân</h5></div>
+            <div class="card-body">
+                <dl class="row mb-0">
+                    <dt class="col-5">CCCD</dt><dd class="col-7"><code>@Model.CCCD</code></dd>
+                    <dt class="col-5">Họ tên</dt><dd class="col-7"><strong>@Model.HoTen</strong></dd>
+                    <dt class="col-5">Giới tính</dt><dd class="col-7">@(Model.GioiTinh == true ? "Nam" : Model.GioiTinh == false ? "Nữ" : "-")</dd>
+                    <dt class="col-5">Ngày sinh</dt><dd class="col-7">@(Model.NgaySinh?.ToString("dd/MM/yyyy") ?? "-")</dd>
+                    <dt class="col-5">Điện thoại</dt><dd class="col-7">@(Model.SoDienThoai ?? "-")</dd>
+                    <dt class="col-5">Email</dt><dd class="col-7">@(Model.Email ?? "-")</dd>
+                    <dt class="col-5">Quốc tịch</dt><dd class="col-7">@(Model.QuocTich ?? "-")</dd>
+                    <dt class="col-5">Địa chỉ</dt><dd class="col-7">@(Model.DiaChi ?? "-")</dd>
+                    <dt class="col-5">Ngày tạo</dt><dd class="col-7">@Model.NgayTao.ToString("dd/MM/yyyy")</dd>
+                </dl>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-6">
+                <div class="card py-3">
+                    <div class="text-muted small">Tổng lượt</div>
+                    <div class="h4 font-weight-bold mb-0">@lichSu.Count</div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card py-3">
+                    <div class="text-muted small">Tổng chi tiêu</div>
+                    <div class="h6 font-weight-bold mb-0 text-success">
+                        @lichSu.Sum(d => d.TongTien).ToString("N0") đ
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header"><h5 class="card-title mb-0">Lịch sử đặt phòng</h5></div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover table-sm mb-0">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>Mã phiếu</th>
+                                <th>Phòng</th>
+                                <th>Check-in</th>
+                                <th>Check-out</th>
+                                <th>Trạng thái</th>
+                                <th class="text-right">Tổng tiền</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var d in lichSu)
+                            {
+                                var ttStr = d.TrangThai == 0 ? "Chờ XN" : d.TrangThai == 1 ? "Đã XN" : d.TrangThai == 2 ? "Đang ở" : d.TrangThai == 3 ? "Đã CO" : "Hủy";
+                                var ttClass = d.TrangThai == 2 ? "badge-success" : d.TrangThai == 3 ? "badge-secondary" : d.TrangThai == 4 ? "badge-danger" : "badge-warning";
+                                <tr>
+                                    <td><strong>@d.MaPhieu</strong></td>
+                                    <td>@(d.KhachSan_Phong != null ? d.KhachSan_Phong.SoPhong : "")</td>
+                                    <td>@d.ThoiGianCheckIn.ToString("dd/MM/yy HH:mm")</td>
+                                    <td>@(d.ThoiGianCheckOutThucTe?.ToString("dd/MM/yy HH:mm") ?? d.ThoiGianCheckOutDuKien?.ToString("dd/MM/yy HH:mm") ?? "-")</td>
+                                    <td><span class="badge @ttClass">@ttStr</span></td>
+                                    <td class="text-right">@d.TongTien.ToString("N0") đ</td>
+                                </tr>
+                            }
+                            @if (!lichSu.Any())
+                            {
+                                <tr><td colspan="6" class="text-center text-muted py-4">Chưa có lịch sử đặt phòng.</td></tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

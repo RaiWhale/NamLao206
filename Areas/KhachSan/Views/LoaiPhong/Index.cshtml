@@ -1,0 +1,67 @@
+@model IList<NamLao206.Models.KhachSan_LoaiPhong>
+@{
+    ViewBag.Title = "Loại phòng";
+}
+
+<div class="subheader">
+    <h1 class="subheader-title"><i class="fal fa-bed mr-2"></i>Loại phòng</h1>
+    <div class="subheader-block">
+        <a href="@Url.Action("Create", "LoaiPhong", new { area = "KhachSan" })" class="btn btn-sm btn-primary"><i class="fal fa-plus mr-1"></i>Thêm mới</a>
+    </div>
+</div>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show">@TempData["Success"]
+        <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+    </div>
+}
+
+<div class="card">
+    <div class="card-body p-0">
+        <table class="table table-hover table-striped mb-0">
+            <thead class="thead-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Tên loại</th>
+                    <th class="text-right">Giá giờ ngắn</th>
+                    <th class="text-right">Giá qua đêm</th>
+                    <th class="text-right">Giá theo ngày</th>
+                    <th class="text-center">Số người tối đa</th>
+                    <th>Ghi chú</th>
+                    <th class="text-center">Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (!Model.Any())
+                {
+                    <tr><td colspan="8" class="text-center text-muted py-4">Chưa có loại phòng nào.</td></tr>
+                }
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.TenLoai</td>
+                        <td class="text-right">@item.GiaGioNgan.ToString("N0")</td>
+                        <td class="text-right">@item.GiaQuaDem.ToString("N0")</td>
+                        <td class="text-right">@item.GiaTheoNgay.ToString("N0")</td>
+                        <td class="text-center">@item.SoNguoiToiDa</td>
+                        <td>@item.MoTa</td>
+                        <td class="text-center">
+                            <a href="@Url.Action("Edit", "LoaiPhong", new { area = "KhachSan", id = item.Id })" class="btn btn-xs btn-outline-primary mr-1">
+                                <i class="fal fa-edit"></i>
+                            </a>
+                            <form action="@Url.Action("Delete", "LoaiPhong", new { area = "KhachSan", id = item.Id })" method="post" class="d-inline"
+                                  onsubmit="return confirm('Xác nhận xóa loại phòng này?')">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-xs btn-outline-danger">
+                                    <i class="fal fa-trash"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

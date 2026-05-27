@@ -286,6 +286,17 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Areas\KhachSan\Controllers\BaoCaoController.cs" />
+    <Compile Include="Areas\KhachSan\Controllers\BookingController.cs" />
+    <Compile Include="Areas\KhachSan\Controllers\CheckInController.cs" />
+    <Compile Include="Areas\KhachSan\Controllers\CheckOutController.cs" />
+    <Compile Include="Areas\KhachSan\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\KhachSan\Controllers\DichVuController.cs" />
+    <Compile Include="Areas\KhachSan\Controllers\KhachHangController.cs" />
+    <Compile Include="Areas\KhachSan\Controllers\LoaiPhongController.cs" />
+    <Compile Include="Areas\KhachSan\Controllers\PhongController.cs" />
+    <Compile Include="Areas\KhachSan\Controllers\ThanhToanController.cs" />
+    <Compile Include="Areas\KhachSan\KhachSanAreaRegistration.cs" />
     <Compile Include="Areas\TransportFiles\Bussiness\EmailBussiness.cs" />
     <Compile Include="Areas\TransportFiles\Controllers\DashboardController.cs" />
     <Compile Include="Areas\TransportFiles\Controllers\DM_ThietBiController.cs" />
@@ -405,6 +416,33 @@
       <DependentUpon>namlao206DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HoSoPhapLy.cs">
+      <DependentUpon>namlao206DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KhachSan_DatPhong.cs">
+      <DependentUpon>namlao206DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KhachSan_DichVuPhuThu.cs">
+      <DependentUpon>namlao206DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KhachSan_DoiPhong.cs">
+      <DependentUpon>namlao206DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KhachSan_KhachHang.cs">
+      <DependentUpon>namlao206DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KhachSan_KiemPhong.cs">
+      <DependentUpon>namlao206DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KhachSan_LoaiPhong.cs">
+      <DependentUpon>namlao206DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KhachSan_Phong.cs">
+      <DependentUpon>namlao206DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KhachSan_ThanhToan.cs">
+      <DependentUpon>namlao206DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KhachSan_TrangThaiLichSu.cs">
       <DependentUpon>namlao206DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\KhaoSat.cs">
@@ -546,6 +584,27 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="Areas\KhachSan\Views\BaoCao\Index.cshtml" />
+    <Content Include="Areas\KhachSan\Views\Booking\Create.cshtml" />
+    <Content Include="Areas\KhachSan\Views\Booking\Index.cshtml" />
+    <Content Include="Areas\KhachSan\Views\CheckIn\Index.cshtml" />
+    <Content Include="Areas\KhachSan\Views\CheckOut\ChiTiet.cshtml" />
+    <Content Include="Areas\KhachSan\Views\CheckOut\Index.cshtml" />
+    <Content Include="Areas\KhachSan\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\KhachSan\Views\DichVu\Index.cshtml" />
+    <Content Include="Areas\KhachSan\Views\KhachHang\ChiTiet.cshtml" />
+    <Content Include="Areas\KhachSan\Views\KhachHang\Index.cshtml" />
+    <Content Include="Areas\KhachSan\Views\LoaiPhong\Create.cshtml" />
+    <Content Include="Areas\KhachSan\Views\LoaiPhong\Edit.cshtml" />
+    <Content Include="Areas\KhachSan\Views\LoaiPhong\Index.cshtml" />
+    <Content Include="Areas\KhachSan\Views\Phong\Create.cshtml" />
+    <Content Include="Areas\KhachSan\Views\Phong\Edit.cshtml" />
+    <Content Include="Areas\KhachSan\Views\Phong\Index.cshtml" />
+    <Content Include="Areas\KhachSan\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\KhachSan\Views\ThanhToan\Index.cshtml" />
+    <Content Include="Areas\KhachSan\Views\web.config" />
+    <Content Include="Areas\KhachSan\Views\_ViewImports.cshtml" />
+    <Content Include="Areas\KhachSan\Views\_ViewStart.cshtml" />
     <Content Include="Content\AdminBinhLT\assets\css\backend-plugin.min.css" />
     <Content Include="Content\AdminBinhLT\assets\css\backend.css" />
     <Content Include="Content\AdminBinhLT\assets\css\backend.min.css" />

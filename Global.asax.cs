@@ -21,13 +21,12 @@ namespace NamLao206
 			RouteConfig.RegisterRoutes(RouteTable.Routes);
 			BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-			Mapper.Initialize(cfg =>
-			{
-
-				cfg.CreateMap<Models.ViewModels.RegisterVM, Account>();
-				cfg.CreateMap<Account, Models.ViewModels.RegisterVM>();
-				cfg.CreateMap<Models.ViewModels.UpdateProfileVM, Employee>();
-			});
+			//Mapper.Initialize(cfg =>
+			//{
+			//	cfg.CreateMap<Models.ViewModels.RegisterVM, Account>();
+			//	cfg.CreateMap<Account, Models.ViewModels.RegisterVM>();
+			//	cfg.CreateMap<Models.ViewModels.UpdateProfileVM, Employee>();
+			//});
 		}
     }
 }

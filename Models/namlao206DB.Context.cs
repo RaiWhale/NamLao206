@@ -89,6 +89,15 @@ namespace NamLao206.Models
         public virtual DbSet<ThietBi_LichSu> ThietBi_LichSu { get; set; }
         public virtual DbSet<DM_ThietBi> DM_ThietBi { get; set; }
         public virtual DbSet<ThietBi_ChiTiet> ThietBi_ChiTiet { get; set; }
+        public virtual DbSet<KhachSan_DatPhong> KhachSan_DatPhong { get; set; }
+        public virtual DbSet<KhachSan_DichVuPhuThu> KhachSan_DichVuPhuThu { get; set; }
+        public virtual DbSet<KhachSan_DoiPhong> KhachSan_DoiPhong { get; set; }
+        public virtual DbSet<KhachSan_KhachHang> KhachSan_KhachHang { get; set; }
+        public virtual DbSet<KhachSan_KiemPhong> KhachSan_KiemPhong { get; set; }
+        public virtual DbSet<KhachSan_LoaiPhong> KhachSan_LoaiPhong { get; set; }
+        public virtual DbSet<KhachSan_Phong> KhachSan_Phong { get; set; }
+        public virtual DbSet<KhachSan_ThanhToan> KhachSan_ThanhToan { get; set; }
+        public virtual DbSet<KhachSan_TrangThaiLichSu> KhachSan_TrangThaiLichSu { get; set; }
     
         public virtual ObjectResult<sp_GetDataForDashBoard_Result> sp_GetDataForDashBoard(string action, string fromDate, string toDate, Nullable<int> donvi_id)
         {

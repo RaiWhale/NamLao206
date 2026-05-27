@@ -1,0 +1,241 @@
+@model NamLao206.Areas.KhachSan.Controllers.CheckInVM
+@using NamLao206.Models
+
+@{
+    ViewBag.Title = "Check-In";
+    var phongs = ViewBag.Phongs as List<KhachSan_Phong> ?? new List<KhachSan_Phong>();
+    var loaiPhongs = ViewBag.LoaiPhongs as List<KhachSan_LoaiPhong> ?? new List<KhachSan_LoaiPhong>();
+    var selectedPhongId = (int?)ViewBag.PhongIdSelected;
+}
+
+<div class="subheader">
+    <h1 class="subheader-title"><i class="fal fa-sign-in-alt"></i> Check-In</h1>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index","Dashboard",new{area="KhachSan"})">Khách sạn</a></li>
+            <li class="breadcrumb-item active">Check-In</li>
+        </ol>
+    </nav>
+</div>
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
+<form method="post" action="@Url.Action("CheckIn", "CheckIn", new { area = "KhachSan" })">
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <!-- Thông tin khách hàng -->
+        <div class="col-md-6">
+            <div class="card mb-3">
+                <div class="card-header"><h5 class="card-title mb-0">Thông tin khách hàng</h5></div>
+                <div class="card-body">
+                    <div class="form-group mb-2">
+                        <label>CCCD / Hộ chiếu <span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            <input type="text" id="cccdInput" name="CCCD" value="@Model.CCCD" class="form-control" required placeholder="Nhập số CCCD..." />
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" onclick="traCuuCCCD()">
+                                    <i class="fal fa-search"></i> Tra cứu
+                                </button>
+                            </div>
+                        </div>
+                        @Html.ValidationMessage("CCCD", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group mb-2">
+                        <label>Họ tên <span class="text-danger">*</span></label>
+                        <input type="text" name="HoTen" value="@Model.HoTen" class="form-control" required />
+                        @Html.ValidationMessage("HoTen", new { @class = "text-danger" })
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group mb-2">
+                                <label>Giới tính</label>
+                                <select name="GioiTinh" class="form-control">
+                                    <option value="">-- Chọn --</option>
+                                    <option value="true" @(Model.GioiTinh == true ? "selected" : "")>Nam</option>
+                                    <option value="false" @(Model.GioiTinh == false ? "selected" : "")>Nữ</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group mb-2">
+                                <label>Ngày sinh</label>
+                                <input type="date" name="NgaySinh" value="@(Model.NgaySinh.HasValue ? Model.NgaySinh.Value.ToString("yyyy-MM-dd") : "")" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label>Số điện thoại</label>
+                        <input type="tel" name="SoDienThoai" value="@Model.SoDienThoai" class="form-control" />
+                    </div>
+                    <div class="form-group mb-2">
+                        <label>Email</label>
+                        <input type="email" name="Email" value="@Model.Email" class="form-control" />
+                    </div>
+                    <div class="form-group mb-2">
+                        <label>Quốc tịch</label>
+                        <input type="text" name="QuocTich" value="@(string.IsNullOrEmpty(Model.QuocTich) ? "Việt Nam" : Model.QuocTich)" class="form-control" />
+                    </div>
+                    <div class="form-group mb-2">
+                        <label>Địa chỉ</label>
+                        <input type="text" name="DiaChi" value="@Model.DiaChi" class="form-control" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Thông tin phòng -->
+        <div class="col-md-6">
+            <div class="card mb-3">
+                <div class="card-header"><h5 class="card-title mb-0">Thông tin phòng</h5></div>
+                <div class="card-body">
+                    <div class="form-group mb-2">
+                        <label>Phòng <span class="text-danger">*</span></label>
+                        <select name="PhongId" id="phongSelect" class="form-control" required onchange="capNhatGia()">
+                            <option value="">-- Chọn phòng --</option>
+                            @foreach (var p in phongs)
+                            {
+                                var sel = selectedPhongId.HasValue && selectedPhongId.Value == p.Id ? "selected" : "";
+                                <option value="@p.Id" @sel
+                                    data-gio="@(p.KhachSan_LoaiPhong != null ? p.KhachSan_LoaiPhong.GiaGioNgan : 0)"
+                                    data-dem="@(p.KhachSan_LoaiPhong != null ? p.KhachSan_LoaiPhong.GiaQuaDem : 0)"
+                                    data-ngay="@(p.KhachSan_LoaiPhong != null ? p.KhachSan_LoaiPhong.GiaTheoNgay : 0)"
+                                    data-loai="@(p.KhachSan_LoaiPhong != null ? p.KhachSan_LoaiPhong.TenLoai : "")"
+                                    data-tang="@p.Tang">
+                                    @p.SoPhong @(p.TenPhong != null ? $"- {p.TenPhong}" : "") (@(p.KhachSan_LoaiPhong != null ? p.KhachSan_LoaiPhong.TenLoai : ""))
+                                    @(p.Tang.HasValue ? $"- Tầng {p.Tang}" : "")
+                                </option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="form-group mb-2">
+                        <label>Loại giá <span class="text-danger">*</span></label>
+                        <div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="LoaiGia" value="1" id="lg1" onchange="capNhatGia()" @(Model.LoaiGia == 1 || Model.LoaiGia == 0 ? "checked" : "") />
+                                <label class="form-check-label" for="lg1">Giờ ngắn</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="LoaiGia" value="2" id="lg2" onchange="capNhatGia()" @(Model.LoaiGia == 2 ? "checked" : "") />
+                                <label class="form-check-label" for="lg2">Qua đêm</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="LoaiGia" value="3" id="lg3" onchange="capNhatGia()" @(Model.LoaiGia == 3 ? "checked" : "") />
+                                <label class="form-check-label" for="lg3">Theo ngày</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-info py-2 mb-2" id="giaDisplay">
+                        Vui lòng chọn phòng và loại giá
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group mb-2">
+                                <label>Số người</label>
+                                <input type="number" name="SoNguoi" value="@(Model.SoNguoi > 0 ? Model.SoNguoi : 1)" class="form-control" min="1" max="10" />
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group mb-2">
+                                <label>Check-out dự kiến</label>
+                                <input type="datetime-local" name="ThoiGianCheckOutDuKien" value="@(Model.ThoiGianCheckOutDuKien.HasValue ? Model.ThoiGianCheckOutDuKien.Value.ToString("yyyy-MM-ddTHH:mm") : "")" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-2">
+                        <label>Nguồn booking</label>
+                        <select name="NguonBooking" class="form-control">
+                            <option value="1" @(Model.NguonBooking == 1 ? "selected" : "")>Walk-in</option>
+                            <option value="2" @(Model.NguonBooking == 2 ? "selected" : "")>Phone</option>
+                            <option value="3" @(Model.NguonBooking == 3 ? "selected" : "")>Agoda</option>
+                            <option value="4" @(Model.NguonBooking == 4 ? "selected" : "")>Booking.com</option>
+                            <option value="5" @(Model.NguonBooking == 5 ? "selected" : "")>Facebook</option>
+                            <option value="6" @(Model.NguonBooking == 6 ? "selected" : "")>Website</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group mb-2">
+                        <label>Ghi chú</label>
+                        <textarea name="GhiChu" class="form-control" rows="2">@Model.GhiChu</textarea>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block btn-lg">
+                <i class="fal fa-sign-in-alt"></i> Xác nhận Check-In
+            </button>
+        </div>
+    </div>
+</form>
+
+<!-- Dữ liệu loại phòng cho JS -->
+<script>
+    var loaiPhongData = {
+        @foreach (var lp in loaiPhongs)
+        {
+            @:@lp.Id: { gioNgan: @lp.GiaGioNgan, quaDem: @lp.GiaQuaDem, theoNgay: @lp.GiaTheoNgay },
+        }
+    };
+
+    function traCuuCCCD() {
+        var cccd = document.getElementById('cccdInput').value.trim();
+        if (!cccd) return;
+        fetch('@Url.Action("TraCuuCCCD","CheckIn",new{area="KhachSan"})' + '?cccd=' + encodeURIComponent(cccd))
+            .then(r => r.json())
+            .then(data => {
+                if (data.found) {
+                    setField('HoTen', data.hoTen);
+                    setField('SoDienThoai', data.soDienThoai);
+                    setField('Email', data.email);
+                    setField('DiaChi', data.diaChi);
+                    setField('QuocTich', data.quocTich || 'Việt Nam');
+                    setField('NgaySinh', data.ngaySinh);
+                    var gt = document.querySelector('[name="GioiTinh"]');
+                    if (gt && data.gioiTinh != null) gt.value = data.gioiTinh ? 'true' : 'false';
+                    alert('Đã tìm thấy khách hàng: ' + data.hoTen);
+                } else {
+                    alert('Chưa có trong hệ thống. Vui lòng nhập thông tin mới.');
+                }
+            })
+            .catch(() => alert('Lỗi tra cứu. Vui lòng thử lại.'));
+    }
+
+    function setField(name, val) {
+        var el = document.querySelector('[name="' + name + '"]');
+        if (el && val) el.value = val;
+    }
+
+    function capNhatGia() {
+        var sel = document.getElementById('phongSelect');
+        var opt = sel.options[sel.selectedIndex];
+        var loaiGia = document.querySelector('[name="LoaiGia"]:checked');
+        var display = document.getElementById('giaDisplay');
+
+        if (!opt || !opt.value || !loaiGia) {
+            display.textContent = 'Vui lòng chọn phòng và loại giá';
+            return;
+        }
+
+        var gio = parseFloat(opt.dataset.gio) || 0;
+        var dem = parseFloat(opt.dataset.dem) || 0;
+        var ngay = parseFloat(opt.dataset.ngay) || 0;
+        var loai = opt.dataset.loai || '';
+
+        var gia = 0;
+        var tenLoaiGia = '';
+        switch (loaiGia.value) {
+            case '1': gia = gio; tenLoaiGia = 'Giờ ngắn'; break;
+            case '2': gia = dem; tenLoaiGia = 'Qua đêm'; break;
+            case '3': gia = ngay; tenLoaiGia = 'Theo ngày'; break;
+        }
+
+        display.innerHTML = '<strong>' + loai + '</strong> - ' + tenLoaiGia + ': <strong>' +
+            gia.toLocaleString('vi-VN') + ' VNĐ</strong>';
+    }
+</script>

@@ -1,0 +1,189 @@
+@using NamLao206.Models
+@{
+    string hoTenNhanVien = "";
+    string tenDonVi = "";
+    using (var _db = new namlao206_websiteEntities())
+    {
+        int _accId;
+        if (User.Identity != null && User.Identity.IsAuthenticated &&
+            int.TryParse(User.Identity.Name, out _accId))
+        {
+            var _acc = _db.Accounts
+                .Select(a => new { a.Id, a.EmployeeId, a.LevelId })
+                .FirstOrDefault(a => a.Id == _accId);
+            if (_acc != null)
+            {
+                var _emp = _db.Employees
+                    .Select(e => new { e.Id, e.Name, e.KhoaphongId })
+                    .FirstOrDefault(e => e.Id == _acc.EmployeeId);
+                if (_emp != null)
+                {
+                    hoTenNhanVien = _emp.Name ?? "";
+                    var _pb = _db.DM_PhongBans
+                        .Where(p => p.Id == _emp.KhoaphongId)
+                        .Select(p => new { p.donvi_Id })
+                        .FirstOrDefault();
+                    if (_pb != null && _pb.donvi_Id.HasValue)
+                    {
+                        var _donVi = _db.DM_DonVis.FirstOrDefault(d => d.Id == _pb.donvi_Id.Value);
+                        if (_donVi != null)
+                        {
+                            tenDonVi = _donVi.TenDonVi ?? "";
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>@ViewBag.Title - Khách Sạn | Nam Lào 206</title>
+    <link rel="shortcut icon" href="~/Content/EponaTheme/assets/images/logo/logo512x512.png" />
+    <link id="vendorsbundle" rel="stylesheet" media="screen, print" href="~/Content/smartadmin/css/vendors.bundle.css">
+    <link id="appbundle" rel="stylesheet" media="screen, print" href="~/Content/smartadmin/css/app.bundle.css">
+    <link id="myskin" rel="stylesheet" media="screen, print" href="~/Content/smartadmin/css/skins/skin-master.css">
+    <link rel="stylesheet" media="screen, print" href="~/Content/smartadmin/css/datagrid/datatables/datatables.bundle.css">
+    <link rel="stylesheet" media="screen, print" href="~/Content/smartadmin/css/fa-solid.css">
+    <link rel="stylesheet" media="screen, print" href="~/Content/smartadmin/css/fa-brands.css">
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
+    <style>
+        .ks-room-0  { background: #27ae60; color: #fff; }
+        .ks-room-1  { background: #f39c12; color: #fff; }
+        .ks-room-2  { background: #e74c3c; color: #fff; }
+        .ks-room-3  { background: #8e44ad; color: #fff; }
+        .ks-room-4  { background: #3498db; color: #fff; }
+        .ks-room-5  { background: #1abc9c; color: #fff; }
+        .ks-room-6  { background: #95a5a6; color: #fff; }
+        .ks-room-7  { background: #2c3e50; color: #fff; }
+        .ks-room-card { cursor: pointer; min-height: 110px; border-radius: 8px; padding: 12px; margin: 6px; transition: transform .15s; }
+        .ks-room-card:hover { transform: scale(1.04); }
+        .ks-room-card .room-no { font-size: 1.4rem; font-weight: 700; }
+        .ks-room-card .room-type { font-size: 0.78rem; opacity: .85; }
+        .ks-room-card .room-price { font-size: 0.85rem; font-weight: 600; margin-top: 4px; }
+        .ks-room-card .room-guest { font-size: 0.78rem; font-style: italic; opacity: .9; }
+    </style>
+    <script src="~/Scripts/jquery-3.7.1.min.js"></script>
+</head>
+<body class="mod-bg-1 mod-nav-link">
+    <div class="page-wrapper">
+        <div class="page-inner">
+            <aside class="page-sidebar" style="background-image: url(/Content/smartadmin/img/backgrounds/banner_darkboad2.png);">
+                <div style="padding: 12px 16px; text-align:center;">
+                    <a href="/Home/TrangChu">
+                        <img src="~/Content/AdminBinhLT/assets/images/login/logongangcongty.png" class="img-fluid" style="max-height:55px;" alt="logo">
+                    </a>
+                    <div class="text-white mt-1" style="font-size:0.8rem; opacity:.7;">@tenDonVi</div>
+                </div>
+                <nav id="js-primary-nav" class="primary-nav" role="navigation">
+                    <ul id="js-nav-menu" class="nav-menu">
+                        <li>
+                            <a href="@Url.Action("Index", "Dashboard", new { area = "KhachSan" })">
+                                <i class="fal fa-th-large"></i>
+                                <span class="nav-link-text">Sơ đồ phòng</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index", "Booking", new { area = "KhachSan" })">
+                                <i class="fal fa-calendar-plus"></i>
+                                <span class="nav-link-text">Đặt phòng</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index", "CheckIn", new { area = "KhachSan" })">
+                                <i class="fal fa-sign-in-alt"></i>
+                                <span class="nav-link-text">Check-In</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index", "CheckOut", new { area = "KhachSan" })">
+                                <i class="fal fa-sign-out-alt"></i>
+                                <span class="nav-link-text">Check-Out</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index", "DichVu", new { area = "KhachSan" })">
+                                <i class="fal fa-concierge-bell"></i>
+                                <span class="nav-link-text">Dịch vụ</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index", "ThanhToan", new { area = "KhachSan" })">
+                                <i class="fal fa-money-bill"></i>
+                                <span class="nav-link-text">Thanh toán</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index", "KhachHang", new { area = "KhachSan" })">
+                                <i class="fal fa-users"></i>
+                                <span class="nav-link-text">Khách hàng</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link collapsed" data-toggle="collapse" data-target="#menu-danhmuc">
+                                <i class="fal fa-list"></i>
+                                <span class="nav-link-text">Danh mục</span>
+                                <b class="collapse-sign"><em class="fal fa-angle-down"></em></b>
+                            </a>
+                            <ul id="menu-danhmuc" class="collapse">
+                                <li><a href="@Url.Action("Index", "LoaiPhong", new { area = "KhachSan" })"><i class="fal fa-bed mr-1"></i>Loại phòng</a></li>
+                                <li><a href="@Url.Action("Index", "Phong", new { area = "KhachSan" })"><i class="fal fa-door-open mr-1"></i>Phòng</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index", "BaoCao", new { area = "KhachSan" })">
+                                <i class="fal fa-chart-bar"></i>
+                                <span class="nav-link-text">Báo cáo</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </aside>
+            <div class="page-content-wrapper">
+                <header class="page-header" role="banner" style="background-image: url(/Content/smartadmin/img/backgrounds/banner_darkboad1.png);">
+                    <div class="page-logo">
+                        <a href="#" class="page-logo-link d-flex align-items-center">
+                            <span class="page-logo-text mr-1">Quản lý Khách Sạn</span>
+                        </a>
+                    </div>
+                    <div class="hidden-md-down dropdown-icon-menu position-relative">
+                        <a href="#" class="header-btn btn js-waves-off" data-action="toggle" data-class="nav-function-hidden">
+                            <i class="ni ni-menu"></i>
+                        </a>
+                    </div>
+                    <div class="hidden-lg-up">
+                        <a href="#" class="header-btn btn" data-action="toggle" data-class="mobile-nav-on">
+                            <i class="ni ni-menu"></i>
+                        </a>
+                    </div>
+                    <div class="ml-auto d-flex align-items-center">
+                        @if (User.Identity != null && User.Identity.IsAuthenticated)
+                        {
+                            <span class="text-white mr-3" style="font-size:.85rem;"><i class="fal fa-user mr-1"></i>@hoTenNhanVien</span>
+                        }
+                        <a href="@Url.Action("Logout","Login", new { area="" })" class="btn btn-sm btn-outline-light ml-2">
+                            <i class="fal fa-sign-out-alt"></i> Đăng xuất
+                        </a>
+                    </div>
+                </header>
+                <main id="js-page-content" role="main" class="page-content">
+                    @RenderBody()
+                </main>
+                <footer class="page-footer" role="contentinfo">
+                    <div class="d-flex align-items-center flex-1 text-muted">
+                        <span class="hidden-md-down fw-700">CÔNG TY TNHH MTV HỮU NGHỊ NAM LÀO &copy; 2026</span>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <script src="~/Content/smartadmin/js/vendors.bundle.js"></script>
+    <script src="~/Content/smartadmin/js/app.bundle.js"></script>
+    <script src="~/Content/smartadmin/js/datagrid/datatables/datatables.bundle.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

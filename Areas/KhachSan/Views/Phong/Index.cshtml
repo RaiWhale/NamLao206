@@ -1,0 +1,114 @@
+@model IList<NamLao206.Models.KhachSan_Phong>
+@{
+    ViewBag.Title = "Quản lý phòng";
+    string[] trangThaiNhan = { "Trống", "Đã đặt", "Đang ở", "Chờ dọn", "Đang dọn", "Sẵn sàng", "Bảo trì", "Khóa phòng" };
+}
+
+<div class="subheader">
+    <h1 class="subheader-title"><i class="fal fa-door-open mr-2"></i>Quản lý phòng</h1>
+    <div class="subheader-block">
+        <a href="@Url.Action("Create", "Phong", new { area = "KhachSan" })" class="btn btn-sm btn-primary"><i class="fal fa-plus mr-1"></i>Thêm phòng</a>
+    </div>
+</div>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show">@TempData["Success"]
+        <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+    </div>
+}
+
+<div class="card">
+    <div class="card-body p-0">
+        <table class="table table-hover table-striped mb-0">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Số phòng</th>
+                    <th>Tên phòng</th>
+                    <th>Loại phòng</th>
+                    <th class="text-center">Tầng</th>
+                    <th class="text-center">Trạng thái</th>
+                    <th class="text-center">Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (!Model.Any())
+                {
+                    <tr><td colspan="6" class="text-center text-muted py-4">Chưa có phòng nào.</td></tr>
+                }
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td><strong>@item.SoPhong</strong></td>
+                        <td>@item.TenPhong</td>
+                        <td>@(item.KhachSan_LoaiPhong != null ? item.KhachSan_LoaiPhong.TenLoai : "—")</td>
+                        <td class="text-center">@(item.Tang.HasValue ? $"Tầng {item.Tang}" : "—")</td>
+                        <td class="text-center">
+                            <span class="badge ks-room-@item.TrangThai">@trangThaiNhan[item.TrangThai]</span>
+                        </td>
+                        <td class="text-center">
+                            <a href="@Url.Action("Edit", "Phong", new { area = "KhachSan", id = item.Id })" class="btn btn-xs btn-outline-primary mr-1">
+                                <i class="fal fa-edit"></i>
+                            </a>
+                            <button type="button" class="btn btn-xs btn-outline-info mr-1"
+                                    onclick="openDoiTrangThai(@item.Id, @item.TrangThai)">
+                                <i class="fal fa-sync"></i>
+                            </button>
+                            <form action="@Url.Action("Delete", "Phong", new { area = "KhachSan", id = item.Id })" method="post" class="d-inline"
+                                  onsubmit="return confirm('Xác nhận xóa phòng @item.SoPhong?')">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-xs btn-outline-danger"><i class="fal fa-trash"></i></button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="modalDoiTrangThai" tabindex="-1">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <form id="formDoiTrangThai" method="post">
+                @Html.AntiForgeryToken()
+                <div class="modal-header">
+                    <h5 class="modal-title">Đổi trạng thái phòng</h5>
+                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Trạng thái mới</label>
+                        <select name="trangThai" class="form-control">
+                            <option value="0">Trống</option>
+                            <option value="3">Chờ dọn</option>
+                            <option value="4">Đang dọn</option>
+                            <option value="5">Sẵn sàng</option>
+                            <option value="6">Bảo trì</option>
+                            <option value="7">Khóa phòng</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Ghi chú</label>
+                        <input name="ghiChu" class="form-control" placeholder="Lý do đổi trạng thái..." />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Lưu</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+    function openDoiTrangThai(phongId, trangThaiHienTai) {
+        var form = document.getElementById('formDoiTrangThai');
+        form.action = '/KhachSan/Phong/DoiTrangThai/' + phongId;
+        form.querySelector('select[name=trangThai]').value = trangThaiHienTai;
+        $('#modalDoiTrangThai').modal('show');
+    }
+</script>
+}

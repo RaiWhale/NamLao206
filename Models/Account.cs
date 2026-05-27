@@ -63,6 +63,14 @@ namespace NamLao206.Models
             this.ThietBi_ChiTiet = new HashSet<ThietBi_ChiTiet>();
             this.ThietBi_ChiTiet1 = new HashSet<ThietBi_ChiTiet>();
             this.DM_ThietBi2 = new HashSet<DM_ThietBi>();
+            this.KhachSan_DatPhong = new HashSet<KhachSan_DatPhong>();
+            this.KhachSan_DatPhong1 = new HashSet<KhachSan_DatPhong>();
+            this.KhachSan_DatPhong2 = new HashSet<KhachSan_DatPhong>();
+            this.KhachSan_DichVuPhuThu = new HashSet<KhachSan_DichVuPhuThu>();
+            this.KhachSan_DoiPhong = new HashSet<KhachSan_DoiPhong>();
+            this.KhachSan_KiemPhong = new HashSet<KhachSan_KiemPhong>();
+            this.KhachSan_ThanhToan = new HashSet<KhachSan_ThanhToan>();
+            this.KhachSan_TrangThaiLichSu = new HashSet<KhachSan_TrangThaiLichSu>();
         }
     
         public int Id { get; set; }
@@ -171,5 +179,21 @@ namespace NamLao206.Models
         public virtual ICollection<ThietBi_ChiTiet> ThietBi_ChiTiet1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DM_ThietBi> DM_ThietBi2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<KhachSan_DatPhong> KhachSan_DatPhong { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<KhachSan_DatPhong> KhachSan_DatPhong1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<KhachSan_DatPhong> KhachSan_DatPhong2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<KhachSan_DichVuPhuThu> KhachSan_DichVuPhuThu { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<KhachSan_DoiPhong> KhachSan_DoiPhong { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<KhachSan_KiemPhong> KhachSan_KiemPhong { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<KhachSan_ThanhToan> KhachSan_ThanhToan { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<KhachSan_TrangThaiLichSu> KhachSan_TrangThaiLichSu { get; set; }
     }
 }

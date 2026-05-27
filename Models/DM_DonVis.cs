@@ -31,6 +31,8 @@ namespace NamLao206.Models
             this.ThietBi_DonVi = new HashSet<ThietBi_DonVi>();
             this.ThietBi_ChiTiet = new HashSet<ThietBi_ChiTiet>();
             this.DM_ThietBi = new HashSet<DM_ThietBi>();
+            this.KhachSan_LoaiPhong = new HashSet<KhachSan_LoaiPhong>();
+            this.KhachSan_Phong = new HashSet<KhachSan_Phong>();
         }
     
         public int Id { get; set; }
@@ -41,6 +43,7 @@ namespace NamLao206.Models
         public int Parent_Id { get; set; }
         public string CreateBranch { get; set; }
         public string EditBranch { get; set; }
+        public Nullable<int> LoaiDonVi { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DM_AddBangs> DM_AddBangs { get; set; }
@@ -70,5 +73,9 @@ namespace NamLao206.Models
         public virtual ICollection<ThietBi_ChiTiet> ThietBi_ChiTiet { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DM_ThietBi> DM_ThietBi { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<KhachSan_LoaiPhong> KhachSan_LoaiPhong { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<KhachSan_Phong> KhachSan_Phong { get; set; }
     }
 }

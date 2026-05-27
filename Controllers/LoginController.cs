@@ -109,6 +109,10 @@ namespace NamLao206.Controllers
                     {
                         return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
                     }
+                    else if(acc.Employee.DM_PhongBans.DM_DonVis.LoaiDonVi== 1)
+                    {
+                        return RedirectToAction("Index", "Dashboard", new { area = "KhachSan" });
+                    }
                     return RedirectToAction("Trangchu", "Home");
                 }
                 else

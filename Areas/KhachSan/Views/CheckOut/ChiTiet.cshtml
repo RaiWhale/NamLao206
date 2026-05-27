@@ -1,0 +1,215 @@
+@using NamLao206.Models
+@using NamLao206.Areas.KhachSan.Controllers
+@model KhachSan_DatPhong
+
+@{
+    ViewBag.Title = $"Chi tiết - {Model.MaPhieu}";
+    var dichVus = ViewBag.DichVus as List<KhachSan_DichVuPhuThu> ?? new List<KhachSan_DichVuPhuThu>();
+    var thanhToans = ViewBag.ThanhToans as List<KhachSan_ThanhToan> ?? new List<KhachSan_ThanhToan>();
+    var conLai = Model.TongTien - Model.DaThanhToan;
+}
+
+<div class="subheader">
+    <h1 class="subheader-title"><i class="fal fa-file-invoice"></i> Chi tiết Check-Out - @Model.MaPhieu</h1>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index","Dashboard",new{area="KhachSan"})">Khách sạn</a></li>
+            <li class="breadcrumb-item"><a href="@Url.Action("Index","CheckOut",new{area="KhachSan"})">Check-Out</a></li>
+            <li class="breadcrumb-item active">@Model.MaPhieu</li>
+        </ol>
+    </nav>
+</div>
+
+<div class="row">
+    <!-- Thông tin phòng & khách -->
+    <div class="col-md-5">
+        <div class="card mb-3">
+            <div class="card-header"><h5 class="card-title mb-0">Thông tin phòng</h5></div>
+            <div class="card-body">
+                <dl class="row mb-0">
+                    <dt class="col-5">Phòng</dt><dd class="col-7">@(Model.KhachSan_Phong != null ? Model.KhachSan_Phong.SoPhong : "") - @(Model.KhachSan_Phong != null ? Model.KhachSan_Phong.TenPhong : "")</dd>
+                    <dt class="col-5">Loại phòng</dt><dd class="col-7">@(Model.KhachSan_Phong != null && Model.KhachSan_Phong.KhachSan_LoaiPhong != null ? Model.KhachSan_Phong.KhachSan_LoaiPhong.TenLoai : "")</dd>
+                    <dt class="col-5">Check-in</dt><dd class="col-7">@Model.ThoiGianCheckIn.ToString("dd/MM/yyyy HH:mm")</dd>
+                    <dt class="col-5">Check-out DK</dt>
+                    <dd class="col-7">@(Model.ThoiGianCheckOutDuKien?.ToString("dd/MM/yyyy HH:mm") ?? "-")</dd>
+                    <dt class="col-5">Thời gian ở</dt>
+                    <dd class="col-7">
+                        @{ var dur = DateTime.Now - Model.ThoiGianCheckIn; }
+                        @((int)dur.TotalHours)h @dur.Minutes m
+                    </dd>
+                    <dt class="col-5">Loại giá</dt>
+                    <dd class="col-7">
+                        @(Model.LoaiGia == 1 ? "Giờ ngắn" : Model.LoaiGia == 2 ? "Qua đêm" : "Theo ngày")
+                    </dd>
+                    <dt class="col-5">Số người</dt><dd class="col-7">@Model.SoNguoi</dd>
+                </dl>
+            </div>
+        </div>
+        <div class="card mb-3">
+            <div class="card-header"><h5 class="card-title mb-0">Khách hàng</h5></div>
+            <div class="card-body">
+                <dl class="row mb-0">
+                    <dt class="col-5">Họ tên</dt><dd class="col-7">@(Model.KhachSan_KhachHang != null ? Model.KhachSan_KhachHang.HoTen : "")</dd>
+                    <dt class="col-5">CCCD</dt><dd class="col-7">@(Model.KhachSan_KhachHang != null ? Model.KhachSan_KhachHang.CCCD : "")</dd>
+                    <dt class="col-5">Điện thoại</dt><dd class="col-7">@(Model.KhachSan_KhachHang != null ? (Model.KhachSan_KhachHang.SoDienThoai ?? "-") : "-")</dd>
+                    <dt class="col-5">Quốc tịch</dt><dd class="col-7">@(Model.KhachSan_KhachHang != null ? (Model.KhachSan_KhachHang.QuocTich ?? "-") : "-")</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dịch vụ & thanh toán -->
+    <div class="col-md-7">
+        <div class="card mb-3">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0">Dịch vụ phụ thu</h5>
+                <a href="@Url.Action("Index","DichVu",new{area="KhachSan",id=Model.Id})" class="btn btn-sm btn-outline-secondary">
+                    <i class="fal fa-plus"></i> Thêm
+                </a>
+            </div>
+            <div class="card-body p-0">
+                <table class="table table-sm mb-0">
+                    <thead class="thead-light">
+                        <tr><th>Dịch vụ</th><th class="text-right">SL</th><th class="text-right">Đơn giá</th><th class="text-right">Thành tiền</th></tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var dv in dichVus)
+                        {
+                            <tr>
+                                <td>@dv.TenDichVu</td>
+                                <td class="text-right">@dv.SoLuong</td>
+                                <td class="text-right">@dv.DonGia.ToString("N0")</td>
+                                <td class="text-right">@dv.ThanhTien.ToString("N0")</td>
+                            </tr>
+                        }
+                        @if (!dichVus.Any())
+                        {
+                            <tr><td colspan="4" class="text-center text-muted">Không có dịch vụ.</td></tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr class="font-weight-bold">
+                            <td colspan="3" class="text-right">Tổng DV:</td>
+                            <td class="text-right">@dichVus.Sum(d => d.ThanhTien).ToString("N0") đ</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0">Lịch sử thanh toán</h5>
+                <a href="@Url.Action("Index","ThanhToan",new{area="KhachSan",id=Model.Id})" class="btn btn-sm btn-outline-secondary">
+                    <i class="fal fa-plus"></i> Thêm
+                </a>
+            </div>
+            <div class="card-body p-0">
+                <table class="table table-sm mb-0">
+                    <thead class="thead-light">
+                        <tr><th>Ngày</th><th>Hình thức</th><th class="text-right">Số tiền</th></tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var tt in thanhToans)
+                        {
+                            var htStr = tt.HinhThuc == 1 ? "Tiền mặt" : tt.HinhThuc == 2 ? "Chuyển khoản" : tt.HinhThuc == 3 ? "Thẻ" : "Ví điện tử";
+                            <tr>
+                                <td>@tt.NgayThu.ToString("dd/MM HH:mm")</td>
+                                <td>@htStr</td>
+                                <td class="text-right">@tt.SoTien.ToString("N0") đ</td>
+                            </tr>
+                        }
+                        @if (!thanhToans.Any())
+                        {
+                            <tr><td colspan="3" class="text-center text-muted">Chưa có thanh toán.</td></tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Form xác nhận check-out -->
+        <div class="card">
+            <div class="card-header"><h5 class="card-title mb-0">Xác nhận Check-Out</h5></div>
+            <div class="card-body">
+                <!-- Tóm tắt hóa đơn -->
+                <div class="table-responsive mb-3">
+                    <table class="table table-sm table-bordered mb-0">
+                        <tr><td>Tiền phòng</td><td class="text-right font-weight-bold">@Model.TienPhong.ToString("N0") đ</td></tr>
+                        <tr><td>Dịch vụ phụ thu</td><td class="text-right">@Model.TienPhuThu.ToString("N0") đ</td></tr>
+                        <tr id="giamGiaRow"><td>Giảm giá</td><td class="text-right text-danger" id="giamGiaDisplay">0 đ</td></tr>
+                        <tr class="table-primary"><td><strong>Tổng cộng</strong></td><td class="text-right"><strong id="tongTienDisplay">@Model.TongTien.ToString("N0") đ</strong></td></tr>
+                        <tr><td>Đã thanh toán</td><td class="text-right text-success">@Model.DaThanhToan.ToString("N0") đ</td></tr>
+                        <tr class="@(conLai > 0 ? "table-danger" : "table-success")">
+                            <td><strong>Còn lại</strong></td>
+                            <td class="text-right"><strong>@conLai.ToString("N0") đ</strong></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <form method="post" action="@Url.Action("XacNhanCheckOut", "CheckOut", new { area = "KhachSan" })">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="DatPhongId" value="@Model.Id" />
+
+                    <div class="form-group mb-2">
+                        <label>Giảm giá (VNĐ)</label>
+                        <input type="number" name="TienGiamGia" class="form-control" value="0" min="0" step="1000" onchange="tinhLai(this.value)" />
+                    </div>
+
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" name="HasKiemPhong" value="true" id="chkKiem" onchange="toggleKiem(this.checked)" />
+                        <input type="hidden" name="HasKiemPhong" value="false" />
+                        <label class="form-check-label" for="chkKiem">Thực hiện kiểm phòng</label>
+                    </div>
+
+                    <div id="kiemPhongSection" style="display:none;" class="border rounded p-2 mb-2 bg-light">
+                        <div class="form-group mb-1">
+                            <label>Trạng thái kiểm phòng</label>
+                            <select name="KiemPhongTrangThai" class="form-control form-control-sm">
+                                <option value="1">Đạt</option>
+                                <option value="2">Không đạt</option>
+                                <option value="3">Cần bảo trì</option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <div class="col-6"><label>Phí minibar</label><input type="number" name="PhiMinibar" class="form-control form-control-sm" value="0" min="0" /></div>
+                            <div class="col-6"><label>Phí hư hỏng</label><input type="number" name="PhiHuHong" class="form-control form-control-sm" value="0" min="0" /></div>
+                            <div class="col-6"><label>Phí mất đồ</label><input type="number" name="PhiMatDo" class="form-control form-control-sm" value="0" min="0" /></div>
+                            <div class="col-6"><label>Phí vệ sinh</label><input type="number" name="PhiVeSinh" class="form-control form-control-sm" value="0" min="0" /></div>
+                        </div>
+                        <div class="form-group mt-1 mb-0">
+                            <label>Ghi chú kiểm phòng</label>
+                            <input type="text" name="KiemPhongGhiChu" class="form-control form-control-sm" />
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label>Ghi chú</label>
+                        <textarea name="GhiChu" class="form-control" rows="2"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-danger btn-block btn-lg"
+                            onclick="return confirm('Xác nhận Check-Out cho phiếu @Model.MaPhieu?')">
+                        <i class="fal fa-sign-out-alt"></i> Xác nhận Check-Out
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var tienPhong = @Model.TienPhong;
+    var tienPhuThu = @Model.TienPhuThu;
+
+    function tinhLai(giamGia) {
+        var gg = parseFloat(giamGia) || 0;
+        var tong = tienPhong + tienPhuThu - gg;
+        document.getElementById('giamGiaDisplay').textContent = gg.toLocaleString('vi-VN') + ' đ';
+        document.getElementById('tongTienDisplay').textContent = tong.toLocaleString('vi-VN') + ' đ';
+    }
+
+    function toggleKiem(show) {
+        document.getElementById('kiemPhongSection').style.display = show ? 'block' : 'none';
+    }
+</script>
