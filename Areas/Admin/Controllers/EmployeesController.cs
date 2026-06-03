@@ -127,7 +127,7 @@ namespace NamLao206.Areas.Admin.Controllers
 					await db.SaveChangesAsync();
 
 				// Create account
-				var account = AutoMapper.Mapper.Map<Account>(data);
+				var account = NamLao206.AutoMapperConfig.Mapper.Map<Account>(data);
 				account.EmployeeId = employee.Id;
 				account.Password = MySecurity.Encrypt(Password);
 				account.IsActive = true;

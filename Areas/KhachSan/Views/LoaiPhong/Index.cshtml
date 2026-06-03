@@ -1,4 +1,4 @@
-@model IList<NamLao206.Models.KhachSan_LoaiPhong>
+﻿@model IList<NamLao206.Models.KhachSan_LoaiPhong>
 @{
     ViewBag.Title = "Loại phòng";
 }
@@ -6,16 +6,13 @@
 <div class="subheader">
     <h1 class="subheader-title"><i class="fal fa-bed mr-2"></i>Loại phòng</h1>
     <div class="subheader-block">
-        <a href="@Url.Action("Create", "LoaiPhong", new { area = "KhachSan" })" class="btn btn-sm btn-primary"><i class="fal fa-plus mr-1"></i>Thêm mới</a>
+        <a href="@Url.Action("Create", "LoaiPhong", new { area = "KhachSan" })" class="btn btn-sm btn-primary bcommand">
+            <i class="fal fa-plus mr-1"></i>Thêm mới
+        </a>
     </div>
 </div>
 
-@if (TempData["Success"] != null)
-{
-    <div class="alert alert-success alert-dismissible fade show">@TempData["Success"]
-        <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
-    </div>
-}
+<div id="alert-container" data-message="@Html.Raw(System.Web.HttpUtility.HtmlEncode(TempData["Success"] as string))"></div>
 
 <div class="card">
     <div class="card-body p-0">
@@ -48,16 +45,12 @@
                         <td class="text-center">@item.SoNguoiToiDa</td>
                         <td>@item.MoTa</td>
                         <td class="text-center">
-                            <a href="@Url.Action("Edit", "LoaiPhong", new { area = "KhachSan", id = item.Id })" class="btn btn-xs btn-outline-primary mr-1">
+                            <a href="@Url.Action("Edit", "LoaiPhong", new { area = "KhachSan", id = item.Id })" class="btn btn-xs btn-outline-primary mr-1 bcommand">
                                 <i class="fal fa-edit"></i>
                             </a>
-                            <form action="@Url.Action("Delete", "LoaiPhong", new { area = "KhachSan", id = item.Id })" method="post" class="d-inline"
-                                  onsubmit="return confirm('Xác nhận xóa loại phòng này?')">
-                                @Html.AntiForgeryToken()
-                                <button type="submit" class="btn btn-xs btn-outline-danger">
-                                    <i class="fal fa-trash"></i>
-                                </button>
-                            </form>
+                            <a href="@Url.Action("Delete", "LoaiPhong", new { area = "KhachSan", id = item.Id })" class="btn btn-xs btn-outline-danger bcommand">
+                                <i class="fal fa-trash"></i>
+                            </a>
                         </td>
                     </tr>
                 }

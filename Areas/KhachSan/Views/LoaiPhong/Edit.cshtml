@@ -1,61 +1,50 @@
-@model NamLao206.Models.KhachSan_LoaiPhong
-@{
-    ViewBag.Title = "Chỉnh sửa loại phòng";
-}
+﻿@model NamLao206.Models.KhachSan_LoaiPhong
 
-<div class="subheader">
-    <h1 class="subheader-title"><i class="fal fa-edit mr-2"></i>Chỉnh sửa loại phòng</h1>
-    <div class="subheader-block">
-        <a href="@Url.Action("Index", "LoaiPhong", new { area = "KhachSan" })" class="btn btn-sm btn-outline-secondary"><i class="fal fa-arrow-left mr-1"></i>Quay lại</a>
-    </div>
-</div>
-
-<div class="card">
-    <div class="card-body">
-        <form action="@Url.Action("Edit", "LoaiPhong", new { area = "KhachSan", id = Model.Id })" method="post">
-            @Html.AntiForgeryToken()
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="TenLoai">Tên loại phòng <span class="text-danger">*</span></label>
-                        @Html.TextBoxFor(m => m.TenLoai, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.TenLoai, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="SoNguoiToiDa">Số người tối đa <span class="text-danger">*</span></label>
-                        @Html.TextBoxFor(m => m.SoNguoiToiDa, new { @class = "form-control", type = "number", min = "1" })
-                        @Html.ValidationMessageFor(m => m.SoNguoiToiDa, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="GiaGioNgan">Giá giờ ngắn (đ)</label>
-                        @Html.TextBoxFor(m => m.GiaGioNgan, new { @class = "form-control", type = "number", min = "0" })
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="GiaQuaDem">Giá qua đêm (đ)</label>
-                        @Html.TextBoxFor(m => m.GiaQuaDem, new { @class = "form-control", type = "number", min = "0" })
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="GiaTheoNgay">Giá theo ngày (đ)</label>
-                        @Html.TextBoxFor(m => m.GiaTheoNgay, new { @class = "form-control", type = "number", min = "0" })
-                    </div>
-                </div>
-            </div>
+<form action="@Url.Action("Edit", "LoaiPhong", new { area = "KhachSan", id = Model.Id })" method="post">
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="row">
+        <div class="col-md-6">
             <div class="form-group">
-                <label for="MoTa">Mô tả</label>
-                @Html.TextAreaFor(m => m.MoTa, new { @class = "form-control", rows = "3" })
+                <label>Tên loại phòng <span class="text-danger">*</span></label>
+                @Html.TextBoxFor(m => m.TenLoai, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.TenLoai, "", new { @class = "text-danger" })
             </div>
-            <button type="submit" class="btn btn-primary"><i class="fal fa-save mr-1"></i>Lưu</button>
-            <a href="@Url.Action("Index", "LoaiPhong", new { area = "KhachSan" })" class="btn btn-secondary ml-2">Hủy</a>
-        </form>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Số người tối đa <span class="text-danger">*</span></label>
+                @Html.TextBoxFor(m => m.SoNguoiToiDa, new { @class = "form-control", type = "number", min = "1" })
+                @Html.ValidationMessageFor(m => m.SoNguoiToiDa, "", new { @class = "text-danger" })
+            </div>
+        </div>
     </div>
-</div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Giá giờ ngắn (đ)</label>
+                @Html.TextBoxFor(m => m.GiaGioNgan, new { @class = "form-control", type = "number", min = "0" })
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Giá qua đêm (đ)</label>
+                @Html.TextBoxFor(m => m.GiaQuaDem, new { @class = "form-control", type = "number", min = "0" })
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Giá theo ngày (đ)</label>
+                @Html.TextBoxFor(m => m.GiaTheoNgay, new { @class = "form-control", type = "number", min = "0" })
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Mô tả</label>
+        @Html.TextAreaFor(m => m.MoTa, new { @class = "form-control", rows = "3" })
+    </div>
+    <div class="mt-3">
+        <button type="submit" class="btn btn-primary"><i class="fal fa-save mr-1"></i>Lưu</button>
+        <button type="button" class="btn btn-secondary ml-2" data-bs-dismiss="modal">Hủy</button>
+    </div>
+</form>

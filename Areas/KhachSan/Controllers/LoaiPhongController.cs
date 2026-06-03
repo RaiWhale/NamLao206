@@ -22,7 +22,7 @@ namespace NamLao206.Areas.KhachSan.Controllers
             return pb != null && pb.donvi_Id.HasValue ? pb.donvi_Id.Value : 0;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(string message)
         {
             int donViId = GetDonViId();
             var list = _db.KhachSan_LoaiPhong
@@ -36,7 +36,7 @@ namespace NamLao206.Areas.KhachSan.Controllers
         public ActionResult Create()
         {
             ViewBag.Title = "Thêm loại phòng";
-            return View(new KhachSan_LoaiPhong());
+            return PartialView(new KhachSan_LoaiPhong());
         }
 
     [HttpPost]
@@ -51,8 +51,8 @@ namespace NamLao206.Areas.KhachSan.Controllers
 
             if (!ModelState.IsValid)
             {
-                ViewBag.Title = "Thêm loại phòng";
-                return View(model);
+                ViewBag.Message = "Thêm loại phòng";
+                return RedirectToAction("Index", new { message = ViewBag.Message });
             }
 
             model.DonViId = donViId;
@@ -61,6 +61,7 @@ namespace NamLao206.Areas.KhachSan.Controllers
             _db.KhachSan_LoaiPhong.Add(model);
             _db.SaveChanges();
             TempData["Success"] = "Đã thêm loại phòng thành công.";
+            if (Request.IsAjaxRequest()) return Content("success");
             return RedirectToAction("Index");
         }
 
@@ -70,7 +71,7 @@ namespace NamLao206.Areas.KhachSan.Controllers
             var item = _db.KhachSan_LoaiPhong.FirstOrDefault(l => l.Id == id && l.DonViId == donViId);
             if (item == null) return HttpNotFound();
             ViewBag.Title = "Chỉnh sửa loại phòng";
-            return View(item);
+            return PartialView(item);
         }
 
     [HttpPost]
@@ -86,8 +87,8 @@ namespace NamLao206.Areas.KhachSan.Controllers
 
             if (!ModelState.IsValid)
             {
-                ViewBag.Title = "Chỉnh sửa loại phòng";
-                return View(model);
+                ViewBag.Message = "Chỉnh sửa loại phòng";
+                return RedirectToAction("Index", new { message = ViewBag.Message });
             }
 
             item.TenLoai = model.TenLoai;
@@ -98,21 +99,32 @@ namespace NamLao206.Areas.KhachSan.Controllers
             item.MoTa = model.MoTa;
             _db.SaveChanges();
             TempData["Success"] = "Đã cập nhật loại phòng thành công.";
+            if (Request.IsAjaxRequest()) return Content("success");
             return RedirectToAction("Index");
         }
 
-    [HttpPost]
+    [HttpGet]
+    public ActionResult Delete(int id)
+    {
+        int donViId = GetDonViId();
+        var item = _db.KhachSan_LoaiPhong.FirstOrDefault(l => l.Id == id && l.DonViId == donViId);
+        if (item == null) return HttpNotFound();
+        return PartialView(item);
+    }
+
+    [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id)
-        {
-            int donViId = GetDonViId();
-            var item = _db.KhachSan_LoaiPhong.FirstOrDefault(l => l.Id == id && l.DonViId == donViId);
-            if (item == null) return HttpNotFound();
-            item.IsActive = false;
-            _db.SaveChanges();
-            TempData["Success"] = "Đã xóa loại phòng.";
-            return RedirectToAction("Index");
-        }
+    public ActionResult DeleteConfirmed(int id)
+    {
+        int donViId = GetDonViId();
+        var item = _db.KhachSan_LoaiPhong.FirstOrDefault(l => l.Id == id && l.DonViId == donViId);
+        if (item == null) return HttpNotFound();
+        item.IsActive = false;
+        _db.SaveChanges();
+        TempData["Success"] = "Đã xóa loại phòng.";
+        if (Request.IsAjaxRequest()) return Content("success");
+        return RedirectToAction("Index");
+    }
 
         protected override void Dispose(bool disposing)
         {

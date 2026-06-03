@@ -26,14 +26,14 @@ namespace NamLao206.Controllers
                 //if (acc.AccountType == 2 || acc.AccountType == 3)
                 //{
                     var user = db.Employees.Where(x => x.Id == acc.EmployeeId).SingleOrDefault();
-                    var data = AutoMapper.Mapper.Map<UpdateProfileVM>(user);
+                    var data = NamLao206.AutoMapperConfig.Mapper.Map<UpdateProfileVM>(user);
                     ViewBag.Chucvu = user.DM_Chucvus.Chucvu;
                     return View(data);
                 //}
                 //if (acc.AccountType == 1)
                 //{
                 //    var user = db.Customers.Where(x => x.Id == acc.EmployeeId).FirstOrDefault();
-                //    var data = AutoMapper.Mapper.Map<UpdateProfileVM>(user);
+                //    var data = NamLao206.AutoMapperConfig.Mapper.Map<UpdateProfileVM>(user);
                 //    ViewBag.Chucvu = "";
                 //    return View(data);
                 //}

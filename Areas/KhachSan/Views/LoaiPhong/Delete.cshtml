@@ -1,0 +1,14 @@
+﻿@model NamLao206.Models.KhachSan_LoaiPhong
+
+<div class="alert alert-warning">
+    <i class="fal fa-exclamation-triangle mr-2"></i>
+    Bạn có chắc muốn xóa loại phòng <strong>@Model.TenLoai</strong> không?
+</div>
+
+<form action="@Url.Action("Delete", "LoaiPhong", new { area = "KhachSan", id = Model.Id })" method="post">
+    @Html.AntiForgeryToken()
+    <div class="mt-3">
+        <button type="submit" class="btn btn-danger"><i class="fal fa-trash mr-1"></i>Xác nhận xóa</button>
+        <button type="button" class="btn btn-secondary ml-2" data-bs-dismiss="modal">Hủy</button>
+    </div>
+</form>

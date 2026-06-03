@@ -47,7 +47,7 @@ namespace NamLao206.Areas.KhachSan.Controllers
                 _db.KhachSan_LoaiPhong.Where(l => l.DonViId == donViId && l.IsActive).OrderBy(l => l.TenLoai),
                 "Id", "TenLoai");
             ViewBag.Title = "Thêm phòng";
-            return View(new KhachSan_Phong());
+            return PartialView(new KhachSan_Phong());
         }
 
         [HttpPost, ValidateAntiForgeryToken]
@@ -64,7 +64,7 @@ namespace NamLao206.Areas.KhachSan.Controllers
                 ViewBag.LoaiPhongs = new SelectList(
                     _db.KhachSan_LoaiPhong.Where(l => l.DonViId == donViId && l.IsActive).OrderBy(l => l.TenLoai),
                     "Id", "TenLoai", model.LoaiPhongId);
-                return View(model);
+                return PartialView(model);
             }
 
             model.DonViId = donViId;
@@ -73,6 +73,7 @@ namespace NamLao206.Areas.KhachSan.Controllers
             _db.KhachSan_Phong.Add(model);
             _db.SaveChanges();
             TempData["Success"] = "Đã thêm phòng thành công.";
+            if (Request.IsAjaxRequest()) return Content("success");
             return RedirectToAction("Index");
         }
 
@@ -85,7 +86,7 @@ namespace NamLao206.Areas.KhachSan.Controllers
                 _db.KhachSan_LoaiPhong.Where(l => l.DonViId == donViId && l.IsActive).OrderBy(l => l.TenLoai),
                 "Id", "TenLoai", item.LoaiPhongId);
             ViewBag.Title = "Chỉnh sửa phòng";
-            return View(item);
+            return PartialView(item);
         }
 
         [HttpPost, ValidateAntiForgeryToken]
@@ -103,7 +104,7 @@ namespace NamLao206.Areas.KhachSan.Controllers
                 ViewBag.LoaiPhongs = new SelectList(
                     _db.KhachSan_LoaiPhong.Where(l => l.DonViId == donViId && l.IsActive).OrderBy(l => l.TenLoai),
                     "Id", "TenLoai", model.LoaiPhongId);
-                return View(model);
+                return PartialView(model);
             }
 
             item.SoPhong = model.SoPhong;
@@ -113,6 +114,7 @@ namespace NamLao206.Areas.KhachSan.Controllers
             item.MoTa = model.MoTa;
             _db.SaveChanges();
             TempData["Success"] = "Đã cập nhật phòng.";
+            if (Request.IsAjaxRequest()) return Content("success");
             return RedirectToAction("Index");
         }
 
@@ -140,8 +142,18 @@ namespace NamLao206.Areas.KhachSan.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpGet]
         public ActionResult Delete(int id)
+        {
+            int donViId = GetDonViId();
+            var item = _db.KhachSan_Phong.FirstOrDefault(p => p.Id == id && p.DonViId == donViId);
+            if (item == null) return HttpNotFound();
+            return PartialView(item);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
         {
             int donViId = GetDonViId();
             var item = _db.KhachSan_Phong.FirstOrDefault(p => p.Id == id && p.DonViId == donViId);
@@ -149,6 +161,7 @@ namespace NamLao206.Areas.KhachSan.Controllers
             item.IsActive = false;
             _db.SaveChanges();
             TempData["Success"] = "Đã xóa phòng.";
+            if (Request.IsAjaxRequest()) return Content("success");
             return RedirectToAction("Index");
         }
 

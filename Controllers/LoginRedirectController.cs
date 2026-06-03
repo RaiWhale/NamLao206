@@ -14,6 +14,8 @@ namespace PhusannhiHospital.Controllers
                 //break;
                 case "TransportFiles": return Redirect("~/Login/Login");
                 //break;
+                case "KhachSan": return Redirect("~/Login/Login");
+                //break;
                 case "News": return Redirect("~/Login/Login");
 
             }
